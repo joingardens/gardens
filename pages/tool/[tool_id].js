@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { Comments } from '../../components/Comments';
 import Head from 'next/head'
 import Pricing from '@/components/Pricing';
 import LightHeroD from '@/components/ui/Hero';
@@ -9,7 +10,7 @@ import ListItemMirrored from '@/components/ui/ListItemMirrored';
 import Title from '@/components/ui/Title';
 import { getActiveProductsWithPrices, getJobToolsByTool, 
 	getAllJobGroups, getAllJobs, getAllJobTools, getToolById } from '@/utils/supabase-client';
-//import MyDisclosure from '@/components/dynamic/disclosure';
+import { NextSeo } from 'next-seo';
 import SquareBlock from '@/components/ui/SquareBlock';
 import getRandomGradient from '@/utils/getRandomGradient';
 
@@ -18,8 +19,10 @@ export default function Tool({ products, jobGroups, jobTools, jobs, tool }) {
   const router = useRouter()
    if (router.isFallback) {
     return (<div className="py-36">
-    <h1 className="text-2xl text-center">Nothing here... <a href="/" className="text-blue-600 hover:underline">Go home?</a></h1>
-    </div>)
+    <h1 className="text-2xl text-center">Nothing here... 
+    <a href="/" className="text-blue-600 hover:underline">Go home?</a></h1>
+    </div>
+    )
   } else {
   const { tool_id } = router.query
   let groupArray = [];
@@ -55,32 +58,33 @@ export default function Tool({ products, jobGroups, jobTools, jobs, tool }) {
          blockType={''} />)
      }
     )
+
     let currentGroup = jobGroups.find(item => item.id == group)
     let currentGroupTitle = currentGroup ? currentGroup.job_group : 'Default'
     groupArray.push(currentGroupTitle)
 
     return (
-    <ListItem key={currentGroupTitle.toString()} categoryName={currentGroupTitle.toString()} emoji={'📂'} categoryDescription={''}>
+    <ListItem key={currentGroupTitle.toString()} categoryName={currentGroupTitle.toString()} 
+    emoji={'📂'} categoryDescription={''}>
     {itemElements}
-    </ListItem>)
-  }
-  	);
-  }
+    </ListItem>
+    )
+  })
 
   return (
   	<>
-    <Head>
-    <script defer src="https://cdn.commento.io/js/commento.js"></script>
-    </Head>
+    <NextSeo
+      title={currentTool.tool + ', a ' + currentTool.category + ' tool'}
+      description={currentTool.description}
+    />
     <div className="-mb-20 -mt-20">
     <Title titleTitle={currentTool.tool} titleDescription={currentTool.category}
      colorBg={getRandomGradient()} />
     </div>
-     <div className="flex flex-col text-center w-full my-32">
-      <p className="lg:w-2/3 mx-auto leading-relaxed text-base">{currentTool.description}</p>
-    </div>
-    <div className="w-full">
-    <h2 className="sm:text-3xl text-2xl text-center font-semibold mt-24 text-gray-900">Things you can do with {currentTool.tool}</h2>
+    <div className="mt-24 pt-10 px-12 lg:px-24">
+    <p className="lg:w-3/5 mx-auto sm:text-2xl lg:text-center text-xl text-gray-900 leading-relaxed text-base">
+    {currentTool.description}</p>
+    <div className="border lg:w-3/5 mx-auto mt-8" />
     </div>
     <div className="flex space-between">
     <aside className="h-screen sticky top-0 w-1/5 hidden md:block">
@@ -88,17 +92,19 @@ export default function Tool({ products, jobGroups, jobTools, jobs, tool }) {
     <TextList items={groupArray} />
     </div>
     </aside>
-    <div className="flex-col w-full md:w-4/5 mt-14">
-    {(typeof listJobs !== 'undefined') ? listJobs : null}
-    <div id="commento"></div>
+    {(typeof listJobs !== 'undefined') ? (
+    <div className="w-full md:w-4/5">
+    <div className="px-5 mt-32 mb-20 lg:w-4/5 mx-auto">
+    <h2 className="lg:w-4/5 mx-auto px-6 sm:text-2xl text-xl font-semibold text-gray-900">
+    Things you can do with {currentTool.tool}</h2>
+    {listJobs}
+    <Comments />
     </div>
     </div>
-    {/*<ParagraphWithButton />
-    <Pricing products={products} />*/}
-    )
-    
+    ) : null}
+    </div>
     </>
-    )}
+    )}}
 }
 
 export async function getStaticPaths() {

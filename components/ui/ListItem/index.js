@@ -9,8 +9,8 @@ function ListItem(props) {
 
   return (
     <section className="text-gray-600 body-font w-full" id={urlify(props.categoryName)}>
-      <div className="container px-5 mx-auto">
-        <div className="flex items-center justify-start lg:w-3/5 mx-auto border-b py-32 border-gray-200 sm:flex-row flex-col">
+      <div className="px-5 mx-auto">
+        <div className="flex items-center justify-start lg:w-4/5 py-24 sm:flex-row flex-col">
           {props.emoji ? (<div className={`sm:w-32 sm:h-32 h-20 w-20 sm:mr-10 inline-flex items-center justify-center rounded-full shadow bg-gray-50 text-${props.theme}-500 sm:text-4xl text-2xl flex-shrink-0`}>
             {props.emoji}
           </div>) : null}

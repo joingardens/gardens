@@ -45,7 +45,5 @@ export const Comments = () => {
 		observer.observe(document.getElementById(commentNodeId));
 	}, [commentNodeId]);
 
-	console.log('hi')
-
-	return <div id={commentNodeId} />;
+	return <div id={commentNodeId} className="lg:w-4/5 mt-6 mb-24 px-5" />;
 };
