@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from  "prop-types";
+import Image from 'next/image'
 
 function SquareBlock(props) {
 
@@ -16,8 +17,13 @@ function SquareBlock(props) {
       ) : null}
     <a href={props.orderLink ? props.orderLink : props.ctaLink ? props.ctaLink : props.blockLink} className="h-full w-full" target="_blank">
         <div className={`border bg-${blockColor} rounded px-4 py-3 h-full w-full items-center justify-between flex`}>
-          <div className="flex w-full">
-          <div className="flex flex-col w-4/6 w-full">
+          <div className="flex w-full items-center">
+          {props.smallImage ? (
+            <div className="w-20 h-20 relative">
+            <Image src={props.smallImage} alt={props.smallImageAlt} 
+            layout='fill' objectFit='contain' objectPosition='center center' />
+            </div>) : null}
+          <div className="flex flex-col w-4/6 ml-4 w-full">
           <span className={`title-font font-${fontWeight} font-bold`}>{props.blockBody}</span>
           <span className={`${typeColor} font-${fontWeight}`}>
           {props.blockType}

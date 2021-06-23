@@ -47,6 +47,7 @@ export default function ToolsPage({ products, tools, jobTools }) {
    {
      let includesJobs = toolsWithJobs.includes(item.id);
      return (<SquareBlock key={item.id} blockBody={item.tool} 
+       smallImage={item.logo_url} smallImageAlt={item.tool + ' logo'}
        blockLink={includesJobs ? null : item.link}
        blockLinkTitle={includesJobs ? null : 'Press to open website'}
        ctaLink={includesJobs ? ('/tool/' + item.id) : null}
@@ -58,8 +59,7 @@ export default function ToolsPage({ products, tools, jobTools }) {
 
 
     return (
-    <ListItem key={category.toString()} categoryName={category.toString()} 
-    emoji={'🔨'} categoryDescription={''}>
+    <ListItem key={category.toString()} categoryName={category.toString()} categoryDescription={''}>
     {itemElements}
     </ListItem>)
   }
