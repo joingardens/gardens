@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from  "prop-types";
 import SquareBlock from '@/components/ui/SquareBlock';
 import urlify from '@/utils/helpers.js';
+import Link from 'next/link';
+
 
 function ListItem(props) {
 
@@ -28,6 +30,18 @@ function ListItem(props) {
               {props.categoryDescription}
             </p>
             {props.children}
+            {props.addLink ? (
+              <div className="w-full flex justify-end md:justify-center py-2">
+              <Link href={props.addLink}>
+        <button className="inline-flex items-center bg-white border border-black py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-2 md:mt-0">
+          Add a tool
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+  <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+</svg>
+        </button>
+        </Link>
+        </div>
+        ) : null}
           </div>
         </div>
       </div>

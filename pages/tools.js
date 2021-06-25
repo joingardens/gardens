@@ -59,7 +59,9 @@ export default function ToolsPage({ products, tools, jobTools }) {
 
 
     return (
-    <ListItem key={category.toString()} categoryName={category.toString()} categoryDescription={''}>
+    <ListItem key={category.toString()} 
+    categoryName={category.toString()} categoryDescription={''}
+    addLink={'https://tally.so/r/w8Zo5m' + '?category=' + category.toString()}>
     {itemElements}
     </ListItem>)
   }
