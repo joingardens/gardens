@@ -61,7 +61,7 @@ function MagicLinkView({ email, setEmail, setAuthView }: MagicLinkViewProps): JS
             onClick={() => supabase.auth.signIn({ provider: 'github' })}
             aria-label="Sign in with GitHub"
           >
-            <Github className="w-5 h-5 dark:text-white" />
+            <GitHub className="w-5 h-5 dark:text-white" />
             <span className="ml-2 text-sm leading-none dark:text-gray-200">
               Sign in with GitHub
             </span>
