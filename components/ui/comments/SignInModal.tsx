@@ -3,7 +3,7 @@ import { Transition } from '@headlessui/react';
 import validateEmail from '../../../utils/regex/validateEmailRegex';
 import { supabase } from '../../../utils/supabase-client';
 import { useUser } from '../../../utils/use-user';
-import GitHub from '../../icons/Github';
+import GitHub from '../../icons/GitHub';
 import { useModal } from '../../../utils/use-modal';
 
 type Views = 'magic_link' | 'awaiting_confirmation';
