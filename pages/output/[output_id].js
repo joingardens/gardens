@@ -1,19 +1,19 @@
 import { useRouter } from 'next/router'
-import Pricing from '@/components/Pricing';
-import LightHeroD from '@/components/ui/Hero';
-import ParagraphWithButton from '@/components/ui/ParagraphWithButton';
-import ListItem from '@/components/ui/ListItem';
-import TextList from '@/components/ui/TextList';
-import ListItemMirrored from '@/components/ui/ListItemMirrored';
-import Title from '@/components/ui/Title';
+import Pricing from '../../components/Pricing';
+import LightHeroD from '../../components/ui/Hero';
+import ParagraphWithButton from '../../components/ui/ParagraphWithButton';
+import ListItem from '../../components/ui/ListItem';
+import TextList from '../../components/ui/TextList';
+import ListItemMirrored from '../../components/ui/ListItemMirrored';
+import Title from '../../components/ui/Title';
 import { getActiveProductsWithPrices, 
   getAllJobs, getAllJobGroups, 
   getAllJobTools, getAllTools, 
   getAllFlowsOutputs, getAllFlowItems, 
-  getAllOutputs, getAllFlows, getOutputById } from '@/utils/supabase-client';
+  getAllOutputs, getAllFlows, getOutputById } from '../../utils/supabase-client';
 //import MyDisclosure from '@/components/dynamic/disclosure';
-import SquareBlock from '@/components/ui/SquareBlock';
-import getRandomGradient from '@/utils/getRandomGradient';
+import SquareBlock from '../../components/ui/SquareBlock';
+import getRandomGradient from '../../utils/getRandomGradient';
 
 export default function Output({ products, jobs, 
   jobGroups, tools, jobTools, 

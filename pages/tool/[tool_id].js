@@ -1,18 +1,15 @@
+import React from 'react';
 import { useRouter } from 'next/router'
-import { Comments } from '../../components/Comments';
-import Head from 'next/head'
-import Pricing from '@/components/Pricing';
-import LightHeroD from '@/components/ui/Hero';
-import ParagraphWithButton from '@/components/ui/ParagraphWithButton';
-import ListItem from '@/components/ui/ListItem';
-import TextList from '@/components/ui/TextList';
-import ListItemMirrored from '@/components/ui/ListItemMirrored';
-import Title from '@/components/ui/Title';
-import { getActiveProductsWithPrices, getJobToolsByTool, 
-	getAllJobGroups, getAllJobs, getAllJobTools, getToolById } from '@/utils/supabase-client';
 import { NextSeo } from 'next-seo';
-import SquareBlock from '@/components/ui/SquareBlock';
-import getRandomGradient from '@/utils/getRandomGradient';
+import Pricing from '../../components/Pricing';
+import ListItem from '../../components/ui/ListItem';
+import TextList from '../../components/ui/TextList';
+import { Comments } from '../../components/Comments';
+import Title from '../../components/ui/Title';
+import { getActiveProductsWithPrices, getJobToolsByTool, 
+	getAllJobGroups, getAllJobs, getAllJobTools, getToolById } from '../../utils/supabase-client';
+import SquareBlock from '../../components/ui/SquareBlock';
+import getRandomGradient from '../../utils/getRandomGradient';
 
 export default function Tool({ products, jobGroups, jobTools, jobs, tool }) {
 
@@ -98,7 +95,7 @@ export default function Tool({ products, jobGroups, jobTools, jobs, tool }) {
     <h2 className="lg:w-4/5 mx-auto px-6 sm:text-2xl text-xl font-semibold text-gray-900">
     Things you can do with {currentTool.tool}</h2>
     {listJobs}
-    <Comments />
+    <Comments postId={tool_id} />
     </div>
     </div>
     ) : null}

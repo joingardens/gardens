@@ -2,12 +2,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import Button from '@/components/ui/Button';
-import GitHub from '@/components/icons/GitHub';
-import Input from '@/components/ui/Input';
-import LoadingDots from '@/components/ui/LoadingDots';
-import Logo from '@/components/icons/Logo';
-import { useUser } from '@/utils/useUser';
+import Button from '../components/ui/Button';
+import GitHub from '../components/icons/GitHub';
+import Input from '../components/ui/Input';
+import LoadingDots from '../components/ui/LoadingDots';
+import Logo from '../components/icons/Logo';
+import { useUser } from '../utils/useUser';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');

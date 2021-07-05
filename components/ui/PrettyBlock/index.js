@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from  "prop-types";
-import getRandomGradient from '@/utils/getRandomGradient'
+import getRandomGradient from '../../../utils/getRandomGradient'
 
 function PrettyBlock(props) {
 

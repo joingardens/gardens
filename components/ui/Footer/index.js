@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from  "prop-types";
-import Logo from '@/components/icons/Logo'
+import Logo from '../../icons/Logo'
 import Link from 'next/link';
 
 

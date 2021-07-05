@@ -1,8 +1,31 @@
 import { useEffect, useState } from 'react';
+import CommentSection from './ui/comments/CommentSection';
+import { CommentsContextProvider } from '../utils/use-comments';
+import { ModalProvider } from '../utils/use-modal';
 
-export const Comments = () => {
+export const Comments = (props) => {
 
-	// Courtesy Dhanraj Padmashali https://dhanrajsp.me/blog/adding-comments-to-my-blog
+	//console.log(props.postId)
+
+	return (
+
+	/* Native Supabase version,
+	Courtesy Lawrence Chen https://github.com/lawrencecchen/threaded-comments */
+
+	 <CommentsContextProvider postId={props.postId}>
+        <ModalProvider>
+          <div className="min-w-full dark:bg-gray-800 transition-all">
+            <div className="max-w-prose mx-auto flex-grow">
+              <CommentSection />
+            </div>
+          </div>
+        </ModalProvider>
+      </CommentsContextProvider>
+
+      )
+
+	/* Utterances version, 
+	Courtesy Dhanraj Padmashali https://dhanrajsp.me/blog/adding-comments-to-my-blog
 
 	const commentNodeId = 'comments';
 
@@ -46,4 +69,5 @@ export const Comments = () => {
 	}, [commentNodeId]);
 
 	return <div id={commentNodeId} className="lg:w-4/5 mt-6 mb-24 px-5" />;
+	*/
 };

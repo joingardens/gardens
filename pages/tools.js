@@ -1,16 +1,16 @@
-import Pricing from '@/components/Pricing';
-import LightHeroD from '@/components/ui/Hero';
-import ParagraphWithButton from '@/components/ui/ParagraphWithButton';
-import ListItem from '@/components/ui/ListItem';
-import TextList from '@/components/ui/TextList';
-import ListItemMirrored from '@/components/ui/ListItemMirrored';
-import Title from '@/components/ui/Title';
-import { getActiveProductsWithPrices, getAllTools, getAllJobTools } from '@/utils/supabase-client';
-import urlify from '@/utils/helpers.js';
-//import MyDisclosure from '@/components/dynamic/disclosure';
-import SquareBlock from '@/components/ui/SquareBlock';
-import PrettyBlock from '@/components/ui/PrettyBlock';
-import getRandomGradient from '@/utils/getRandomGradient';
+import Pricing from '../components/Pricing';
+import LightHeroD from '../components/ui/Hero';
+import Link from 'next/link';
+import ParagraphWithButton from '../components/ui/ParagraphWithButton';
+import ListItem from '../components/ui/ListItem';
+import TextList from '../components/ui/TextList';
+import ListItemMirrored from '../components/ui/ListItemMirrored';
+import Title from '../components/ui/Title';
+import { getActiveProductsWithPrices, getAllTools, getAllJobTools } from '../utils/supabase-client';
+import urlify from '../utils/helpers.js';
+import SquareBlock from '../components/ui/SquareBlock';
+import PrettyBlock from '../components/ui/PrettyBlock';
+import getRandomGradient from '../utils/getRandomGradient';
 
 export default function ToolsPage({ products, tools, jobTools }) {
   

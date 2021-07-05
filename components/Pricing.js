@@ -2,10 +2,10 @@ import cn from 'classnames';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-import Button from '@/components/ui/Button';
-import { postData } from '@/utils/helpers';
-import { getStripe } from '@/utils/stripe-client';
-import { useUser } from '@/utils/useUser';
+import Button from './ui/Button';
+import { postData } from '../utils/helpers';
+import { getStripe } from '../utils/stripe-client';
+import { useUser } from '../utils/useUser';
 
 export default function Pricing({ products }) {
   const router = useRouter();

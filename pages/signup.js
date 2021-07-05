@@ -2,11 +2,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import Button from '@/components/ui/Button';
-import Input from '@/components/ui/Input';
-import Logo from '@/components/icons/Logo';
-import { updateUserName } from '@/utils/supabase-client';
-import { useUser } from '@/utils/useUser';
+import Button from '../components/ui/Button';
+import Input from '../components/ui/Input';
+import Logo from '../components/icons/Logo';
+import { updateUserName } from '../utils/supabase-client';
+import { useUser } from '../utils/useUser';
 
 const SignUp = () => {
   const [user, setUser] = useState(null);

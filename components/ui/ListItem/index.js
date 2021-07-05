@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from  "prop-types";
-import SquareBlock from '@/components/ui/SquareBlock';
-import urlify from '@/utils/helpers.js';
-import Link from 'next/link';
-
+import SquareBlock from '../SquareBlock';
+import urlify from '../../../utils/helpers.js';
+import Link from 'next/link'
 
 function ListItem(props) {
 

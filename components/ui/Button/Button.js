@@ -3,7 +3,7 @@ import React, { forwardRef, useRef } from 'react';
 import mergeRefs from 'react-merge-refs';
 import s from './Button.module.css';
 
-import LoadingDots from '@/components/ui/LoadingDots';
+import LoadingDots from '../LoadingDots';
 
 const Button = forwardRef((props, buttonRef) => {
   const {

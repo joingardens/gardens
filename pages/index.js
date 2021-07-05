@@ -1,12 +1,11 @@
-import Pricing from '@/components/Pricing';
-import LightHeroD from '@/components/ui/Hero';
-import ParagraphWithButton from '@/components/ui/ParagraphWithButton';
-import ListItem from '@/components/ui/ListItem';
-import TextList from '@/components/ui/TextList';
-import ListItemMirrored from '@/components/ui/ListItemMirrored';
-import { getActiveProductsWithPrices, getAllTools } from '@/utils/supabase-client';
-//import MyDisclosure from '@/components/dynamic/disclosure';
-import SquareBlock from '@/components/ui/SquareBlock';
+import Pricing from '../components/Pricing';
+import LightHeroD from '../components/ui/Hero';
+import ParagraphWithButton from '../components/ui/ParagraphWithButton';
+import ListItem from '../components/ui/ListItem';
+import TextList from '../components/ui/TextList';
+import ListItemMirrored from '../components/ui/ListItemMirrored';
+import { getActiveProductsWithPrices, getAllTools } from '../utils/supabase-client';
+import SquareBlock from '../components/ui/SquareBlock';
 import Link from 'next/link';
 
 

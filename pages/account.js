@@ -2,10 +2,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 
-import LoadingDots from '@/components/ui/LoadingDots';
-import Button from '@/components/ui/Button';
-import { useUser } from '@/utils/useUser';
-import { postData } from '@/utils/helpers';
+import LoadingDots from '../components/ui/LoadingDots';
+import Button from '../components/ui/Button';
+import { useUser } from '../utils/useUser';
+import { postData } from '../utils/helpers';
 
 function Card({ title, description, footer, children }) {
   return (
