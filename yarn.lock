@@ -192,37 +192,44 @@
   "resolved" "https://registry.npmjs.org/@stripe/stripe-js/-/stripe-js-1.11.0.tgz"
   "version" "1.11.0"
 
-"@supabase/gotrue-js@^1.10.2":
-  "integrity" "sha512-uyxJn43yJulrbdYIi0OSD1+VKGqXd96YV23DrNgr+snfCJXkyGUQS37s64jeKU1UV6d4Ed4Px7qYiUtPvbRwHA=="
-  "resolved" "https://registry.npmjs.org/@supabase/gotrue-js/-/gotrue-js-1.10.3.tgz"
-  "version" "1.10.3"
+"@supabase/gotrue-js@^1.16.6":
+  "integrity" "sha512-tLaG4G4sMW2P1hyq05Nr0jM/6AbdiWkjOPbM+QZsuVSsNbZ/z+BNxuE5q+6zHOnoP+YKEHup7x9xKR0zy2UqUQ=="
+  "resolved" "https://registry.npmjs.org/@supabase/gotrue-js/-/gotrue-js-1.16.6.tgz"
+  "version" "1.16.6"
   dependencies:
     "cross-fetch" "^3.0.6"
 
-"@supabase/postgrest-js@^0.24.1":
-  "integrity" "sha512-uvS0v1zqVc3Y5GqnR3B2GBY1c4REdpcS/kiiOJJou3me6nuZptqV/8tUPhSOAWWt8S5XpOI9OK+aAozBdC7c5w=="
-  "resolved" "https://registry.npmjs.org/@supabase/postgrest-js/-/postgrest-js-0.24.1.tgz"
-  "version" "0.24.1"
+"@supabase/postgrest-js@^0.33.0":
+  "integrity" "sha512-og6Evdkan7Qp6+tOch7Pyq+ZWMnrCQtPHWwPpsN5A3iYQSro2yn21Yvazs9qAFoWAeTGNkuTOVpShT5Mbc9WcQ=="
+  "resolved" "https://registry.npmjs.org/@supabase/postgrest-js/-/postgrest-js-0.33.0.tgz"
+  "version" "0.33.0"
   dependencies:
     "cross-fetch" "^3.0.6"
 
-"@supabase/realtime-js@^1.0.6":
-  "integrity" "sha512-qzYYBzXteYsqQYlLzoYwee2OloWn3w8YzUFbDYFUPdkUwLs01OIqsm+lRCzKDivmyn2G0FJQjloWcF4BF5TyBg=="
-  "resolved" "https://registry.npmjs.org/@supabase/realtime-js/-/realtime-js-1.0.6.tgz"
-  "version" "1.0.6"
+"@supabase/realtime-js@^1.0.9":
+  "integrity" "sha512-jE8/8I64VpEygEbrd9+RBZBIREo43Vacy8exef1QlyRegblG2VtqqK96BiQSaVG5ZwXumOs6Igl8kgyrDqUAPg=="
+  "resolved" "https://registry.npmjs.org/@supabase/realtime-js/-/realtime-js-1.0.11.tgz"
+  "version" "1.0.11"
   dependencies:
     "@types/websocket" "^1.0.1"
-    "query-string" "^6.12.1"
-    "websocket" "^1.0.31"
+    "websocket" "^1.0.34"
 
-"@supabase/supabase-js@1.3.2":
-  "integrity" "sha512-+ofWGmr22iFhrk9A/dDwczNx8zwba4ZeMowgT9Ex9uHQWGbl9bjKPNOMRZM9C/3/2P0GXqI3rnqoUL3fkBq6yA=="
-  "resolved" "https://registry.npmjs.org/@supabase/supabase-js/-/supabase-js-1.3.2.tgz"
-  "version" "1.3.2"
+"@supabase/storage-js@^1.2.2":
+  "integrity" "sha512-EJ2BsfD7Mc+fXJqRef3YiWF8kg/GhBdxIil7EzmrAFBSJ3VCbN4sqzvCCUYK2dtNICUV3JOKh5SBX2RrgROIOA=="
+  "resolved" "https://registry.npmjs.org/@supabase/storage-js/-/storage-js-1.2.2.tgz"
+  "version" "1.2.2"
   dependencies:
-    "@supabase/gotrue-js" "^1.10.2"
-    "@supabase/postgrest-js" "^0.24.1"
-    "@supabase/realtime-js" "^1.0.6"
+    "cross-fetch" "^3.1.0"
+
+"@supabase/supabase-js@^1.18.0":
+  "integrity" "sha512-0gkL4oDSsTNc0t0ks3aIuIoPzlqix4Jqc9lII3cczaaN8MYjZDKTo48MkWvnwXm0pYuoS8wAoGzRjQ6llXAUHw=="
+  "resolved" "https://registry.npmjs.org/@supabase/supabase-js/-/supabase-js-1.18.0.tgz"
+  "version" "1.18.0"
+  dependencies:
+    "@supabase/gotrue-js" "^1.16.6"
+    "@supabase/postgrest-js" "^0.33.0"
+    "@supabase/realtime-js" "^1.0.9"
+    "@supabase/storage-js" "^1.2.2"
 
 "@types/json-schema@^7.0.5", "@types/json-schema@^7.0.6":
   "integrity" "sha512-3c+yGKvVP5Y9TYBEibGNR+kLtijnj7mYrXRg+WpFb2X9xm04g/DXYkfg4hmzJQosc9snFNUPkbYIhu+KAm6jJw=="
@@ -254,9 +261,9 @@
   "version" "0.16.1"
 
 "@types/websocket@^1.0.1":
-  "integrity" "sha512-f5WLMpezwVxCLm1xQe/kdPpQIOmL0TXYx2O15VYfYzc7hTIdxiOoOvez+McSIw3b7z/1zGovew9YSL7+h4h7/Q=="
-  "resolved" "https://registry.npmjs.org/@types/websocket/-/websocket-1.0.1.tgz"
-  "version" "1.0.1"
+  "integrity" "sha512-ZdoTSwmDsKR7l1I8fpfQtmTI/hUwlOvE3q0iyJsp4tXU0MkdrYowimDzwxjhQvxU4qjhHLd3a6ig0OXRbLgIdw=="
+  "resolved" "https://registry.npmjs.org/@types/websocket/-/websocket-1.0.3.tgz"
+  "version" "1.0.3"
   dependencies:
     "@types/node" "*"
 
@@ -896,9 +903,9 @@
     "ieee754" "^1.1.4"
 
 "bufferutil@^4.0.1":
-  "integrity" "sha512-AtnG3W6M8B2n4xDQ5R+70EXvOpnXsFYg/AK2yTZd+HQ/oxAdz+GI+DvjmhBw3L0ole+LJ0ngqY4JMbDzkfNzhA=="
-  "resolved" "https://registry.npmjs.org/bufferutil/-/bufferutil-4.0.2.tgz"
-  "version" "4.0.2"
+  "integrity" "sha512-yEYTwGndELGvfXsImMBLop58eaGW+YdONi1fNjTINSY98tmMmFijBG6WXgdkfuLNt4imzQNtIE+eBp1PVpMCSw=="
+  "resolved" "https://registry.npmjs.org/bufferutil/-/bufferutil-4.0.3.tgz"
+  "version" "4.0.3"
   dependencies:
     "node-gyp-build" "^4.2.0"
 
@@ -1246,6 +1253,13 @@
   "integrity" "sha512-KBPUbqgFjzWlVcURG+Svp9TlhA5uliYtiNx/0r8nv0pdypeQCRJ9IaSIc3q/x3q8t3F75cHuwxVql1HFGHCNJQ=="
   "resolved" "https://registry.npmjs.org/cross-fetch/-/cross-fetch-3.0.6.tgz"
   "version" "3.0.6"
+  dependencies:
+    "node-fetch" "2.6.1"
+
+"cross-fetch@^3.1.0":
+  "integrity" "sha512-1eAtFWdIubi6T4XPy6ei9iUFoKpUkIF971QLN8lIvvvwueI65+Nw5haMNKUwfJxabqlIIDODJKGrQ66gxC0PbQ=="
+  "resolved" "https://registry.npmjs.org/cross-fetch/-/cross-fetch-3.1.4.tgz"
+  "version" "3.1.4"
   dependencies:
     "node-fetch" "2.6.1"
 
@@ -3729,15 +3743,6 @@
   "resolved" "https://registry.npmjs.org/qs/-/qs-6.9.4.tgz"
   "version" "6.9.4"
 
-"query-string@^6.12.1":
-  "integrity" "sha512-CsGs8ZYb39zu0WLkeOhe0NMePqgYdAuCqxOYKDR5LVCytDZYMGx3Bb+xypvQvPHVPijRXB0HZNFllCzHRe4gEA=="
-  "resolved" "https://registry.npmjs.org/query-string/-/query-string-6.13.7.tgz"
-  "version" "6.13.7"
-  dependencies:
-    "decode-uri-component" "^0.2.0"
-    "split-on-first" "^1.0.0"
-    "strict-uri-encode" "^2.0.0"
-
 "querystring-es3@^0.2.0":
   "integrity" "sha1-nsYfeQSYdXB9aUFFlv2Qek1xHnM="
   "resolved" "https://registry.npmjs.org/querystring-es3/-/querystring-es3-0.2.1.tgz"
@@ -4347,11 +4352,6 @@
   dependencies:
     "whatwg-url" "^7.0.0"
 
-"split-on-first@^1.0.0":
-  "integrity" "sha512-43ZssAJaMusuKWL8sKUBQXHWOpq8d6CfN/u1p4gUzfJkM05C8rxTmYrkIPTXapZpORA6LkkzcUulJ8FqA7Uudw=="
-  "resolved" "https://registry.npmjs.org/split-on-first/-/split-on-first-1.1.0.tgz"
-  "version" "1.1.0"
-
 "split-string@^3.0.1", "split-string@^3.0.2":
   "integrity" "sha512-NzNVhJDYpwceVVii8/Hu6DKfD2G+NrQHlS/V/qgv763EYudVwEcMQNxd2lh+0VrUByXN/oJkl5grOhYWvQUYiw=="
   "resolved" "https://registry.npmjs.org/split-string/-/split-string-3.1.0.tgz"
@@ -4425,11 +4425,6 @@
   "integrity" "sha512-AiisoFqQ0vbGcZgQPY1cdP2I76glaVA/RauYR4G4thNFgkTqr90yXTo4LYX60Jl+sIlPNHHdGSwo01AvbKUSVQ=="
   "resolved" "https://registry.npmjs.org/stream-shift/-/stream-shift-1.0.1.tgz"
   "version" "1.0.1"
-
-"strict-uri-encode@^2.0.0":
-  "integrity" "sha1-ucczDHBChi9rFC3CdLvMWGbONUY="
-  "resolved" "https://registry.npmjs.org/strict-uri-encode/-/strict-uri-encode-2.0.0.tgz"
-  "version" "2.0.0"
 
 "string_decoder@^1.0.0", "string_decoder@~1.1.1":
   "integrity" "sha512-n/ShnvDi6FHbbVfviro+WojiFzv+s8MPMHBczVePfUpDJLwoLT0ht1l4YwBCbi8pJAveEEdnkHyPyTP/mzRfwg=="
@@ -4866,9 +4861,9 @@
   "version" "3.1.1"
 
 "utf-8-validate@^5.0.2":
-  "integrity" "sha512-jtJM6fpGv8C1SoH4PtG22pGto6x+Y8uPprW0tw3//gGFhDDTiuksgradgFN6yRayDP4SyZZa6ZMGHLIa17+M8A=="
-  "resolved" "https://registry.npmjs.org/utf-8-validate/-/utf-8-validate-5.0.3.tgz"
-  "version" "5.0.3"
+  "integrity" "sha512-+pnxRYsS/axEpkrrEpzYfNZGXp0IjC/9RIxwM5gntY4Koi8SHmUGSfxfWqxZdRxrtaoVstuOzUp/rbs3JSPELQ=="
+  "resolved" "https://registry.npmjs.org/utf-8-validate/-/utf-8-validate-5.0.5.tgz"
+  "version" "5.0.5"
   dependencies:
     "node-gyp-build" "^4.2.0"
 
@@ -4964,10 +4959,10 @@
     "watchpack" "^1.7.4"
     "webpack-sources" "^1.4.1"
 
-"websocket@^1.0.31":
-  "integrity" "sha512-i4yhcllSP4wrpoPMU2N0TQ/q0O94LRG/eUQjEAamRltjQ1oT1PFFKOG4i877OlJgCG8rw6LrrowJp+TYCEWF7Q=="
-  "resolved" "https://registry.npmjs.org/websocket/-/websocket-1.0.32.tgz"
-  "version" "1.0.32"
+"websocket@^1.0.34":
+  "integrity" "sha512-PRDso2sGwF6kM75QykIesBijKSVceR6jL2G8NGYyq2XrItNC2P5/qL5XeR056GhA+Ly7JMFvJb9I312mJfmqnQ=="
+  "resolved" "https://registry.npmjs.org/websocket/-/websocket-1.0.34.tgz"
+  "version" "1.0.34"
   dependencies:
     "bufferutil" "^4.0.1"
     "debug" "^2.2.0"
