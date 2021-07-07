@@ -5,7 +5,7 @@ import ListItem from '../components/ui/ListItem';
 import TextList from '../components/ui/TextList';
 import ListItemMirrored from '../components/ui/ListItemMirrored';
 import Title from '../components/ui/Title';
-import { getActiveProductsWithPrices, getAllJobs, getAllJobGroups, getAllJobTools } from '@/utils/supabase-client';
+import { getActiveProductsWithPrices, getAllJobs, getAllJobGroups, getAllJobTools } from '../utils/supabase-client';
 import SquareBlock from '../components/ui/SquareBlock';
 import getRandomGradient from '../utils/getRandomGradient';
 
