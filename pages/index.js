@@ -8,7 +8,6 @@ import { getActiveProductsWithPrices, getAllTools } from '../utils/supabase-clie
 import SquareBlock from '../components/ui/SquareBlock';
 import Link from 'next/link';
 
-
 export default function Index({ products, tools }) {
   
   const uniqueCategories = [...new Set(tools.map(tool => tool.category))]; 

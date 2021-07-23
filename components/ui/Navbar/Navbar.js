@@ -3,11 +3,13 @@ import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import Logo from '../../icons/Logo';
 import { useUser } from '../../../utils/useUser';
+import SearchBar from '../SearchBar/SearchBar';
+import { ModalProvider } from '../../../utils/use-modal';
 
 const Navbar = () => {
   const { user, signOut } = useUser();
 
-  let listener = null
+  let listener = null;
   const [scrollState, setScrollState] = useState("bg-transparent")
 
   useEffect(() => {
@@ -29,6 +31,8 @@ const Navbar = () => {
   }, [scrollState])
 
   return (
+    <>
+    <ModalProvider>
       <div className={`sticky top-0 ${scrollState} z-40 transition-all mx-auto flex flex-wrap px-5 py-2 flex-col md:flex-row items-center`}>
         <Link href="/">
               <a className="title-font font-medium items-center text-gray-900 mb-4 md:mb-0 pr-4 hidden md:flex rounded hover:shadow hover:bg-white transition" aria-label="Logo">
@@ -79,8 +83,11 @@ const Navbar = () => {
         </Link>
         </div>
             )}
+            <SearchBar/>
         </nav>
       </div>
+      </ModalProvider>
+      </>
   );
 };
 

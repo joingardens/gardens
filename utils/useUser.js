@@ -49,7 +49,7 @@ export const UserContextProvider = (props) => {
   const value = {
     session,
     user,
-    userDetails,
+    profile: userDetails,
     userLoaded,
     subscription,
     signIn: (options) => supabase.auth.signIn(options),

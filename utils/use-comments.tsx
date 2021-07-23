@@ -127,16 +127,19 @@ export const CommentsContextProvider = (props: CommentsContextProviderProps): JS
     (pageIndex, previousPageData) =>
       getKey(pageIndex, previousPageData, postId, sortingBehavior, user), // Include user to revalidate when auth changes
     async (_name, path, sortingBehavior, _user) => {
+      //console.log(sortingBehavior)
+      //console.log(path)
       return (
         supabase
           .from<definitions['comments_thread_with_user_vote']>('comments_thread_with_user_vote')
           .select('*', { count: 'exact' })
-          .eq('path', '{1}')
-          // .lt('depth', MAX_DEPTH)
-          .gt(sortingBehavior, (path))
+          .contains('path', [postId])
+          //.lt('depth', MAX_DEPTH)
+          .gt('depth', 1)
           .order(sortingBehavior as any)
           .limit(PAGE_SIZE)
           .then(({ data, error, count: tableCount }) => {
+            //console.log(data)
             if (error) throw error;
             if (!data) return null;
             mutateGlobalCount((count) => {
@@ -157,7 +160,7 @@ export const CommentsContextProvider = (props: CommentsContextProviderProps): JS
   const flattenedComments: CommentType[] = data ? data.flat() : [];
 
   const rootParentIds = flattenedComments
-    .filter((comment: CommentType) => comment.parentId === postId)
+    .filter((comment: CommentType) => comment.parentId === parseInt(postId))
     .map((comment: CommentType) => comment.parentId)
     .reduce(
       (accumulator, currentValue) => ({
@@ -167,6 +170,7 @@ export const CommentsContextProvider = (props: CommentsContextProviderProps): JS
       {}
     );
 
+
   const comments: CommentType[] = data
     ? (arrayToTree(flattenedComments, {
         dataField: null,
@@ -174,6 +178,7 @@ export const CommentsContextProvider = (props: CommentsContextProviderProps): JS
         rootParentIds,
       }) as CommentType[])
     : [];
+    //console.log(comments)
   const isLoadingInitialData = !data && !error;
   const isLoadingMore =
     isLoadingInitialData || !!(size > 0 && data && typeof data[size - 1] === 'undefined');

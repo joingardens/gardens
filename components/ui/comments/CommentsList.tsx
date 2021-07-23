@@ -78,6 +78,7 @@ const CommentsList = ({ initialData = null, useInfiniteScroll = false }: Props):
     );
   }
 
+
   return (
     <div
       ref={wrapperRef}

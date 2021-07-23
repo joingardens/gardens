@@ -22,7 +22,7 @@ function ListItem(props) {
               {props.categoryName}
             </a>
             </h2>
-            <span className="underline text-center md:text-end">
+            <span className="hover:underline text-center md:text-end">
             <a href="#" className="text-gray-700">Jump to top</a></span>
           </div>
             <p className="leading-relaxed text-base my-4">

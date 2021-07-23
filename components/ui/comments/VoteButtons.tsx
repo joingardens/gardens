@@ -1,5 +1,5 @@
 import { useComments } from '../../../utils/use-comments';
-import { useUser } from '../../../utils/use-user';
+import { useUser } from '../../../utils/useUser';
 import Heart from '../../icons/Heart';
 import ThumbsUpFilled from '../../icons/ThumbsUpFilled';
 import ThumbsUpOutlined from '../../icons/ThumbsUpOutlined';
@@ -76,6 +76,7 @@ const VoteButtons = ({
   const { open } = useModal();
 
   function handleUpvote(): void {
+    console.log(user)
     if (!user || !user.id) return open('signInModal');
 
     if (status === 'unvoted') {

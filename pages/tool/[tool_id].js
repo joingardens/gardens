@@ -95,7 +95,7 @@ export default function Tool({ products, jobGroups, jobTools, jobs, tool }) {
     <h2 className="lg:w-4/5 mx-auto px-6 sm:text-2xl text-xl font-semibold text-gray-900">
     Things you can do with {currentTool.tool}</h2>
     {listJobs}
-    <Comments postId={tool_id} />
+    <Comments postId={parseInt('999' + tool_id)} />
     </div>
     </div>
     ) : null}

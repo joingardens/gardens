@@ -113,7 +113,8 @@ const Comment = ({ comment, pageIndex, highlight = false, parent = null }: Props
   }
 
   return (
-    <div className="flex flex-col">
+    // if it's garbled add "flex-col"
+    <div className="flex">
       {!hidden && parent && (
         <div className="grid pb-1 gap-x-2 comment-grid">
           <div className="w-6 relative">

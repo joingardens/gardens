@@ -11,12 +11,19 @@ import urlify from '../utils/helpers.js';
 import SquareBlock from '../components/ui/SquareBlock';
 import PrettyBlock from '../components/ui/PrettyBlock';
 import getRandomGradient from '../utils/getRandomGradient';
+import SectionsAndCategories from '../components/ui/SectionsAndCategories';
 
 export default function ToolsPage({ products, tools, jobTools }) {
   
   let toolsWithJobs = [];
   jobTools.map(jobTool => toolsWithJobs.push(jobTool.tool))
-  const uniqueCategories = [...new Set(tools.map(tool => tool.category))]; 
+  const uniqueCategories = [...new Set(tools.map(tool => tool.category))];
+  const uniqueSections = [...new Set(tools.map(tool => tool.section))];
+  let categoriesWithSections = uniqueSections.map(section => ({section: section, categories: []})); 
+  tools.map(tool => {
+    let currentSection = categoriesWithSections.findIndex(categoryWithSection => categoryWithSection.section == tool.section);
+    (!categoriesWithSections[currentSection].categories.includes(tool.category)) ? categoriesWithSections[currentSection].categories.push(tool.category) : null
+  });
   const toolsByCategory = [...new Set(uniqueCategories.map(category => {
   	return {
   		category: category, 
@@ -72,11 +79,11 @@ export default function ToolsPage({ products, tools, jobTools }) {
   	<>
     <div className="-mb-20 -mt-20">
     <Title titleTitle={'Tools'} 
-    titleDescription={'All the tools, sorted by openness'} 
+    titleDescription={'Open-source and fair-code tools are shown at the top. Pick a category — or keep scrolling to discover all tools.'} 
     colorBg={getRandomGradient()} />
     </div>
-    <div className="flex flex-wrap w-full pt-8 md:px-4 mt-14 justify-center items-center">
-    {featuredElements}
+    <div className="flex pt-8 md:px-4 mt-8 overflow-x-auto">
+    <SectionsAndCategories sections={categoriesWithSections} />
     </div>
     <div className="w-full">
     <h2 className="sm:text-3xl text-2xl text-center font-semibold mt-24 text-gray-900">Tools by group</h2>
