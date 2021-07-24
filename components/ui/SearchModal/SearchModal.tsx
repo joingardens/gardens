@@ -5,10 +5,35 @@ import { supabase } from '../../../utils/supabase-client';
 import { useUser } from '../../../utils/use-user';
 import GitHub from '../../icons/GitHub';
 import { useModal } from '../../../utils/use-modal';
+import { searchForTools, searchForJobs } from '../../../utils/supabase-client';
+import SquareBlock from '../SquareBlock';
+
 
 const SearchModal = () => {
 
   const { isOpen: show, close } = useModal('searchModal');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentTools, setcurrentTools] = useState([]);
+  const [currentJobs, setCurrentJobs] = useState([]);
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+
+      const returnSearchResult = async (searchTerm) => {
+      const searchResultTools = await searchForTools(searchTerm); // wait for this data to load
+      const searchResultJobs = await searchForJobs(searchTerm);
+      setcurrentTools(searchResultTools);
+      setCurrentJobs(searchResultJobs);
+      console.log(searchResultTools)
+      console.log(searchResultJobs)
+     
+  }
+  returnSearchResult(searchTerm);
+      
+    }, 3000)
+
+    return () => clearTimeout(delayDebounceFn)
+  }, [searchTerm])
 
   return (
     <Transition show={show}>
@@ -33,7 +58,7 @@ const SearchModal = () => {
          
 
           <div
-            className="w-full bg-white dark:bg-gray-800 inline-block rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm"
+            className="w-full bg-white dark:bg-gray-800 inline-block rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg"
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-headline"
@@ -59,10 +84,31 @@ const SearchModal = () => {
                   Cancel
                 </button>
                       <input className="appearance-none w-full py-2 px-3 text-gray-700 bg-gray-50 leading-tight focus:outline-none focus:shadow-outline" 
+                      autoFocus type='text' autoComplete='off'
+                      onChange={(e) => setSearchTerm(e.target.value)}
                       id="searchbox" type="text" placeholder="Enter your search term here..."/>
               </div>
-              <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                Hi there
+              <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4 w-full">
+                {(currentJobs && (currentJobs.length > 0)) ? currentJobs.map(item => (
+                  <SquareBlock key={item.id} blockBody={item.job} 
+       ctaLink={('/job/' + item.id)}
+       ctaLinkTitle={('Learn more')}
+       blockDescription={item.job_group.job_group}/>
+       )) : null}
+                {(currentJobs && (currentJobs.length > 0)) ? (<div className="h-0.5 mx-auto my-6 w-3/5 bg-gray-200"></div>) : null}
+                {(currentTools && (currentTools.length > 0)) ? currentTools.map(item => (
+                  <SquareBlock key={item.id} blockBody={item.tool} 
+       smallImage={item.logo_url} smallImageAlt={item.tool + ' logo'}
+       ctaLink={('/tool/' + item.id)}
+       ctaLinkTitle={('Learn more')}
+       blockDescription={item.category}
+       blockType={(item.model == 1) ? 'Open' : (item.model == 2) ? 'Fair' : (item.model == 4) ? 'Closed' : (item.model == 3) ? 'Exportable' : null} />
+       )) : null}
+                {((currentTools.length == 0) && (currentJobs.length == 0)) ? (<div className="py-2">
+             <span className="font-bold text-gray-400">
+              Nothing in here... Search for something else?
+              </span>
+             </div>) : null}
               </div>
             </Transition.Child>
           </div>

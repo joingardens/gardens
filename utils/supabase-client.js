@@ -187,6 +187,43 @@ export const getActiveProductsWithPrices = async () => {
   return data || [];
 };
 
+export const searchForTools = async (query) => {
+  const { data, error } = await supabase
+    .from('tools')
+    .select('id, tool, category, description, link, model, logo_url')
+    .or('tool.fts.' + query + ',description.fts.' + query + ',category.fts.' + query)
+    .order('category')
+    .order('model');
+    //.textSearch('description || tool || category', query, { 
+    //config: 'english' 
+    //})
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
+export const searchForJobs = async (query) => {
+  const { data, error } = await supabase
+    .from('jobs')
+    .select('id, job, job_group(job_group, emoji), description')
+    .or('job.fts.' + query + ',description.fts.' + query)
+    .order('job_group')
+    .order('job');
+    //.textSearch('description || tool || category', query, { 
+    //config: 'english' 
+    //})
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
 
 export const updateUserName = async (user, name) => {
   await supabase

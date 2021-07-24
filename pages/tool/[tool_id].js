@@ -80,25 +80,28 @@ export default function Tool({ products, jobGroups, jobTools, jobs, tool }) {
     </div>
     <div className="mt-24 pt-10 px-12 lg:px-24">
     <p className="lg:w-3/5 mx-auto sm:text-2xl lg:text-center text-xl text-gray-900 leading-relaxed text-base">
-    {currentTool.description}</p>
+    {currentTool.description ? currentTool.description : "There's nothing in here... for now. Add a description or start the discussion in comments below!"}
+    </p>
     <div className="border lg:w-3/5 mx-auto mt-8" />
     </div>
     <div className="flex space-between">
+    {(typeof listJobs !== 'undefined' && (listJobs.length > 0)) ? (
     <aside className="h-screen sticky top-0 w-1/5 hidden md:block">
     <div className="pt-20 h-full">
     <TextList items={groupArray} />
     </div>
     </aside>
-    {(typeof listJobs !== 'undefined') ? (
-    <div className="w-full md:w-4/5">
+    ) : null}
+    <div className={`w-full ${(typeof listJobs !== 'undefined' && (listJobs.length > 0)) ? 'md:w-4/5' : null}`}>
     <div className="px-5 mt-32 mb-20 lg:w-4/5 mx-auto">
+    {(typeof listJobs !== 'undefined' && (listJobs.length > 0)) ? (
     <h2 className="lg:w-4/5 mx-auto px-6 sm:text-2xl text-xl font-semibold text-gray-900">
     Things you can do with {currentTool.tool}</h2>
+    ) : null}
     {listJobs}
     <Comments postId={parseInt('999' + tool_id)} />
     </div>
     </div>
-    ) : null}
     </div>
     </>
     )}}

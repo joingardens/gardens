@@ -7,11 +7,6 @@ import SearchModal from '../SearchModal/SearchModal';
 
 const SearchBar = (): JSX.Element => {
 
-  // Search component courtesy Nick Coughlin https://github.com/ncoughlin/react-widgets/blob/master/src/components/Search.js
-
-  /*const [content, setContent] = useState<string>('');
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);*/
   const { open, isOpen } = useModal({ searchModal: SearchModal });
 
   return (
