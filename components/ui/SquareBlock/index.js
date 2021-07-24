@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from  "prop-types";
 import Image from 'next/image'
 
 function SquareBlock(props) {
@@ -52,13 +51,6 @@ function SquareBlock(props) {
   );
 }
 
-SquareBlock.defaultProps = {
-  theme: 'indigo'
-};
-
-SquareBlock.propTypes = {
-  theme: PropTypes.string.isRequired
-};
 
 export default SquareBlock;
   
