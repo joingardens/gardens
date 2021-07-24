@@ -6,7 +6,7 @@ export interface CommentType {
   title: string;
   content: string;
   authorId: string;
-  parentId: any;
+  parentId: number;
   createdAt: string;
   isPublished: boolean;
   updatedAt: string;

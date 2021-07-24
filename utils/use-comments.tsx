@@ -160,7 +160,7 @@ export const CommentsContextProvider = (props: CommentsContextProviderProps): JS
   const flattenedComments: CommentType[] = data ? data.flat() : [];
 
   const rootParentIds = flattenedComments
-    .filter((comment: CommentType) => comment.parentId === parseInt(postId))
+    .filter((comment: CommentType) => comment.parentId === postId)
     .map((comment: CommentType) => comment.parentId)
     .reduce(
       (accumulator, currentValue) => ({
