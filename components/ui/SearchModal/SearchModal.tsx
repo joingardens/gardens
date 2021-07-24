@@ -86,7 +86,7 @@ const SearchModal = () => {
                       <input className="appearance-none w-full py-2 px-3 text-gray-700 bg-gray-50 leading-tight focus:outline-none focus:shadow-outline" 
                       autoFocus type='text' autoComplete='off'
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      id="searchbox" type="text" placeholder="Enter your search term here..."/>
+                      id="searchbox" placeholder="Enter your search term here..."/>
               </div>
               <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4 w-full">
                 {(currentJobs && (currentJobs.length > 0)) ? currentJobs.map(item => (
