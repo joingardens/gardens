@@ -50,8 +50,8 @@ export default function Tool({ products, jobGroups, jobTools, jobs, tool }) {
  	  const itemElements = sortedItemArray.map(item => {
        let currentJobTool = jobTools.find(jobTool => jobTool.job == item.id)
        return (<SquareBlock key={item.id} blockBody={item.job} 
-         blockLink={(currentJobTool) ? ('/usecases#' + currentJobTool.id) : null}
-         linkTitle={"How-to's"} orderLink={'#pricing'}
+         blockLink={(currentJobTool) ? ('/task/' + currentJobTool.job) : null}
+         linkTitle={"How-to's"}
          blockType={''} />)
      }
     )

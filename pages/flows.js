@@ -51,7 +51,7 @@ export default function FlowPage({ products, jobs,
     blockBody={currentJob.job}
     blockDescription={'Using '} 
     blockDescriptionLinkTitle={currentTool.tool} 
-    ctaLink={currentTool ? ('/tool/' + currentTool.id) : null}
+    ctaLink={currentTool ? ('/task/' + currentJob.id) : null}
     ctaLinkTitle={'Press to get this done'}
     blockType={(currentTool.model == 1) ? 'Open' : (currentTool.model == 2) ? 'Fair' : (currentTool.model == 4) ? 'Closed' : (currentTool.model == 3) ? 'Exportable' : null} />)
 

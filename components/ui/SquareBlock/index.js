@@ -14,38 +14,52 @@ function SquareBlock(props) {
     {props.orderNumber ? (
       <div className="my-auto h-full w-24"><span className="text-2xl pl-6">{props.orderNumber}</span></div>
       ) : null}
-    <a href={props.orderLink ? props.orderLink : props.ctaLink ? props.ctaLink : props.blockLink} className="h-full w-full" target="_blank">
         <div className={`border bg-${blockColor} rounded px-4 py-3 h-full w-full items-center justify-between flex`}>
           <div className="flex w-full items-center">
           {props.smallImage ? (
             <div className="w-20 h-20 relative">
+            <a href={props.ctaLink ? props.ctaLink : props.blockLink} target="_blank">
             <Image src={props.smallImage} alt={props.smallImageAlt} 
             layout='fill' objectFit='contain' objectPosition='center center' />
+            </a>
             </div>) : null}
-          <div className="flex flex-col w-4/6 ml-4 w-full">
-          <span className={`title-font font-${fontWeight} font-bold`}>{props.blockBody}</span>
+          <div className="flex flex-col w-4/6 w-full ml-4">
+          <span className={`title-font font-${fontWeight} font-bold`}>
+          <a href={props.ctaLink ? props.ctaLink : props.blockLink} target="_blank" className="hover:underline">
+          {props.blockBody}
+          </a></span>
           <span className={`${typeColor} font-${fontWeight}`}>
+          <a href="/models" target="_blank" className="hover:underline">
           {props.blockType}
+          </a>
           </span>
           {props.blockDescription ? (
             <span className="py-1 pr-2">{props.blockDescription}
-            {props.blockDescriptionLinkTitle ? (<span className="font-semibold underline">{props.blockDescriptionLinkTitle}</span>) : (null)}
+            {props.blockDescriptionLinkTitle ? (<a href={props.blockLink} target="_blank" className="hover:underline"> 
+              <span className="font-semibold underline">{props.blockDescriptionLinkTitle}</span>
+              </a>) : (null)}
             </span>
             ) : (null)}
           </div>
           <div className="flex w-2/6 justify-center items-center">
           {props.orderLink ? (
+            <a href={props.orderLink} target="_blank" className="hover:underline">
             <span className="text-red-500 font-bold">{props.orderLinkTitle}</span>
+            </a>
           ) : props.ctaLink ? (
+          <a href={props.ctaLink} target="_blank" className="hover:underline">
             <span className="text-blue-500 font-bold">{props.ctaLinkTitle}</span>
+            </a>
+          
           ) : props.blockLink ? (
+          <a href={props.blockLink} target="_blank" className="hover:underline">
           <span className="text-gray-400">{props.blockLinkTitle}</span>
+          </a>
           ) : null}
           </div>
           </div>
           
           </div>
-          </a>
       </div>
       </>
   );

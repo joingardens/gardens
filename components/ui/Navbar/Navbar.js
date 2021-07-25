@@ -33,7 +33,7 @@ const Navbar = () => {
   return (
     <>
     <ModalProvider>
-      <div className={`sticky top-0 ${scrollState} z-40 transition-all mx-auto flex flex-wrap px-5 py-2 flex-col md:flex-row items-center`}>
+      <div className={`sticky top-0 ${scrollState} z-40 transition-all mx-auto flex flex-wrap px-2 py-2 flex-col md:flex-row items-center`}>
         <Link href="/">
               <a className="title-font font-medium items-center text-gray-900 mb-4 md:mb-0 pr-4 hidden md:flex rounded hover:shadow hover:bg-white transition" aria-label="Logo">
               <div>
@@ -45,10 +45,10 @@ const Navbar = () => {
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
 
               <Link href="/values">
-                <a className="mr-5 p-2 hover:bg-white hover:underline rounded transition">Values</a>
+                <a className="hidden sm:block mr-2.5 p-2 hover:bg-white hover:underline rounded transition">Values</a>
               </Link>
               <Link href="/flows">
-                <a className="mr-5 p-2 hover:bg-white hover:underline rounded transition">Flows</a>
+                <a className="mr-2.5 p-2 hover:bg-white hover:underline rounded transition">Flows</a>
               </Link>
               {/*
               <Link href="/account">
@@ -56,7 +56,7 @@ const Navbar = () => {
               </Link>*/}
               {user ? (
               <Link href="#">
-                <a className="mr-5 p-2 hover:bg-white hover:underline rounded transition" onClick={() => signOut()}>
+                <a className="mr-2.5 p-2 hover:bg-white hover:underline rounded transition" onClick={() => signOut()}>
                   Sign out
                 </a>
               </Link>

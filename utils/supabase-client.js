@@ -48,12 +48,42 @@ export const getJobToolsByTool = async (tool_id) => {
   return data || [];
 };
 
+export const getJobToolsByTask = async (task_id) => {
+  const { data, error } = await supabase
+    .from('jobs_tools')
+    .select('tool(id, tool, logo_url, section, category, model), instruction_link')
+    .eq('job', task_id)
+    .order('tool');
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
 export const getToolById = async (tool_id) => {
   const { data, error } = await supabase
     .from('tools')
     .select('*')
     .eq('id', tool_id)
     .order('category');
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
+export const getTaskById = async (task_id) => {
+  const { data, error } = await supabase
+    .from('jobs')
+    .select('*')
+    .eq('id', task_id)
+    .order('job_group');
 
   if (error) {
     console.log(error.message);

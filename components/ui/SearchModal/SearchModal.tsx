@@ -24,8 +24,6 @@ const SearchModal = () => {
       const searchResultJobs = await searchForJobs(searchTerm);
       setcurrentTools(searchResultTools);
       setCurrentJobs(searchResultJobs);
-      console.log(searchResultTools)
-      console.log(searchResultJobs)
      
   }
   returnSearchResult(searchTerm);
@@ -91,7 +89,7 @@ const SearchModal = () => {
               <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4 w-full">
                 {(currentJobs && (currentJobs.length > 0)) ? currentJobs.map(item => (
                   <SquareBlock key={item.id} blockBody={item.job} 
-       ctaLink={('/job/' + item.id)}
+       ctaLink={('/task/' + item.id)}
        ctaLinkTitle={('Learn more')}
        blockDescription={item.job_group.job_group}/>
        )) : null}
