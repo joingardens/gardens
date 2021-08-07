@@ -6,7 +6,7 @@ export const supabase = createClient(
 );
 
 export const findInputsByString = async (string) => {
-  const {data, error} = await supabase
+  const {data} = await supabase
   .from("inputs")
   .select("*")
   .textSearch("input", string)
