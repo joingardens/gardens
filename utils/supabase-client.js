@@ -5,6 +5,14 @@ export const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
+export const findInputsByString = async (string) => {
+  const {data, error} = await supabase
+  .from("inputs")
+  .select("*")
+  .textSearch("input", string)
+  return data
+}
+
 export const getAllTools = async () => {
   const { data, error } = await supabase
     .from('tools')

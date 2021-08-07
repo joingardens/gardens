@@ -2,7 +2,8 @@ import React from "react";
 
 const Plus = (props) => {
   return (
-    <svg
+    <svg 
+      className={`h-full w-full`}
       viewBox="0 0 24 24"
       stroke="currentColor"
       strokeWidth="2"

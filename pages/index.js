@@ -7,8 +7,13 @@ import ListItemMirrored from '../components/ui/ListItemMirrored';
 import { getActiveProductsWithPrices, getAllTools } from '../utils/supabase-client';
 import SquareBlock from '../components/ui/SquareBlock';
 import Link from 'next/link';
+import { useContext } from 'react';
+import ModalsContext from '../components/modals/modalsContext';
+import Button from '../components/ui/Button';
 
 export default function Index({ products, tools }) {
+
+  const {service} = useContext(ModalsContext)
   
   const uniqueCategories = [...new Set(tools.map(tool => tool.category))]; 
   const toolsByCategory = [...new Set(uniqueCategories.map(category => {
@@ -51,6 +56,11 @@ export default function Index({ products, tools }) {
     <div className="h-12" />
     <div className="flex space-between">
     </div>
+    <button onClick={() => {
+      service.openModal("newFlow")
+    }}>
+      Open modal
+    </button>
   	{/*<ParagraphWithButton />
   	<Pricing products={products} />*/}
     </>

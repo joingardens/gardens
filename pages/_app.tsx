@@ -4,6 +4,8 @@ import '../assets/chrome-bug.css';
 
 import Layout from '../components/Layout';
 import { UserContextProvider } from '../utils/useUser';
+import { ModalsContextProvider } from '../components/modals/modalsContext';
+import { NewFlowContextProvider } from '../components/context/newFlow/newFlowContext';
 
 export default function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -12,11 +14,15 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <div className="bg-white">
+      <ModalsContextProvider>
+        <NewFlowContextProvider>
       <UserContextProvider>
-        <Layout>
+        <Layout meta={{}}>
           <Component {...pageProps} />
         </Layout>
       </UserContextProvider>
+      </NewFlowContextProvider>
+      </ModalsContextProvider>
     </div>
   );
 }
