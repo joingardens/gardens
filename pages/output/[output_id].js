@@ -6,18 +6,15 @@ import ListItem from '../../components/ui/ListItem';
 import TextList from '../../components/ui/TextList';
 import ListItemMirrored from '../../components/ui/ListItemMirrored';
 import Title from '../../components/ui/Title';
-import { getActiveProductsWithPrices, 
-  getAllJobs, getAllJobGroups, 
-  getAllJobTools, getAllTools, 
-  getAllFlowsOutputs, getAllFlowItems, 
-  getAllOutputs, getAllFlows, getOutputById } from '../../utils/supabase-client';
+import { getActiveProductsWithPrices, getFlowItemsByFlowId, 
+  getAllOutputs, getOutputById, getAllJobGroups, getFlowOutputsByOutputId } from '../../utils/supabase-client';
 //import MyDisclosure from '@/components/dynamic/disclosure';
-import SquareBlock from '../../components/ui/SquareBlock';
+//import SquareBlock from '../../components/ui/SquareBlock';
+import PrettyBlock from '../../components/ui/PrettyBlock';
 import getRandomGradient from '../../utils/getRandomGradient';
 
-export default function Output({ products, jobs, 
-  jobGroups, tools, jobTools, 
-  flowsOutputs, flowItems, outputs, output }) {
+export default function Output({ products, jobGroups, 
+  flowItems, output, flowsOutputs }) {
 
   const router = useRouter()
    if (router.isFallback) {
@@ -26,70 +23,20 @@ export default function Output({ products, jobs,
     </div>)
   } else {
   const { output_id } = router.query
+  
   let groupArray = [];
   let flowIds = [];
-  let currentOutput = output ? output[0] : null
-  if (currentOutput != null){
-  flowsOutputs.map(flowOutput => (flowOutput.output == currentOutput.id) ? flowIds.push(flowOutput.flow) : null);
-  const filteredFlowItems = flowItems.filter(flowItem => flowIds.includes(flowItem.flow))
+  let currentOutput = output ? output[0] : null;
 
-  const uniqueFlows = [...new Set(filteredFlowItems.map(flowItem => flowItem.flow))]; 
-  const jobToolsByFlow = [...new Set(uniqueFlows.map(flow => {
-    return {
-      category: flow ? flowsOutputs.find(item => item.flow == flow) : 'Default', 
-      itemArray: flowItems.filter(item => {
-      if (item.flow == flow){
-        return item
-      } 
-    })} 
-  }))];
-
-
-    const listJobTools = uniqueFlows.map((flow) => {
-    const filteredArray = jobToolsByFlow.filter(item => {
-      if (item.category.id == flow){
-        return item
-      }
-    })
-    const itemArray = filteredArray[0].itemArray;
-    const sortedItemArray = itemArray
-
-    let currentOrderNumber = 0;
-
-     const itemElements = sortedItemArray.map(item => {
-      currentOrderNumber += 1;
-      let currentJobTool = jobTools.find(jobTool => jobTool.id == item.job_tool)
-      
-      let currentTool = tools.find(tool => tool.id == currentJobTool.tool);
-
-      let currentJob = jobs.find(job => job.id == currentJobTool.job)
-      return (
-    <SquareBlock key={item.id} blockId={item.id} 
-    orderNumber={currentOrderNumber}
-    blockBody={currentJob.job}
-    blockDescription={'Using '} 
-    blockDescriptionLinkTitle={currentTool.tool} 
-    ctaLink={currentTool ? ('/tool/' + currentTool.id) : null}
-    ctaLinkTitle={'Press to get this done'}
-    blockType={(currentTool.model == 1) ? 'Open' : (currentTool.model == 2) ? 'Fair' : (currentTool.model == 4) ? 'Closed' : (currentTool.model == 3) ? 'Exportable' : null} />)
-
+  const itemElements = flowsOutputs.map(item => {
+       return (
+       <PrettyBlock key={item.id} blockBody={item.title} 
+         blockLink={'/flow/' + item.id}  />
+         )
      }
     )
 
-    let currentGroup = flowsOutputs.find(item => item.output == filteredArray[0].category.output)
 
-    let currentGroupTitle = currentGroup ? currentGroup.title : 'Default'
-    groupArray.push(currentGroupTitle)
-
-    return (
-    <ListItem key={currentGroupTitle.toString()} categoryName={currentGroupTitle.toString()}
-
-    categoryDescription={''}>
-    {itemElements}
-    </ListItem>)
-  }
-    );
-}
   return (
   	<>
     <div className="-mb-20 -mt-20">
@@ -97,19 +44,19 @@ export default function Output({ products, jobs,
      colorBg={getRandomGradient()} />
     </div>
     <div className="flex space-between">
-    <aside className="h-screen sticky top-0 w-1/5 hidden md:block">
+    {/*<aside className="h-screen sticky top-0 w-1/5 hidden md:block">
     <div className="pt-20 h-full">
     <TextList items={groupArray} />
     </div>
-    </aside>
-    <div className="flex-col w-full md:w-4/5 mt-14">
-    {(typeof listJobTools !== 'undefined') ? listJobTools : null}
+    </aside>*/}
+    <div className="flex-col w-full mx-auto md:w-4/5 mt-14 py-14">
+    <h2 className="lg:w-4/5 text-center mx-auto px-6 sm:text-2xl text-xl text-gray-900">
+    Get {currentOutput.output.toLowerCase()} by following these flows</h2>
+    <div className="flex items-center justify-center w-full mx-auto lg:w-4/5 mt-4">
+    {itemElements}
     </div>
     </div>
-    {/*<ParagraphWithButton />
-    <Pricing products={products} />*/}
-    )
-    
+    </div>
     </>
     )}
 }
@@ -127,21 +74,15 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const products = await getActiveProductsWithPrices();
-  const jobs = await getAllJobs();
-  const tools = await getAllTools();
   const jobGroups = await getAllJobGroups();
-  const jobTools = await getAllJobTools();
-  const flowsOutputs = await getAllFlowsOutputs();
-  const flowItems = await getAllFlowItems();
+  const flowsOutputs = await getFlowOutputsByOutputId(context.params.output_id);
+  const flowItems = await getFlowItemsByFlowId(flowsOutputs[0].flow);
   const output = await getOutputById(context.params.output_id)
 
   return {
     props: {
       products,
-      jobs,
       jobGroups,
-      jobTools,
-      tools,
       flowsOutputs,
       flowItems,
       output

@@ -17,6 +17,7 @@
     "classnames": "2.2.6",
     "cuid": "^2.1.8",
     "dayjs": "^1.10.5",
+    "html-react-parser": "^1.2.7",
     "next": "10.0.5",
     "next-seo": "^4.26.0",
     "performant-array-to-tree": "^1.9.1",

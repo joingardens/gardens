@@ -33,6 +33,35 @@ export const getAllJobs = async () => {
   return data || [];
 };
 
+export const getStandalonePostIds = async () => {
+  const { data, error } = await supabase
+    .from('posts')
+    .select('id')
+    .not('parentId', 'is', null)
+    .order('id');
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
+export const getAllFlowIds = async () => {
+  const { data, error } = await supabase
+    .from('flow_items')
+    .select('flow')
+    .order('flow');
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
 export const getJobToolsByTool = async (tool_id) => {
   const { data, error } = await supabase
     .from('jobs_tools')
@@ -84,6 +113,20 @@ export const getTaskById = async (task_id) => {
     .select('*')
     .eq('id', task_id)
     .order('job_group');
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
+export const getPostById = async (post_id) => {
+  const { data, error } = await supabase
+    .from('posts')
+    .select('*')
+    .eq('id', post_id)
 
   if (error) {
     console.log(error.message);
@@ -172,11 +215,71 @@ export const getOutputById = async (output_id) => {
   return data || [];
 };
 
+export const getFlowOutputsByFlowId = async (flow_id) => {
+  const { data, error } = await supabase
+    .from('flows_outputs')
+    .select('id, flow, output(id, output, description, job_group), title')
+    .eq('flow', flow_id)
+    .order('id')
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
+export const getFlowOutputsByOutputId = async (output_id) => {
+  const { data, error } = await supabase
+    .from('flows_outputs')
+    .select('id, flow, output, title')
+    .eq('output', output_id)
+    .order('id')
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
+export const getFlowInputsByFlowId = async (flow_id) => {
+  const { data, error } = await supabase
+    .from('flows_inputs')
+    .select('id, flow, input(id, input, description, job_group), title')
+    .eq('flow', flow_id)
+    .order('id')
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
 export const getFlowItemsById = async (flow_id) => {
   const { data, error } = await supabase
     .from('flow_items')
     .select('*')
     .eq('id', flow_id)
+    .order('job_tool');
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
+export const getFlowItemsByFlowId = async (flow_id) => {
+  const { data, error } = await supabase
+    .from('flow_items')
+    .select('id, flow, job_tool(id, job(id, job, job_group, description), tool(id, tool, category, model, logo_url), instruction_link, description)')
+    .eq('flow', flow_id)
     .order('job_tool');
 
   if (error) {

@@ -81,6 +81,15 @@ a {
   animation-name: fadeIn;
 }
 
+.tooltip {
+  @apply invisible absolute;
+}
+
+.has-tooltip:hover .tooltip {
+  @apply visible z-50;
+}
+
+
 @-webkit-keyframes fadeIn {
   from {
     opacity: 0;
