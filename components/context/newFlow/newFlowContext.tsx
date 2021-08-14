@@ -1,5 +1,6 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import { Reducer } from "react";
+import { useMemo } from "react";
 import { useReducer } from "react";
 import NewFlowReducer from "./newFlowReducer";
 import { NewFlowService } from "./newFlowService";
@@ -17,9 +18,9 @@ interface Props {
 }
 
 interface IStep {
-  name: string,
+  task: string,
   description?: string,
-  tool?: string
+  tool: string
 }
 
 export interface IInput {
@@ -40,6 +41,13 @@ export interface INewFlowState {
 export const defaultNewFlowInput:IInput = {
   name: ""
 }
+
+export const defaultNewStep: IStep = {
+  task: "",
+  tool: "",
+  description: ""
+}
+
 export type IAction = 
 {type: "setTitle", payload: string} |
 {type: "addInput"} 
@@ -53,14 +61,16 @@ const InitialState:INewFlowState = {
   ],
   steps: [
     {
-      name: ""
+      task: "",
+      tool: "",
+      description: ""
     }
   ],
   outputs: []
 }
 const NewFlowContextProvider = ({ children }: Props) => {
   const [newFlowState, newFlowDispatch] = useReducer(NewFlowReducer, InitialState)
-  const newFlowService = new NewFlowService(newFlowDispatch)
+  const newFlowService = useMemo(() => new NewFlowService(newFlowDispatch), [newFlowDispatch]) 
 
   return (
     <NewFlowContext.Provider
