@@ -23,7 +23,7 @@ const NewFlowInputInput = ({input, index}: Props) => {
 
     const find = async () => {
         setLoading(true)
-        const data =  await findInputsByString(input.name)
+        const data =  await newFlowService.findEntityByString("inputs", "input", input.name)
         setSuggestions(data) 
         console.log(data)
         setLoading(false)

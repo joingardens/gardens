@@ -9,7 +9,8 @@ export type IAction =
 {type: "setStepTask", payload: {index: number, task: string}} |
 {type: "setStepTool", payload: {index: number, tool: string}} |
 {type: "addStep"} |
-{type: "removeStep", payload: number}
+{type: "removeStep", payload: number} |
+{type: "setOutput", payload: string}
 
 export const NewFlowReducer: Reducer<INewFlowState, IAction> = (state, action: IAction) => {
 
@@ -85,6 +86,12 @@ export const NewFlowReducer: Reducer<INewFlowState, IAction> = (state, action: I
         return {
             ...state,
             steps: state.steps.filter((_input, index) => (index !== action.payload))
+        }
+    }
+    if (action.type === "setOutput") {
+        return {
+            ...state,
+            output: action.payload
         }
     }
 

@@ -9,6 +9,7 @@ import Gear from "../icons/Gear";
 import Plus from "../icons/Plus";
 import NewFlowInputInput from "./newFlow/newFlowInputInput";
 import NewFlowStepInput from "./newFlow/newFlowStepInput";
+import NewFlowOutputInput from "./newFlow/newFlowOutputInput";
 
 
 const NewFlowModal = () => {
@@ -85,6 +86,13 @@ const NewFlowModal = () => {
                             className={`w-12 h-12 mt-4 ml-1  mr-4 p-2 rounded-full bg-gray-100 flex-shrink-0`}>
                             <Plus />
                     </button>
+                </div>
+                <div className={`flex-col items-center flex`}>
+                <div className={`text-lg font-semibold mb-4 w-full text-center `}>Final output</div>
+                <NewFlowOutputInput/>
+                <button onClick={() => {newFlowService.saveFlow()}} className={`shadow hover:shadow-lg py-3 px-5 mx-auto transition-all mt-6 focus:bg-gray-200 focus:outline-none`}>
+                    Send!
+                </button>
                 </div>
             </div>
         </ModalOverlay>
