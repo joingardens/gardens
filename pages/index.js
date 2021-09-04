@@ -40,7 +40,7 @@ export default function Index({ products, tools }) {
     )
 
     return (
-    <ListItem key={category.toString()} categoryName={category.toString()} emoji={'🔨'} categoryDescription={''}>
+    <ListItem key={category ? category.toString() : ""} categoryName={category ? category.toString() : ""} emoji={'🔨'} categoryDescription={''}>
     {itemElements}
     </ListItem>)
   }
