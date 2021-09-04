@@ -34,7 +34,8 @@ export default function FlowPage({ products, jobs,
         return item
       }
     })
-    const itemArray = filteredArray[0].itemArray;
+
+    const itemArray = filteredArray[0] && filteredArray[0].itemArray ? filteredArray[0].itemArray : [];
   	const sortedItemArray = itemArray
 
     let currentOrderNumber = 0;
@@ -58,7 +59,7 @@ export default function FlowPage({ products, jobs,
      }
     )
 
-    let currentOutput = outputs.find(item => item.id == filteredArray[0].category.output)
+    let currentOutput = outputs.find(item => item.id == filteredArray[0]?.category?.output)
 
     let currentOutputTitle = currentOutput ? currentOutput.output : 'Default'
     outputArray.push(currentOutputTitle)
@@ -66,7 +67,7 @@ export default function FlowPage({ products, jobs,
     return (
     <ListItem key={currentOutputTitle.toString()} categoryName={currentOutputTitle.toString()}
 
-    categoryDescription={currentOutput.description}>
+    categoryDescription={currentOutput?.description}>
     {itemElements}
     </ListItem>)
   }

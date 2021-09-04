@@ -260,9 +260,11 @@ export class NewFlowService extends SupabaseServiceClass {
                 return jobTool
             })
         }
-        const flow = await this.insertItem("flows", [{
-            title: this.state.title
-        }])[0]
+        const flowArr = await this.insertItem("flows", [{
+            flow: this.state.title
+        }])
+        console.log(flowArr)
+        const flow = flowArr[0]
 
         let flowItems = foundJobTools.map(jobTool => {
             return {
