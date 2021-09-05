@@ -36,7 +36,7 @@ export default function ToolsPage({ products, tools, jobTools }) {
 
     const featuredElements = uniqueCategories.map(category => {
       if (category){
-        
+
       return (
       <PrettyBlock key={urlify(category)} 
       blockBody={category} blockLink={'#' + urlify(category)} linkTitle={'View'}
@@ -67,13 +67,16 @@ export default function ToolsPage({ products, tools, jobTools }) {
     ) 
    });
 
-
-    return (
+    if (category){
+      return (
     <ListItem key={category.toString()} 
     categoryName={category.toString()} categoryDescription={''}
     addLink={'https://tally.so/r/w8Zo5m' + '?category=' + category.toString()}>
     {itemElements}
     </ListItem>)
+    }
+
+    
   }
   	);
     
