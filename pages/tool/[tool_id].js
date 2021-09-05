@@ -61,7 +61,7 @@ export default function Tool({ products, jobGroups, jobTools, jobs, tool }) {
     groupArray.push(currentGroupTitle)
 
     return (
-    <ListItem key={currentGroupTitle.toString()} categoryName={currentGroupTitle.toString()} 
+    <ListItem key={currentGroupTitle ? currentGroupTitle.toString() : ""} categoryName={currentGroupTitle ? currentGroupTitle.toString() : ""} 
     emoji={'📂'} categoryDescription={''}>
     {itemElements}
     </ListItem>
