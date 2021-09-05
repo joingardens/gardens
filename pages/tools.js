@@ -35,7 +35,7 @@ export default function ToolsPage({ products, tools, jobTools }) {
   }))];
 
     const featuredElements = uniqueCategories.map(category => {
-      if (category){
+      if (category && (category.length != 0)){
 
       return (
       <PrettyBlock key={urlify(category)} 
@@ -67,7 +67,7 @@ export default function ToolsPage({ products, tools, jobTools }) {
     ) 
    });
 
-    if (category){
+    if (category && (category.length != 0)){
       return (
     <ListItem key={category.toString()} 
     categoryName={category.toString()} categoryDescription={''}
