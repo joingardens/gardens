@@ -38,8 +38,8 @@ export default function ToolsPage({ products, tools, jobTools }) {
       if (category && (category.length != 0)){
 
       return (
-      <PrettyBlock key={urlify(category)} 
-      blockBody={category} blockLink={'#' + urlify(category)} linkTitle={'View'}
+      <PrettyBlock key={category ? urlify(category) : ''} 
+      blockBody={category} blockLink={category ? ('#' + urlify(category)) : ''} linkTitle={'View'}
     blockType={'Open'} />)
       }
     });

@@ -40,7 +40,7 @@ export default function UseCasePage({ products, jobs, jobGroups, tools, jobTools
     blockDescriptionLinkTitle={currentTool ? currentTool.tool : 'No tool'} 
     ctaLink={currentTool ? ('/tool/' + item.tool) : null}
     ctaLinkTitle={'Press to get this done'}
-    blockType={(currentTool.model == 1) ? 'Open' : (currentTool.model == 2) ? 'Fair' : (currentTool.model == 4) ? 'Closed' : (currentTool.model == 3) ? 'Exportable' : null} />)
+    blockType={currentTool ? ((currentTool.model == 1) ? 'Open' : (currentTool.model == 2) ? 'Fair' : (currentTool.model == 4) ? 'Closed' : (currentTool.model == 3) ? 'Exportable' : null) : null} />)
 
      }
     )
