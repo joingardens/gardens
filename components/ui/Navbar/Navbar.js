@@ -4,10 +4,13 @@ import React, { useState, useEffect } from 'react';
 import Logo from '../../icons/Logo';
 import { useUser } from '../../../utils/useUser';
 import SearchBar from '../SearchBar/SearchBar';
-import { ModalProvider } from '../../../utils/use-modal';
+//import { ModalProvider } from '../../../utils/use-modal';
+import { useContext } from 'react';
+import ModalsContext from '../../modals/modalsContext';
 
 const Navbar = () => {
   const { user, signOut } = useUser();
+  const {service} = useContext(ModalsContext)
 
   let listener = null;
   const [scrollState, setScrollState] = useState("bg-transparent")
@@ -32,7 +35,6 @@ const Navbar = () => {
 
   return (
     <>
-    <ModalProvider>
       <div className={`sticky top-0 ${scrollState} z-40 transition-all mx-auto flex flex-wrap px-2 py-2 flex-col md:flex-row items-center`}>
         <Link href="/">
               <a className="title-font font-medium items-center text-gray-900 mb-4 md:mb-0 pr-4 hidden md:flex rounded hover:shadow hover:bg-white transition" aria-label="Logo">
@@ -66,9 +68,12 @@ const Navbar = () => {
                 <a className="mr-5 px-2 hover:underline">Sign in</a>
               </Link>*/}
               <Link href="/">
-        <button className="inline-flex items-center bg-white border border-black py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-2 md:mt-0">
-          Contribute
-          <svg
+ <button className="inline-flex items-center bg-white border border-black py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-2 md:mt-0" 
+ onClick={() => {
+      service.openModal("newFlow")
+    }}>
+      Open modal
+      <svg
             fill="none"
             stroke="currentColor"
             strokeLinecap="round"
@@ -79,14 +84,13 @@ const Navbar = () => {
           >
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
-        </button>
+    </button>
         </Link>
         </div>
             )}
             <SearchBar/>
         </nav>
       </div>
-      </ModalProvider>
       </>
   );
 };

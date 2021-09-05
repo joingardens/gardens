@@ -30,7 +30,7 @@ export default function FlowPage({ products, jobs,
 
   	const listJobTools = uniqueFlows.map((flow) => {
   	const filteredArray = jobToolsByFlow.filter(item => {
-      if (item.category.id == flow){
+      if (item.category.flow == flow){
         return item
       }
     })
