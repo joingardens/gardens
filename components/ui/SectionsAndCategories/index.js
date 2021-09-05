@@ -6,13 +6,20 @@ function SectionsAndCategories(props) {
 
     let allSections = props.sections.map(section => {
 
-    let categoryItems = section.categories.map(item => 
-    <a href={'#' + urlify(item)} className="w-full" key={urlify(item)}>
-    <div className="py-1 w-full">
+    let categoryItems = section.categories.map(item => {
+      if (item){
+        return (<div className="py-1 w-full">
+    <a href={item ? ('#' + urlify(item)) : null} className="w-full h-full" key={item ? urlify(item) : ''}>
+    
                 <span className="text-blue-500 font-semibold w-full hover:underline">{item}</span>
-               </div>
+               
               </a>
-    );
+               </div>)
+      }
+    
+    });
+    if (section.section){
+
       return (
         <div className="ml-4 pr-4 py-4 md:py-12 w-full md:w-48 md:h-full" key={section.section}>
         <div className="py-2 md:py-0 md:h-12 w-full md:w-auto">
@@ -24,6 +31,7 @@ function SectionsAndCategories(props) {
         <div className="flex-col mt-2 md:mt-0 h-full">{categoryItems}</div>
         </div>
         ) 
+    }
     })
   
   

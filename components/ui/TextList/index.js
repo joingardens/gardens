@@ -5,7 +5,7 @@ import urlify from '../../../utils/helpers.js';
 function LightFeatureH(props) {
 
   const listItems = props.items.map(item => 
-    <a href={'#' + urlify(item)} className="w-full" key={urlify(item)}>
+    <a href={item ? ('#' + urlify(item)) : null} className="w-full" key={item ? urlify(item) : ''}>
     <div className="flex items-center px-2 py-2">
                 <span className={`bg-${props.theme}-100 text-${props.theme}-500 w-4 h-4 mr-2 rounded-full inline-flex items-center justify-center`}>
                   <svg
