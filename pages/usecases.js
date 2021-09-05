@@ -33,12 +33,12 @@ export default function UseCasePage({ products, jobs, jobGroups, tools, jobTools
   	const sortedItemArray = itemArray
  	  const itemElements = sortedItemArray.map(item => {
       let currentTool = tools.find(tool => tool.id == item.tool);
-      let currentJob = jobs.find(job => job.id == item.job)
+      let currentJob = jobs.find(job => job.id == item.job);
       return (
     <SquareBlock key={item.id} blockId={item.id} blockBody={currentJob.job}
     blockDescription={'Using '} 
-    blockDescriptionLinkTitle={currentTool.tool} 
-    ctaLink={currentTool ? ('/tool/' + item.tool) : null}
+    blockDescriptionLinkTitle={currentTool.tool ? currentTool.tool : 'No tool'} 
+    ctaLink={currentTool.tool ? ('/tool/' + item.tool) : null}
     ctaLinkTitle={'Press to get this done'}
     blockType={(currentTool.model == 1) ? 'Open' : (currentTool.model == 2) ? 'Fair' : (currentTool.model == 4) ? 'Closed' : (currentTool.model == 3) ? 'Exportable' : null} />)
 

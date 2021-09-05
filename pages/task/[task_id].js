@@ -26,7 +26,11 @@ export default function Tool({ products, jobGroups, jobTools, task }) {
   let filteredTools = [];
   let currentTask = task ? task[0] : null
   if (currentTask != null){
-  jobTools.map(jobTool => filteredTools.push(jobTool.tool));
+  jobTools.map(jobTool => { 
+    if (jobTool.tool) {
+      filteredTools.push(jobTool.tool)
+    }
+  });
    
   const uniqueGroups = [...new Set(filteredTools.map(tool => tool.category))];
   
@@ -63,7 +67,7 @@ export default function Tool({ products, jobGroups, jobTools, task }) {
       description={currentTask.job + ' with different tools following our step-by-step instructions.'}
     />
     <div className="-mb-20 -mt-20">
-    <Title titleTitle={currentTask.job} titleDescription={currentJobGroup.emoji ? (currentJobGroup.emoji + ' ' + currentJobGroup.job_group) : currentJobGroup.job_group}
+    <Title titleTitle={currentTask.job} titleDescription={currentJobGroup ? (currentJobGroup.job_group) : 'Default'}
      colorBg={getRandomGradient()} />
     </div>
     <div className="mt-24 pt-10">
