@@ -110,7 +110,12 @@ export default function Tool({ products, jobGroups, jobTools, jobs, tool }) {
 export async function getStaticPaths() {
   const allJobTools = await getAllJobTools();
   let jobToolIds = [];
-  allJobTools.map(jobtool => jobToolIds.push({params: {tool_id: jobtool.tool.toString()}}))
+  allJobTools.map(jobtool => {
+    if (jobtool.tool){
+      jobToolIds.push({params: {tool_id: jobtool.tool.toString()}})
+    }
+    
+  })
 
   return {
     paths: jobToolIds,
