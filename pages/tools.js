@@ -35,10 +35,13 @@ export default function ToolsPage({ products, tools, jobTools }) {
   }))];
 
     const featuredElements = uniqueCategories.map(category => {
+      if (category){
+        
       return (
       <PrettyBlock key={urlify(category)} 
       blockBody={category} blockLink={'#' + urlify(category)} linkTitle={'View'}
     blockType={'Open'} />)
+      }
     });
 
   	const listTools = uniqueCategories.map((category) => {
