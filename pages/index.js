@@ -4,55 +4,36 @@ import ParagraphWithButton from '../components/ui/ParagraphWithButton';
 import ListItem from '../components/ui/ListItem';
 import TextList from '../components/ui/TextList';
 import ListItemMirrored from '../components/ui/ListItemMirrored';
-import { getActiveProductsWithPrices, getAllTools } from '../utils/supabase-client';
+import { getActiveProductsWithPrices, getAllFlows, getAllFlowItems, getAllFlowItemsWithTools } from '../utils/supabase-client';
 import SquareBlock from '../components/ui/SquareBlock';
+import PrettyBlock from '../components/ui/PrettyBlock';
 import Link from 'next/link';
 import Button from '../components/ui/Button';
 
-export default function Index({ products, tools }) {
-  
-  const uniqueCategories = [...new Set(tools.map(tool => tool.category))]; 
-  const toolsByCategory = [...new Set(uniqueCategories.map(category => {
-  	return {
-  		category: category, 
-  		itemArray: tools.filter(item => {
-  		if (item.category == category){
-  			return item
-  		} 
-  	})} 
-  }))];
+export default function Index({ products, flows, flowItemsWithTools }) {
 
-  	const listTools = uniqueCategories.map((category) => {
-  	const filteredArray = toolsByCategory.filter(item => {
-    	if (item.category == category){
-    		return item
-    	}
-    });
-    const itemArray = filteredArray[0].itemArray;
-  	const sortedItemArray = itemArray.sort((a, b) => a.model - b.model)
- 	const itemElements = sortedItemArray.map(item => 
-    <SquareBlock key={item.id} blockBody={item.tool} blockLink={item.link} linkTitle='Learn more'
-    blockType={(item.model == 1) ? 'Open' : (item.model == 2) ? 'Fair' : (item.model == 4) ? 'Closed' : (item.model == 3) ? 'Exportable' : null} />
-    )
+    const flowArray = flows.map(flow => {
+      const currentFlowItems = flowItemsWithTools.filter(flowItem => flowItem.flow == flow.id);
+      const allToolTitles = [...new Set(currentFlowItems.map(item => item.job_tool.tool.tool))];
 
-    return (
-    <ListItem key={category ? category.toString() : ""} categoryName={category ? category.toString() : ""} emoji={'🔨'} categoryDescription={''}>
-    {itemElements}
-    </ListItem>)
-  }
-  	);
+      return (
+        <PrettyBlock key={flow.id} 
+      blockLink={'/flow/' + flow.id} blockBody={flow.flow}
+      blockDescription={'Using ' + allToolTitles.toString().split(',').join(', ')} />
+      )
+    } );
+
+    // Work-themed collection of images imagesrc="https://source.unsplash.com/collection/3106209/700x600"
 
   return (
   	<>
-    <LightHeroD heading="Tools, resources, & a platform for work" 
-    subheading="Delegate any kinds of tasks to people who know the process — or learn how to do things effectively."
-    button_title="" button_comment=""
-    button_title_1="EXPLORE" button_body_1="Our wiki"
-    button_title_2="VISIT" button_body_2="The Task Shop" imagesrc="https://source.unsplash.com/collection/3106209/700x600" />
-    <div className="h-12" />
-    <div className="flex space-between">
+    <LightHeroD heading="Best way to do anything" 
+    subheading="See how others solve important problems and submit your own flows. If it can be done - there's a flow for it."
+      />
+      <h2 className="text-center text-2xl font-semibold py-4 mt-6">Recent flows</h2>
+    <div className="flex px-5 justify-center mb-24">
+    {flowArray}
     </div>
-   
   	{/*<ParagraphWithButton />
   	<Pricing products={products} />*/}
     </>
@@ -61,12 +42,14 @@ export default function Index({ products, tools }) {
 
 export async function getStaticProps() {
   const products = await getActiveProductsWithPrices();
-  const tools = await getAllTools();
+  const flows = await getAllFlows();
+  const flowItemsWithTools = await getAllFlowItemsWithTools();
 
   return {
     props: {
       products,
-      tools
+      flows,
+      flowItemsWithTools
     },
     revalidate: 60
   };

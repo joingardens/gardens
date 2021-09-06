@@ -1,22 +1,32 @@
 import React from "react";
 import PropTypes from  "prop-types";
 import Link from 'next/link';
-
+import getRandomGradient from '../../../utils/getRandomGradient'
 
 function LightHeroD(props) {
+
+  const blockColor = getRandomGradient();
+
   return (
-    <section className="text-gray-600 body-font">
-      <div className="container mx-auto flex px-5 pt-16 md:flex-row flex-col items-center">
-        <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-          <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
+    <section className={`text-gray-700 body-font ${blockColor} pt-16 -mt-24 pb-4`}>
+      <div className="container mx-auto flex px-5 pt-12 md:flex-row flex-col items-center">
+        <div className="lg:flex-grow md:w-1/2 flex flex-col md:items-start mb-8 md:mb-0 items-center text-center">
+          <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium underline font-bold text-center w-full">
             {props.heading}
           </h1>
-          <p className="mb-8 leading-relaxed">
+          <p className="mb-8 leading-relaxed w-full text-center font-semibold">
             {props.subheading}
             <br/>
             {props.subheading1}
           </p>
+
+        {props.imagesrc ? (<div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+          <img className="object-cover object-center rounded" alt="hero" src={props.imagesrc} />
+        </div>) : null}
           {/*
+            <p className="text-sm mt-2 text-gray-500 mb-4 w-full">
+            {props.button_comment}
+          </p>
           <div className="flex w-full md:justify-start justify-center items-end">
             <div className="relative mr-4 md:w-full lg:w-full xl:w-1/2 w-2/4">
               <label
@@ -35,10 +45,7 @@ function LightHeroD(props) {
             <button className={`inline-flex text-white bg-accents-0 border-0 py-2 px-6 focus:outline-none hover:bg-accents-1 rounded text-lg`}>
               Button
             </button>
-          </div>*/}
-          <p className="text-sm mt-2 text-gray-500 mb-4 w-full">
-            {props.button_comment}
-          </p>
+          </div>
           <div className="flex lg:flex-row flex-col items-start w-4/5 lg:w-auto">
              <Link href="/flows">
             <button className="bg-blue-100 inline-flex py-3 px-5 w-full lg:w-auto rounded-lg items-center hover:bg-blue-200 focus:outline-none">
@@ -61,10 +68,9 @@ function LightHeroD(props) {
             </button>
             </Link>
           </div>
+        */}
         </div>
-        <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-          <img className="object-cover object-center rounded" alt="hero" src={props.imagesrc} />
-        </div>
+        
       </div>
     </section>
   );

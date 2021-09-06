@@ -220,10 +220,24 @@ export const getAllFlowItems = async () => {
   return data || [];
 };
 
+export const getAllFlowItemsWithTools = async () => {
+  const { data, error } = await supabase
+    .from('flow_items')
+    .select('id, flow, job_tool(job, tool(id, tool))')
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
 export const getAllFlows = async () => {
   const { data, error } = await supabase
     .from('flows')
     .select('*')
+    .order('created')
 
   if (error) {
     console.log(error.message);

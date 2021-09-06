@@ -72,7 +72,7 @@ const Navbar = () => {
  onClick={() => {
       service.openModal("newFlow")
     }}>
-      Open modal
+      Submit a flow
       <svg
             fill="none"
             stroke="currentColor"
