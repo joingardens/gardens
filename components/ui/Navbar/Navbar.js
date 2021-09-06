@@ -46,8 +46,8 @@ const Navbar = () => {
               </Link>
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
 
-              <Link href="/values">
-                <a className="hidden sm:block mr-2.5 p-2 hover:bg-white hover:underline rounded transition">Values</a>
+              <Link href="/tools">
+                <a className="hidden sm:block mr-2.5 p-2 hover:bg-white hover:underline rounded transition">Tools</a>
               </Link>
               <Link href="/flows">
                 <a className="mr-2.5 p-2 hover:bg-white hover:underline rounded transition">Flows</a>
