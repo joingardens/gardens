@@ -27,11 +27,11 @@ export default function Index({ products, flows, flowItemsWithTools }) {
 
   return (
   	<>
-    <LightHeroD heading="Best way to do anything" 
-    subheading="See how others solve important problems and submit your own flows. If it can be done - there's a flow for it."
+    <LightHeroD heading="Perfect solutions for any use case" 
+    subheading="Flows are instructions for common tasks. Discover community flows and add your own - getting things done has never been easier!"
       />
       <h2 className="text-center text-2xl font-semibold py-4 mt-6">Recent flows</h2>
-    <div className="flex px-5 justify-center mb-24">
+    <div className="flex flex-wrap px-5 justify-center mb-24">
     {flowArray}
     </div>
   	{/*<ParagraphWithButton />
