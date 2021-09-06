@@ -55,11 +55,7 @@ export type IAction =
 
 const InitialState:INewFlowState = {
   title: "",
-  inputs: [
-    {
-      name: ""
-    }
-  ],
+  inputs: [],
   steps: [
     {
       task: "",

@@ -7,14 +7,14 @@ import TextList from '../../components/ui/TextList';
 import ListItemMirrored from '../../components/ui/ListItemMirrored';
 import Title from '../../components/ui/Title';
 import { getActiveProductsWithPrices, getFlowItemsByFlowId, 
-  getAllOutputs, getOutputById, getAllJobGroups, getFlowOutputsByOutputId } from '../../utils/supabase-client';
+  getAllOutputs, getOutputById, getAllJobGroups, getFlowOutputsByOutputId, getFlowById, getAllFlows } from '../../utils/supabase-client';
 //import MyDisclosure from '@/components/dynamic/disclosure';
 //import SquareBlock from '../../components/ui/SquareBlock';
 import PrettyBlock from '../../components/ui/PrettyBlock';
 import getRandomGradient from '../../utils/getRandomGradient';
 
 export default function Output({ products, jobGroups, 
-  flowItems, output, flowsOutputs }) {
+  output, flowsOutputs, allFlows }) {
 
   const router = useRouter()
    if (router.isFallback) {
@@ -29,9 +29,15 @@ export default function Output({ products, jobGroups,
   let currentOutput = output ? output[0] : null;
 
   const itemElements = flowsOutputs.map(item => {
+    
+  let currentFlow = [];
+  if (item != null){
+    currentFlow = allFlows.find(flow => flow.id == item.flow)
+  }
+
        return (
-       <PrettyBlock key={item.id} blockBody={item.title} 
-         blockLink={'/flow/' + item.id}  />
+       <PrettyBlock key={currentFlow.id} blockBody={currentFlow.flow} 
+         blockLink={'/flow/' + currentFlow.id}  />
          )
      }
     )
@@ -75,17 +81,18 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const products = await getActiveProductsWithPrices();
   const jobGroups = await getAllJobGroups();
+  const allFlows = await getAllFlows();
   const flowsOutputs = await getFlowOutputsByOutputId(context.params.output_id);
-  const flowItems = await getFlowItemsByFlowId(flowsOutputs[0].flow);
-  const output = await getOutputById(context.params.output_id)
+  // const flowItems = await getFlowItemsByFlowId(flowsOutputs[0].flow);
+  const output = await getOutputById(context.params.output_id);
 
   return {
     props: {
       products,
       jobGroups,
       flowsOutputs,
-      flowItems,
-      output
+      output,
+      allFlows
     },
     revalidate: 60
   };

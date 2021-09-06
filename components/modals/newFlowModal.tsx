@@ -32,19 +32,21 @@ const NewFlowModal = () => {
                 className={`
         overflow-y-auto max-w-3xl w-full h-full relative z-50 bg-white rounded-lg
         ${isOpen ? "opacity-100 visible scale-100" : "opacity-10 invisible scale-75"}
-        transistion-all duration-300 transform origin-center
-        pt-8 px-4 md:px-8 pb-10 overflow-x-hidden 
+        transition-all duration-300 transform origin-center
+        pb-10 overflow-x-hidden 
         `}>
-                <div className={`w-full z-30 bg-white sticky left-0 h-20 top-0 shadow flex px-4 pr-6 md:px-8 items-center justify-between`}>
-                    <span className={`hidden md:block`}>New flow</span>
+                <div className={`w-full bg-gray-50 z-30 sticky left-0 h-20 top-0 flex px-4 pr-6 md:px-8 items-center justify-between`}>
+                    <div className="w-1/4" />
                     <AutosizeInput
                         value={newFlowState.title}
                         onChange={(e) => {
                             newFlowService.dispatch({ type: "setTitle", payload: e.target.value })
                         }}
-                        placeholder="Title"
-                        className={`placeholder-gray-500 text-black text-2xl md:-ml-16 font-bold`}
+                        placeholder="Flow title"
+                        inputStyle={{ backgroundColor: "rgb(249, 250, 251)", outline: "none"}}
+                        className={`placeholder-gray-700 w-2/4 text-black text-center text-2xl font-bold`}
                     />
+                    <div className="w-1/4 text-right">
                     <button
                         onClick={() => {
                             service.closeModal(modal)
@@ -52,10 +54,12 @@ const NewFlowModal = () => {
                         className={`w-6 h-6 text-black opacity-60 hover:opacity-100 transition-all`}>
                         <Cross />
                     </button>
+                    </div>
                 </div>
-                <div>
+                <div className="flex flex-col px-8 md:px-16">
+                <div className="mt-6">
                     <div>
-                        <div className={`text-lg font-semibold mb-4 w-full text-center`}>Required Inputs (optional)</div>
+                        <div className={`text-lg font-semibold mb-4 w-full text-center`}>Inputs</div>
                         <div className={`grid grid-cols-1 gap-y-4`}>
                             {newFlowState.inputs.map((input, index) => {
                                 return <NewFlowInputInput index={index} input={input} />
@@ -88,11 +92,12 @@ const NewFlowModal = () => {
                     </button>
                 </div>
                 <div className={`flex-col items-center flex`}>
-                <div className={`text-lg font-semibold mb-4 w-full text-center `}>Final output</div>
+                <div className={`text-lg font-semibold mb-4 w-full text-center `}>Output</div>
                 <NewFlowOutputInput/>
-                <button onClick={() => {newFlowService.saveFlow()}} className={`shadow hover:shadow-lg py-3 px-5 mx-auto transition-all mt-6 focus:bg-gray-200 focus:outline-none`}>
-                    Send!
+                <button onClick={() => {newFlowService.saveFlow()}} className={`inline-flex items-center bg-white border border-black py-1 px-3 mt-12 focus:outline-none hover:bg-gray-200 rounded text-base`}>
+                    Save flow
                 </button>
+                </div>
                 </div>
             </div>
         </ModalOverlay>

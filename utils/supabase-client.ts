@@ -140,6 +140,20 @@ export const getTaskById = async (task_id) => {
   return data || [];
 };
 
+export const getFlowById = async (flow_id) => {
+  const { data, error } = await supabase
+    .from('flows')
+    .select('*')
+    .eq('id', flow_id)
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
 export const getPostById = async (post_id) => {
   const { data, error } = await supabase
     .from('posts')
@@ -196,6 +210,19 @@ export const getAllFlowsOutputs = async () => {
 export const getAllFlowItems = async () => {
   const { data, error } = await supabase
     .from('flow_items')
+    .select('*')
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
+export const getAllFlows = async () => {
+  const { data, error } = await supabase
+    .from('flows')
     .select('*')
 
   if (error) {

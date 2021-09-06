@@ -6,11 +6,11 @@ import Pricing from '../../components/Pricing';
 import { Comments } from '../../components/Comments';
 import Title from '../../components/ui/Title';
 import { getActiveProductsWithPrices, getFlowItemsByFlowId, 
-  getFlowInputsByFlowId, getFlowOutputsByFlowId, getAllFlowIds } from '../../utils/supabase-client';
+  getFlowInputsByFlowId, getFlowOutputsByFlowId, getAllFlowIds, getFlowById } from '../../utils/supabase-client';
 import SquareBlock from '../../components/ui/SquareBlock';
 import getRandomGradient from '../../utils/getRandomGradient';
 
-export default function Flow({ products, flow, inputs, outputs }) {
+export default function Flow({ products, flow, inputs, outputs, flowRecord }) {
 
   const router = useRouter()
    if (router.isFallback) {
@@ -23,19 +23,21 @@ export default function Flow({ products, flow, inputs, outputs }) {
   const { flow_id } = router.query
 
   const allToolTitles = [...new Set(flow.map(item => item.job_tool.tool.tool))];
-  console.log(allToolTitles)
 
   const itemInputs = inputs.map(input => {
-  
+
+    const currentInput = input.input;
+    console.log(currentInput)
+
       return (
       <div className="max-w-sm px-6">
-    <SquareBlock key={input.id + '-input'} 
-    blockBody={input.title}
+    <SquareBlock key={currentInput.id + '-input'} 
+    blockBody={currentInput.input}
      />
      </div>)
 
      
-  })
+  });
 
   let currentOrderNumber = 0;
 
@@ -71,10 +73,9 @@ export default function Flow({ products, flow, inputs, outputs }) {
 
      
   })
-
-  const generatedTitle = (allOutputTitles.toString() + ' for a ' + outputs[0].output.output.toLowerCase());
+  const generatedTitle = (flowRecord[0].flow);
   const generatedDescription = ('Using ' + allToolTitles.toString());
-
+  
   return (
   	<>
     <NextSeo
@@ -89,11 +90,14 @@ export default function Flow({ products, flow, inputs, outputs }) {
     <div className="mt-24 pt-10">
     <div className="flex flex-col lg:flex-row w-full items-center px-6 lg:px-12">
     <div className="w-full lg:w-3/5 mx-auto mt-8 lg:mt-0">
+    {(inputs && inputs.length != 0) ? (
+    <>
     <h2 className="lg:w-4/5 text-center mx-auto px-6 sm:text-2xl text-xl font-semibold text-gray-900">
     Use</h2>
     <div className="flex items-center justify-center w-full mx-auto lg:w-4/5 mt-4">
     {itemInputs}
     </div>
+    </>) : null}
     <div className="mx-auto w-24 flex justify-center items-center mt-4">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13 16.172l5.364-5.364 1.414 1.414L12 20l-7.778-7.778 1.414-1.414L11 16.172V4h2v12.172z"/></svg>
     </div>
@@ -139,6 +143,7 @@ export async function getStaticProps(context) {
   
   const products = await getActiveProductsWithPrices();
   const flow = await getFlowItemsByFlowId(context.params.flow_id);
+  const flowRecord = await getFlowById(context.params.flow_id);
   const inputs = await getFlowInputsByFlowId(context.params.flow_id);
   const outputs = await getFlowOutputsByFlowId(context.params.flow_id);
 
@@ -153,7 +158,8 @@ export async function getStaticProps(context) {
       products,
       flow,
       inputs,
-      outputs
+      outputs,
+      flowRecord
     },
     revalidate: 60
   };
