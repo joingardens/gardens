@@ -41,7 +41,7 @@ const Navbar = () => {
               <div>
               <Logo />
               </div>
-              <span className="ml-3 text-xl">Open Work</span>
+              <span className="ml-3 text-xl">Gardens</span>
               </a>
               </Link>
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">

@@ -6,6 +6,10 @@ module.exports = {
       maxWidth: {
         '8xl': '1920px'
       },
+      placeholderColor: {
+        'primary': '#000',
+        'secondary': '#000',
+      },
       colors: {
         primary: 'var(--primary)',
         'primary-2': 'var(--primary-2)',

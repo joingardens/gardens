@@ -11,24 +11,15 @@ function LightFooterA(props) {
         <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
           <a href="" className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
             <Logo />
-            {/*<svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              className={`w-10 h-10 text-white p-2 bg-accents-1 rounded-full`}
-              viewBox="0 0 24 24"
-            >
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-            </svg>*/}
-            <span className="ml-3 md:text-xl text-md">Open Work</span>
-          </a>
-          <p className="mt-2 text-sm text-gray-500">
-           The community of work.
-          </p>
+            </a>
         </div>
+        <div className="flex flex-col items-center">
+        <span className="ml-3 md:text-xl text-md">Gardens</span>
+          
+          <p className="mt-2 text-sm text-gray-500 ml-2 md:ml-6">
+           Grow your garden.
+          </p>
+          </div>
         <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
           <div className="lg:w-1/4 md:w-1/2 w-full px-4">
             

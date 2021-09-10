@@ -92,7 +92,8 @@ const NewFlowStepInput = ({index, step}) => {
             onChange={(e) => {newFlowService.setStepTask(e.target.value, index)}}
             placeholder={"Get this task done"}
             inputClassName={`border-none max-w-full`}
-            className={` px-3  border py-1 rounded-md  max-w-full`}
+            inputStyle={{ backgroundColor: "rgb(249, 250, 251)", outline: "none"}}
+            className={` px-3  border py-1 rounded-md  max-w-full bg-gray-50`}
             />
             <div className={`absolute left-0 bottom-0 z-20`}>
                     <div className={`absolute ${taskDropdownState.isOpen && step.task ? "opacity-100 scale-100 visible" : "opacity-0 scale-75 invisible"} rounded-md overflow-y-auto transform origin-top-left w-60 top-1 left-0 max-h-32 shadow-md bg-white  transition-all duration-300 `}>
@@ -131,11 +132,12 @@ const NewFlowStepInput = ({index, step}) => {
         value={step.tool}
         onChange={(e) => {newFlowService.setStepTool(e.target.value, index)}}
         placeholder={"This tool"}
+        inputStyle={{ backgroundColor: "rgb(249, 250, 251)", outline: "none"}}
         inputClassName={`border-none max-w-full`}
         style={{
             maxWidth: "90%"
         }}
-        className={` px-3 ml-3 border py-1 rounded-md m-2`}
+        className={` px-3 ml-3 border py-1 rounded-md m-2 bg-gray-50`}
         />
                     <div className={`absolute left-3 bottom-0 z-20`}>
                     <div className={`absolute ${toolDropdownState.isOpen && step.tool ? "opacity-100 scale-100 visible" : "opacity-0 scale-75 invisible"} rounded-md overflow-y-auto transform origin-top-left w-60 top-1 left-0 max-h-32 shadow-md bg-white  transition-all duration-300 `}>

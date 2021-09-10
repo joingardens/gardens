@@ -1,5 +1,5 @@
 import { SupabaseServiceClass } from "../../../utils/supabase-client"
-import { IInput, INewFlowState, IStep } from "./newFlowContext"
+import { IInput, INewFlowState, IStep, IOutput } from "./newFlowContext"
 import { IAction } from "./newFlowReducer"
 
 class CDebouncer{
@@ -27,8 +27,8 @@ export class NewFlowService extends SupabaseServiceClass {
     setTitle(title: string){
         this.dispatch({type: "setTitle", payload: title})
     }
-    setInput(name:string, index:number) {
-        this.dispatch({type: "setInput", payload: {name, index}})
+    setInput(input:string, description:string, index:number) {
+        this.dispatch({type: "setInput", payload: {input, description, index}})
     }
     addInput() {
         this.dispatch({type: "addInput"})
@@ -59,25 +59,25 @@ export class NewFlowService extends SupabaseServiceClass {
     removeStep(index:number) {
         this.dispatch({type: "removeStep", payload: index})
     }
-    setOutput(value: string) {
-        this.dispatch({type: "setOutput", payload: value})
+    setOutput(output: string, description: string) {
+        this.dispatch({type: "setOutput", payload: output, description})
     }
 
     validateInputs(inputs: IInput[]) {
-        let result = inputs.filter(a => a.name.length > 0)
+        let result = inputs.filter(a => a.input.length > 0)
         return result
     }
     validateSteps(steps: IStep[]) {
         let result = steps.filter(a => a.task.length > 0)
         return result
     }
-    validateOutput(output: string) {
-        let result = output.length > 0 ? output : false
+    validateOutput(output: IOutput) {
+        let result = output.output.length > 0 ? output : false
         return result
     }
 
     async findInput(input: IInput){
-        const data = await this.findEntityByString("inputs", "input", input.name)
+        const data = await this.findEntityByString("inputs", "input", input.input)
         if (data.length === 0) {
             return input
         }
@@ -166,26 +166,28 @@ export class NewFlowService extends SupabaseServiceClass {
             foundSteps.push(result)
         }
 
-        let foundOutput = await this.findOutput(this.state.output)
+        let foundOutput = await this.findOutput(this.state.output.output)
         if (!foundOutput.id) {
             foundOutput = await this.insertItem("outputs", [{
-                output: foundOutput
+                output: foundOutput.output,
+                description: foundOutput.description
             }])[0]
         }
 
         let inputInsertions = []
         for (let input of foundInputs) {
-            if (input.name) {
+            if (input.input) {
                 inputInsertions.push({
-                    input: input.name
+                    input: input.input,
+                    description: input.description
                 })
             }
         }
         if (inputInsertions.length) {
             const data = await this.insertInputs(inputInsertions)
             foundInputs = foundInputs.map(input => {
-                if (input.name) {
-                   return data.find(data => data.input === input.name)
+                if (input.input) {
+                   return data.find(data => data.input === input.input)
                 }
                 return input
             })

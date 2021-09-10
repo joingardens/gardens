@@ -24,23 +24,25 @@ export interface IStep {
 }
 
 export interface IInput {
-  name: string
+  input: string,
+  description?: string
 }
 
-interface IOutput {
-  name: string
+export interface IOutput {
+  output: string,
+  description?: string
 }
 
 export interface INewFlowState {
   title: string,
   inputs: IInput[],
   steps: IStep[],
-  output: string,
+  output: IOutput,
   loading: boolean
 }
 
 export const defaultNewFlowInput:IInput = {
-  name: ""
+  input: ""
 }
 
 export const defaultNewStep: IStep = {
@@ -55,7 +57,7 @@ export type IAction =
 
 const InitialState:INewFlowState = {
   title: "",
-  inputs: [],
+  inputs: [{input: "", description: ""}],
   steps: [
     {
       task: "",
@@ -63,7 +65,7 @@ const InitialState:INewFlowState = {
       description: ""
     }
   ],
-  output: "",
+  output: {output: "", description: ""},
   loading: false
 }
 const NewFlowContextProvider = ({ children }: Props) => {

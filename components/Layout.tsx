@@ -8,8 +8,8 @@ import Modals from './modals/modals';
 export default function Layout({ children, meta: pageMeta }) {
   const router = useRouter();
   const meta = {
-    title: 'Open Work',
-    description: 'Free resources and tools for productive work',
+    title: 'Gardens',
+    description: 'Grow your life garden or contribute to others - Gardens is where you get tools and knowledge to do this',
     cardImage: '/og.png',
     ...pageMeta
   };
