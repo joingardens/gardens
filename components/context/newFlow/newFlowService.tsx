@@ -87,6 +87,7 @@ export class NewFlowService extends SupabaseServiceClass {
 
     async findInput(input: IInput){
         const data = await this.findEntityByString("inputs", "input", input.input)
+        console.log(data)
         if (data.length === 0) {
             return input
         }
@@ -179,10 +180,10 @@ export class NewFlowService extends SupabaseServiceClass {
         if (!foundOutput.id) {
             foundOutput = await this.insertItem("outputs", [{
                 output: this.state.output.output,
-                description: this.state.output.description
-            }])[0]
+            }])
         }
         console.log(foundOutput)
+
         let inputInsertions = []
         for (let input of foundInputs) {
             if (input.input) {
