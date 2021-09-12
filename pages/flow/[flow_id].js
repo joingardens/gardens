@@ -33,6 +33,7 @@ export default function Flow({ products, flow, inputs, outputs, flowRecord }) {
       <div className="max-w-sm px-6">
     <SquareBlock key={currentInput.id + '-input'} 
     blockBody={currentInput.input}
+    blockDescription={input.description}
      />
      </div>)
 
@@ -46,16 +47,14 @@ export default function Flow({ products, flow, inputs, outputs, flowRecord }) {
       let currentJobTool = item.job_tool;
       let currentJob = currentJobTool.job;
       let currentTool = currentJobTool.tool
-      
+
+      // blockDescriptionLinkTitle={currentTool.tool} 
       return (
     <SquareBlock key={currentJobTool.id} blockId={currentJobTool.id} 
     orderNumber={currentOrderNumber}
     blockBody={currentJob.job}
-    blockDescription={'Using '} 
-    blockDescriptionLinkTitle={currentTool.tool} 
-    ctaLink={currentJob ? ('/task/' + currentJob.id) : null}
-    ctaLinkTitle={'Press to get this done'}
-    blockType={(currentTool.model == 1) ? 'Open' : (currentTool.model == 2) ? 'Fair' : (currentTool.model == 4) ? 'Closed' : (currentTool.model == 3) ? 'Exportable' : null} />
+    blockDescription={item.description} 
+    blockType={null} />
     )
      }
     )
@@ -68,6 +67,7 @@ export default function Flow({ products, flow, inputs, outputs, flowRecord }) {
       <Link href={"/output/" + output.id}>
       <div key={output.id + '-output'} className="max-w-sm px-6">
     <span className="text-gray-900 font-bold text-2xl">{output.output.output}</span>
+    <p className="mt-2">{output.description}</p>
      </div>
      </Link>)
 
@@ -111,8 +111,8 @@ export default function Flow({ products, flow, inputs, outputs, flowRecord }) {
     <div className="bg-gray-50 py-12">
     <h2 className="lg:w-4/5 text-center mx-auto px-6 mb-6 sm:text-2xl text-xl font-semibold text-gray-900">
     And get a...</h2>
-    <div className={`${getRandomGradient()} px-12 max-w-md mx-auto py-6 shadow hover:shadow-lg`}>
-    <div className="flex items-center justify-center w-full mx-auto lg:w-4/5">
+    <div className={`${getRandomGradient()} px-6 max-w-md mx-auto py-6 shadow hover:shadow-lg`}>
+    <div className="flex items-center justify-center w-full mx-auto ">
     {itemOutputs}
     </div>
     </div>

@@ -277,7 +277,7 @@ export const getOutputById = async (output_id) => {
 export const getFlowOutputsByFlowId = async (flow_id) => {
   const { data, error } = await supabase
     .from('flows_outputs')
-    .select('id, flow, output(id, output, description, job_group), title')
+    .select('id, flow, description, output(id, output, description, job_group), title')
     .eq('flow', flow_id)
     .order('id')
 
@@ -307,7 +307,7 @@ export const getFlowOutputsByOutputId = async (output_id) => {
 export const getFlowInputsByFlowId = async (flow_id) => {
   const { data, error } = await supabase
     .from('flows_inputs')
-    .select('id, flow, input(id, input, description, job_group), title')
+    .select('id, flow, description, input(id, input, description, job_group), title')
     .eq('flow', flow_id)
     .order('id')
 
@@ -337,7 +337,7 @@ export const getFlowItemsById = async (flow_id) => {
 export const getFlowItemsByFlowId = async (flow_id) => {
   const { data, error } = await supabase
     .from('flow_items')
-    .select('id, flow, job_tool(id, job(id, job, job_group, description), tool(id, tool, category, model, logo_url), instruction_link, description)')
+    .select('id, flow, description, job_tool(id, job(id, job, job_group, description), tool(id, tool, category, model, logo_url), instruction_link, description)')
     .eq('flow', flow_id)
     .order('job_tool');
 
