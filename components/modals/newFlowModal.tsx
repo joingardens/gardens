@@ -76,7 +76,7 @@ const NewFlowModal = () => {
                 </div>
                 <div>
                     <div className={`text-lg font-semibold mb-4 w-full text-center`}>Current steps</div>
-                    <div className={`grid grid-cols-1 gap-y-4`}>
+                    <div className={`grid grid-cols-1 gap-y-8`}>
                         {newFlowState.steps.map((step, index) => {
                             return (
                                 <NewFlowStepInput step={step} index={index}/>

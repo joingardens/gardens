@@ -25,7 +25,7 @@ export interface IStep {
 
 export interface IInput {
   input: string,
-  description?: string
+  description?: string,
 }
 
 export interface IOutput {

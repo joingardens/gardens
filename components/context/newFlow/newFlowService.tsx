@@ -27,8 +27,11 @@ export class NewFlowService extends SupabaseServiceClass {
     setTitle(title: string){
         this.dispatch({type: "setTitle", payload: title})
     }
-    setInput(input:string, description:string, index:number) {
-        this.dispatch({type: "setInput", payload: {input, description, index}})
+    setInputInput(input:string, index: number) {
+        return this.dispatch({type: "setInputInput", payload: {index, input}})
+    }
+    setInputDescription(description: string, index: number) {
+        return this.dispatch({type: "setInputDescription", payload: {index, description}})
     }
     addInput() {
         this.dispatch({type: "addInput"})
@@ -59,8 +62,14 @@ export class NewFlowService extends SupabaseServiceClass {
     removeStep(index:number) {
         this.dispatch({type: "removeStep", payload: index})
     }
-    setOutput(output: string, description: string) {
-        this.dispatch({type: "setOutput", payload: output, description})
+    setOutputOutput(output: string) {
+        this.dispatch({type: "setOutputOutput", payload: output})
+    }
+    setOutputDescription(description: string) {
+        this.dispatch({type: "setOutputDescription", payload: description})
+    }
+    setStepDescription(description: string, index:number) {
+        this.dispatch({type: "setStepDescription", payload: {description, index}})
     }
 
     validateInputs(inputs: IInput[]) {
@@ -169,11 +178,11 @@ export class NewFlowService extends SupabaseServiceClass {
         let foundOutput = await this.findOutput(this.state.output.output)
         if (!foundOutput.id) {
             foundOutput = await this.insertItem("outputs", [{
-                output: foundOutput.output,
-                description: foundOutput.description
+                output: this.state.output.output,
+                description: this.state.output.description
             }])[0]
         }
-
+        console.log(foundOutput)
         let inputInsertions = []
         for (let input of foundInputs) {
             if (input.input) {
@@ -268,17 +277,19 @@ export class NewFlowService extends SupabaseServiceClass {
         console.log(flowArr)
         const flow = flowArr[0]
 
-        let flowItems = foundJobTools.map(jobTool => {
+        let flowItems = foundJobTools.map((jobTool, index)=> {
             return {
                 job_tool: jobTool.id,
-                flow: flow.id
+                flow: flow.id,
+                description: this.state.steps[index].description
             }
         })
 
-        let flowsInputs = foundInputs.map(input => {
+        let flowsInputs = foundInputs.map((input, index) => {
             return {
                 flow: flow.id,
-                input: input.id
+                input: input.id,
+                description: this.state.inputs[index].description
             }
         })
 
@@ -286,7 +297,8 @@ export class NewFlowService extends SupabaseServiceClass {
         await this.insertItem("flows_inputs", flowsInputs)
         await this.insertItem("flows_outputs", [{
             flow: flow.id,
-            output: foundOutput.id
+            output: foundOutput.id,
+            description: this.state.output.description
         }])
 
 

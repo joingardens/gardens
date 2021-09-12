@@ -1,6 +1,7 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import { useReducer } from "react";
 import { Reducer } from "../context/newFlow/newFlowReducer";
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 export type IModals = "newFlow" | "someModal"
 
@@ -68,6 +69,16 @@ class ModalService {
 const ModalsContextProvider = ({ children }: Props) => {
   const [modalsState, dispatch] = useReducer(modalReducer, initialState)
   const service = new ModalService(dispatch)
+
+  useEffect(() => {
+    const targetElement = document.querySelector("body");
+    if (Object.values(modalsState).includes(true)) {
+      disableBodyScroll(targetElement)
+    }
+    else {
+      enableBodyScroll(targetElement)
+    }
+  }, [modalsState])
 
   return (
     <ModalsContext.Provider

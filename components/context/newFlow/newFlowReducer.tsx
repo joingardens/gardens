@@ -1,4 +1,4 @@
-import { defaultNewFlowInput, defaultNewStep, INewFlowState } from "./newFlowContext";
+import { defaultNewFlowInput, defaultNewStep, INewFlowState, IOutput } from "./newFlowContext";
 
 export type Reducer<S, A> = (prevState: S, action: A) => S;
 export type IAction = 
@@ -10,7 +10,12 @@ export type IAction =
 {type: "setStepTool", payload: {index: number, tool: string}} |
 {type: "addStep"} |
 {type: "removeStep", payload: number} |
-{type: "setOutput", payload: string}
+{type: "setOutput", payload: IOutput} |
+{type: "setInputInput", payload: {index: number, input: string}} |
+{type: 'setInputDescription', payload: {index: number, description: string}} |
+{type: "setOutputOutput", payload: string} |
+{type: "setOutputDescription", payload: string} |
+{type: "setStepDescription", payload: {index: number, description: string}}
 
 export const NewFlowReducer: Reducer<INewFlowState, IAction> = (state, action: IAction) => {
 
@@ -94,6 +99,67 @@ export const NewFlowReducer: Reducer<INewFlowState, IAction> = (state, action: I
             output: action.payload
         }
     }
+    if (action.type === "setInputInput") {
+        return {
+            ...state,
+            inputs: state.inputs.map((input, index) => {
+                if (index !== action.payload.index) {
+                    return input
+                }
+                return {
+                    ...input,
+                    input: action.payload.input
+                }
+            })
+        }
+    }
+    if (action.type === "setInputDescription") {
+        return {
+            ...state,
+            inputs: state.inputs.map((input, index) => {
+                if (index !== action.payload.index) {
+                    return input
+                }
+                return {
+                    ...input,
+                    description: action.payload.description
+                }
+            })
+        }
+    }
+    if (action.type === "setOutputOutput") {
+        return {
+            ...state,
+            output: {
+                ...state.output,
+                output: action.payload
+            }
+        }
+    }
+    if (action.type === "setOutputDescription") {
+        return {
+            ...state,
+            output: {
+                ...state.output,
+                description: action.payload
+            }
+        }
+    }
+    if (action.type === "setStepDescription") {
+        return {
+            ...state,
+            steps: state.steps.map((step, index) => {
+                if (index !== action.payload.index) {
+                    return step
+                }
+                return {
+                    ...step,
+                    description: action.payload.description
+                }
+            })
+        }
+    }
+    
 
 }
 
