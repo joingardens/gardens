@@ -6,6 +6,8 @@ import punctuationRegex from '../../../utils/regex/punctuationRegex';
 import { CommentType } from '../../../utils/types';
 //import { useUser } from '../../../utils/use-user';
 import { useUser } from '../../../utils/useUser';
+import { useRouter } from 'next/router';
+
 import cn from 'classnames';
 import cuid from 'cuid';
 import React, { useRef, useState, useEffect } from 'react';
@@ -31,6 +33,7 @@ const NewCommentForm = ({
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { user, profile } = useUser();
+  const router = useRouter();
   const { mutateGlobalCount, rootId, mutateComments } = useComments();
   const { open, isOpen } = useModal({ signInModal: SignInModal, newUserModal: NewUserModal });
 
@@ -75,7 +78,8 @@ const NewCommentForm = ({
     hideEarlyCallback?.();
 
     if (!user) {
-      return open('signInModal');
+      //return open('signInModal');
+      return router.push('/signin');
     }
 
     if (!profile) {

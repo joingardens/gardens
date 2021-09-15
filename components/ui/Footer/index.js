@@ -2,9 +2,13 @@ import React from "react";
 import PropTypes from  "prop-types";
 import Logo from '../../icons/Logo'
 import Link from 'next/link';
-
+import { useContext } from 'react';
+import ModalsContext from '../../modals/modalsContext';
 
 function LightFooterA(props) {
+    const {service} = useContext(ModalsContext)
+
+
   return (
     <footer className="text-gray-600 body-font">
 
@@ -35,21 +39,20 @@ function LightFooterA(props) {
               CONTRIBUTE
             </h3>
             <nav className="flex flex-col mb-10">
-            <Link href="/">
+             <button className="text-gray-600 hover:text-gray-800 text-left w-full"
+ onClick={() => {
+      service.openModal("newFlow")
+    }}>
+                  Submit a Flow
+    </button>
+              <Link href="/signin">
                 <a className="text-gray-600 hover:text-gray-800" >
-                  Community
+                  Join the Community
                 </a>
               </Link>
-              <Link href="/">
-                <a className="text-gray-600 hover:text-gray-800" >
-                  Knowledge
+                <a className="text-gray-600 hover:text-gray-800" href="https://tally.so/r/wMOjXm" target="_blank">
+                  Visit Task Shop
                 </a>
-              </Link>
-              <Link href="/">
-                <a className="text-gray-600 hover:text-gray-800" >
-                  Task Shop
-                </a>
-              </Link>
             </nav>
           </div>
           <div className="lg:w-1/4 md:w-1/2 w-full px-4">

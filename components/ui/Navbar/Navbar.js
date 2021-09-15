@@ -55,7 +55,7 @@ const Navbar = () => {
                 <a className={`mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded text-base`}>Tools</a>
               </Link>
               <Link href="/flows">
-                <a className="mr-2.5 bg-white py-1 px-2 focus:outline-none hover:bg-gray-200 rounded text-base">Flows</a>
+                <a className={`mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded text-base`}>Flows</a>
               </Link>
               {/*
               <Link href="/account">
