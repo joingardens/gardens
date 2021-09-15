@@ -73,7 +73,7 @@ const NewCommentForm = ({
     setIsLoading(false);
   }
 
-  async function handleSubmit(): Promise<void> {
+  async function handleSubmit() {
     setIsLoading(true);
     hideEarlyCallback?.();
 
