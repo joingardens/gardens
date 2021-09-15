@@ -14,6 +14,7 @@ const Navbar = () => {
 
   let listener = null;
   const [scrollState, setScrollState] = useState("bg-transparent")
+  const [buttonState, setButtonState] = useState("bg-white hover:bg-gray-200")
 
   useEffect(() => {
     listener = document.addEventListener("scroll", e => {
@@ -21,10 +22,12 @@ const Navbar = () => {
       if (scrolled >= 10) {
         if (scrollState !== "bg-white bg-opacity-80 border") {
           setScrollState("bg-white bg-opacity-80 border")
+          setButtonState("bg-white hover:bg-gray-200 border border-gray-400")
         }
       } else {
         if (scrollState !== "bg-transparent") {
           setScrollState("bg-transparent")
+          setButtonState("bg-white hover:bg-gray-200")
         }
       }
     })
@@ -36,39 +39,39 @@ const Navbar = () => {
   return (
     <>
       <div className={`sticky top-0 ${scrollState} z-40 transition-all mx-auto flex flex-wrap px-2 py-2 flex-col md:flex-row items-center`}>
+        <nav className="w-full flex flex-wrap items-center text-base justify-between">
+        <div className="flex items-center justify-center">
         <Link href="/">
-              <a className="title-font font-medium items-center text-gray-900 mb-4 md:mb-0 pr-4 hidden md:flex rounded hover:shadow hover:bg-white transition" aria-label="Logo">
-              <div>
+              <a className="title-font font-medium text-gray-900 pr-4 rounded hover:shadow hover:bg-white transition" aria-label="Logo">
+              <div className="flex items-center">
               <Logo />
-              </div>
               <span className="ml-3 text-xl">Gardens</span>
+              </div>
               </a>
               </Link>
-        <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-
+        </div>
+        <div className="flex items-center justify-center">
               <Link href="/tools">
-                <a className="hidden sm:block mr-2.5 p-2 hover:bg-white hover:underline rounded transition">Tools</a>
+                <a className={`mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded text-base`}>Tools</a>
               </Link>
               <Link href="/flows">
-                <a className="mr-2.5 p-2 hover:bg-white hover:underline rounded transition">Flows</a>
+                <a className="mr-2.5 bg-white py-1 px-2 focus:outline-none hover:bg-gray-200 rounded text-base">Flows</a>
               </Link>
               {/*
               <Link href="/account">
-                <a className="mr-5 p-2 hover:bg-white hover:underline rounded transition">Account</a>
+                <a className="mr-2.5 bg-white py-1 px-2 focus:outline-none hover:bg-gray-200 rounded text-base">Account</a>
               </Link>*/}
               {user ? (
               <Link href="#">
-                <a className="mr-2.5 p-2 hover:bg-white hover:underline rounded transition" onClick={() => signOut()}>
+                <a className="mr-2.5 bg-white py-1 px-2 focus:outline-none hover:bg-gray-200 rounded text-base" onClick={() => signOut()}>
                   Sign out
                 </a>
               </Link>
             ) : (
-            <div className="flex items-center">
-              {/*<Link href="/signin">
-                <a className="mr-5 px-2 hover:underline">Sign in</a>
-              </Link>*/}
-              <Link href="/">
- <button className="inline-flex items-center bg-white border border-black py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-2 md:mt-0" 
+              
+              null
+            )}
+             <button className="hidden md:inline-flex items-center bg-white border border-black py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-2 md:mt-0" 
  onClick={() => {
       service.openModal("newFlow")
     }}>
@@ -85,10 +88,11 @@ const Navbar = () => {
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
     </button>
-        </Link>
-        </div>
-            )}
             <SearchBar/>
+            {/*<Link href="/signin">
+                <a className="mr-2.5 bg-white py-1 px-2 focus:outline-none hover:bg-gray-200 rounded text-base">Sign in</a>
+              </Link>*/}
+        </div>
         </nav>
       </div>
       </>

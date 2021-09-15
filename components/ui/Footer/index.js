@@ -7,16 +7,18 @@ import Link from 'next/link';
 function LightFooterA(props) {
   return (
     <footer className="text-gray-600 body-font">
+
       <div className="w-full px-5 py-12 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col bg-gray-50 shadow-inner">
-        <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
-          <a href="" className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+        <div className="w-48 flex-shrink-0 md:mx-0 mx-auto">
+          <a href="" className="w-full h-full title-font font-medium items-center md:justify-start justify-center text-gray-900">
+            <div className="flex items-center justify-center w-full pr-4">
             <Logo />
+            <span className="ml-3 md:text-xl text-lg">Gardens</span>
+            </div>
             </a>
         </div>
-        <div className="flex flex-col items-center">
-        <span className="ml-3 md:text-xl text-md">Gardens</span>
-          
-          <p className="mt-2 text-sm text-gray-500 ml-2 md:ml-6">
+        <div className="flex flex-col items-center justify-center md:py-5">
+          <p className="text-sm text-gray-500 ml-2 md:ml-6">
            Grow your garden.
           </p>
           </div>
