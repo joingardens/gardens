@@ -1,7 +1,7 @@
 import { Transition } from '@headlessui/react';
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../../../utils/supabase-client';
-import { useUser } from '../../../utils/use-user';
+import { useUser } from '../../../utils/useUser';
 import { useModal } from '../../../utils/use-modal';
 import Avatar from './Avatar';
 
