@@ -60,9 +60,10 @@ function LightFooterA(props) {
               DISCOVER
             </h3>
             <nav className="flex flex-col mb-10">
-            <Link href="/tasks">
+              
+              <Link href="/flows">
                 <a className="text-gray-600 hover:text-gray-800" >
-                  Tasks
+                  Flows
                 </a>
               </Link>
               <Link href="/tools">
@@ -70,14 +71,9 @@ function LightFooterA(props) {
                   Tools
                 </a>
               </Link>
-              <Link href="/usecases">
+              <Link href="/listings">
                 <a className="text-gray-600 hover:text-gray-800" >
-                  Instructions
-                </a>
-              </Link>
-              <Link href="/flows">
-                <a className="text-gray-600 hover:text-gray-800" >
-                  Flows
+                  Listings
                 </a>
               </Link>
             </nav>

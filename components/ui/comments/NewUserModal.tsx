@@ -6,7 +6,8 @@ import { useModal } from '../../../utils/use-modal';
 import Avatar from './Avatar';
 
 const NewUserModal = (): JSX.Element => {
-  const { user, profile, refresh } = useUser();
+  // do we need "refresh" here?
+  const { user, profile } = useUser();
   const { isOpen: show, close } = useModal('newUserModal');
 
   const [fullName, setFullName] = useState('');
@@ -57,7 +58,7 @@ const NewUserModal = (): JSX.Element => {
 
     setFullNameError(null);
     if (data) {
-      await refresh();
+      
       close('newUserModal');
     }
   }

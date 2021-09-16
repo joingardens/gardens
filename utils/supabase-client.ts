@@ -349,6 +349,20 @@ export const getFlowItemsByFlowId = async (flow_id) => {
   return data || [];
 };
 
+export const getPublishedListings = async () => {
+  const { data, error } = await supabase
+    .from('listings')
+    .select('*')
+    .eq('published', true)
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
 export const getAllValues = async () => {
   const { data, error } = await supabase
     .from('values')
