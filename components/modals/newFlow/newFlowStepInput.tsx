@@ -5,9 +5,11 @@ import NewFlowContext, { IInput } from "../../context/newFlow/newFlowContext"
 import Cross from "../../icons/Cross"
 import useDebounce from "../../hooks/useDebounce"
 import TextareaAutosize from 'react-textarea-autosize';
+import ImageMap from "../../ui/ImageMap"
+import ImageInput from "../../ui/ImageInput"
 
 const NewFlowStepInput = ({index, step}) => {
-    const { newFlowService} = useContext(NewFlowContext)
+    const { newFlowService, newFlowState} = useContext(NewFlowContext)
     const [mounted, setMounted] = useState(false)
     const [taskDropdownState, setTaskDropdownState] = useState({
         loading: false,
@@ -21,6 +23,10 @@ const NewFlowStepInput = ({index, step}) => {
     })
     const debounceTool = useDebounce(step.tool, 1000)
     const debounceTask = useDebounce(step.task, 1000)
+
+    const setStepImages = (images: File[]) => {
+        return newFlowService.setStepImages(index, images)
+    }
 
     const findSuggestions = async () => {
 
@@ -72,7 +78,7 @@ const NewFlowStepInput = ({index, step}) => {
 
     return (
         <div className={`flex items-center -m-2 transition-all ${mounted ? "max-h-full opacity-100" : "max-h-0 opacity-20"}`}>
-            <div className={`h-full flex items-center`}>
+            <div className={`h-full flex `}>
                 <div className={`w-12 h-12 mr-4 p-2 m-3 flex text-2xl font-bold rounded-full items-center justify-center bg-gray-100 flex-shrink-0`}>
             {index + 1}
                 </div>
@@ -176,6 +182,10 @@ const NewFlowStepInput = ({index, step}) => {
                     placeholder={"Description!"}
                     minRows={3}
                 />
+            </div>
+            <div className={`mt-4 grid lg:grid-cols-3 grid-cols-2 gap-4`}>
+                    <ImageMap images={newFlowState.steps[index].images} setState={setStepImages}/>
+                    <ImageInput state={newFlowState.steps[index].images} setState={setStepImages}/>
             </div>
             </div>
 

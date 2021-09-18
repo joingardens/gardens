@@ -1,6 +1,8 @@
 import { SupabaseServiceClass } from "../../../utils/supabase-client"
 import { IInput, INewFlowState, IStep, IOutput } from "./newFlowContext"
 import { IAction } from "./newFlowReducer"
+import { v4 as uuidv4 } from 'uuid';
+import image from "next/image";
 
 class CDebouncer{
     private timeout: NodeJS.Timeout
@@ -44,6 +46,12 @@ export class NewFlowService extends SupabaseServiceClass {
     }
     setStepTool(tool: string, index: number) {
         this.dispatch({type: "setStepTool", payload: {tool, index}})
+    }
+    setOutputImages(images: File[]) {
+        this.dispatch({type: "setOutputImages", payload: images})
+    }
+    setStepImages(index:number, images: File[]) {
+        this.dispatch({type: "setStepImages", payload: {index, images}})
     }
     async insertItem(from:string,entities: any[] ){
         const {data} = await this.supabase.from(from).insert(entities)
@@ -108,6 +116,7 @@ export class NewFlowService extends SupabaseServiceClass {
         const data = await this.insertItem("tools", tools)
         return data
     }
+
 
     async findStep(step: IStep) {
         let taskData
@@ -278,11 +287,18 @@ export class NewFlowService extends SupabaseServiceClass {
         console.log(flowArr)
         const flow = flowArr[0]
 
+        let jobToolImages = []
+        for (let step of this.state.steps) {
+          jobToolImages.push(await this.saveImages(step.images))  
+        }
+
+
         let flowItems = foundJobTools.map((jobTool, index)=> {
             return {
                 job_tool: jobTool.id,
                 flow: flow.id,
-                description: this.state.steps[index].description
+                description: this.state.steps[index].description,
+                image_url: jobToolImages[index]
             }
         })
 
@@ -294,14 +310,30 @@ export class NewFlowService extends SupabaseServiceClass {
             }
         })
 
+        let outputImages = await this.saveImages(this.state.output.images)
+
         await this.insertItem("flow_items", flowItems)
         await this.insertItem("flows_inputs", flowsInputs)
         await this.insertItem("flows_outputs", [{
             flow: flow.id,
             output: foundOutput.id,
-            description: this.state.output.description
+            description: this.state.output.description,
+            image_url: outputImages
         }])
 
+
+    }
+
+    async saveImages(images: File[]) {
+        let dataArr = []
+        for (let image of images) {
+            const { data, error } = await this.supabase.storage
+            .from('flows')
+            .upload(`images/${uuidv4()}.png`, image)
+            dataArr.push(data.Key)
+        }
+        console.log(dataArr)
+        return dataArr
 
     }
 }

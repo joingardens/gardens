@@ -20,7 +20,8 @@ interface Props {
 export interface IStep {
   task: string,
   description?: string,
-  tool: string
+  tool: string,
+  images: File[]
 }
 
 export interface IInput {
@@ -30,7 +31,8 @@ export interface IInput {
 
 export interface IOutput {
   output: string,
-  description?: string
+  description?: string,
+  images: File[]
 }
 
 export interface INewFlowState {
@@ -48,7 +50,8 @@ export const defaultNewFlowInput:IInput = {
 export const defaultNewStep: IStep = {
   task: "",
   tool: "",
-  description: ""
+  description: "",
+  images: []
 }
 
 export type IAction = 
@@ -62,10 +65,11 @@ const InitialState:INewFlowState = {
     {
       task: "",
       tool: "",
-      description: ""
+      description: "",
+      images: []
     }
   ],
-  output: {output: "", description: ""},
+  output: {output: "", description: "", images: []},
   loading: false
 }
 const NewFlowContextProvider = ({ children }: Props) => {
