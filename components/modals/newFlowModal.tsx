@@ -10,15 +10,15 @@ import Plus from "../icons/Plus";
 import NewFlowInputInput from "./newFlow/newFlowInputInput";
 import NewFlowStepInput from "./newFlow/newFlowStepInput";
 import NewFlowOutputInput from "./newFlow/newFlowOutputInput";
+import { useUser } from "../../utils/useUser";
 
 
 const NewFlowModal = () => {
     const modal: IModals = "newFlow"
     const { state, service } = useContext(ModalsContext)
-
+    const {user} = useUser()
     const { newFlowState, newFlowService, dispatch } = useContext(NewFlowContext)
     const isOpen = state[modal] === true
-
 
     return (
         <ModalOverlay modal={modal}>
@@ -94,7 +94,11 @@ const NewFlowModal = () => {
                 <div className={`flex-col items-center flex`}>
                 <div className={`text-lg font-semibold mb-4 w-full text-center `}>Output</div>
                 <NewFlowOutputInput/>
-                <button onClick={() => {newFlowService.saveFlow()}} className={`inline-flex items-center bg-white border border-black py-1 px-3 mt-12 focus:outline-none hover:bg-gray-200 rounded text-base`}>
+                <button onClick={() => {
+                    if (user.id) {
+                        newFlowService.saveFlow(user.id)
+                    }
+                    }} className={`inline-flex items-center bg-white border border-black py-1 px-3 mt-12 focus:outline-none hover:bg-gray-200 rounded text-base`}>
                     Save flow
                 </button>
                 </div>

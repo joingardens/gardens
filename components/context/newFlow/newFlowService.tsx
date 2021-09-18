@@ -153,7 +153,7 @@ export class NewFlowService extends SupabaseServiceClass {
         return data.data[0]
     }
 
-    async saveFlow() {
+    async saveFlow(id: string) {
         const validatedInputs = this.validateInputs(this.state.inputs)
         const validatedSteps = this.validateSteps(this.state.steps)
         const validatedOutput = this.validateOutput(this.state.output)
@@ -282,7 +282,8 @@ export class NewFlowService extends SupabaseServiceClass {
             })
         }
         const flowArr = await this.insertItem("flows", [{
-            flow: this.state.title
+            flow: this.state.title,
+            author: id
         }])
         console.log(flowArr)
         const flow = flowArr[0]

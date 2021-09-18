@@ -14,15 +14,16 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <div className="bg-white">
+      <UserContextProvider>
       <ModalsContextProvider>
         <NewFlowContextProvider>
-      <UserContextProvider>
+
         <Layout meta={{}}>
           <Component {...pageProps} />
         </Layout>
-      </UserContextProvider>
       </NewFlowContextProvider>
       </ModalsContextProvider>
+      </UserContextProvider>
     </div>
   );
 }
