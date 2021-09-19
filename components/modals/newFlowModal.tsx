@@ -94,12 +94,13 @@ const NewFlowModal = () => {
                 <div className={`flex-col items-center flex`}>
                 <div className={`text-lg font-semibold mb-4 w-full text-center `}>Output</div>
                 <NewFlowOutputInput/>
-                <button onClick={() => {
+                <button onClick={async () => {
                     if (user.id) {
-                        newFlowService.saveFlow(user.id)
+                        await newFlowService.saveFlow(user.id)
+                        service.closeModal("newFlow")
                     }
                     }} className={`inline-flex items-center bg-white border border-black py-1 px-3 mt-12 focus:outline-none hover:bg-gray-200 rounded text-base`}>
-                    Save flow
+                    {newFlowState.loading ? "loading..." : "Save input"}
                 </button>
                 </div>
                 </div>

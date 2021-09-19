@@ -79,6 +79,9 @@ export class NewFlowService extends SupabaseServiceClass {
     setStepDescription(description: string, index:number) {
         this.dispatch({type: "setStepDescription", payload: {description, index}})
     }
+    setLoading(bool:boolean) {
+        this.dispatch({type: "setLoading", payload: bool})
+    }
 
     validateInputs(inputs: IInput[]) {
         let result = inputs.filter(a => a.input.length > 0)
@@ -154,6 +157,7 @@ export class NewFlowService extends SupabaseServiceClass {
     }
 
     async saveFlow(id: string) {
+        this.setLoading(true)
         const validatedInputs = this.validateInputs(this.state.inputs)
         const validatedSteps = this.validateSteps(this.state.steps)
         const validatedOutput = this.validateOutput(this.state.output)
@@ -321,7 +325,7 @@ export class NewFlowService extends SupabaseServiceClass {
             description: this.state.output.description,
             image_url: outputImages
         }])
-
+        this.setLoading(false)
 
     }
 

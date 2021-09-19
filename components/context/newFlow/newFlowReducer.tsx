@@ -17,7 +17,8 @@ export type IAction =
 {type: "setOutputDescription", payload: string} |
 {type: "setStepDescription", payload: {index: number, description: string}} |
 {type: "setOutputImages", payload: File[]} |
-{type: "setStepImages", payload: {index:number, images: File[]}}
+{type: "setStepImages", payload: {index:number, images: File[]}} |
+{type: "setLoading", payload: boolean}
 
 export const NewFlowReducer: Reducer<INewFlowState, IAction> = (state, action: IAction) => {
 
@@ -182,6 +183,12 @@ export const NewFlowReducer: Reducer<INewFlowState, IAction> = (state, action: I
                     images: action.payload.images
                 }
             })
+        }
+    }
+    if (action.type === "setLoading") {
+        return {
+            ...state,
+            loading: action.payload
         }
     }
     
