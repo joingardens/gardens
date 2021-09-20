@@ -9,6 +9,7 @@ import { getActiveProductsWithPrices, getFlowItemsByFlowId,
   getFlowInputsByFlowId, getFlowOutputsByFlowId, getAllFlowIds, getFlowById } from '../../utils/supabase-client';
 import SquareBlock from '../../components/ui/SquareBlock';
 import getRandomGradient from '../../utils/getRandomGradient';
+import Image from 'next/image'
 
 export default function Flow({ products, flow, inputs, outputs, flowRecord }) {
 
@@ -27,7 +28,6 @@ export default function Flow({ products, flow, inputs, outputs, flowRecord }) {
   const itemInputs = inputs.map(input => {
 
     const currentInput = input.input;
-    console.log(currentInput)
 
       return (
       <div className="max-w-sm px-6">
@@ -46,15 +46,31 @@ export default function Flow({ products, flow, inputs, outputs, flowRecord }) {
       currentOrderNumber += 1;
       let currentJobTool = item.job_tool;
       let currentJob = currentJobTool.job;
-      let currentTool = currentJobTool.tool
+      let currentTool = currentJobTool.tool;
+      let currentImageURLs = [];
+      let currentImages = [];
+      if (item.image_url){
+        currentImageURLs = item.image_url;
+        //process.env.IMAGES_DOMAIN_2
+        currentImages = currentImageURLs.map(imageURL => {
+          return (
+          <div className="h-48 w-11/12 relative mt-4">
+          <Image src={'https://nbygyyaygsxxesvjjcwa.supabase.in' + '/storage/v1/object/public/' + imageURL} 
+          layout='fill'
+          objectFit='contain' />
+          </div>)
+        })
+      }
 
       // blockDescriptionLinkTitle={currentTool.tool} 
       return (
+      <>
     <SquareBlock key={currentJobTool.id} blockId={currentJobTool.id} 
     orderNumber={currentOrderNumber}
     blockBody={currentJob.job}
     blockDescription={item.description} 
-    blockType={null} />
+    blockType={null} bigImages={currentImages} />
+    </>
     )
      }
     )
@@ -62,6 +78,10 @@ export default function Flow({ products, flow, inputs, outputs, flowRecord }) {
   const allOutputTitles = [...new Set(outputs.map(output => output.title))];
 
   const itemOutputs = outputs.map(output => {
+
+    if (output.image_url){
+      console.log(output.image_url)
+    }
   
       return (
       <Link href={"/output/" + output.id}>

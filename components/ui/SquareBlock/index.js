@@ -14,7 +14,7 @@ function SquareBlock(props) {
     {props.orderNumber ? (
       <div className="my-auto h-full w-24"><span className="text-2xl pl-6">{props.orderNumber}</span></div>
       ) : null}
-        <div className={`border bg-${blockColor} rounded px-4 py-3 h-full w-full items-center justify-between flex`}>
+        <div className={`border bg-${blockColor} rounded px-4 py-3 h-full w-full items-center flex flex-col`}>
           <div className="flex w-full items-center">
           {props.smallImage ? (
             <div className="w-20 h-20 relative mr-4">
@@ -58,7 +58,7 @@ function SquareBlock(props) {
           ) : null}
           </div>) : null}
           </div>
-          
+          {props.bigImages}
           </div>
       </div>
       </>
