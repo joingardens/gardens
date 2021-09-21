@@ -42,20 +42,21 @@ const Navbar = () => {
         <nav className="w-full flex flex-wrap items-center text-base justify-between">
         <div className="flex items-center justify-center">
         <Link href="/">
-              <a className="title-font font-medium text-gray-900 pr-4 rounded hover:shadow hover:bg-white transition" aria-label="Logo">
+              <a className="title-font font-medium text-gray-900 rounded hover:shadow hover:bg-white transition" aria-label="Logo">
               <div className="flex items-center">
-              <Logo />
-              <span className="ml-3 text-xl">Gardens</span>
+              <Logo className="w-12 h-12" />
+              <span className="px-3 text-md sm:text-xl font-semibold">Gardens</span>
               </div>
               </a>
               </Link>
         </div>
         <div className="flex items-center justify-center">
-              <Link href="/tools">
-                <a className={`mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded text-base`}>Tools</a>
-              </Link>
+              
               <Link href="/flows">
                 <a className={`mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded text-base`}>Flows</a>
+              </Link>
+              <Link href="/tools">
+                <a className={`hidden sm:block mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded text-base`}>Tools</a>
               </Link>
               {/*
               <Link href="/account">
@@ -67,11 +68,13 @@ const Navbar = () => {
                   Sign out
                 </a>
               </Link>
+               
             ) : (
               
               null
             )}
-             <button className="hidden md:inline-flex items-center bg-white border border-black py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-2 md:mt-0" 
+            {user ? (
+              <button className="hidden md:inline-flex items-center bg-white border border-black py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-2 md:mt-0" 
  onClick={() => {
       service.openModal("newFlow")
     }}>
@@ -87,11 +90,13 @@ const Navbar = () => {
           >
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
-    </button>
+    </button>) : null}
+            <Link href="/signin">
+                <a className="md:mr-2.5 bg-white py-1 px-2 focus:outline-none hover:bg-gray-200 rounded text-base" onClick={() => signOut()}>
+                  Sign in
+                </a>
+              </Link>
             <SearchBar/>
-            {/*<Link href="/signin">
-                <a className="mr-2.5 bg-white py-1 px-2 focus:outline-none hover:bg-gray-200 rounded text-base">Sign in</a>
-              </Link>*/}
         </div>
         </nav>
       </div>

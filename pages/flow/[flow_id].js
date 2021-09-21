@@ -30,7 +30,7 @@ export default function Flow({ products, flow, inputs, outputs, flowRecord }) {
     console.log(currentInput)
 
       return (
-      <div className="max-w-sm px-6">
+      <div className="w-full px-6">
     <SquareBlock key={currentInput.id + '-input'} 
     blockBody={currentInput.input}
     blockDescription={input.description}
@@ -94,7 +94,7 @@ export default function Flow({ products, flow, inputs, outputs, flowRecord }) {
     <>
     <h2 className="lg:w-4/5 text-center mx-auto px-6 sm:text-2xl text-xl font-semibold text-gray-900">
     Use</h2>
-    <div className="flex items-center justify-center w-full mx-auto lg:w-4/5 mt-4">
+    <div className="flex flex-col items-center justify-center w-full mx-auto lg:w-4/5 mt-4">
     {itemInputs}
     </div>
     </>) : null}

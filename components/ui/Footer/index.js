@@ -16,8 +16,8 @@ function LightFooterA(props) {
         <div className="w-48 flex-shrink-0 md:mx-0 mx-auto">
           <a href="" className="w-full h-full title-font font-medium items-center md:justify-start justify-center text-gray-900">
             <div className="flex items-center justify-center w-full pr-4">
-            <Logo />
-            <span className="ml-3 md:text-xl text-lg">Gardens</span>
+            <Logo className="w-12 h-12" />
+            <span className="ml-3 md:text-xl text-lg font-semibold">Gardens</span>
             </div>
             </a>
         </div>
@@ -39,7 +39,7 @@ function LightFooterA(props) {
               CONTRIBUTE
             </h3>
             <nav className="flex flex-col mb-10">
-             <button className="text-gray-600 hover:text-gray-800 text-left w-full"
+             <button className="text-gray-600 hover:text-gray-800 text-center md:text-left w-full"
  onClick={() => {
       service.openModal("newFlow")
     }}>
@@ -47,11 +47,11 @@ function LightFooterA(props) {
     </button>
               <Link href="/signin">
                 <a className="text-gray-600 hover:text-gray-800" >
-                  Join the Community
+                  Visit the Community
                 </a>
               </Link>
                 <a className="text-gray-600 hover:text-gray-800" href="https://tally.so/r/wMOjXm" target="_blank">
-                  Visit Task Shop
+                  Join Gardens Network
                 </a>
             </nav>
           </div>

@@ -55,7 +55,7 @@ const SignIn = () => {
   if (!user)
     return (
       <div className="w-80 flex flex-col justify-between p-3 max-w-lg m-auto mb-24">
-        <h3 className="text-3xl text-center my-6">Welcome back</h3>
+        <h3 className="text-3xl text-center my-6">Hi there!</h3>
         <div className="flex justify-center pb-12">
           <Logo width="64px" height="64px" />
         </div>
@@ -146,7 +146,7 @@ const SignIn = () => {
             </Link>
           </span>
         </div>
-
+      {/*
         <div className="flex items-center my-6">
           <div
             className="border-t border-accents-2 flex-grow mr-3"
@@ -158,8 +158,7 @@ const SignIn = () => {
             aria-hidden="true"
           ></div>
         </div>
-
-        <Button
+      <Button
           variant="slim"
           type="submit"
           disabled={loading}
@@ -168,6 +167,8 @@ const SignIn = () => {
           <GitHub />
           <span className="ml-2">Continue with GitHub</span>
         </Button>
+      */}
+        
       </div>
     );
 

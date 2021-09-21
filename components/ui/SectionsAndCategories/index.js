@@ -36,7 +36,7 @@ function SectionsAndCategories(props) {
   
   
   return (
-            <div className="flex flex-col md:flex-row mt-0.5">
+            <div className="flex flex-col md:flex-row mt-0.5 w-full">
             <div className="h-4" />
               {allSections}
             </div>

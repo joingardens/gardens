@@ -1,12 +1,10 @@
 const Logo = ({ className = '', ...props }) => (
     <svg
-      width={60}
-      height={60}
       className={className}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      viewBox="-40 -20 120 120"
+      viewBox="-20 -20 120 120"
       {...props}
     >
       <path fill="url(#prefix__pattern0)" d="M0 0h80v80H0z" />

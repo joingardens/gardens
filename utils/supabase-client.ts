@@ -354,6 +354,7 @@ export const getPublishedListings = async () => {
     .from('listings')
     .select('*')
     .eq('published', true)
+    .order('listing')
 
   if (error) {
     console.log(error.message);
