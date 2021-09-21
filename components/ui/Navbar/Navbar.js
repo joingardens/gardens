@@ -90,13 +90,12 @@ const Navbar = () => {
           >
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
-    </button>) : null}
-            <Link href="/signin">
+    </button>) : (<Link href="/signin">
                 <a className="md:mr-2.5 bg-white py-1 px-2 focus:outline-none hover:bg-gray-200 rounded text-base" onClick={() => signOut()}>
                   Sign in
                 </a>
-              </Link>
-            <SearchBar/>
+              </Link>)}
+            {/*<SearchBar/>*/}
         </div>
         </nav>
       </div>

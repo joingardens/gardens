@@ -21,7 +21,7 @@ function SectionsAndCategories(props) {
     if (section.section){
 
       return (
-        <div className="ml-4 pr-4 py-4 md:py-12 w-full md:w-48 md:h-full" key={section.section}>
+        <div className="px-4 py-4 md:pb-12 md:pt-24 w-full md:w-48 md:h-full" key={section.section}>
         <div className="py-2 md:py-0 md:h-12 w-full md:w-auto">
         <div className="pb-2 border-b border-gray-900">
         <span className="font-bold">{section.section}
@@ -36,8 +36,8 @@ function SectionsAndCategories(props) {
   
   
   return (
-            <div className="flex flex-col md:flex-row mt-0.5 w-full">
-            <div className="h-4" />
+            <div className="flex flex-col md:flex-row overflow-x-auto mt-0.5 w-full">
+            <div className="h-24" />
               {allSections}
             </div>
   );

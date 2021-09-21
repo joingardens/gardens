@@ -88,9 +88,7 @@ export default function ToolsPage({ products, tools, jobTools }) {
     titleDescription={'Open-source and fair-code tools are shown at the top. Pick a category — or keep scrolling to discover all tools.'} 
     colorBg={getRandomGradient()} />
     </div>
-    <div className="flex md:px-4 pt-16 overflow-x-auto">
     <SectionsAndCategories sections={categoriesWithSections} />
-    </div>
     <div className="w-full">
     <h2 className="sm:text-3xl text-2xl text-center font-semibold mt-24 text-gray-900">Tools by group</h2>
     </div>
