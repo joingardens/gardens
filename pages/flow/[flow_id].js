@@ -53,11 +53,11 @@ export default function Flow({ products, flow, inputs, outputs, flowRecord }) {
 
       if (item.image_url){
         currentImageURLs = item.image_url;
-        //process.env.IMAGES_DOMAIN_2
+        
                 currentImages = currentImageURLs.map(imageURL => {
                   return (
           <div className="h-48 w-11/12 relative mt-4">
-          <Image src={'https://nbygyyaygsxxesvjjcwa.supabase.in' + '/storage/v1/object/public/' + imageURL} 
+          <Image src={process.env.IMAGES_DOMAIN_2 + '/storage/v1/object/public/' + imageURL} 
           layout='fill'
           objectFit='contain' />
           </div>)
