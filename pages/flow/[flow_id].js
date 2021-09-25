@@ -11,7 +11,7 @@ import SquareBlock from '../../components/ui/SquareBlock';
 import getRandomGradient from '../../utils/getRandomGradient';
 import Image from 'next/image';
 
-export default function Flow({ products, flow, inputs, outputs, flowRecord }) {
+export default function Flow({ products, flow, inputs, outputs, flowRecord, imageDomain }) {
 
   const router = useRouter()
    if (router.isFallback) {
@@ -57,7 +57,7 @@ export default function Flow({ products, flow, inputs, outputs, flowRecord }) {
                 currentImages = currentImageURLs.map(imageURL => {
                   return (
           <div className="h-48 w-11/12 relative mt-4">
-          <Image src={process.env.IMAGES_DOMAIN_2 + '/storage/v1/object/public/' + imageURL} 
+          <Image src={'https://' + imageDomain + '/storage/v1/object/public/' + imageURL} 
           layout='fill'
           objectFit='contain' />
           </div>)
@@ -164,6 +164,7 @@ export async function getStaticProps(context) {
   const flowRecord = await getFlowById(context.params.flow_id);
   const inputs = await getFlowInputsByFlowId(context.params.flow_id);
   const outputs = await getFlowOutputsByFlowId(context.params.flow_id);
+  const imageDomain = process.env.IMAGES_DOMAIN_2;
 
   if (!flow) {
     return {
@@ -177,7 +178,8 @@ export async function getStaticProps(context) {
       flow,
       inputs,
       outputs,
-      flowRecord
+      flowRecord, 
+      imageDomain
     },
     revalidate: 60
   };
