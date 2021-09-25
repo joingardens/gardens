@@ -432,6 +432,20 @@ export const searchForJobs = async (query) => {
   return data || [];
 };
 
+export const getPersonalDetailsByUserId = async (user_id) => {
+  const { data, error } = await supabase
+    .from('user_public_profile')
+    .select('*')
+    .eq('id', user_id)
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
 export const updateUserName = async (user, name) => {
   await supabase
     .from('users')

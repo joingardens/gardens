@@ -5,13 +5,13 @@ import Link from 'next/link';
 import Pricing from '../../components/Pricing';
 import { Comments } from '../../components/Comments';
 import Title from '../../components/ui/Title';
-import { getActiveProductsWithPrices, getFlowItemsByFlowId, 
-  getFlowInputsByFlowId, getFlowOutputsByFlowId, getAllFlowIds, getFlowById } from '../../utils/supabase-client';
+import { getFlowItemsByFlowId, 
+  getFlowInputsByFlowId, getFlowOutputsByFlowId, getAllFlowIds, getFlowById, getPersonalDetailsByUserId } from '../../utils/supabase-client';
 import SquareBlock from '../../components/ui/SquareBlock';
 import getRandomGradient from '../../utils/getRandomGradient';
 import Image from 'next/image';
 
-export default function Flow({ products, flow, inputs, outputs, flowRecord, imageDomain }) {
+export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDomain }) {
 
   const router = useRouter()
    if (router.isFallback) {
@@ -21,14 +21,13 @@ export default function Flow({ products, flow, inputs, outputs, flowRecord, imag
     </div>
     )
   } else {
-  const { flow_id } = router.query
+  const { flow_id } = router.query;
 
   const allToolTitles = [...new Set(flow.map(item => item.job_tool.tool.tool))];
 
   const itemInputs = inputs.map(input => {
 
     const currentInput = input.input;
-    console.log(currentInput)
 
       return (
       <div className="w-full px-6">
@@ -107,16 +106,29 @@ export default function Flow({ products, flow, inputs, outputs, flowRecord, imag
     </div>
     <div className="mt-24 pt-10">
     <div className="flex flex-col lg:flex-row w-full items-center px-6 lg:px-12">
-    <div className="w-full lg:w-3/5 mx-auto mt-8 lg:mt-0">
+    <div className="w-full lg:w-3/5 mx-auto lg:mt-0">
+    {(user[0]) ? (
+      <div class="flex flex-col items-center 
+      relative md:absolute md:top-0 md:right-0 md:mt-64 md:mr-4 lg:mr-8 z-40 px-12 py-4 mb-6 bg-gray-50 rounded w-64 mx-auto">
+      <h3 className="font-medium text-lg">Author</h3>
+      <div className="relative h-32 w-24 mb-2">
+      <Image src={user[0].avatar_url}
+      layout='fill'
+      objectFit='contain' />
+      </div>
+      <h3 className="font-semibold text-lg">{user[0].full_name}</h3>
+      <span className="text-gray-700 font-light">{user[0].username}</span>
+      </div>
+      ) : null}
     {(inputs && inputs.length != 0) ? (
-    <>
-    <h2 className="lg:w-4/5 text-center mx-auto px-6 sm:text-2xl text-xl font-semibold text-gray-900">
+    <div className="md:max-w-xl md:pr-28 lg:pr-0 lg:max-w-full md:ml-0 lg:mx-auto z-30">
+    <h2 className="md:w-5/6 text-center mx-auto px-6 sm:text-2xl text-xl font-semibold text-gray-900">
     Use</h2>
-    <div className="flex flex-col items-center justify-center w-full mx-auto lg:w-4/5 mt-4">
+    <div className="flex flex-col items-center justify-center w-full mx-auto lg:w-5/6 mt-4">
     {itemInputs}
     </div>
-    </>) : null}
-    <div className="mx-auto w-24 flex justify-center items-center mt-4">
+    </div>) : null}
+    <div className="mx-auto w-24 flex justify-center items-center mt-8">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13 16.172l5.364-5.364 1.414 1.414L12 20l-7.778-7.778 1.414-1.414L11 16.172V4h2v12.172z"/></svg>
     </div>
     <div className="py-8">
@@ -125,14 +137,15 @@ export default function Flow({ products, flow, inputs, outputs, flowRecord, imag
     <div className="flex-col w-full mt-4">
     {itemElements}
     </div>
+    <div className="mx-auto w-24 flex justify-center items-center mt-8">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13 16.172l5.364-5.364 1.414 1.414L12 20l-7.778-7.778 1.414-1.414L11 16.172V4h2v12.172z"/></svg>
     </div>
-    <div className="bg-gray-50 py-12">
-    <h2 className="lg:w-4/5 text-center mx-auto px-6 mb-6 sm:text-2xl text-xl font-semibold text-gray-900">
-    And get a...</h2>
-    <div className={`${getRandomGradient()} px-6 max-w-md mx-auto py-6 shadow hover:shadow-lg`}>
+    </div>
+    <h2 className="text-center mx-auto px-6 mb-6 sm:text-2xl text-xl font-semibold text-gray-900">
+    And get a...</h2>    
+    <div className={`${getRandomGradient()} px-6 max-w-md mx-auto py-6 shadow border border-black rounded hover:shadow-lg transition`}>
     <div className="flex items-center justify-center w-full mx-auto ">
     {itemOutputs}
-    </div>
     </div>
     </div>
     </div>
@@ -158,10 +171,14 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
+
+  let user = [];
   
-  const products = await getActiveProductsWithPrices();
   const flow = await getFlowItemsByFlowId(context.params.flow_id);
   const flowRecord = await getFlowById(context.params.flow_id);
+  if (flowRecord[0].author){
+    user = await getPersonalDetailsByUserId(flowRecord[0].author);
+  }
   const inputs = await getFlowInputsByFlowId(context.params.flow_id);
   const outputs = await getFlowOutputsByFlowId(context.params.flow_id);
   const imageDomain = process.env.IMAGES_DOMAIN_2;
@@ -174,8 +191,8 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      products,
       flow,
+      user,
       inputs,
       outputs,
       flowRecord, 
