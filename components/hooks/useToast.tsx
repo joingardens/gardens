@@ -39,9 +39,10 @@ const useToast = () => {
         )
     }
 
-    const makeManyToasts = async (toasts: {text: string, type: ToastTypes, ttl: number}[]) => {
+    const makeManyToasts = async (toastsArg: {text: string, type: ToastTypes, ttl: number}[]) => {
         const readyToasts = []
-        for (let toast of toasts) {
+        for (let toast of toastsArg) {
+            console.log(readyToasts)
             readyToasts.push({
                 ...toast,
                 id: v4(),
@@ -49,7 +50,7 @@ const useToast = () => {
                 dob: Date.now()/1000
             })
         }
-        setToasts(readyToasts)
+        setToasts([ ...toasts, ...readyToasts,])
     }
 
     return {makeToast, mountToast, makeManyToasts}
