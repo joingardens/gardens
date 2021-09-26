@@ -97,7 +97,7 @@ const NewFlowModal = () => {
                 <button onClick={async () => {
                     if (user.id) {
                         await newFlowService.saveFlow(user.id)
-                        service.closeModal("newFlow")
+                        //service.closeModal("newFlow")
                     }
                     }} className={`inline-flex items-center bg-white border border-black py-1 px-3 mt-12 focus:outline-none hover:bg-gray-200 rounded text-base`}>
                     {newFlowState.loading ? "loading..." : "Save input"}

@@ -53,6 +53,11 @@ export class NewFlowService extends SupabaseServiceClass {
     setStepImages(index:number, images: File[]) {
         this.dispatch({type: "setStepImages", payload: {index, images}})
     }
+    setErrors(errors: string[]) {
+        this.dispatch({type: "setErrors", payload: errors })
+    }
+
+
     async insertItem(from:string,entities: any[] ){
         const {data} = await this.supabase.from(from).insert(entities)
         return data
@@ -95,6 +100,7 @@ export class NewFlowService extends SupabaseServiceClass {
         let result = output.output.length > 0 ? output : false
         return result
     }
+
 
     async findInput(input: IInput){
         const data = await this.findEntityByString("inputs", "input", input.input)
@@ -168,13 +174,13 @@ export class NewFlowService extends SupabaseServiceClass {
         if (!validatedOutput) {
             errors.push("output")
         }
-
         if (!this.state.title) {
             errors.push("title")
         }
         
         if (errors.length) {
-            console.log(errors)
+            this.setErrors(errors)
+            this.setLoading(false)
             return
         }
 

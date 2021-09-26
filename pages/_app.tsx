@@ -6,6 +6,7 @@ import Layout from '../components/Layout';
 import { UserContextProvider } from '../utils/useUser';
 import { ModalsContextProvider } from '../components/modals/modalsContext';
 import { NewFlowContextProvider } from '../components/context/newFlow/newFlowContext';
+import { ToastContextProvider } from '../components/context/ToastContext';
 
 export default function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -14,14 +15,17 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <div className="bg-white">
+
       <UserContextProvider>
       <ModalsContextProvider>
+      <ToastContextProvider>
         <NewFlowContextProvider>
 
         <Layout meta={{}}>
           <Component {...pageProps} />
         </Layout>
       </NewFlowContextProvider>
+      </ToastContextProvider>
       </ModalsContextProvider>
       </UserContextProvider>
     </div>

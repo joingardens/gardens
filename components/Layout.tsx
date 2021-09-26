@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import Navbar from './ui/Navbar';
 import Footer from './ui/Footer';
 import Modals from './modals/modals';
+import Toaster from './Toaster/Toaster';
 
 export default function Layout({ children, meta: pageMeta }) {
   const router = useRouter();
@@ -39,6 +40,7 @@ export default function Layout({ children, meta: pageMeta }) {
       <Navbar />
       <main id="skip">{children}</main>
       <Modals />
+      <Toaster/>
       <Footer />
     </>
   );

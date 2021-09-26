@@ -2,6 +2,7 @@ import React, { ReactNode, useEffect, useState } from "react";
 import { Reducer } from "react";
 import { useMemo } from "react";
 import { useReducer } from "react";
+import useToast from "../../hooks/useToast";
 import NewFlowReducer from "./newFlowReducer";
 import { NewFlowService } from "./newFlowService";
 
@@ -40,7 +41,8 @@ export interface INewFlowState {
   inputs: IInput[],
   steps: IStep[],
   output: IOutput,
-  loading: boolean
+  loading: boolean,
+  errors: string[]
 }
 
 export const defaultNewFlowInput:IInput = {
@@ -70,12 +72,24 @@ const InitialState:INewFlowState = {
     }
   ],
   output: {output: "", description: "", images: []},
-  loading: false
+  loading: false,
+  errors: []
 }
 const NewFlowContextProvider = ({ children }: Props) => {
   const [newFlowState, newFlowDispatch] = useReducer(NewFlowReducer, InitialState)
   const newFlowService = useMemo(() => new NewFlowService(newFlowState,newFlowDispatch), [newFlowDispatch, newFlowState]) 
+  const {makeManyToasts} = useToast()
 
+  useEffect(() => {
+    if (newFlowState.errors.length) {
+      console.log(newFlowState.errors)
+      makeManyToasts(newFlowState.errors.map(a => ({
+        text: a,
+        ttl:3,
+        type: "error"
+      })))
+    }
+  }, [newFlowState.errors])
   return (
     <NewFlowContext.Provider
     value={{

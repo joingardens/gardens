@@ -7,6 +7,7 @@ import SearchBar from '../SearchBar/SearchBar';
 //import { ModalProvider } from '../../../utils/use-modal';
 import { useContext } from 'react';
 import ModalsContext from '../../modals/modalsContext';
+import useToast from '../../hooks/useToast';
 
 const Navbar = () => {
   const { user, signOut } = useUser();
@@ -15,6 +16,7 @@ const Navbar = () => {
   let listener = null;
   const [scrollState, setScrollState] = useState("bg-transparent")
   const [buttonState, setButtonState] = useState("bg-white hover:bg-gray-200")
+  const {makeToast} = useToast()
 
   useEffect(() => {
     listener = document.addEventListener("scroll", e => {
@@ -97,6 +99,13 @@ const Navbar = () => {
               </Link>)}
             {/*<SearchBar/>*/}
         </div>
+        <button
+        onClick={() => {
+          makeToast("test", "error", 3)
+        }}
+        >
+          test toast
+        </button>
         </nav>
       </div>
       </>
