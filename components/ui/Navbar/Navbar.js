@@ -99,13 +99,6 @@ const Navbar = () => {
               </Link>)}
             {/*<SearchBar/>*/}
         </div>
-        <button
-        onClick={() => {
-          makeToast("test", "error", 3)
-        }}
-        >
-          test toast
-        </button>
         </nav>
       </div>
       </>
