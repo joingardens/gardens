@@ -31,31 +31,6 @@ function LightFooterA(props) {
             
           </div>
           <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-            
-          </div>
-          
-          <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-            <h3 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-              CONTRIBUTE
-            </h3>
-            <nav className="flex flex-col mb-10">
-             <button className="text-gray-600 hover:text-gray-800 text-center md:text-left w-full"
- onClick={() => {
-      service.openModal("newFlow")
-    }}>
-                  Submit a Flow
-    </button>
-              <Link href="/signin">
-                <a className="text-gray-600 hover:text-gray-800" >
-                  Visit the Community
-                </a>
-              </Link>
-                <a className="text-gray-600 hover:text-gray-800" href="https://tally.so/r/wMOjXm" target="_blank">
-                  Join Gardens Network
-                </a>
-            </nav>
-          </div>
-          <div className="lg:w-1/4 md:w-1/2 w-full px-4">
             <h3 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
               DISCOVER
             </h3>
@@ -74,6 +49,53 @@ function LightFooterA(props) {
               <Link href="/listings">
                 <a className="text-gray-600 hover:text-gray-800" >
                   Listings
+                </a>
+              </Link>
+            </nav>
+          </div>
+          <div className="lg:w-1/4 md:w-1/2 w-full px-4">
+            <h3 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
+              CONTRIBUTE
+            </h3>
+            <nav className="flex flex-col mb-10">
+              <Link href="/signin">
+                <a className="text-gray-600 hover:text-gray-800" >
+                  Add a flow
+                </a>
+              </Link>
+              <Link href="/signin">
+                <a className="text-gray-600 hover:text-gray-800" >
+                  Other ways to help
+                </a>
+              </Link>
+             {/*
+             <button className="text-gray-600 hover:text-gray-800 text-center md:text-left w-full"
+ onClick={() => {
+      service.openModal("newFlow")
+    }}>
+                  Submit a Flow
+    </button>
+             */}
+                <a className="text-gray-600 hover:text-gray-800" href="https://tally.so/r/wMOjXm" target="_blank">
+                  Gardens Network
+                </a>
+            </nav>
+          </div>
+          <div className="lg:w-1/4 md:w-1/2 w-full px-4">
+            <h3 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
+              CONTACT US
+            </h3>
+            <nav className="flex flex-col mb-10">
+              
+                <a href="mailto:hello@joingardens.com" target="_blank" className="text-gray-600 hover:text-gray-800" >
+                  hello@joingardens.com
+                </a>
+              <a href="https://cal.com/gardens/intro" target="_blank" className="text-gray-600 hover:text-gray-800" >
+                Book a call
+                </a>
+                <Link href="/signin">
+                <a className="text-gray-600 hover:text-gray-800" >
+                  Join the Community
                 </a>
               </Link>
             </nav>
