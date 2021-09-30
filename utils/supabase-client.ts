@@ -51,6 +51,32 @@ export const getAllJobs = async () => {
   return data || [];
 };
 
+export const getAllActions = async () => {
+  const { data, error } = await supabase
+    .from('actions')
+    .select('id, action, appsrc')
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
+export const getAllActionIds = async () => {
+  const { data, error } = await supabase
+    .from('actions')
+    .select('id')
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
 export const getStandalonePostIds = async () => {
   const { data, error } = await supabase
     .from('posts')
@@ -437,6 +463,20 @@ export const getPersonalDetailsByUserId = async (user_id) => {
     .from('user_public_profile')
     .select('*')
     .eq('id', user_id)
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
+export const getActionById = async (action_id) => {
+  const { data, error } = await supabase
+    .from('actions')
+    .select('*')
+    .eq('id', action_id)
 
   if (error) {
     console.log(error.message);

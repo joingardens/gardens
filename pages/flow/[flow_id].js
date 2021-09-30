@@ -109,7 +109,7 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
     <div className="w-full lg:w-3/5 mx-auto lg:mt-0">
     {(user[0]) ? (
       <div class="flex flex-col items-center 
-      relative md:absolute md:top-0 md:right-0 md:mt-64 md:mr-4 lg:mr-8 z-40 px-12 py-4 mb-6 bg-gray-50 rounded w-64 mx-auto">
+      relative md:absolute md:top-0 md:right-0 md:mt-64 md:mr-4 lg:mr-8 z-30 px-12 py-4 mb-6 bg-gray-50 rounded w-64 mx-auto">
       <h3 className="font-medium text-lg">Author</h3>
       <div className="relative h-32 w-24 mb-2">
       <Image src={user[0].avatar_url}
@@ -121,7 +121,7 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
       </div>
       ) : null}
     {(inputs && inputs.length != 0) ? (
-    <div className="md:max-w-xl md:pr-28 lg:pr-0 lg:max-w-full md:ml-0 lg:mx-auto z-30">
+    <div className="md:max-w-xl md:pr-28 lg:pr-0 lg:max-w-full md:ml-0 lg:mx-auto z-20">
     <h2 className="md:w-5/6 text-center mx-auto px-6 sm:text-2xl text-xl font-semibold text-gray-900">
     Use</h2>
     <div className="flex flex-col items-center justify-center w-full mx-auto lg:w-5/6 mt-4">

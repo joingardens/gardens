@@ -66,7 +66,7 @@ const Navbar = () => {
               </Link>*/}
               {user ? (
               <Link href="#">
-                <a className="mr-2.5 bg-white py-1 px-2 focus:outline-none hover:bg-gray-200 rounded text-base" onClick={() => signOut()}>
+                <a className={`mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded text-base`} onClick={() => signOut()}>
                   Sign out
                 </a>
               </Link>
@@ -93,7 +93,7 @@ const Navbar = () => {
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
     </button>) : (<Link href="/signin">
-                <a className="md:mr-2.5 bg-white py-1 px-2 focus:outline-none hover:bg-gray-200 rounded text-base" onClick={() => signOut()}>
+                <a className={`mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded text-base`} onClick={() => signOut()}>
                   Sign in
                 </a>
               </Link>)}
