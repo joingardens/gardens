@@ -27,7 +27,7 @@ export default function Index({ flows, flowItemsWithTools, actions }) {
     const actionItems = actions.map(action => (
       <div key={action.id} className="w-48">
       <Link href={'/action/' + action.id}>
-      <div className="w-full text-center font-semibold border border-black hover:shadow transition cursor-pointer rounded py-3 px-1">
+      <div className="w-full text-center font-semibold border border-black hover:shadow transition cursor-pointer rounded py-3 px-1 mb-2">
       <span>{action.action}</span>
       </div>
       </Link>
