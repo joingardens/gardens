@@ -5,3 +5,12 @@
 @import './components.css';
 
 @tailwind utilities;
+
+@layer base {
+	li {
+		@apply list-disc;
+	}
+	a {
+		@apply font-semibold text-blue-600 underline;
+	}
+}

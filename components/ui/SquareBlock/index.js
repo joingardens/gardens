@@ -1,8 +1,11 @@
 import React from "react";
-import Image from 'next/image'
-import getRandomGradient from '../../../utils/getRandomGradient';
+import Image from "next/image"
+import getRandomGradient from "../../../utils/getRandomGradient";
+import MarkdownIt from "markdown-it"
 
 function SquareBlock(props) {
+
+  const md = new MarkdownIt();
 
   const blockColor = (props.blockType == 'Open') ? 'green-50' : (props.blockType == 'Fair') ? 'yellow-50' : (props.blockType == 'Exportable') ? 'gray-50' : 'gray-50';
   const typeColor = (props.blockType == 'Open') ? 'text-green-500' : (props.blockType == 'Fair') ? 'text-yellow-500' : (props.blockType == 'Closed') ? 'text-red-500' : 'text-primary'
@@ -33,22 +36,23 @@ function SquareBlock(props) {
       ) : null}
           <div className="flex flex-col">
           <span className={`title-font font-${fontWeight} font-bold`}>
-          <a href={props.ctaLink ? props.ctaLink : props.blockLink} target="_blank" className="hover:underline">
+          <a href={props.ctaLink ? props.ctaLink : props.blockLink} target="_blank" className="hover:underline text-gray-900 no-underline">
           {props.blockBody}
           </a></span>
           <span className={`${typeColor} font-${fontWeight}`}>
-          <a href="/models" target="_blank" className="hover:underline">
+          <a href="/models" target="_blank" className="hover:underline text-gray-900 no-underline">
           {props.blockType}
           </a>
           </span>
           </div>
           </div>
           {props.blockDescription ? (
-            <span className="mt-2 py-1 pr-2">{props.blockDescription}
+            <div dangerouslySetInnerHTML={{__html: md.render(props.blockDescription)}} 
+            className="mt-2 py-1 pr-2"> 
             {props.blockDescriptionLinkTitle ? (<a href={props.blockLink} target="_blank" className="hover:underline"> 
               <span className="font-semibold underline">{props.blockDescriptionLinkTitle}</span>
               </a>) : (null)}
-            </span>
+            </div>
             ) : (null)}
           </div>
           {(props.orderLink || props.ctaLink || props.blockLink) ? (<div className="flex w-2/6 justify-center items-center">
