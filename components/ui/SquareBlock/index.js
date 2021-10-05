@@ -12,6 +12,13 @@ function SquareBlock(props) {
   const fontWeight = (props.blockType == 'Open') ? 'medium' : (props.blockType == 'Fair') ? 'medium' : (props.blockType == 'Closed') ? 'medium' : 'medium'
   const pillColor = getRandomGradient();
 
+  /*
+  To-do: add links to description bodies for selected blocks
+
+  {props.blockDescriptionLinkTitle ? (<a href={props.blockLink} target="_blank" className="hover:underline"> 
+              <span className="font-semibold underline">{props.blockDescriptionLinkTitle}</span>
+              </a>) : (null)}*/
+
   return (
     <>
     <div className="my-2 w-full flex relative">
@@ -48,11 +55,7 @@ function SquareBlock(props) {
           </div>
           {props.blockDescription ? (
             <div dangerouslySetInnerHTML={{__html: md.render(props.blockDescription)}} 
-            className="mt-2 py-1 pr-2"> 
-            {props.blockDescriptionLinkTitle ? (<a href={props.blockLink} target="_blank" className="hover:underline"> 
-              <span className="font-semibold underline">{props.blockDescriptionLinkTitle}</span>
-              </a>) : (null)}
-            </div>
+            className="mt-2 py-1 pr-2" /> 
             ) : (null)}
           </div>
           {(props.orderLink || props.ctaLink || props.blockLink) ? (<div className="flex w-2/6 justify-center items-center">
