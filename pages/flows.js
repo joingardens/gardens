@@ -53,7 +53,6 @@ export default function FlowPage({ products, jobs,
     <SquareBlock key={item.id} blockId={item.id} 
     orderNumber={currentOrderNumber}
     blockBody={currentJob.job}
-    blockDescription={'Using '} 
     blockDescriptionLinkTitle={currentTool.tool} 
     ctaLink={currentTool ? ('/task/' + currentJob.id) : null}
     ctaLinkTitle={'Press to get this done'}

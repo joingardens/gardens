@@ -17,15 +17,15 @@ function ListItem(props) {
           </div>) : null}
           <div className="flex-grow mt-6 sm:mt-0">
           <div className="flex flex-col md:flex-row w-full items-center justify-center md:justify-between">
-            <h2 className="text-gray-900 text-lg sm:text-left text-center font-bold title-font font-medium mb-2">
-            <a href={urlify(props.categoryName)}>
+            <h2 className="text-lg sm:text-left text-center font-bold title-font font-medium mb-2">
+            <a className="text-gray-900" href={urlify(props.categoryName)}>
               {props.categoryName}
             </a>
             </h2>
             <span className="hover:underline text-center md:text-end">
             <a href="#" className="text-gray-700">Jump to top</a></span>
           </div>
-            <p className="leading-relaxed text-base my-4">
+            <p className="leading-relaxed text-base my-4 font-medium">
               {props.categoryDescription}
             </p>
             {props.children}

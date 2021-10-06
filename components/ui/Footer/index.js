@@ -37,17 +37,17 @@ function LightFooterA(props) {
             <nav className="flex flex-col mb-10">
               
               <Link href="/flows">
-                <a className="text-gray-600 hover:text-gray-800" >
+                <a className="text-gray-600 hover:text-gray-800 font-medium" >
                   Flows
                 </a>
               </Link>
               <Link href="/tools">
-                <a className="text-gray-600 hover:text-gray-800" >
+                <a className="text-gray-600 hover:text-gray-800 font-medium" >
                   Tools
                 </a>
               </Link>
               <Link href="/listings">
-                <a className="text-gray-600 hover:text-gray-800" >
+                <a className="text-gray-600 hover:text-gray-800 font-medium" >
                   Listings
                 </a>
               </Link>
@@ -59,12 +59,12 @@ function LightFooterA(props) {
             </h3>
             <nav className="flex flex-col mb-10">
               <Link href="/signin">
-                <a className="text-gray-600 hover:text-gray-800" >
+                <a className="text-gray-600 hover:text-gray-800 font-medium" >
                   Add a flow
                 </a>
               </Link>
               <Link href="/signin">
-                <a className="text-gray-600 hover:text-gray-800" >
+                <a className="text-gray-600 hover:text-gray-800 font-medium" >
                   Other ways to help
                 </a>
               </Link>
@@ -76,7 +76,7 @@ function LightFooterA(props) {
                   Submit a Flow
     </button>
              */}
-                <a className="text-gray-600 hover:text-gray-800" href="https://tally.so/r/wMOjXm" target="_blank">
+                <a className="text-gray-600 hover:text-gray-800 font-medium" href="https://tally.so/r/wMOjXm" target="_blank">
                   Gardens Network
                 </a>
             </nav>
@@ -87,14 +87,14 @@ function LightFooterA(props) {
             </h3>
             <nav className="flex flex-col mb-10">
               
-                <a href="mailto:hello@joingardens.com" target="_blank" className="text-gray-600 hover:text-gray-800" >
+                <a href="mailto:hello@joingardens.com" target="_blank" className="text-gray-600 hover:text-gray-800 font-medium" >
                   hello@joingardens.com
                 </a>
-              <a href="https://cal.com/gardens/intro" target="_blank" className="text-gray-600 hover:text-gray-800" >
+              <a href="https://cal.com/gardens/intro" target="_blank" className="text-gray-600 hover:text-gray-800 font-medium" >
                 Book a call
                 </a>
                 <Link href="/signin">
-                <a className="text-gray-600 hover:text-gray-800" >
+                <a className="text-gray-600 hover:text-gray-800 font-medium" >
                   Join the Community
                 </a>
               </Link>

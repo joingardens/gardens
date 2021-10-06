@@ -5,9 +5,17 @@ import getRandomGradient from '../../../utils/getRandomGradient'
 function PrettyBlock(props) {
 
   const blockColor = getRandomGradient();
-  const typeColor = (props.blockType == 'Open') ? 'text-primary' : (props.blockType == 'Fair') ? 'text-primary' : (props.blockType == 'Closed') ? 'text-primary' : 'text-primary'
-  const blockWidth = props.fullWidth ? 'w-full' : 'w-48 md:w-64'
-  const blockHeight = props.flexibleHeight ? '' : 'h-20'
+  const typeColor = (props.blockType == 'Open') ? 'text-primary' : (props.blockType == 'Fair') ? 'text-primary' : (props.blockType == 'Closed') ? 'text-primary' : 'text-primary';
+  const blockWidth = props.fullWidth ? 'w-full' : 'w-48 md:w-64';
+  const blockHeight = props.flexibleHeight ? '' : 'h-24';
+
+  // Shorten a string to less than maxLen characters without truncating words. Courtesy Chris Cinelli https://stackoverflow.com/a/40382963
+  function shorten(str, maxLen, separator = ' ') {
+  if (str.length <= maxLen) return str;
+  return (str.substr(0, str.lastIndexOf(separator, maxLen)) + '...');
+  }
+
+  let shortBlockBody = shorten(props.blockBody, 32);
 
   return (
     <>
@@ -20,7 +28,7 @@ function PrettyBlock(props) {
             <path d="M22 4L12 14.01l-3-3"></path>
           </svg>*/}
           <div className="flex flex-col px-4 w-full">
-          <span className={"title-font text-gray-700 text-md md:text-lg text-left"}>{props.blockBody}</span>
+          <span className="title-font text-gray-700 text-md md:text-lg text-left">{shortBlockBody}</span>
           {props.blockDescription ? (
             <span className="py-1 font-normal text-left">{props.blockDescription} <a href={props.blockDescriptionLinkHref}>
             {props.blockDescriptionLinkTitle ? (<span className="font-semibold underline">{props.blockDescriptionLinkTitle}</span>) : (null)}

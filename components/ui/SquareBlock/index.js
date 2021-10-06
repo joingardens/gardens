@@ -12,13 +12,6 @@ function SquareBlock(props) {
   const fontWeight = (props.blockType == 'Open') ? 'medium' : (props.blockType == 'Fair') ? 'medium' : (props.blockType == 'Closed') ? 'medium' : 'medium'
   const pillColor = getRandomGradient();
 
-  /*
-  To-do: add links to description bodies for selected blocks
-
-  {props.blockDescriptionLinkTitle ? (<a href={props.blockLink} target="_blank" className="hover:underline"> 
-              <span className="font-semibold underline">{props.blockDescriptionLinkTitle}</span>
-              </a>) : (null)}*/
-
   return (
     <>
     <div className="my-2 w-full flex relative">
@@ -43,14 +36,20 @@ function SquareBlock(props) {
       ) : null}
           <div className="flex flex-col">
           <span className={`title-font font-${fontWeight} font-bold`}>
-          <a href={props.ctaLink ? props.ctaLink : props.blockLink} target="_blank" className="hover:underline text-gray-900 no-underline">
+          <a href={props.ctaLink ? props.ctaLink : props.blockLink} target="_blank" className="text-gray-900 no-underline">
           {props.blockBody}
           </a></span>
-          <span className={`${typeColor} font-${fontWeight}`}>
-          <a href="/models" target="_blank" className="hover:underline text-gray-900 no-underline">
-          {props.blockType}
-          </a>
+          {props.blockDescriptionLinkTitle ? (
+            <span>
+            <a href={props.blockLink} target="_blank" className="no-underline font-medium text-gray-900"> 
+              Using <span className="font-medium no-underline">{props.blockDescriptionLinkTitle}</span>
+              </a>
+          <a href="/models" target="_blank" className={`${typeColor} text-gray-900 no-underline font-${fontWeight}`}>
+          <span>
+          {' ' + '(' + props.blockType + ')'} 
           </span>
+          </a>
+          </span>) : (null)}
           </div>
           </div>
           {props.blockDescription ? (
