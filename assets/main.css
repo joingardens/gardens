@@ -11,6 +11,6 @@
 		@apply list-disc;
 	}
 	a {
-		@apply font-semibold text-blue-600 underline;
+		@apply font-semibold text-blue-600;
 	}
 }
