@@ -107,7 +107,7 @@ export async function getStaticProps() {
   const flowsOutputs = await getAllFlowsOutputs();
   const flowItems = await getAllFlowItems();
   const outputs = await getAllOutputs();
-
+  
   return {
     props: {
       products,

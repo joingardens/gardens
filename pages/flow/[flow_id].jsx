@@ -10,6 +10,7 @@ import { getFlowItemsByFlowId,
 import SquareBlock from '../../components/ui/SquareBlock';
 import getRandomGradient from '../../utils/getRandomGradient';
 import Image from 'next/image';
+import ScaleableImage from "../../components/scaleableImage"
 
 export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDomain }) {
 
@@ -55,11 +56,8 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
         
                 currentImages = currentImageURLs.map(imageURL => {
                   return (
-          <div className="h-48 w-11/12 relative mt-4">
-          <Image src={'https://' + imageDomain + '/storage/v1/object/public/' + imageURL} 
-          layout='fill'
-          objectFit='contain' />
-          </div>)
+                    <ScaleableImage imageDomain={imageDomain} imageURL={imageURL}/>
+          )
         })
       }
 
