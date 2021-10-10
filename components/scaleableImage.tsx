@@ -74,11 +74,9 @@ const ScaleableImage = ({imageDomain, imageURL}) => {
         </div>
         <div 
         ref={scroller}
-        className={`fixed ${isEnlarged ? "opacity-100 visible" : "opacity-30 invisible"} w-full transition-all duration-500 bg-black bg-opacity-30 z-50 max-w-full min-h-full left-0 top-0 grid place-items-center overflow-x-auto px-5 py-5 `}>
+        className={`fixed zoom ${isEnlarged ? "opacity-100 visible" : "opacity-0 invisible"} w-full transition-all duration-500 bg-black bg-opacity-30 z-50 max-w-full min-h-full left-0 top-0 grid place-items-center overflow-x-auto py-5 `}>
             <img 
-            style={{
-                minWidth: dims.width
-            }}
+
             onClick={(e) => {
             }}
             onMouseDown={(e) => {
@@ -104,7 +102,7 @@ const ScaleableImage = ({imageDomain, imageURL}) => {
             onClick={() => {
                 setIsEnlarged(false)
             }}
-            className={`fixed text-white top-10 right-10 bg-black rounded-md cursor-pointer bg-opacity-60 p-2 `}>
+            className={`fixed max-w-full text-white top-10 right-10 bg-black rounded-md cursor-pointer bg-opacity-60 p-2 `}>
                 <Cross/>
             </div>
         </div>

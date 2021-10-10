@@ -15,7 +15,7 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <div className="bg-white">
-
+      <script src="/zoom.js"></script>
       <UserContextProvider>
       <ModalsContextProvider>
       <ToastContextProvider>
