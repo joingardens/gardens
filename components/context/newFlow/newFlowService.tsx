@@ -199,7 +199,7 @@ export class NewFlowService extends SupabaseServiceClass {
         if (!foundOutput.id) {
             foundOutput = await this.insertItem("outputs", [{
                 output: this.state.output.output,
-            }])
+            }])[0]
         }
         console.log(foundOutput)
 
@@ -282,8 +282,6 @@ export class NewFlowService extends SupabaseServiceClass {
         }
         if (jobToolsInsertions.length) {
             const data = await this.insertItem("jobs_tools", jobToolsInsertions)
-            console.log(data)
-            console.log(foundJobTools)
             foundJobTools = foundJobTools.map(jobTool => {
                 if (!jobTool.id) {
                     return data.find(data => (data.job === jobTool.job && data.tool === jobTool.tool))

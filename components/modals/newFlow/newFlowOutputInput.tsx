@@ -89,7 +89,7 @@ const NewFlowOutputInput = () => {
                         minRows={3}
                     />
                 </div>
-                <div className={`flex flex-wrap mt-6 justify-between`}>
+                <div className={`flex flex-wrap mt-6`}>
                     {useMemo(() => {
                         return  <>
                     <ImageMap images={newFlowState.output.images} setState={newFlowService.setOutputImages.bind(newFlowService)}/>

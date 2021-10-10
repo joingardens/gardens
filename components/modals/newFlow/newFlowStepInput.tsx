@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
 import { useContext, useState } from "react"
 import AutosizeInput from "react-input-autosize"
 import NewFlowContext, { IInput } from "../../context/newFlow/newFlowContext"
@@ -184,8 +184,14 @@ const NewFlowStepInput = ({index, step}) => {
                 />
             </div>
             <div className={`mt-4 flex flex-wrap justify-between`}>
-                    <ImageMap images={newFlowState.steps[index].images} setState={setStepImages}/>
+            {useMemo(() => {
+                        return  <>
+                     <ImageMap images={newFlowState.steps[index].images} setState={setStepImages}/>
                     <ImageInput state={newFlowState.steps[index].images} setState={setStepImages}/>
+                    </>
+                    
+            }, [newFlowState.steps[index].images])}
+
             </div>
             </div>
 
