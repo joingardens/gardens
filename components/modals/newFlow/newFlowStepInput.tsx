@@ -183,7 +183,7 @@ const NewFlowStepInput = ({index, step}) => {
                     minRows={3}
                 />
             </div>
-            <div className={`mt-4 grid lg:grid-cols-3 grid-cols-2 gap-4`}>
+            <div className={`mt-4 flex flex-wrap justify-between`}>
                     <ImageMap images={newFlowState.steps[index].images} setState={setStepImages}/>
                     <ImageInput state={newFlowState.steps[index].images} setState={setStepImages}/>
             </div>

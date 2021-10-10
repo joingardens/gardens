@@ -41,11 +41,11 @@ const NewFlowOutputInput = () => {
 
     return (
         <div className={`flex justify-center w-full`}>
-            <div className={`relative w-full flex flex-col items-center`}>
+            <div className={`relative w-full flex flex-col `}>
                 <div className={`relative`}>
                 <AutosizeInput 
             inputClassName={`border-none max-w-full`}
-            className={` px-3 ml-3 border py-1 rounded-md text-2xl bg-gray-50`}
+            className={` px-3 border py-1 rounded-md text-2xl bg-gray-50`}
             inputStyle={{ backgroundColor: "rgb(249, 250, 251)", outline: "none"}}
             onFocus={() => {
                 setOutputDropdownState({
@@ -89,7 +89,7 @@ const NewFlowOutputInput = () => {
                         minRows={3}
                     />
                 </div>
-                <div className={`mt-4 grid lg:grid-cols-4 grid-cols-2 gap-4`}>
+                <div className={`flex flex-wrap mt-6 justify-between`}>
                     {useMemo(() => {
                         return  <>
                     <ImageMap images={newFlowState.output.images} setState={newFlowService.setOutputImages.bind(newFlowService)}/>
