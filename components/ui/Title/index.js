@@ -5,12 +5,12 @@ function LightHeroB(props) {
   
   return (
     <section className="text-gray-600 body-font">
-      <div className={`mx-auto flex px-5 pb-6 pt-24 md:pb-12 md:pt-16 items-center justify-center flex-col ${props.colorBg} shadow`}>
+      <div className={`mx-auto flex px-5 pb-6 pt-24 md:pb-12 md:pt-16 items-center justify-center flex-col bg-persiangreen shadow`}>
         <div className="text-center lg:w-2/3 w-full">
-          <h1 className="title-font sm:text-4xl text-3xl mb-4 font-semibold text-gray-900">
+          <h1 className="title-font sm:text-4xl text-3xl mb-4 font-bold text-white">
             {props.titleTitle}
           </h1>
-          <p className="leading-relaxed">
+          <p className="leading-relaxed text-white font-semibold">
             {props.titleDescription}
           </p>
         </div>

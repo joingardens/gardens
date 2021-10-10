@@ -11,6 +11,11 @@ module.exports = {
         'secondary': '#000',
       },
       colors: {
+        'sapphire': '#05668D',
+        'seaweed': '#028090',
+        'persiangreen': '#00a896',
+        'meadow': '#02c39a',
+        'palebud': '#f0f3bd',
         primary: 'var(--primary)',
         'primary-2': 'var(--primary-2)',
         secondary: 'var(--secondary)',

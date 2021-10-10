@@ -21,7 +21,7 @@ function PrettyBlock(props) {
     <>
     <div className={`my-4 ml-2 flex ${blockHeight}`}>
     <a href={props.blockLink} className={'font-semibold inline-flex items-center text-center mr-4'}>
-        <div className={`border border-gray-600 transition hover:shadow rounded h-full ${blockWidth} items-center justify-center flex ${blockColor}`}>
+        <div className={`border border-gray-300 shadow hover:bg-gray-100 transition rounded h-full ${blockWidth} items-center justify-center flex `}>
           <div className="flex items-center bg-white w-full h-full py-2 bg-opacity-50 text-ce">
           {/*<svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" className="w-6 h-6 flex-shrink-0 mr-4" viewBox="0 0 24 24">
             <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
@@ -30,12 +30,19 @@ function PrettyBlock(props) {
           <div className="flex flex-col px-4 w-full">
           <span className="title-font text-gray-700 text-md md:text-lg text-left">{shortBlockBody}</span>
           {props.blockDescription ? (
-            <span className="py-1 font-normal text-left">{props.blockDescription} <a href={props.blockDescriptionLinkHref}>
+            <span className="py-1 font-semibold text-left text-gray-500">{props.blockDescription} <a href={props.blockDescriptionLinkHref}>
             {props.blockDescriptionLinkTitle ? (<span className="font-semibold underline">{props.blockDescriptionLinkTitle}</span>) : (null)}
             </a>
             </span>
             ) : (null)}  
             </div>
+            {props.smallImage ? (
+            <div className="w-20 h-20 relative mr-4">
+            <a href={props.ctaLink ? props.ctaLink : props.blockLink} target="_blank">
+            <Image src={props.smallImage} alt={props.smallImageAlt} 
+            layout='fill' objectFit='contain' objectPosition='center center' />
+            </a>
+            </div>) : null}
           </div>
         </div>
         </a>

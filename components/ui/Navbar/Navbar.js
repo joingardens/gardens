@@ -15,7 +15,8 @@ const Navbar = () => {
 
   let listener = null;
   const [scrollState, setScrollState] = useState("bg-transparent")
-  const [buttonState, setButtonState] = useState("bg-white hover:bg-gray-200")
+  const [buttonState, setButtonState] = useState("bg-transparent text-white hover:bg-white hover:text-gray-900")
+  const [titleState, setTitleState] = useState("text-white font-bold")
   const {makeToast} = useToast()
 
   useEffect(() => {
@@ -24,12 +25,14 @@ const Navbar = () => {
       if (scrolled >= 10) {
         if (scrollState !== "bg-white bg-opacity-80 border") {
           setScrollState("bg-white bg-opacity-80 border")
-          setButtonState("bg-white hover:bg-gray-200 border border-gray-400")
+          setButtonState("bg-white text-gray-900 hover:bg-gray-200 border border-gray-400")
+          setTitleState("text-gray-900 font-semibold")
         }
       } else {
         if (scrollState !== "bg-transparent") {
           setScrollState("bg-transparent")
-          setButtonState("bg-white hover:bg-gray-200")
+          setButtonState("bg-transparent text-white hover:bg-white hover:text-gray-900 transition")
+          setTitleState("text-white font-bold")
         }
       }
     })
@@ -44,10 +47,10 @@ const Navbar = () => {
         <nav className="w-full flex flex-wrap items-center text-base justify-between">
         <div className="flex items-center justify-center">
         <Link href="/">
-              <a className="title-font font-medium text-gray-900 rounded hover:shadow hover:bg-white transition" aria-label="Logo">
+              <a className="title-font font-medium text-gray-900 rounded" aria-label="Logo">
               <div className="flex items-center">
-              <Logo className="w-12 h-12" />
-              <span className="px-3 text-md sm:text-xl font-semibold">Gardens</span>
+              <Logo className="w-12 h-12 bg-white rounded-full border border-gray-400" />
+              <span className={`px-3 text-md sm:text-xl ${titleState}`}>Gardens</span>
               </div>
               </a>
               </Link>
@@ -55,10 +58,10 @@ const Navbar = () => {
         <div className="flex items-center justify-center">
               
               <Link href="/flows">
-                <a className={`mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded text-base`}>Flows</a>
+                <a className={`mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded`}>Flows</a>
               </Link>
               <Link href="/tools">
-                <a className={`hidden sm:block mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded text-base`}>Tools</a>
+                <a className={`hidden sm:block mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded`}>Tools</a>
               </Link>
               {/*
               <Link href="/account">
@@ -93,7 +96,7 @@ const Navbar = () => {
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
     </button>) : (<Link href="/signin">
-                <a className={`mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded text-base`} onClick={() => signOut()}>
+                <a className={`mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded`} onClick={() => signOut()}>
                   Sign in
                 </a>
               </Link>)}
