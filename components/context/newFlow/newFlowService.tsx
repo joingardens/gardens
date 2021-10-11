@@ -199,9 +199,8 @@ export class NewFlowService extends SupabaseServiceClass {
         if (!foundOutput.id) {
             foundOutput = await this.insertItem("outputs", [{
                 output: this.state.output.output,
-            }])[0]
+            }])
         }
-        console.log(foundOutput)
 
         let inputInsertions = []
         for (let input of foundInputs) {
@@ -320,7 +319,7 @@ export class NewFlowService extends SupabaseServiceClass {
         })
 
         let outputImages = await this.saveImages(this.state.output.images)
-
+        console.log(foundOutput.id)
         await this.insertItem("flow_items", flowItems)
         await this.insertItem("flows_inputs", flowsInputs)
         await this.insertItem("flows_outputs", [{
