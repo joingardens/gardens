@@ -11,6 +11,7 @@ import ImageInput from "../../ui/ImageInput"
 const NewFlowStepInput = ({index, step}) => {
     const { newFlowService, newFlowState} = useContext(NewFlowContext)
     const [mounted, setMounted] = useState(false)
+    const [imagesEnabled, setImagesEnabled] = useState(false)
     const [taskDropdownState, setTaskDropdownState] = useState({
         loading: false,
         suggestions: [],
@@ -23,6 +24,10 @@ const NewFlowStepInput = ({index, step}) => {
     })
     const debounceTool = useDebounce(step.tool, 1000)
     const debounceTask = useDebounce(step.task, 1000)
+
+    const handleImagesEnabled = () => {
+        setImagesEnabled(!imagesEnabled);
+    }
 
     const setStepImages = (images: File[]) => {
         return newFlowService.setStepImages(index, images)
@@ -78,13 +83,25 @@ const NewFlowStepInput = ({index, step}) => {
 
     return (
         <div className={`flex items-center -m-2 transition-all ${mounted ? "max-h-full opacity-100" : "max-h-0 opacity-20"}`}>
-            <div className={`h-full flex `}>
-                <div className={`w-12 h-12 mr-4 p-2 m-3 flex text-2xl font-bold rounded-full items-center justify-center bg-gray-100 flex-shrink-0`}>
-            {index + 1}
-                </div>
-            </div>
             <div className={`flex flex-wrap`}>
-                <div className={`m-2 relative`}>
+            <div className="w-full flex justify-between items-center ml-2 mb-2">
+            <span className="font-semibold text-gray-900">
+            {'Step ' + (index + 1)}
+            </span>
+            <button 
+            onClick={() => {
+                newFlowService.removeStep(index)
+            }}
+            className={`w-5 h-5 text-red-600 opacity-60 hover:opacity-100 m-2 transition-all`}>
+                <Cross/>
+            </button>
+            </div>
+                <div className={`ml-2 mt-2 mb-1 w-full`}>
+                    <div className="mb-1 w-full">
+                    <span className="text-gray-500">
+                    Task
+                    </span>
+                    </div>
                     <AutosizeInput
                     onFocus={() => {
                         setTaskDropdownState({
@@ -100,7 +117,7 @@ const NewFlowStepInput = ({index, step}) => {
                     }}
                     value={step.task}
                     onChange={(e) => {newFlowService.setStepTask(e.target.value, index)}}
-                    placeholder={"Get this task done"}
+                    placeholder={"Create a web page"}
                     inputClassName={`border-none max-w-full`}
                     inputStyle={{ backgroundColor: "rgb(249, 250, 251)", outline: "none"}}
                     className={` px-3  border py-1 rounded-md  max-w-full bg-gray-50`}
@@ -121,11 +138,12 @@ const NewFlowStepInput = ({index, step}) => {
                             </div>
                     </div>
                 </div>
-
-            <span className={`m-4`}>
-            {"with"}
+            <div className={`ml-2 mt-1 mb-1 w-full`}>
+            <div className="mb-1 w-full">
+            <span className="text-gray-500">
+            Tool
             </span>
-            <div className={`relative `}>
+            </div>
             <AutosizeInput
             onFocus={() => {
                 setToolDropdownState({
@@ -141,13 +159,10 @@ const NewFlowStepInput = ({index, step}) => {
                 }}
             value={step.tool}
             onChange={(e) => {newFlowService.setStepTool(e.target.value, index)}}
-            placeholder={"This tool"}
+            placeholder={"Wordpress"}
             inputStyle={{ backgroundColor: "rgb(249, 250, 251)", outline: "none"}}
             inputClassName={`border-none max-w-full`}
-            style={{
-                maxWidth: "90%"
-            }}
-            className={` px-3 ml-3 border py-1 rounded-md m-2 bg-gray-50`}
+            className={` px-3 border py-1 rounded-md bg-gray-50`}
             />
                         <div className={`absolute left-3 bottom-0 z-20`}>
                         <div className={`absolute ${toolDropdownState.isOpen && step.tool ? "opacity-100 scale-100 visible" : "opacity-0 scale-75 invisible"} rounded-md overflow-y-auto transform origin-top-left w-60 top-1 left-0 max-h-32 shadow-md bg-white  transition-all duration-300 `}>
@@ -165,37 +180,37 @@ const NewFlowStepInput = ({index, step}) => {
                         </div>
                 </div>
             </div>
+            {imagesEnabled ? (
+                <div className={`mt-2 flex flex-wrap justify-between`}>
+                <ImageMap images={newFlowState.steps[index].images} setState={setStepImages}/>
+                <ImageInput state={newFlowState.steps[index].images} setState={setStepImages}/>
+                    
+            {/*useMemo(() => {
+                        return  <>
+                     <ImageMap images={newFlowState.steps[index].images} setState={setStepImages}/>
+                    <ImageInput state={newFlowState.steps[index].images} setState={setStepImages}/>
+                    </>
+                    
+            }, [newFlowState.steps[index].images])
+        */}
 
-                        <button 
-            onClick={() => {
-                newFlowService.removeStep(index)
-            }}
-            className={`w-6 h-6 text-red-600 opacity-60 hover:opacity-100 m-2 transition-all`}>
-                <Cross/>
+            </div>) : (
+            <div>
+            <button onClick={handleImagesEnabled} className={`inline-flex items-center bg-white border border-gray-500 py-1 px-3 ml-2 my-4 focus:outline-none hover:bg-gray-200 rounded text-gray-500`}>
+                + Add images
             </button>
+            </div>)}
             <div className={`w-full border mr-3 bg-gray-50 rounded-md ml-2 py-2`}>
                 <TextareaAutosize
                     value={step.description}
                     onChange={(e) => {newFlowService.setStepDescription(e.target.value,index)}}
                     autoComplete={"off"}
                     className={`px-4 h-full rounded-md max-w-full bg-gray-50 w-full resize-none overflow-y-hidden focus:border-transparent`}
-                    placeholder={"Description!"}
+                    placeholder={"To create a page in Wordpress, do this..."}
                     minRows={3}
                 />
             </div>
-            <div className={`mt-4 flex flex-wrap justify-between`}>
-            {useMemo(() => {
-                        return  <>
-                     <ImageMap images={newFlowState.steps[index].images} setState={setStepImages}/>
-                    <ImageInput state={newFlowState.steps[index].images} setState={setStepImages}/>
-                    </>
-                    
-            }, [newFlowState.steps[index].images])}
-
             </div>
-            </div>
-
-
     </div>
     )
 }

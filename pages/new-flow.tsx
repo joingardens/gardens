@@ -13,7 +13,7 @@ const newFlow = () => {
     const {user} = useUser()
     const { newFlowState, newFlowService, dispatch } = useContext(NewFlowContext)
     return (
-        <div className={`px-10 py-10 w-full`}>
+        <div className={`lg:px-10 lg:py-10 w-full`}>
                         <div
                 onClick={(e) => {
                     e.stopPropagation()

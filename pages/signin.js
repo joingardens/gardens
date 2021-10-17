@@ -54,7 +54,7 @@ const SignIn = () => {
 
   if (!user)
     return (
-      <div className="w-80 flex flex-col justify-between p-3 max-w-lg m-auto mb-24">
+      <div className="w-80 flex flex-col justify-between p-3 max-w-lg m-auto mb-24 bg-gray-50">
         <h3 className="text-3xl text-center my-6">Hi there!</h3>
         <div className="flex justify-center pb-12">
           <Logo width="64px" height="64px" />

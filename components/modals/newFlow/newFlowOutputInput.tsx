@@ -79,6 +79,16 @@ const NewFlowOutputInput = () => {
                     </div>
                 </div>
                 </div>
+                <div className={`flex flex-wrap mt-2 -ml-2`}>
+                    {useMemo(() => {
+                        return  <>
+                    <ImageMap images={newFlowState.output.images} setState={newFlowService.setOutputImages.bind(newFlowService)}/>
+                    <ImageInput state={newFlowState.output.images} setState={newFlowService.setOutputImages.bind(newFlowService)}/>
+                    </>
+                    
+                    }, [newFlowState.output.images])}
+                    
+                </div>
                 <div className={`w-full border mr-3 bg-gray-50 rounded-md mt-3 py-2`}>
                     <TextareaAutosize
                         value={newFlowState.output.description}
@@ -88,16 +98,6 @@ const NewFlowOutputInput = () => {
                         placeholder={"All the good stuff you can find in your fridge"}
                         minRows={3}
                     />
-                </div>
-                <div className={`flex flex-wrap mt-6`}>
-                    {useMemo(() => {
-                        return  <>
-                    <ImageMap images={newFlowState.output.images} setState={newFlowService.setOutputImages.bind(newFlowService)}/>
-                    <ImageInput state={newFlowState.output.images} setState={newFlowService.setOutputImages.bind(newFlowService)}/>
-                    </>
-                    
-                    }, [newFlowState.output.images])}
-                    
                 </div>
             </div> 
         </div>
