@@ -13,7 +13,7 @@ const newFlow = () => {
     const {user} = useUser()
     const { newFlowState, newFlowService, dispatch } = useContext(NewFlowContext)
     return (
-        <div className={`lg:px-10 lg:py-10 w-full`}>
+        <div className={`w-full`}>
                         <div
                 onClick={(e) => {
                     e.stopPropagation()
@@ -22,24 +22,24 @@ const newFlow = () => {
                     e.stopPropagation()
                 }}
                 className={`
-        overflow-y-auto w-full h-full relative bg-white rounded-lg opacity-100 visible scale-100
+        overflow-y-hidden w-full h-full relative bg-white rounded-lg opacity-100 visible scale-100
         transition-all duration-300 transform origin-center
         pb-10 overflow-x-hidden 
         `}>
-                <div className={`w-full bg-gray-50 z-30 sticky left-0 h-20 top-0 flex px-4 pr-6 md:px-8 items-center `}>
+                <div className={`w-full ml-2 mt-4 px-8 md:px-16 z-30 sticky left-0 h-20 top-0 flex px-4 pr-6 md:px-8 items-center `}>
                     <div />
                     <AutosizeInput
                         value={newFlowState.title}
                         onChange={(e) => {
                             newFlowService.dispatch({ type: "setTitle", payload: e.target.value })
                         }}
-                        placeholder="Flow title"
-                        inputStyle={{ backgroundColor: "rgb(249, 250, 251)", outline: "none"}}
-                        className={`placeholder-gray-700  text-black text-center text-2xl font-bold`}
+                        placeholder="Flow title..."
+                        inputStyle={{ backgroundColor: "#fff", outline: "none", fontWeight: "bold"}}
+                        className={`placeholder-gray-800  text-black text-center text-2xl font-bold`}
                     />
                 </div>
                 <div className="flex flex-col px-8 md:px-16">
-                <div className="mt-6">
+                <div className="mt-4">
                     <div>
                         <div className={`text-lg font-semibold mb-4 w-full text-center`}>Inputs</div>
                         <div className={`grid grid-cols-1 gap-y-4`}>
@@ -51,7 +51,7 @@ const newFlow = () => {
                             onClick={() => {
                                 newFlowService.addInput()
                             }}
-                            className={`w-12 h-12 mt-4 mr-4 p-2 rounded-full bg-gray-100 flex-shrink-0`}>
+                            className={`w-12 h-12 mt-4 mr-4 ml-2 p-2 rounded-full bg-gray-100 flex-shrink-0 border`}>
                             <Plus />
                         </button>
                     </div>
@@ -69,7 +69,7 @@ const newFlow = () => {
                             onClick={() => {
                                 newFlowService.addStep()
                             }}
-                            className={`w-12 h-12 mt-4 ml-1  mr-4 p-2 rounded-full bg-gray-100 flex-shrink-0`}>
+                            className={`w-12 h-12 mt-4 ml-2  mr-4 p-2 rounded-full bg-gray-100 flex-shrink-0 border`}>
                             <Plus />
                     </button>
                 </div>

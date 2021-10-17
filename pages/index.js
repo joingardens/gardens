@@ -16,9 +16,10 @@ export default function Index({ flows, flowItemsWithTools, actions }) {
   const flowArray = flows.map(flow => {
   const currentFlowItems = flowItemsWithTools.filter(flowItem => flowItem.flow == flow.id);
   const allToolTitles = [...new Set(currentFlowItems.map(item => item.job_tool.tool.tool))];
+  const allToolImages = [...new Set(currentFlowItems.map(item => item.job_tool.tool.logo_url))];
 
       return (
-        <PrettyBlock key={flow.id} 
+        <PrettyBlock key={flow.id} smallImage={allToolImages[0] ? allToolImages[0] : null}
       blockLink={'/flow/' + flow.id} blockBody={flow.flow}
       blockDescription={'Using ' + allToolTitles.toString().split(',').join(', ')} />
       )
@@ -37,8 +38,8 @@ export default function Index({ flows, flowItemsWithTools, actions }) {
 
   return (
   	<>
-    <LightHeroD heading="Perfect solutions for any use case" 
-    subheading="Flows are instructions for common tasks. Discover community flows and add your own - getting things done has never been easier!"
+    <LightHeroD heading="Step-by-step guides for work" 
+    subheading="Find useful guides and share your knowledge. Grow your garden."
       />
       <div className="flex flex-col lg:flex-row">
       <div className="w-full flex flex-col">

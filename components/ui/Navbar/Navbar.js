@@ -11,12 +11,14 @@ import useToast from '../../hooks/useToast';
 
 const Navbar = () => {
   const { user, signOut } = useUser();
-  const {service} = useContext(ModalsContext)
+  const {service} = useContext(ModalsContext);
+  const linkCta = (user ? '/new-flow' : '/signin');
 
   let listener = null;
-  const [scrollState, setScrollState] = useState("bg-transparent")
-  const [buttonState, setButtonState] = useState("bg-transparent text-white hover:bg-white hover:text-gray-900")
+  const [scrollState, setScrollState] = useState("bg-seaweed")
+  const [buttonState, setButtonState] = useState("bg-seaweed text-white hover:bg-white hover:text-gray-900")
   const [titleState, setTitleState] = useState("text-white font-bold")
+  const [ctaState, setCtaState] = useState("bg-white text-gray-900 hover:bg-gray-200 border border-gray-400")
   const {makeToast} = useToast()
 
   useEffect(() => {
@@ -25,13 +27,15 @@ const Navbar = () => {
       if (scrolled >= 10) {
         if (scrollState !== "bg-white bg-opacity-80 border") {
           setScrollState("bg-white bg-opacity-80 border")
+          setCtaState("bg-seaweed text-white hover:bg-white hover:text-gray-900 transition")
           setButtonState("bg-white text-gray-900 hover:bg-gray-200 border border-gray-400")
           setTitleState("text-gray-900 font-semibold")
         }
       } else {
-        if (scrollState !== "bg-transparent") {
-          setScrollState("bg-transparent")
-          setButtonState("bg-transparent text-white hover:bg-white hover:text-gray-900 transition")
+        if (scrollState !== "bg-seaweed") {
+          setScrollState("bg-seaweed")
+          setCtaState("bg-white text-gray-900 hover:bg-gray-200 border border-gray-400")
+          setButtonState("bg-seaweed text-white hover:bg-white hover:text-gray-900 transition")
           setTitleState("text-white font-bold")
         }
       }
@@ -58,7 +62,7 @@ const Navbar = () => {
         <div className="flex items-center justify-center">
               
               <Link href="/flows">
-                <a className={`mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded`}>Flows</a>
+                <a className={`mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded`}>Guides</a>
               </Link>
               <Link href="/tools">
                 <a className={`hidden sm:block mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded`}>Tools</a>
@@ -69,7 +73,7 @@ const Navbar = () => {
               </Link>*/}
               {user ? (
               <Link href="#">
-                <a className={`mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded text-base`} onClick={() => signOut()}>
+                <a className={`mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded`} onClick={() => signOut()}>
                   Sign out
                 </a>
               </Link>
@@ -78,28 +82,11 @@ const Navbar = () => {
               
               null
             )}
-            {user ? (
-              <button className="hidden md:inline-flex items-center bg-white border border-black py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-2 md:mt-0" 
- onClick={() => {
-      service.openModal("newFlow")
-    }}>
-      Submit a flow
-      <svg
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            className="w-4 h-4 ml-1"
-            viewBox="0 0 24 24"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-    </button>) : (<Link href="/signin">
-                <a className={`mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded`} onClick={() => signOut()}>
-                  Sign in
+            <Link href={`${linkCta}`}>
+                <a className={`mr-2.5 ${ctaState} py-1 px-2 focus:outline-none rounded`} onClick={() => signOut()}>
+                  + Add a guide
                 </a>
-              </Link>)}
+              </Link>
             {/*<SearchBar/>*/}
         </div>
         </nav>

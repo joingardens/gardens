@@ -2,11 +2,14 @@ import React from "react";
 import PropTypes from  "prop-types";
 import Logo from '../../icons/Logo'
 import Link from 'next/link';
+import { useUser } from '../../../utils/useUser';
 import { useContext } from 'react';
 import ModalsContext from '../../modals/modalsContext';
 
 function LightFooterA(props) {
-    const {service} = useContext(ModalsContext)
+    const {service} = useContext(ModalsContext);
+    const { user, signOut } = useUser();
+    const linkCta = (user ? '/new-flow' : '/signin');
 
 
   return (
@@ -38,7 +41,7 @@ function LightFooterA(props) {
               
               <Link href="/flows">
                 <a className="text-gray-600 hover:text-gray-800 font-medium" >
-                  Flows
+                  Guides
                 </a>
               </Link>
               <Link href="/tools">
@@ -58,26 +61,26 @@ function LightFooterA(props) {
               CONTRIBUTE
             </h3>
             <nav className="flex flex-col mb-10">
-              <Link href="/signin">
+              <Link href={`${linkCta}`}>
                 <a className="text-gray-600 hover:text-gray-800 font-medium" >
-                  Add a flow
+                  Add a guide
                 </a>
               </Link>
-              <Link href="/signin">
+              
+             {/*
+             <Link href="/signin">
                 <a className="text-gray-600 hover:text-gray-800 font-medium" >
                   Other ways to help
                 </a>
               </Link>
-             {/*
-             <button className="text-gray-600 hover:text-gray-800 text-center md:text-left w-full"
- onClick={() => {
-      service.openModal("newFlow")
-    }}>
-                  Submit a Flow
-    </button>
              */}
+             <Link href="/signin">
+                <a className="text-gray-600 hover:text-gray-800 font-medium" >
+                  Join the Community
+                </a>
+              </Link>
                 <a className="text-gray-600 hover:text-gray-800 font-medium" href="https://tally.so/r/wMOjXm" target="_blank">
-                  Gardens Network
+                  For organizations
                 </a>
             </nav>
           </div>
@@ -93,11 +96,6 @@ function LightFooterA(props) {
               <a href="https://cal.com/gardens/intro" target="_blank" className="text-gray-600 hover:text-gray-800 font-medium" >
                 Book a call
                 </a>
-                <Link href="/signin">
-                <a className="text-gray-600 hover:text-gray-800 font-medium" >
-                  Join the Community
-                </a>
-              </Link>
             </nav>
           </div>
         </div>

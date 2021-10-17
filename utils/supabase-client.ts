@@ -249,7 +249,7 @@ export const getAllFlowItems = async () => {
 export const getAllFlowItemsWithTools = async () => {
   const { data, error } = await supabase
     .from('flow_items')
-    .select('id, flow, job_tool(job, tool(id, tool))')
+    .select('id, flow, job_tool(job, tool(id, tool, logo_url))')
 
   if (error) {
     console.log(error.message);

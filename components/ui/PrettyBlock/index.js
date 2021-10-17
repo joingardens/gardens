@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from  "prop-types";
 import getRandomGradient from '../../../utils/getRandomGradient'
+import Image from 'next/image';
 
 function PrettyBlock(props) {
 
@@ -28,7 +29,7 @@ function PrettyBlock(props) {
             <path d="M22 4L12 14.01l-3-3"></path>
           </svg>*/}
           <div className="flex flex-col px-4 w-full">
-          <span className="title-font text-gray-700 text-md md:text-lg text-left">{shortBlockBody}</span>
+          <span className="title-font text-gray-700 text-md text-left">{shortBlockBody}</span>
           {props.blockDescription ? (
             <span className="py-1 font-semibold text-left text-gray-500">{props.blockDescription} <a href={props.blockDescriptionLinkHref}>
             {props.blockDescriptionLinkTitle ? (<span className="font-semibold underline">{props.blockDescriptionLinkTitle}</span>) : (null)}

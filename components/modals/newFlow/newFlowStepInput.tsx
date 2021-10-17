@@ -11,7 +11,8 @@ import ImageInput from "../../ui/ImageInput"
 const NewFlowStepInput = ({index, step}) => {
     const { newFlowService, newFlowState} = useContext(NewFlowContext)
     const [mounted, setMounted] = useState(false)
-    const [imagesEnabled, setImagesEnabled] = useState(false)
+    const [imagesEnabled, setImagesEnabled] = useState('hidden')
+    const [imageButtonEnabled, setImageButtonEnabled] = useState('block')
     const [taskDropdownState, setTaskDropdownState] = useState({
         loading: false,
         suggestions: [],
@@ -26,7 +27,8 @@ const NewFlowStepInput = ({index, step}) => {
     const debounceTask = useDebounce(step.task, 1000)
 
     const handleImagesEnabled = () => {
-        setImagesEnabled(!imagesEnabled);
+       (imagesEnabled == 'hidden') ? (setImagesEnabled('block')) : (setImagesEnabled('block'));
+       (imageButtonEnabled == 'block') ? (setImageButtonEnabled('hidden')) : (setImageButtonEnabled('block'));
     }
 
     const setStepImages = (images: File[]) => {
@@ -82,7 +84,7 @@ const NewFlowStepInput = ({index, step}) => {
     }, [step.tool])
 
     return (
-        <div className={`flex items-center -m-2 transition-all ${mounted ? "max-h-full opacity-100" : "max-h-0 opacity-20"}`}>
+        <div className={`flex items-center transition-all ${mounted ? "max-h-full opacity-100" : "max-h-0 opacity-20"}`}>
             <div className={`flex flex-wrap`}>
             <div className="w-full flex justify-between items-center ml-2 mb-2">
             <span className="font-semibold text-gray-900">
@@ -180,26 +182,11 @@ const NewFlowStepInput = ({index, step}) => {
                         </div>
                 </div>
             </div>
-            {imagesEnabled ? (
-                <div className={`mt-2 flex flex-wrap justify-between`}>
-                <ImageMap images={newFlowState.steps[index].images} setState={setStepImages}/>
-                <ImageInput state={newFlowState.steps[index].images} setState={setStepImages}/>
-                    
-            {/*useMemo(() => {
-                        return  <>
-                     <ImageMap images={newFlowState.steps[index].images} setState={setStepImages}/>
-                    <ImageInput state={newFlowState.steps[index].images} setState={setStepImages}/>
-                    </>
-                    
-            }, [newFlowState.steps[index].images])
-        */}
-
-            </div>) : (
-            <div>
-            <button onClick={handleImagesEnabled} className={`inline-flex items-center bg-white border border-gray-500 py-1 px-3 ml-2 my-4 focus:outline-none hover:bg-gray-200 rounded text-gray-500`}>
-                + Add images
-            </button>
-            </div>)}
+            <div className="my-1 ml-2 w-full">
+            <span className="text-gray-500">
+            Description
+            </span>
+            </div>
             <div className={`w-full border mr-3 bg-gray-50 rounded-md ml-2 py-2`}>
                 <TextareaAutosize
                     value={step.description}
@@ -209,6 +196,21 @@ const NewFlowStepInput = ({index, step}) => {
                     placeholder={"To create a page in Wordpress, do this..."}
                     minRows={3}
                 />
+            </div>
+                <div className={`${imagesEnabled} mt-2 flex flex-wrap justify-between`}>
+                {
+            useMemo(() => {
+                        return  <>
+                     <ImageMap images={newFlowState.steps[index].images} setState={setStepImages}/>
+                    <ImageInput state={newFlowState.steps[index].images} setState={setStepImages}/>
+                    </>
+                    
+            }, [newFlowState.steps[index].images])}
+            </div>
+            <div>
+            <button onClick={handleImagesEnabled} className={`${imageButtonEnabled} bg-white border bg-gray-50 py-1 px-3 ml-2 my-4 focus:outline-none hover:bg-gray-200 rounded text-gray-500`}>
+                + Add images
+            </button>
             </div>
             </div>
     </div>

@@ -1,7 +1,7 @@
 const ImageInput = ({setState, state}) => {
     return (
         <label>
-            <div className={`rounded-lg m-2 border grid place-items-center cursor-pointer bg-gray-50 w-36 h-20`}>
+            <div className={`rounded-lg m-2 border grid place-items-center cursor-pointer bg-gray-50 w-32 h-20`}>
                 <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24}>
       <path fill="none" d="M0 0h24v24H0z" />
       <path

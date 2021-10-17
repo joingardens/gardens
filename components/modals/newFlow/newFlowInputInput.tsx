@@ -47,13 +47,14 @@ const NewFlowInputInput = ({input, index}: Props) => {
     }, [debouncedValue, isOpen])
     return (
         <div 
-        className={`flex items-center -m-2 transition-all max-w-full w-full duration-300 ${mounted ? "max-h-full opacity-100" : "max-h-0 opacity-20"}`}>
-        <div className={`w-12 h-12 mr-4 p-2 hidden md:block rounded-full bg-gray-100 flex-shrink-0 m-2`}>
+        className={`flex items-center  transition-all max-w-full w-full duration-300 ${mounted ? "max-h-full opacity-100" : "max-h-0 opacity-20"}`}>
+        {/*<div className={`w-12 h-12 mr-4 p-2 hidden md:block rounded-full bg-gray-100 flex-shrink-0 m-2`}>
             <Gear/>
         </div>
+        */}
         <div className={`m-2 flex items-center relative w-full`}>
             <div className="flex flex-col flex-wrap w-full">
-            <div>
+            <div className="flex justify-between w-full pr-1">
             <AutosizeInput
             onFocus={() => {
                 setIsOpen(true)
@@ -67,7 +68,7 @@ const NewFlowInputInput = ({input, index}: Props) => {
             autoComplete={"off"}
             inputClassName={`border-none`}
             placeholderIsMinWidth
-            placeholder="Tomatos, garlic, salt, eggs"
+            placeholder="Brand assets"
             className={`px-4 mr-3 border py-2 rounded-md max-w-full bg-gray-50`}
             inputStyle={{ backgroundColor: "rgb(249, 250, 251)", outline: "none"}}
             type="text" />
@@ -94,7 +95,7 @@ const NewFlowInputInput = ({input, index}: Props) => {
                 onChange={(e) => {newFlowService.setInputDescription(e.target.value,index)}}
                 autoComplete={"off"}
                 className={`px-4 h-full rounded-md max-w-full bg-gray-50 w-full resize-none overflow-y-hidden focus:border-transparent`}
-                placeholder={"All the good stuff you can find in your fridge"}
+                placeholder={"Visuals, fonts, colors. Everything you need to design something"}
                 minRows={3}
             />
         </div>
