@@ -1,6 +1,7 @@
 import { OutputBlockData } from "@editorjs/editorjs";
 import { useEffect, useState } from "react";
 import { useUser } from "../../utils/useUser"
+import useToast from "../hooks/useToast";
 import writerService from "./writerService";
 
 const objectsEqual = (o1, o2) => 
@@ -12,23 +13,27 @@ const objectsEqual = (o1, o2) =>
 const arraysEqual = (a1, a2) => 
         a1.length === a2.length && a1.every((o, idx) => objectsEqual(o, a2[idx]));
 
-const useAutosave = (draftName: string, payload: OutputBlockData[]) => {
+const useAutosave = (draftName: string, payload: OutputBlockData[], draftId:string) => {
     const {user} = useUser()
     const [prevPayload, setPrevPayload] = useState(payload)
     const [trigger, setTrigger] = useState(0)
+    const {makeToast} = useToast()
 
     useEffect(() => {
-        console.log("autosave")
-        setTimeout(() => {
+        const timer = setTimeout(() => {
             setTrigger(trigger+1)
         }, 10000)
         if (!writerService.comparePayloads(prevPayload, payload)) {
             setPrevPayload(payload)
-            if (user) {
-                writerService.insertDraft(payload, user.id, draftName)
+            makeToast("Autosaved!", "succ", 3)
+            if (user && draftId) {
+                writerService.insertDraft(payload, user.id, draftName, draftId)
             }
         }
-    }, [trigger])
+        return () => {
+            clearTimeout(timer)
+        }
+    }, [trigger, draftId, user])
 }
 
 export default useAutosave

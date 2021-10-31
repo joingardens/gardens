@@ -20,7 +20,7 @@
     "body-scroll-lock": "^4.0.0-beta.0",
     "classnames": "2.2.6",
     "cuid": "^2.1.8",
-    "dayjs": "^1.10.5",
+    "dayjs": "^1.10.7",
     "html-react-parser": "^1.2.7",
     "markdown-it": "^12.2.0",
     "next": "10.0.5",

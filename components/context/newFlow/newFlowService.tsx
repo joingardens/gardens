@@ -342,7 +342,6 @@ export class NewFlowService extends SupabaseServiceClass {
         }
         console.log(dataArr)
         return dataArr
-
     }
 }
 

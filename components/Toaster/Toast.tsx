@@ -11,7 +11,7 @@ const Toast = ({toast} : {toast: IToast}) => {
     // }, [])
 
     return useMemo(() => {return (       
-    <div className={`transition-all duration-300 h-8 rounded-md p-2
+    <div className={`transition-all duration-300 h-10 rounded-md p-3
     ${toast.type === "error" && "bg-red-700 text-white"} 
     ${toast.type === "succ" && "bg-green-700 text-white"}
     ${toast.mounted ? "opacity-100" : "opacity-0"}`}>

@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import EditorJs from "react-editor-js";
-import { API, BlockAPI, OutputData} from "@editorjs/editorjs"
+import { API, BlockAPI, OutputBlockData, OutputData} from "@editorjs/editorjs"
 
-export const Editor = ({state, setState}) => {
+export const Editor = ({data, setState}) => {
   return (
     <div>
-      <EditorJs onChange={(_api:API, data) => {   
-          setState(data.blocks)
-      }}/>
+      <EditorJs  
+      data={{
+        blocks: data
+      }}
+      onChange={(api, data) => {
+        console.log(data.blocks)
+        setState(data.blocks)
+      }}
+      />
     </div>
   );
 };

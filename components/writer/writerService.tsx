@@ -1,4 +1,5 @@
 import { API, BlockAPI, OutputBlockData, OutputData} from "@editorjs/editorjs"
+import { NextRouter, Router } from "next/router";
 import { SupabaseServiceClass } from "../../utils/supabase-client"
 
 function sleep (time) {
@@ -35,15 +36,25 @@ export class WriterService extends SupabaseServiceClass {
         )
     }
 
-    async insertDraft(payload: OutputBlockData[], user: string, draftName: string) {
-        const {data, error} = await this.supabase.from("drafts").upsert({
+    async insertDraft(payload: OutputBlockData[], user: string, draftName: string, draftId: string) {
+        const {data, error} = await this.supabase.from("drafts").update({
             payload,
-            user,
-            draftName: draftName,
-            uniqueid: user+draftName
-        }, {onConflict: "uniqueid"})
-        console.log(data, error)
+            draftName,
+        }).match({id: draftId, user})
+        console.log(data)
         return data
+    }
+
+    async createNewDraft(user: string) {
+        const {data} = await this.supabase.from("drafts").insert({
+            user
+        })
+        console.log(data)
+        return data[0]
+    }
+
+    goToWriter(router: NextRouter, id: number) {
+        router.push(`/drafts/${id}`)
     }
 
     async getDraftbyId(id: number) {
@@ -55,8 +66,19 @@ export class WriterService extends SupabaseServiceClass {
         return arraysEqual(first, second)
     }
 
-    async initAutosave() {
-        
+    async deleteDraft(id:string, user: string) {
+        const {data} = await this.supabase.from("drafts").delete().eq("id", id).eq("user", user)
+        return data
+    }
+
+    async getDraftsbyUser(id: string, page: number, limit:number) {
+        const {data, error} = await this.supabase.from("drafts").select("draftName,created,id").eq("user", id).range((page-1) * limit, page * limit).order("created")
+        return data
+    }
+
+    async authDraft(draftId:number, userId:string) {
+        const {data} = await this.supabase.from("drafts").select("id,created,draftName,payload").eq("user", userId).eq("id", draftId)
+        return data[0]
     }
 
 

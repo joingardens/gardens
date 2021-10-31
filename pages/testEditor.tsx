@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
-import EditorJs from 'react-editor-js';
 import dynamic from 'next/dynamic'
 import { OutputBlockData } from '@editorjs/editorjs';
 import Writer from '../components/writer/writerService';
 import { useUser } from '../utils/useUser';
 import useAutosave from '../components/writer/useEditorAutosave';
 
-const EditorJsWithNoSSR = dynamic(() => import("../components/writer/NoSSREditor"), {
+export const EditorJsWithNoSSR = dynamic(() => import("../components/writer/NoSSREditor"), {
     ssr: false,
   });
   
@@ -16,15 +15,14 @@ const TestEditor = () => {
     const [editorState, setEditorState] = useState([])
     const [fetchedData, setFetchedData] = useState([])
     const {user} = useUser()
-    useAutosave("test", editorState)
 
     return (
         <>
-        <h2>
+        {/* <h2>
         Инпут
         </h2>
         <div className={`p-6 border-red-600 border-2`}>
-             <EditorJsWithNoSSR state={editorState} setState={setEditorState}/>
+             <EditorJsWithNoSSR data={editorState} setState={setEditorState}/>
         </div>
         <h2>
         Аутпут
@@ -52,7 +50,7 @@ const TestEditor = () => {
            setFetchedData(data.payload)
         }}>
             Fetch
-        </button>
+        </button> */}
         </>
     )
 }   
