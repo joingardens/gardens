@@ -10,8 +10,12 @@ const objectsEqual = (o1, o2) =>
             && Object.keys(o1).every(p => objectsEqual(o1[p], o2[p]))
         : o1 === o2;
 
-const arraysEqual = (a1, a2) => 
-        a1.length === a2.length && a1.every((o, idx) => objectsEqual(o, a2[idx]));
+const arraysEqual = (a1, a2) => {
+    if (a2)
+    a1.length === a2.length && a1.every((o, idx) => objectsEqual(o, a2[idx]));
+}
+    
+
 
 const useAutosave = (draftName: string, payload: OutputBlockData[], draftId:string) => {
     const {user} = useUser()
