@@ -37,10 +37,12 @@ export default function Tool({ jobTools, task, flows }) {
   const flowArray = flows.map(flow => {
   
       return (
+      <div className="bg-gray-100 hover:bg-gray-200">
         <SquareBlock key={flow.id} 
       ctaLink={'/flow/' + flow.id} ctaLinkTitle={'→ View'} 
       blockBody={flow.flow} 
        />
+       </div>
       )
     } );
   const currentJobGroup = null
@@ -79,12 +81,12 @@ export default function Tool({ jobTools, task, flows }) {
     <div className="-mb-20 -mt-20">
     <Title titleTitle={currentTask.job} />
     </div>
-    <div className="mt-24 pt-10">
-    <div className="flex flex-col lg:flex-row w-full items-center px-6 lg:px-12">
-    <div className="w-full lg:w-3/6">
+    <div className="mt-16 pt-10">
+    <div className="flex flex-col lg:flex-row w-full px-6 lg:px-12">
+    <div className="w-full lg:w-3/6 mt-2">
     <h2 className="lg:w-4/5 text-center mx-auto px-6 sm:text-2xl text-xl font-semibold text-gray-900">
-    Guides to follow</h2>
-    <div className="flex-col w-4/5 mx-auto mt-4">
+    Guides with this task</h2>
+    <div className="flex-col w-4/5 mx-auto mt-8">
     {flowArray}
     </div>
     </div>
@@ -92,7 +94,7 @@ export default function Tool({ jobTools, task, flows }) {
     <div className="w-full lg:w-2/6 lg:ml-24 mt-8 lg:mt-0">
     <h2 className="lg:w-4/5 text-center mx-auto px-6 sm:text-2xl text-xl font-semibold text-gray-900">
     Tools to use</h2>
-    <div className="flex-col w-full mt-4">
+    <div className="flex-col w-full mt-8">
     {listTools}
     </div>
     </div>
@@ -121,7 +123,7 @@ export async function getStaticProps(context) {
   const jobTools = await getJobToolsByTask(context.params.task_id);
   const jobToolIds = jobTools.map(jobTool => jobTool.id);
   const flowItems = await getFlowItemsByJobToolIds(jobToolIds);
-  const flowIds = flowItems.map(flowItem => flowItem.flow);
+  const flowIds = [...new Set(flowItems.map(flowItem => flowItem.flow))];
   const flows = await getFlowsByIds(flowIds);
   //const jobGroups = await getAllJobGroups();
   const task = await getTaskById(context.params.task_id);

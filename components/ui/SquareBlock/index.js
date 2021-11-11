@@ -14,16 +14,15 @@ function SquareBlock(props) {
 
   return (
     <>
+    <a href={props.ctaLink ? props.ctaLink : props.blockLink} className="text-gray-900" target="_blank">
     <div className={`my-2 w-full flex relative ${props.blockType ? ('bg-' + blockColor) : null}`}>
     <a className="absolute -top-48" id={props.blockId}/>
         <div className={`px-4 py-3 h-full w-full items-center flex flex-col`}>  
           <div className="flex w-full items-center">
           {props.smallImage ? (
             <div className="w-20 h-20 relative mr-4">
-            <a href={props.ctaLink ? props.ctaLink : props.blockLink} target="_blank">
             <Image src={props.smallImage} alt={props.smallImageAlt} 
             layout='fill' objectFit='contain' objectPosition='center center' />
-            </a>
             </div>) : null}
           <div className="flex flex-col w-11/12 mx-auto">
           <div className="flex items-center">
@@ -35,10 +34,9 @@ function SquareBlock(props) {
       </div>
       ) : null}
           <div className="flex flex-col">
-          <span className={`title-font font-${fontWeight} font-bold text-lg`}>
-          <a href={props.ctaLink ? props.ctaLink : props.blockLink} target="_blank" className="text-gray-900 no-underline">
+          <span className={`title-font font-${fontWeight} font-semibold text-lg`}>
           {props.blockBody}
-          </a></span>
+          </span>
           <a href="/models" target="_blank" className={`${typeColor} text-gray-900 no-underline font-${fontWeight}`}>
           <span>
           {((props.blockType == 'Open') ? 'Open-source' : (props.blockType == 'Fair') ? 'Fair-code' : (props.blockType) ? 'Closed-source' : null)} 
@@ -64,10 +62,7 @@ function SquareBlock(props) {
             <span className="text-red-500 font-bold">{props.orderLinkTitle}</span>
             </a>
           ) : props.ctaLink ? (
-          <a href={props.ctaLink} target="_blank" className="hover:underline">
             <span className="text-blue-500 font-bold">{props.ctaLinkTitle}</span>
-            </a>
-          
           ) : props.blockLink ? (
           <a href={props.blockLink} target="_blank" className="hover:underline">
           <span className="text-gray-400">{props.blockLinkTitle}</span>
@@ -78,6 +73,7 @@ function SquareBlock(props) {
           {props.bigImages}
           </div>
       </div>
+      </a>
       </>
   );
 }

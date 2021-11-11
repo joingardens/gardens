@@ -43,12 +43,12 @@ const Navbar = () => {
     <>
       <div className={`sticky top-0 ${scrollState} z-40 transition mx-auto flex flex-wrap px-2 py-2 flex-col md:flex-row items-center`}>
         <nav className="w-full flex flex-wrap items-center text-base justify-between">
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center bg-white border rounded ml-4 hover:bg-gray-200 transition">
         <Link href="/">
               <a className="title-font font-medium text-gray-900 rounded" aria-label="Logo">
-              <div className="flex items-center ml-4">
-              <Logo className="w-12 h-12 bg-white rounded-full shadow" />
-              <span className={`px-3 py-1 text-md sm:text-xl ${titleState}`}>Gardens</span>
+              <div className="flex items-center ml-2">
+              <Logo className="w-12 h-12 rounded-full bg-white" />
+              <span className={`px-4 py-1 text-md sm:text-xl ${titleState}`}>Gardens</span>
               </div>
               </a>
               </Link>
