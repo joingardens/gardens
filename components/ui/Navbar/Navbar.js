@@ -15,28 +15,22 @@ const Navbar = () => {
   const linkCta = (user ? '/new-flow' : '/signin');
 
   let listener = null;
-  const [scrollState, setScrollState] = useState("bg-seaweed")
-  const [buttonState, setButtonState] = useState("bg-seaweed text-white hover:bg-white hover:text-gray-900")
-  const [titleState, setTitleState] = useState("text-white font-bold")
-  const [ctaState, setCtaState] = useState("bg-white text-gray-900 hover:bg-gray-200 border border-gray-400")
+  const [scrollState, setScrollState] = useState("bg-gray-50 border")
+  const [buttonState, setButtonState] = useState("bg-white text-gray-900 hover:bg-gray-200 border border-gray-400")
+  const [titleState, setTitleState] = useState("text-gray-900 font-semibold")
+  const [ctaState, setCtaState] = useState("bg-seaweed text-white hover:bg-white hover:text-gray-900 transition")
   const {makeToast} = useToast()
 
   useEffect(() => {
     listener = document.addEventListener("scroll", e => {
       var scrolled = document.scrollingElement.scrollTop
       if (scrolled >= 10) {
-        if (scrollState !== "bg-white bg-opacity-80 border") {
-          setScrollState("bg-white bg-opacity-80 border")
-          setCtaState("bg-seaweed text-white hover:bg-white hover:text-gray-900 transition")
-          setButtonState("bg-white text-gray-900 hover:bg-gray-200 border border-gray-400")
-          setTitleState("text-gray-900 font-semibold")
+        if (scrollState !== "bg-white bg-opacity-80") {
+          setScrollState("bg-white bg-opacity-80")
         }
       } else {
-        if (scrollState !== "bg-seaweed") {
-          setScrollState("bg-seaweed")
-          setCtaState("bg-white text-gray-900 hover:bg-gray-200 border border-gray-400")
-          setButtonState("bg-seaweed text-white hover:bg-white hover:text-gray-900 transition")
-          setTitleState("text-white font-bold")
+        if (scrollState !== "bg-gray-50 border") {
+          setScrollState("bg-gray-50 border")
         }
       }
     })
@@ -47,14 +41,14 @@ const Navbar = () => {
 
   return (
     <>
-      <div className={`sticky top-0 ${scrollState} z-40 transition-all mx-auto flex flex-wrap px-2 py-2 flex-col md:flex-row items-center`}>
+      <div className={`sticky top-0 ${scrollState} z-40 transition mx-auto flex flex-wrap px-2 py-2 flex-col md:flex-row items-center`}>
         <nav className="w-full flex flex-wrap items-center text-base justify-between">
         <div className="flex items-center justify-center">
         <Link href="/">
               <a className="title-font font-medium text-gray-900 rounded" aria-label="Logo">
-              <div className="flex items-center">
-              <Logo className="w-12 h-12 bg-white rounded-full border border-gray-400" />
-              <span className={`px-3 text-md sm:text-xl ${titleState}`}>Gardens</span>
+              <div className="flex items-center ml-4">
+              <Logo className="w-12 h-12 bg-white rounded-full shadow" />
+              <span className={`px-3 py-1 text-md sm:text-xl ${titleState}`}>Gardens</span>
               </div>
               </a>
               </Link>

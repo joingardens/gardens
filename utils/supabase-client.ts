@@ -124,7 +124,7 @@ export const getJobToolsByTool = async (tool_id) => {
 export const getJobToolsByTask = async (task_id) => {
   const { data, error } = await supabase
     .from('jobs_tools')
-    .select('tool(id, tool, logo_url, section, category, model), instruction_link')
+    .select('id, tool(id, tool, logo_url, section, category, model), instruction_link')
     .eq('job', task_id)
     .order('tool');
 
@@ -171,6 +171,23 @@ export const getFlowById = async (flow_id) => {
     .from('flows')
     .select('*')
     .eq('id', flow_id)
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
+export const getFlowsByIds = async (flow_ids) => {
+  
+  const orFilterString = flow_ids.map(flowId => ('id.eq.'+flowId)).join()
+  
+  const { data, error } = await supabase
+    .from('flows')
+    .select('*')
+    .or(orFilterString)
 
   if (error) {
     console.log(error.message);
@@ -237,6 +254,23 @@ export const getAllFlowItems = async () => {
   const { data, error } = await supabase
     .from('flow_items')
     .select('*')
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
+export const getFlowItemsByJobToolIds = async (jobtool_ids) => {
+
+  const orFilterString = jobtool_ids.map(jobtoolId => ('job_tool.eq.'+jobtoolId)).join()
+  //console.log(orFilterString)
+  const { data, error } = await supabase
+    .from('flow_items')
+    .select('flow')
+    .or(orFilterString)
 
   if (error) {
     console.log(error.message);

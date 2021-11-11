@@ -38,6 +38,7 @@ export default function Index({ flows, flowItemsWithTools, actions }) {
 
   return (
   	<>
+    <div className="mt-16"></div>
     <LightHeroD heading="Step-by-step guides for work" 
     subheading="Find useful guides and share your knowledge. Grow your garden."
       />

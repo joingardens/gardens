@@ -79,8 +79,7 @@ export default function FlowPage({ products, jobs,
   	<>
     <div className="-mb-20 -mt-20">
     <Title titleTitle={'Flows'}
-    titleDescription={'Get an output following a sequence of tasks'} 
-    colorBg={getRandomGradient()} />
+    titleDescription={'Get an output following a sequence of tasks'}  />
     </div>
     <div className="flex space-between">
     <aside className="h-screen sticky top-0 w-1/5 hidden md:flex">
