@@ -31,7 +31,7 @@ export default function Tool({ jobGroups, jobTools, jobs, tool, flows }) {
   const uniqueGroups = [...new Set(filteredJobs.map(job => job.job_group))]; 
   const jobsByCategory = [...new Set(uniqueGroups.map(group => {
   	return {
-  		category: group ? jobGroups.find(item => item.id == group) : 'Default', 
+  		category: group ? jobGroups.find(item => item.id == group) : 'General', 
   		itemArray: filteredJobs.filter(item => {
   		if (item.job_group == group){
   			return item
@@ -68,7 +68,7 @@ export default function Tool({ jobGroups, jobTools, jobs, tool, flows }) {
     )
 
     let currentGroup = jobGroups.find(item => item.id == group)
-    let currentGroupTitle = currentGroup ? currentGroup.job_group : 'Default'
+    let currentGroupTitle = currentGroup ? currentGroup.job_group : 'General'
     groupArray.push(currentGroupTitle)
 
     return (

@@ -11,7 +11,7 @@ import { getJobToolsByTask, getFlowItemsByJobToolIds,
 import SquareBlock from '../../components/ui/SquareBlock';
 import getRandomGradient from '../../utils/getRandomGradient';
 
-export default function Tool({ jobTools, task, flows }) {
+export default function Task({ jobTools, task, flows }) {
 
   const router = useRouter()
    if (router.isFallback) {

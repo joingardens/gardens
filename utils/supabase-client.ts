@@ -182,7 +182,7 @@ export const getFlowById = async (flow_id) => {
 
 export const getFlowsByIds = async (flow_ids) => {
   
-  const orFilterString = flow_ids.map(flowId => ('id.eq.'+flowId)).join()
+  const orFilterString = flow_ids.map(flowId => ('id.eq.'+flowId)).join().toString();
   
   const { data, error } = await supabase
     .from('flows')
@@ -265,7 +265,7 @@ export const getAllFlowItems = async () => {
 
 export const getFlowItemsByJobToolIds = async (jobtool_ids) => {
 
-  const orFilterString = jobtool_ids.map(jobtoolId => ('job_tool.eq.'+jobtoolId)).join()
+  const orFilterString = jobtool_ids.map(jobtoolId => ('job_tool.eq.'+jobtoolId)).join().toString();
   //console.log(orFilterString)
   const { data, error } = await supabase
     .from('flow_items')
@@ -296,7 +296,7 @@ export const getAllFlowItemsWithTools = async () => {
 export const getAllFlows = async () => {
   const { data, error } = await supabase
     .from('flows')
-    .select('*')
+    .select('id, flow, job_group (id, job_group, emoji), created, user_public_profile!author(full_name)')
     .order('created')
 
   if (error) {

@@ -7,16 +7,17 @@ function SquareBlock(props) {
 
   const md = new MarkdownIt();
 
-  const blockColor = (props.blockType == 'Open') ? 'green-50' : (props.blockType == 'Fair') ? 'green-50' : (props.blockType == 'Exportable') ? 'gray-50' : 'gray-50';
+  const blockColor = (props.blockType == 'Open') ? 'green-50 hover:bg-green-100' : (props.blockType == 'Fair') ? 'green-50 hover:bg-green-100' : (props.blockType == 'Exportable') ? 'gray-50 hover:bg-gray-100' : 'gray-50 hover:bg-gray-100';
   const typeColor = (props.blockType == 'Open') ? 'text-green-500' : (props.blockType == 'Fair') ? 'text-green-500' : 'text-primary'
   const fontWeight = (props.blockType == 'Open') ? 'medium' : (props.blockType == 'Fair') ? 'medium' : (props.blockType == 'Closed') ? 'medium' : 'medium'
   const pillColor = getRandomGradient();
 
   return (
     <>
-    <a href={props.ctaLink ? props.ctaLink : props.blockLink} className="text-gray-900" target="_blank">
-    <div className={`my-2 w-full flex relative ${props.blockType ? ('bg-' + blockColor) : null}`}>
+    <div className={`my-2 w-full flex relative ${props.blockType ? ('border border-gray-300 bg-' + blockColor) : null}`}>
     <a className="absolute -top-48" id={props.blockId}/>
+    <a href={props.ctaLink ? props.ctaLink : props.blockLink} className="text-gray-900 w-full h-full" target="_blank">
+
         <div className={`px-4 py-3 h-full w-full items-center flex flex-col`}>  
           <div className="flex w-full items-center">
           {props.smallImage ? (
@@ -37,7 +38,7 @@ function SquareBlock(props) {
           <span className={`title-font font-${fontWeight} font-semibold text-lg`}>
           {props.blockBody}
           </span>
-          <a href="/models" target="_blank" className={`${typeColor} text-gray-900 no-underline font-${fontWeight}`}>
+          <a href="/models" target="_blank" className={`${typeColor} text-gray-900 hover:underline no-underline font-${fontWeight}`}>
           <span>
           {((props.blockType == 'Open') ? 'Open-source' : (props.blockType == 'Fair') ? 'Fair-code' : (props.blockType) ? 'Closed-source' : null)} 
           </span>
@@ -53,7 +54,7 @@ function SquareBlock(props) {
           </div>
           {props.blockDescription ? (
             <div dangerouslySetInnerHTML={{__html: md.render(props.blockDescription)}} 
-            className="py-1 pr-2" /> 
+            className="py-1 pr-2 prose" /> 
             ) : (null)}
           </div>
           {(props.orderLink || props.ctaLink || props.blockLink) ? (<div className="flex w-2/6 justify-center items-center">
@@ -72,8 +73,8 @@ function SquareBlock(props) {
           </div>
           {props.bigImages}
           </div>
+          </a>
       </div>
-      </a>
       </>
   );
 }

@@ -22,7 +22,7 @@ function PrettyBlock(props) {
     <>
     <div className={`my-4 ml-2 flex ${blockHeight} w-full md:w-auto`}>
     <a href={props.blockLink} className={'font-semibold w-full items-center text-center mr-4'}>
-        <div className={`border border-gray-300 shadow hover:bg-gray-100 transition rounded h-full w-full md:${blockWidth} items-center justify-center flex `}>
+        <div className={`border border-black hover:bg-gray-100 transition rounded h-full w-full md:${blockWidth} items-center justify-center flex `}>
           <div className="flex items-center bg-white w-full h-full py-2 bg-opacity-50 text-ce">
           {/*<svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" className="w-6 h-6 flex-shrink-0 mr-4" viewBox="0 0 24 24">
             <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
@@ -36,6 +36,7 @@ function PrettyBlock(props) {
             </a>
             </span>
             ) : (null)}  
+            {props.blockSubtitle ? (<span className="text-gray-900 text-left font-normal">{props.blockSubtitle}</span>) : null}
             </div>
             {props.smallImage ? (
             <div className="w-20 h-20 relative mr-4">

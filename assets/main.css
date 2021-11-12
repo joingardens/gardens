@@ -5,13 +5,3 @@
 @import './components.css';
 
 @tailwind utilities;
-
-@layer base {
-	li {
-		@apply list-disc;
-		@apply ml-4;
-	}
-	a {
-		@apply font-semibold text-blue-600;
-	}
-}
