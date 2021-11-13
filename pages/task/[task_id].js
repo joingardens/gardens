@@ -6,12 +6,12 @@ import ListItem from '../../components/ui/ListItem';
 import TextList from '../../components/ui/TextList';
 import { Comments } from '../../components/Comments';
 import Title from '../../components/ui/Title';
-import { getActiveProductsWithPrices, getJobToolsByTask, 
-	getAllJobGroups, getAllJobTools, getTaskById } from '../../utils/supabase-client';
+import { getJobToolsByTask, getFlowItemsByJobToolIds,
+	getAllJobTools, getFlowsByIds, getTaskById } from '../../utils/supabase-client';
 import SquareBlock from '../../components/ui/SquareBlock';
 import getRandomGradient from '../../utils/getRandomGradient';
 
-export default function Tool({ products, jobGroups, jobTools, task }) {
+export default function Task({ jobTools, task, flows }) {
 
   const router = useRouter()
    if (router.isFallback) {
@@ -24,17 +24,29 @@ export default function Tool({ products, jobGroups, jobTools, task }) {
   const { task_id } = router.query
   let groupArray = [];
   let filteredTools = [];
+  let filteredTasks = [];
   let currentTask = task ? task[0] : null
   if (currentTask != null){
-  jobTools.map(jobTool => { 
+  jobTools.map(jobTool => {
     if (jobTool.tool) {
       filteredTools.push(jobTool.tool)
     }
   });
    
   const uniqueGroups = [...new Set(filteredTools.map(tool => tool.category))];
+  const flowArray = flows.map(flow => {
   
-  const currentJobGroup = jobGroups.find(jobGroup => jobGroup.id == currentTask.job_group) 
+      return (
+      <div className="bg-gray-100 hover:bg-gray-200">
+        <SquareBlock key={flow.id} 
+      ctaLink={'/flow/' + flow.id} ctaLinkTitle={'→ View'} 
+      blockBody={flow.flow} 
+       />
+       </div>
+      )
+    } );
+  const currentJobGroup = null
+  //jobGroups.find(jobGroup => jobGroup.id == currentTask.job_group) 
   
   const listTools = filteredTools.map(item => {
        let currentJobTool = jobTools.find(jobTool => jobTool.tool.id == item.id)
@@ -67,22 +79,22 @@ export default function Tool({ products, jobGroups, jobTools, task }) {
       description={currentTask.job + ' with different tools following our step-by-step instructions.'}
     />
     <div className="-mb-20 -mt-20">
-    <Title titleTitle={currentTask.job} titleDescription={currentJobGroup ? (currentJobGroup.job_group) : 'Default'}
-     colorBg={getRandomGradient()} />
+    <Title titleTitle={currentTask.job} />
     </div>
-    <div className="mt-24 pt-10">
-    <div className="flex flex-col lg:flex-row w-full items-center px-6 lg:px-12">
-    <div className="w-full lg:w-3/6">
-    <p className="lg:w-4/5 mx-auto sm:text-2xl lg:text-center text-xl text-gray-900 leading-relaxed text-base">
-    {currentTask.description ? currentTask.description : "There's nothing in here... for now. Add a description or start the discussion in comments below!"}
-    </p>
-    <div className="border lg:w-4/5 mx-auto mt-8" />
+    <div className="mt-16 pt-10">
+    <div className="flex flex-col lg:flex-row w-full px-6 lg:px-12">
+    <div className="w-full lg:w-3/6 mt-2">
+    <h2 className="lg:w-4/5 text-center mx-auto px-6 sm:text-2xl text-xl font-semibold text-gray-900">
+    Guides with this task</h2>
+    <div className="flex-col w-4/5 mx-auto mt-8">
+    {flowArray}
+    </div>
     </div>
     {(typeof listTools !== 'undefined' && (listTools.length > 0)) ? (
     <div className="w-full lg:w-2/6 lg:ml-24 mt-8 lg:mt-0">
     <h2 className="lg:w-4/5 text-center mx-auto px-6 sm:text-2xl text-xl font-semibold text-gray-900">
     Tools to use</h2>
-    <div className="flex-col w-full mt-4">
+    <div className="flex-col w-full mt-8">
     {listTools}
     </div>
     </div>
@@ -108,9 +120,12 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  const products = await getActiveProductsWithPrices();
   const jobTools = await getJobToolsByTask(context.params.task_id);
-  const jobGroups = await getAllJobGroups();
+  const jobToolIds = jobTools.map(jobTool => jobTool.id);
+  const flowItems = await getFlowItemsByJobToolIds(jobToolIds);
+  const flowIds = [...new Set(flowItems.map(flowItem => flowItem.flow))];
+  const flows = await getFlowsByIds(flowIds);
+  //const jobGroups = await getAllJobGroups();
   const task = await getTaskById(context.params.task_id);
 
   if (!task) {
@@ -121,10 +136,9 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      products,
       task,
-      jobGroups,
-      jobTools
+      jobTools,
+      flows
     },
     revalidate: 60
   };

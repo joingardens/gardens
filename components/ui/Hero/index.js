@@ -8,13 +8,13 @@ function LightHeroD(props) {
   //const blockColor = getRandomGradient();
 
   return (
-    <section className={`text-gray-700 body-font bg-seaweed pt-16 -mt-24 pb-2 md:pb-4`}>
+    <section className={`text-gray-700 body-font pt-16 -mt-24 pb-2 md:pb-4`}>
       <div className="container mx-auto flex px-5 pt-12 md:flex-row flex-col items-center">
         <div className="lg:flex-grow md:w-1/2 flex flex-col md:items-start mb-8 md:mb-0 items-center text-center">
-          <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium underline font-bold text-center text-white w-full">
+          <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium underline font-bold text-center text-gray-900 w-full">
             {props.heading}
           </h1>
-          <p className="mb-2 md:mb-8 leading-relaxed w-full text-center text-white font-semibold">
+          <p className="mb-2 md:mb-8 leading-relaxed w-full text-center text-gray-900 font-semibold">
             {props.subheading}
             <br/>
             {props.subheading1}

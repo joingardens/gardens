@@ -38,12 +38,13 @@ export default function Index({ flows, flowItemsWithTools, actions }) {
 
   return (
   	<>
+    <div className="mt-16"></div>
     <LightHeroD heading="Step-by-step guides for work" 
     subheading="Find useful guides and share your knowledge. Grow your garden."
       />
       <div className="flex flex-col lg:flex-row">
       <div className="w-full flex flex-col">
-      <h2 className="text-center md:text-left md:pl-8 text-2xl font-semibold py-4 mt-6 px-5">Recent flows</h2>
+      <h2 className="text-center md:text-left md:pl-8 text-2xl font-semibold py-4 mt-6 px-5">Recent guides</h2>
     <div className="flex flex-wrap px-5 w-full justify-start mb-24">
     {flowArray}
     </div>

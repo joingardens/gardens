@@ -6,12 +6,12 @@ import ListItem from '../../components/ui/ListItem';
 import TextList from '../../components/ui/TextList';
 import { Comments } from '../../components/Comments';
 import Title from '../../components/ui/Title';
-import { getActiveProductsWithPrices, getJobToolsByTool, 
-	getAllJobGroups, getAllJobs, getAllJobTools, getToolById } from '../../utils/supabase-client';
+import { getJobToolsByTool, 
+	getAllJobGroups, getAllJobs, getAllJobTools, getToolById, getFlowItemsByJobToolIds, getFlowsByIds } from '../../utils/supabase-client';
 import SquareBlock from '../../components/ui/SquareBlock';
 import getRandomGradient from '../../utils/getRandomGradient';
 
-export default function Tool({ products, jobGroups, jobTools, jobs, tool }) {
+export default function Tool({ jobGroups, jobTools, jobs, tool, flows }) {
 
   const router = useRouter()
    if (router.isFallback) {
@@ -31,13 +31,24 @@ export default function Tool({ products, jobGroups, jobTools, jobs, tool }) {
   const uniqueGroups = [...new Set(filteredJobs.map(job => job.job_group))]; 
   const jobsByCategory = [...new Set(uniqueGroups.map(group => {
   	return {
-  		category: group ? jobGroups.find(item => item.id == group) : 'Default', 
+  		category: group ? jobGroups.find(item => item.id == group) : 'General', 
   		itemArray: filteredJobs.filter(item => {
   		if (item.job_group == group){
   			return item
   		} 
   	})} 
   }))];
+   const flowArray = flows.map(flow => {
+  
+      return (
+      <div className="bg-gray-100 hover:bg-gray-200">
+        <SquareBlock key={flow.id} 
+      ctaLink={'/flow/' + flow.id} ctaLinkTitle={'→ View'} 
+      blockBody={flow.flow} 
+       />
+       </div>
+      )
+    } );
 
   	const listJobs = uniqueGroups.map((group) => {
   	const filteredArray = jobsByCategory.filter(item => {
@@ -57,7 +68,7 @@ export default function Tool({ products, jobGroups, jobTools, jobs, tool }) {
     )
 
     let currentGroup = jobGroups.find(item => item.id == group)
-    let currentGroupTitle = currentGroup ? currentGroup.job_group : 'Default'
+    let currentGroupTitle = currentGroup ? currentGroup.job_group : 'General'
     groupArray.push(currentGroupTitle)
 
     return (
@@ -78,11 +89,20 @@ export default function Tool({ products, jobGroups, jobTools, jobs, tool }) {
     <Title titleTitle={currentTool.tool} titleDescription={currentTool.category}
      colorBg={getRandomGradient()} />
     </div>
-    <div className="mt-24 pt-10 px-12 lg:px-24">
+    {currentTool.description ? (
+    <div className="mt-6 pt-24 md:pt-10 px-12 lg:px-24">
+    <div className="border lg:w-3/5 mx-auto mb-8 mt-4" />
     <p className="lg:w-3/5 mx-auto sm:text-2xl lg:text-center text-xl text-gray-900 leading-relaxed text-base">
-    {currentTool.description ? currentTool.description : "There's nothing in here... for now. Add a description or start the discussion in comments below!"}
+    {currentTool.description}
     </p>
-    <div className="border lg:w-3/5 mx-auto mt-8" />
+    <div className="border lg:w-3/5 mx-auto mb-4 mt-8" />
+    </div>) : null}
+    <div className="w-full lg:w-3/6 mx-auto mt-8 py-4">
+    <h2 className="lg:w-4/5 text-center mx-auto px-6 sm:text-2xl text-xl font-semibold text-gray-900">
+    Step-by-step guides for {currentTool.tool}</h2>
+    <div className="flex-col w-4/5 mx-auto mt-8">
+    {flowArray}
+    </div>
     </div>
     <div className="flex space-between">
     {(typeof listJobs !== 'undefined' && (listJobs.length > 0)) ? (
@@ -124,8 +144,11 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  const products = await getActiveProductsWithPrices();
   const jobTools = await getJobToolsByTool(context.params.tool_id);
+  const jobToolIds = jobTools.map(jobTool => jobTool.id);
+  const flowItems = await getFlowItemsByJobToolIds(jobToolIds);
+  const flowIds = [...new Set(flowItems.map(flowItem => flowItem.flow))];
+  const flows = await getFlowsByIds(flowIds);
   const jobGroups = await getAllJobGroups();
   const jobs = await getAllJobs();
   const tool = await getToolById(context.params.tool_id)
@@ -138,11 +161,11 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      products,
       jobs,
       jobGroups,
       jobTools,
-      tool
+      tool, 
+      flows
     },
     revalidate: 60
   };

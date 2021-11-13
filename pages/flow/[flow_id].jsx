@@ -31,7 +31,7 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
     const currentInput = input.input;
 
       return (
-      <div className="w-full px-6">
+      <div className="w-full">
     <SquareBlock key={currentInput.id + '-input'} 
     blockBody={currentInput.input}
     blockDescription={input.description}
@@ -75,11 +75,10 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
     )
 
   const allOutputTitles = [...new Set(outputs.map(output => output.title))];
-
   const itemOutputs = outputs.map(output => {
   
       return (
-      <Link href={"/output/" + output.id}>
+      <Link href={"/output/" + output.output.id}>
       <div key={output.id + '-output'} className="max-w-sm px-6">
     <span className="text-gray-900 font-bold text-2xl">{output.output.output}</span>
     <p className="mt-2">{output.description}</p>
@@ -97,55 +96,58 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
       title={generatedTitle}
       description={generatedTitle + ' ' + generatedDescription}
     />
-    <div className="-mb-20 -mt-20">
-    <Title titleTitle={generatedTitle} 
-    titleDescription={generatedDescription}
-     colorBg={getRandomGradient()} />
+    <section class="text-gray-600 body-font">
+  <div class="container mx-auto flex lg:px-48 py-4 mt-8 md:flex-row flex-col items-center">
+    <div class="flex-grow flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+      <h1 class="title-font sm:text-4xl text-3xl mb-4 font-semibold text-gray-900">{generatedTitle}
+        <br class="hidden lg:inline-block"/>
+      </h1>
+      <p class="leading-relaxed">{generatedDescription}</p>
     </div>
-    <div className="mt-24 pt-10">
+    <div class="w-64 md:w-48 md:py-4 md:px-2 flex md:flex-col justify-center items-center">
+      <div className="text-lg w-24 md:w-32 mr-4 md:mr-0 text-center">Created by</div>
+      <div className="relative h-16 w-16 md:h-32 md:w-32 my-2" >
+      <Image className="rounded-full" layout="fill" objectFit="cover" alt={user[0].full_name} src={user[0].avatar_url}/>
+      </div>
+      <div className="flex flex-col items-center md:ml-0 ml-4">
+      <h2 className="font-bold text-lg">{user[0].full_name}</h2>
+      <span>{user[0].username}</span>
+      </div>
+    </div>
+  </div>
+</section>
+    <div className="mt-4 pt-10">
     <div className="flex flex-col lg:flex-row w-full items-center px-6 lg:px-12">
     <div className="w-full lg:w-3/5 mx-auto lg:mt-0">
-    {(user[0]) ? (
-      <div class="flex flex-col items-center 
-      relative md:absolute md:top-0 md:right-0 md:mt-64 md:mr-4 lg:mr-8 z-30 px-12 py-4 mb-6 bg-gray-50 rounded w-64 mx-auto">
-      <h3 className="font-medium text-lg">Author</h3>
-      <div className="relative h-32 w-24 mb-2">
-      <Image src={user[0].avatar_url}
-      layout='fill'
-      objectFit='contain' />
-      </div>
-      <h3 className="font-semibold text-lg">{user[0].full_name}</h3>
-      <span className="text-gray-700 font-light">{user[0].username}</span>
-      </div>
-      ) : null}
     {(inputs && inputs.length != 0) ? (
-    <div className="md:max-w-xl md:pr-28 lg:pr-0 lg:max-w-full md:ml-0 lg:mx-auto z-20">
-    <h2 className="md:w-5/6 text-center mx-auto px-6 sm:text-2xl text-xl font-semibold text-gray-900">
-    Use</h2>
-    <div className="flex flex-col items-center justify-center w-full mx-auto lg:w-5/6 mt-4">
+    <div className="lg:pr-0 lg:max-w-full md:ml-0 lg:mx-auto z-20">
+    <h2 className="px-9 sm:text-2xl text-center text-xl font-semibold text-gray-900 bg-gray-50 py-1">
+    You will need</h2>
+    <div className="flex flex-col items-start justify-center w-full lg:w-5/6 mt-4">
     {itemInputs}
     </div>
     </div>) : null}
-    <div className="mx-auto w-24 flex justify-center items-center mt-8">
+    {/*<div className="mx-auto w-24 flex justify-center items-center mt-8">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13 16.172l5.364-5.364 1.414 1.414L12 20l-7.778-7.778 1.414-1.414L11 16.172V4h2v12.172z"/></svg>
-    </div>
+    </div>*/}
     <div className="py-8">
-    <h2 className="lg:w-4/5 text-center mx-auto px-6 sm:text-2xl text-xl font-semibold text-gray-900">
-    To do this</h2>
+    <h2 className="px-9 sm:text-2xl text-center text-xl font-semibold text-gray-900 bg-gray-50 py-1">
+    Step-by-step instructions</h2>
     <div className="flex-col w-full mt-4">
     {itemElements}
     </div>
-    <div className="mx-auto w-24 flex justify-center items-center mt-8">
+    {/*<div className="mx-auto w-24 flex justify-center items-center mt-8">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13 16.172l5.364-5.364 1.414 1.414L12 20l-7.778-7.778 1.414-1.414L11 16.172V4h2v12.172z"/></svg>
+    </div>*/}
     </div>
-    </div>
-    <h2 className="text-center mx-auto px-6 mb-6 sm:text-2xl text-xl font-semibold text-gray-900">
-    And get a...</h2>    
-    <div className={`${getRandomGradient()} px-6 max-w-md mx-auto py-6 shadow border border-black rounded hover:shadow-lg transition`}>
-    <div className="flex items-center justify-center w-full mx-auto ">
+    <h2 className="px-9 sm:text-2xl text-center text-xl font-semibold text-gray-900 bg-gray-50 py-1">
+    The result</h2>    
+    <div className={`bg-white mt-4 px-6 max-w-md mx-auto py-6 shadow border border-black rounded hover:bg-gray-100 cursor-pointer`}>
+    <div className="flex flex-col items-center justify-center w-full mx-auto ">
     {itemOutputs}
     </div>
     </div>
+    <div className="mx-auto text-center text-gray-600 font-semibold mt-2">↑ Press to view all guides for this result</div>
     </div>
     </div>
     <div className="py-24">
