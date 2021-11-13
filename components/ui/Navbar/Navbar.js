@@ -87,7 +87,13 @@ const Navbar = () => {
                   + Add a guide
                 </a>
               </Link>
-            {/*<SearchBar/>*/}
+            <button 
+            onClick={() => {
+              service.openModal("search")
+            }}
+            className={`mr-2.5 ${ctaState} py-1 px-2 focus:outline-none rounded`}>
+              Open search
+            </button>
         </div>
         </nav>
       </div>
