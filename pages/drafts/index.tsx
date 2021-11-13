@@ -17,7 +17,6 @@ const DraftsPage = () => {
     const [page, setPage] = useState(1)
 
     const fetchDrafts = async (page) => {
-        console.log(user.id)
         const newDrafts = await writerService.getDraftsbyUser(user.id, page, limit)
         if (newDrafts) {
             setDrafts([...drafts, ...newDrafts])
@@ -30,14 +29,18 @@ const DraftsPage = () => {
 
     useEffect(() => {
         if (user) {
-            console.log(user)
             fetchDrafts(page)
         }
     }, [user ? user.id : null])
 
-    useEffect(() => {
-        console.log(drafts)
-    }, [drafts])
+    const deleteDraft = (id:number) => {
+        writerService.deleteDraft(id, user.id)
+        .then((res) => {
+            console.log(drafts)
+            console.log(res)
+            setDrafts(drafts.filter(a => a.id !== res.id))
+        })
+    }
 
     return (
         <div className={`p-6`}>
@@ -68,6 +71,7 @@ const DraftsPage = () => {
             <div className={`grid grid-cols-1 gap-5`}>
                 {drafts.map(a => {
                     return  <DraftCard 
+                    deleteDraft={deleteDraft}
                     draftName={a.draftName}
                     created={a.created}
                     id={a.id}

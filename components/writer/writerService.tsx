@@ -70,9 +70,9 @@ export class WriterService extends SupabaseServiceClass {
         return arraysEqual(first, second)
     }
 
-    async deleteDraft(id:string, user: string) {
+    async deleteDraft(id:number, user: string) {
         const {data} = await this.supabase.from("drafts").delete().eq("id", id).eq("user", user)
-        return data
+        return data[0]
     }
 
     async getDraftsbyUser(id: string, page: number, limit:number) {
@@ -84,6 +84,7 @@ export class WriterService extends SupabaseServiceClass {
         const {data} = await this.supabase.from("drafts").select("id,created,draftName,payload").eq("user", userId).eq("id", draftId)
         return data[0]
     }
+
 
 
 
