@@ -22,7 +22,8 @@ type IModalState = {
 
 const initialState:IModalState = {
   newFlow: false,
-  search: false
+  search: false,
+  newItem: false
 }
 
 type IAction = 
