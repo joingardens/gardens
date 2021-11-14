@@ -43,10 +43,10 @@ const DraftsPage = () => {
     }
 
     return (
-        <div className={`p-6`}>
+        <div className={`p-6 mt-4`}>
             <h1 className={`mb-7 flex justify-between`}>
                 <div className={`text-2xl `}>
-                    Your Drafts!
+                    Your Drafts
                 </div>
                 <button 
                 onClick={async (e) => {
@@ -58,12 +58,9 @@ const DraftsPage = () => {
                         makeToast("Not logged in", "error", 3)
                     }
                 }}
-                className={`flex items-center hover:shadow transition-all px-3`}>
-                    <div className={`w-8 h-8 mr-1`}>
-                        <Plus/>
-                    </div>
+                className={`flex items-center bg-gray-50 rounded border border-black hover:bg-gray-100 transition-all px-3`}>
                     <div>
-                        Add new!
+                        + New Draft
                     </div>
                 </button>
 

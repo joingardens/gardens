@@ -3,7 +3,7 @@ import { useReducer } from "react";
 import { Reducer } from "../context/newFlow/newFlowReducer";
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
-export type IModals = "newFlow" | "search"
+export type IModals = "newFlow" | "search" | "newItem"
 
 type ContextProps = {
   state: IModalState,

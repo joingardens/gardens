@@ -38,7 +38,13 @@ function LightFooterA(props) {
               DISCOVER
             </h3>
             <nav className="flex flex-col mb-10">
-              
+              {user ? (
+                <Link href="/drafts">
+                <a className="text-gray-600 hover:text-gray-800 font-medium" >
+                  Drafts
+                </a>
+              </Link>
+              ) : null}
               <Link href="/flows">
                 <a className="text-gray-600 hover:text-gray-800 font-medium" >
                   Guides

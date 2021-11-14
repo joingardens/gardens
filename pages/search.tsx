@@ -53,8 +53,10 @@ const Search = () => {
                     return <Link
                     href={`/${res.type}/${res.id}`}
                     passHref={true}
+
                     >
-                        <a className={`w-full border border-gray-200 hover:bg-gray-200 mb-2`} href="
+                        <a className={`w-full border border-gray-200 hover:bg-gray-200 mb-2`} 
+                        href="
                         ">
                         <SquareBlock key={`${res.type}/${res.id}`} 
                          blockBody={res.name} 

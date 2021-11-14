@@ -58,7 +58,7 @@ const Navbar = () => {
             onClick={() => {
               service.openModal("search")
             }}
-            className={`inline-flex items-center ${buttonState} py-1 px-2 mr-2  focus:outline-none rounded text-base mt-2 md:mt-0`}>
+            className={`inline-flex items-center ${buttonState} py-1 px-2 mr-2  focus:outline-none rounded text-base`}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15z"/></svg>
             </button>
               <Link href="/flows">
@@ -67,27 +67,37 @@ const Navbar = () => {
               <Link href="/tools">
                 <a className={`hidden sm:block mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded`}>Tools</a>
               </Link>
-              {/*
-              <Link href="/account">
-                <a className="mr-2.5 bg-white py-1 px-2 focus:outline-none hover:bg-gray-200 rounded text-base">Account</a>
-              </Link>*/}
+              {!user ? (
+                <Link href={`${linkCta}`}>
+                <a className={`mr-2.5 ${ctaState} py-1 px-2 focus:outline-none rounded font-bold`} onClick={() => signOut()}>
+                  {user ? ('+ New') : ('Join us')}
+                </a>
+              </Link>
+              ) : null}
               {user ? (
+            <>
+            <button 
+            onClick={() => {
+              service.openModal("newItem")
+            }}
+            className={`inline-flex items-center ${ctaState} py-1 px-2 mr-2  focus:outline-none rounded font-bold`}>
+            + New
+            </button>
               <Link href="#">
-                <a className={`mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded`} onClick={() => signOut()}>
+                <a className={`text-gray-600 absolute top-0 right-0 mt-16 mr-4 bg-white rounded px-0.5 border border-gray-300 hover:bg-gray-100`} onClick={() => signOut()}>
                   Sign out
                 </a>
               </Link>
-               
+               </>
             ) : (
-              
-              null
+            null
             )}
-            <Link href={`${linkCta}`}>
-                <a className={`mr-2.5 ${ctaState} py-1 px-2 focus:outline-none rounded`} onClick={() => signOut()}>
-                  + Add a guide
-                </a>
+              {/*
+              <Link href="/account">
+                <a className="mr-2.5 bg-white py-1 px-2 focus:outline-none hover:bg-gray-200 rounded text-base">Account</a>
               </Link>
-        </div>
+            */}
+            </div>
         </nav>
       </div>
       </>

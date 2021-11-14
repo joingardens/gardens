@@ -33,7 +33,7 @@ const SearchModal = () => {
                     onClick={() => {
                         service.closeModal("search")
                     }}
-                    className={`w-6 h-6 text-red-700 cursor-pointer ml-4`}>
+                    className={`w-6 h-6 text-gray-600 cursor-pointer ml-4`}>
                         <Cross/>
                     </div>
                 </div>
