@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import useDebounce from "../components/hooks/useDebounce"
 import { SupabaseServiceClass } from "../utils/supabase-client"
 import Link from "next/link"
+import SquareBlock from '../components/ui/SquareBlock';
 
 class SearchService extends SupabaseServiceClass {
     async searchByString(string:string) {
@@ -37,37 +38,31 @@ const Search = () => {
     }, [debouncedSearchString])
 
     return (
-        <div className={``}>
+        <div className={`w-full flex flex-col`}>
             <input 
             value={searchString}
             onChange={(E) => {
                 setSearchString(E.target.value)
             }}
-            className={`mb-5 w-full border border-black h-10 px-5`}
+            className={`mb-5 w-full h-12 px-5 text-lg`}
             type="text" 
+            placeholder="Type to search for posts and tools..."
             name="" 
             id="" />
-            <div className={`grid grid-cols-1 gap-2`}>
                 {searchResults.map((res) => {
                     return <Link
                     href={`/${res.type}/${res.id}`}
                     passHref={true}
                     >
-                        <a className={`w-full p-2 border bg-indigo-500 grid grid-cols-3 text-white`} href="
+                        <a className={`w-full border border-gray-200 hover:bg-gray-200 mb-2`} href="
                         ">
-                        <div>
-                            {res.name}
-                        </div>
-                        <div>
-                            {res.type}
-                        </div>
-                        <div>
-                            {res.id}
-                        </div>
+                        <SquareBlock key={`${res.type}/${res.id}`} 
+                         blockBody={res.name} 
+                         blockDescription={res.type}
+                        />
                         </a>
                     </Link>
                 })}
-            </div>
         </div>
     )
 }

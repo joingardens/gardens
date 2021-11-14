@@ -27,19 +27,16 @@ const SearchModal = () => {
                     transition-all duration-300 transform origin-center
                     pb-10 overflow-x-hidden  p-4
                     `}>
-                <div className={`w-full flex justify-between min-w-full mb-8`}>
-                    <div>
-                        Search
-                    </div>
+                <div className={`w-full flex min-w-full mb-8`}>
+                <Search/>
                     <div 
                     onClick={() => {
                         service.closeModal("search")
                     }}
-                    className={`w-6 h-6 text-red-700 cursor-pointer`}>
+                    className={`w-6 h-6 text-red-700 cursor-pointer ml-4`}>
                         <Cross/>
                     </div>
                 </div>
-                <Search/>
             </div>
         </ModalOverlay>
     )
