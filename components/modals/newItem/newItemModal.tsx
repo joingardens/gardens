@@ -29,11 +29,11 @@ const NewItemModal = () => {
                     `}>
                 <div className="mt-4" />
                 <div className={`flex flex-col justify-center items-center h-full`}>
-                <PrettyBlock key={'new-guide'} smallImage={"https://nbygyyaygsxxesvjjcwa.supabase.in/storage/v1/object/public/public/seedling-line.png"}
-      blockLink={'/new-flow'} blockBody={'New Guide'}
+                <PrettyBlock key={'new-guide'} 
+      blockLink={'/new-flow'} blockBody={'New Guide'} smallImage={"https://nbygyyaygsxxesvjjcwa.supabase.in/storage/v1/object/public/public/seedling-line.png"}
       blockDescription={"Show how it's done with a step-by-step guide"} flexibleHeight={true} />
-                <PrettyBlock key={'new-post'} smallImage={"https://nbygyyaygsxxesvjjcwa.supabase.in/storage/v1/object/public/public/newspaper-line.png"}
-      blockLink={'/drafts'} blockBody={'New Draft'}
+                <PrettyBlock key={'new-post'} 
+      blockLink={'/drafts'} blockBody={'New Draft'} smallImage={"https://nbygyyaygsxxesvjjcwa.supabase.in/storage/v1/object/public/public/newspaper-line.png"}
       blockDescription={'Share opinions, thoughts, or just a snippet of text'} flexibleHeight={true} />
                     <div 
                     onClick={() => {
