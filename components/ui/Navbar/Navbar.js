@@ -84,7 +84,7 @@ const Navbar = () => {
             + New
             </button>
               <Link href="#">
-                <a className={`text-gray-600 absolute top-0 right-0 mt-16 mr-4 bg-white rounded px-0.5 border border-gray-300 hover:bg-gray-100`} onClick={() => signOut()}>
+                <a className={`text-gray-600 absolute top-0 right-0 mt-20 mr-4 bg-white rounded px-0.5 border border-gray-300 hover:bg-gray-100`} onClick={() => signOut()}>
                   Sign out
                 </a>
               </Link>

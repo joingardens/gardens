@@ -10,9 +10,10 @@ export const Editor = ({data, setState}) => {
         blocks: data
       }}
       onChange={(api, data) => {
-        console.log(data.blocks)
+        //console.log(data.blocks)
         setState(data.blocks)
       }}
+      placeholder="Start typing here..."
       />
     </div>
   );

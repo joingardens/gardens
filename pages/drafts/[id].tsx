@@ -50,26 +50,31 @@ const DraftPage = () => {
 
     
     return (
-        <div className={`p-6`}>
+        <div className={`p-6 w-full flex flex-col justify-center`}>
+        <div className="flex items-center justify-center w-full">
             {!loading && 
+                <div className="max-w-full mt-12 flex w-full text-center">
                 <AutosizeInput
                     value={title}
                     onChange={(e) => {
                         setTitle(e.target.value)
                     }}
-                    placeholder={"Your title here"}
-                />    
+                    placeholder={"Name your draft..."}
+                    className="text-xl mx-auto"
+                    inputStyle={{maxWidth: "20rem"}}
+                />
+                </div>    
             }
             <button
-            className={`ml-4`}
+            className={`absolute top-0 left-0 ml-8 mt-20 border border-green-300 hover:bg-green-50 rounded py-1 px-2`}
             onClick={() => {
                 writerService.insertDraft(payload, user.id, title, query.id as any)
             }}
             >
                 Save
             </button>
-
-            <div>
+            </div>
+            <div className="p-4 mt-4 w-full bg-gray-50">
             {!loading && <EditorJsWithNoSSR
             data={payload}
             setState={setPayload}
