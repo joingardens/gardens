@@ -10,7 +10,7 @@
   <p align="center">
     A platform to discover and write guides/work processes
     <br />
-    This README is a work in progress. Stay tuned!
+    This README is a work in progress. Stay tuned for more!
   </p>
 </p>
 
