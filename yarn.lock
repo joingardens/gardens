@@ -201,6 +201,11 @@
     "tiny-warning" "^1.0.3"
     "tslib" "^2.3.0"
 
+"@sentry/types@^6.11.0":
+  "integrity" "sha512-zBw5gPUsofXUSpS3ZAXqRNedLRBvirl3sqkj2Lez7X2EkKRgn5D8m9fQIrig/X3TsKcXUpijDW5Buk5zeCVzJA=="
+  "resolved" "https://registry.npmjs.org/@sentry/types/-/types-6.15.0.tgz"
+  "version" "6.15.0"
+
 "@stripe/stripe-js@1.11.0":
   "integrity" "sha512-SDNZKuETBEVkernd1tq8tL6wNfVKrl24Txs3p+4NYxoaIbNaEO7mrln/2Y/WRcQBWjagvhDIM5I6+X1rfK0qhQ=="
   "resolved" "https://registry.npmjs.org/@stripe/stripe-js/-/stripe-js-1.11.0.tgz"
@@ -1845,6 +1850,11 @@
   "resolved" "https://registry.npmjs.org/fast-json-stable-stringify/-/fast-json-stable-stringify-2.1.0.tgz"
   "version" "2.1.0"
 
+"fflate@^0.4.1":
+  "integrity" "sha512-FJqqoDBR00Mdj9ppamLa/Y7vxm+PRmNWA67N846RvsoYVMKB4q3y/de5PA7gUmRMYK/8CMz2GDZQmCRN1wBcWA=="
+  "resolved" "https://registry.npmjs.org/fflate/-/fflate-0.4.8.tgz"
+  "version" "0.4.8"
+
 "figgy-pudding@^3.5.1":
   "integrity" "sha512-0btnI/H8f2pavGMN8w40mlSKOfTK2SVJmBfBeVIj3kNw0swwgzyRq0d5TJVOwodFmtvpPeWPN/MCcfuWF0Ezbw=="
   "resolved" "https://registry.npmjs.org/figgy-pudding/-/figgy-pudding-3.5.2.tgz"
@@ -2894,6 +2904,13 @@
   "resolved" "https://registry.npmjs.org/next-tick/-/next-tick-1.0.0.tgz"
   "version" "1.0.0"
 
+"next-use-posthog@^1.16.0":
+  "integrity" "sha512-nEv+0c/m06/uImJTZ8llg+Pr5thMOyGEjKzXZK31UqVf+/bhbsG4mDFP4yJyDC02+U3tb1c3wW/IN0XY7Kn9lw=="
+  "resolved" "https://registry.npmjs.org/next-use-posthog/-/next-use-posthog-1.16.0.tgz"
+  "version" "1.16.0"
+  dependencies:
+    "posthog-js" "1.16.0"
+
 "next@10.0.5":
   "integrity" "sha512-yr7ap2TLugf0aMHz+3JoKFP9CCkFE+k6jCfdUymORhptjLYZbD3YGlTcUC1CRl+b5Phlbl7m/WUIPde0VcguiA=="
   "resolved" "https://registry.npmjs.org/next/-/next-10.0.5.tgz"
@@ -3755,6 +3772,15 @@
     "nanoid" "^3.1.16"
     "source-map" "^0.6.1"
 
+"posthog-js@1.16.0":
+  "integrity" "sha512-7gE4fDSCD7wzdr+Jb/dOIqUubsc4ahnyJYXKudDF+LcuhGX8qP8wRj8WA6JtyQDS1mqSH3Y+AwOWzfC9W8UIMQ=="
+  "resolved" "https://registry.npmjs.org/posthog-js/-/posthog-js-1.16.0.tgz"
+  "version" "1.16.0"
+  dependencies:
+    "@sentry/types" "^6.11.0"
+    "fflate" "^0.4.1"
+    "rrweb-snapshot" "^1.1.7"
+
 "prebuild-install@^6.0.0":
   "integrity" "sha512-h2ZJ1PXHKWZpp1caLw0oX9sagVpL2YTk+ZwInQbQ3QqNd4J03O6MpFNmMTJlkfgPENWqe5kP0WjQLqz5OjLfsw=="
   "resolved" "https://registry.npmjs.org/prebuild-install/-/prebuild-install-6.0.0.tgz"
@@ -3977,7 +4003,7 @@
     "use-composed-ref" "^1.0.0"
     "use-latest" "^1.0.0"
 
-"react@17.0.1":
+"react@^16.13.1 || ^17", "react@17.0.1":
   "integrity" "sha512-lG9c9UuMHdcAexXtigOZLX8exLWkW0Ku29qPRU8uhF2R9BN96dLCt0psvzPLlHc5OWkgymP3qwTRgbnw5BKx3w=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.1.tgz"
   "version" "17.0.1"
@@ -4229,6 +4255,11 @@
   dependencies:
     "hash-base" "^3.0.0"
     "inherits" "^2.0.1"
+
+"rrweb-snapshot@^1.1.7":
+  "integrity" "sha512-31u0PtpM6qzEww7PajYLM9X0Nf2UA/arFA2tEFTnAVNfxX2TL12BifQYdX0l4fMtu5rnJia4GDiQO9Gwf7pIAg=="
+  "resolved" "https://registry.npmjs.org/rrweb-snapshot/-/rrweb-snapshot-1.1.10.tgz"
+  "version" "1.1.10"
 
 "run-queue@^1.0.0", "run-queue@^1.0.3":
   "integrity" "sha1-6Eg5bwV9Ij8kOGkkYY4laUFh7Ec="
