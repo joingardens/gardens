@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import '../assets/main.css';
 import '../assets/chrome-bug.css';
-
 import Layout from '../components/Layout';
 import { UserContextProvider } from '../utils/useUser';
 import { ModalsContextProvider } from '../components/modals/modalsContext';

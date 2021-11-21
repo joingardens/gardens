@@ -4727,7 +4727,7 @@
   dependencies:
     "dequal" "2.0.2"
 
-"tailwindcss@>=2.0.0", "tailwindcss@2.0.2":
+"tailwindcss@2.0.2":
   "integrity" "sha512-nO9JRE1pO7SF9RnYAl6g7uzeHdrmKAFqNjT9NtZUfxqimJZAOOLOEyIEUiMq12+xIc7mC2Ey3Vf90XjHpWKfbw=="
   "resolved" "https://registry.npmjs.org/tailwindcss/-/tailwindcss-2.0.2.tgz"
   "version" "2.0.2"
