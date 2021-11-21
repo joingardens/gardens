@@ -12,7 +12,7 @@ import { FC } from 'react';
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
 
-  usePostHog(process.env.POSTHOG_KEY, { api_host: process.env.POSTHOG_HOST })
+  usePostHog(process.env.NEXT_PUBLIC_POSTHOG_KEY, { api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST })
 
   useEffect(() => {
     document.body.classList?.remove('loading');
