@@ -1,10 +1,16 @@
 import React from "react";
 import PropTypes from  "prop-types";
-import Logo from '../../icons/Logo'
+import Logo from '../../icons/Logo';
+import FacebookIcon from "../../icons/Facebook";
+import InstagramIcon from "../../icons/Instagram";
+import TwitterIcon from "../../icons/Twitter";
+import PinterestIcon from "../../icons/Pinterest";
+import TikTokIcon from "../../icons/TikTok";
 import Link from 'next/link';
 import { useUser } from '../../../utils/useUser';
 import { useContext } from 'react';
 import ModalsContext from '../../modals/modalsContext';
+
 
 function LightFooterA(props) {
     const {service} = useContext(ModalsContext);
@@ -16,6 +22,8 @@ function LightFooterA(props) {
     <footer className="text-gray-600 body-font">
 
       <div className="w-full px-5 py-12 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col bg-gray-50 shadow-inner">
+        <div className="flex flex-col">
+        <div className="flex flex-col md:flex-row justify-center items-center">
         <div className="w-48 flex-shrink-0 md:mx-0 mx-auto">
           <a href="" className="w-full h-full title-font font-medium items-center md:justify-start justify-center text-gray-900">
             <div className="flex items-center justify-center w-full pr-4">
@@ -29,6 +37,25 @@ function LightFooterA(props) {
            Grow your garden.
           </p>
           </div>
+          </div>
+          <div className="flex items=center justify-between mx-auto my-3 md:my-2 w-48">
+          <a href="https://twitter.com/joingardens" target="_blank">
+          <TwitterIcon/>
+          </a>
+          <a href="https://www.instagram.com/joingardens/" target="_blank">
+          <InstagramIcon/>
+          </a>
+          <a href="https://pin.it/6Im3O5a" target="_blank">
+          <PinterestIcon/>
+          </a>
+          <a href="https://www.facebook.com/joingardens/" target="_blank">
+          <FacebookIcon/>
+          </a>
+          <a href="https://www.tiktok.com/@joingardens?" target="_blank">
+          <TikTokIcon/>
+          </a>
+          </div>
+         </div>
         <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
           <div className="lg:w-1/4 md:w-1/2 w-full px-4">
             
@@ -87,6 +114,9 @@ function LightFooterA(props) {
               </Link>
                 <a className="text-gray-600 hover:text-gray-800 font-medium" href="https://tally.so/r/wMOjXm" target="_blank">
                   For organizations
+                </a>
+                <a className="text-gray-600 hover:text-gray-800 font-medium" href="https://github.com/joingardens/gardens/" target="_blank">
+                  Open-Source
                 </a>
             </nav>
           </div>
