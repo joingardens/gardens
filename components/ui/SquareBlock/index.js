@@ -38,11 +38,10 @@ function SquareBlock(props) {
           <span className={`title-font font-${fontWeight} font-semibold text-lg`}>
           {props.blockBody}
           </span>
-          <a href="/models" target="_blank" className={`${typeColor} text-gray-900 hover:underline no-underline font-${fontWeight}`}>
+          {/*<a href="/models" target="_blank" className={`${typeColor} text-gray-900 hover:underline no-underline font-${fontWeight}`}>*/}
           <span>
           {((props.blockType == 'Open') ? 'Open-source' : (props.blockType == 'Fair') ? 'Fair-code' : (props.blockType) ? 'Closed-source' : null)} 
           </span>
-          </a>
           {props.blockDescriptionLinkTitle ? (
             <span>
             <a href={props.blockLink} target="_blank" className="no-underline font-medium text-gray-900"> 
