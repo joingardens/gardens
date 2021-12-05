@@ -16,7 +16,7 @@ function PrettyBlock(props) {
   return (str.substr(0, str.lastIndexOf(separator, maxLen)) + '...');
   }
 
-  let shortBlockBody = shorten(props.blockBody, 32);
+  let shortBlockBody = shorten(props.blockBody, 42);
 
   return (
     <>
@@ -31,7 +31,7 @@ function PrettyBlock(props) {
           <div className="flex flex-col px-2 w-full">
           <span className="title-font text-gray-700 text-md text-left">{shortBlockBody}</span>
           {props.blockDescription ? (
-            <span className="py-1 font-semibold text-left text-gray-500">{props.blockDescription} <a href={props.blockDescriptionLinkHref}>
+            <span className="py-1 font-semibold text-left text-gray-500 text-sm">{props.blockDescription} <a href={props.blockDescriptionLinkHref}>
             {props.blockDescriptionLinkTitle ? (<span className="font-semibold underline">{props.blockDescriptionLinkTitle}</span>) : (null)}
             </a>
             </span>

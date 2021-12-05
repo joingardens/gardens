@@ -15,6 +15,12 @@ export class SupabaseServiceClass {
   }
 }
 
+export async function signInWithGoogle() {
+  const { user, session, error } = await supabase.auth.signIn({
+    provider: 'google',
+  })
+}
+
 export const findInputsByString = async (string) => {
   const {data} = await supabase
   .from("inputs")

@@ -12,7 +12,20 @@ import PrettyBlock from '../components/ui/PrettyBlock';
 export default function Flows({ flows, flowItemsWithTools }) {
 
   let groupArray = []
-  const uniqueGroups = [...new Set(flows.map(flow => flow.job_group))];
+  //const uniqueGroups = [...new Set(flows.map(flow => flow.job_group))];
+
+  const uniqueGroups = [];
+  const map = new Map();
+  for (const flow of flows){
+    if(!map.has(flow.job_group.id)){
+      map.set(flow.job_group.id, true);
+      uniqueGroups.push({
+        id: flow.job_group.id,
+        job_group: flow.job_group.job_group
+      });
+    }
+  };
+  console.log(uniqueGroups)
   const listFlows = uniqueGroups.map((group) => {
     let sortedItemArray = [];
     if (group){

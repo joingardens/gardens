@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { signInWithGoogle } from '../utils/supabase-client';
 
+import GoogleButton from 'react-google-button'
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import Logo from '../components/icons/Logo';
@@ -78,6 +80,11 @@ const SignUp = () => {
           >
             Sign up
           </Button>
+
+          <GoogleButton style={{width: '100%', marginTop: '1rem'}}
+          type="light" label="Sign up with Google"
+           onClick={() => { signInWithGoogle() }}
+            />
         </div>
 
         <span className="pt-1 text-center text-sm">

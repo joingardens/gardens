@@ -1,9 +1,9 @@
 .root {
-  @apply bg-accents-0 text-secondary cursor-pointer inline-flex px-10 rounded-sm leading-6  transition ease-in-out duration-150 shadow-sm font-semibold text-center justify-center uppercase py-4 border border-transparent items-center;
+  @apply text-gray-900 shadow-md border-gray-400 cursor-pointer inline-flex px-10 rounded-sm leading-6  transition ease-in-out duration-150 shadow-sm font-semibold text-center justify-center uppercase py-4 border  items-center;
 }
 
 .root:hover {
-  @apply bg-accents-1 text-secondary border border-secondary;
+  @apply text-black border border-secondary;
 }
 
 .root:focus {
@@ -11,7 +11,7 @@
 }
 
 .root[data-active] {
-  @apply bg-accents-0;
+  @apply shadow;
 }
 
 .loading {
@@ -19,12 +19,12 @@
 }
 
 .slim {
-  @apply py-2 transform-none normal-case;
+  @apply py-2 transform-none normal-case h-12;
 }
 
 .disabled,
 .disabled:hover {
-  @apply text-accents-4 border-accents-2 bg-accents-1 cursor-not-allowed;
+  @apply text-gray-900 border-accents-2 cursor-not-allowed;
   filter: grayscale(1);
   -webkit-transform: translateZ(0);
   -webkit-perspective: 1000;

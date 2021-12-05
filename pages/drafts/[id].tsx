@@ -74,7 +74,7 @@ const DraftPage = () => {
                 Save
             </button>
             </div>
-            <div className="p-4 mt-4 w-full bg-gray-50">
+            <div className="p-4 mt-4 w-full">
             {!loading && <EditorJsWithNoSSR
             data={payload}
             setState={setPayload}

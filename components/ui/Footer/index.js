@@ -132,6 +132,11 @@ function LightFooterA(props) {
               <a href="https://cal.com/gardens/intro" target="_blank" className="text-gray-600 hover:text-gray-800 font-medium" >
                 Book a call
                 </a>
+                <div className="my-2 mx-auto md:mx-0 w-12 bg-gray-200 h-0.5" />
+              <Link href="/privacy">
+              Privacy Policy</Link>
+              <Link href="/terms">
+              Terms</Link>
             </nav>
           </div>
         </div>

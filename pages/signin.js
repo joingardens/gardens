@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { signInWithGoogle } from '../utils/supabase-client';
 
+import GoogleButton from 'react-google-button'
 import Button from '../components/ui/Button';
 import GitHub from '../components/icons/GitHub';
 import Input from '../components/ui/Input';
@@ -89,6 +91,10 @@ const SignIn = () => {
               >
                 Send magic link
               </Button>
+              <GoogleButton style={{width: '100%', marginTop: '1rem'}}
+          type="light" 
+           onClick={() => { signInWithGoogle() }}
+            />
             </form>
           )}
 
@@ -135,7 +141,6 @@ const SignIn = () => {
               }.`}
             </a>
           </span>
-
           <span className="pt-1 text-center text-sm">
             <span className="text-accents-7">Don't have an account?</span>
             {` `}
