@@ -34,9 +34,6 @@ export default function Action({ action }) {
     <Appsmith 
     appsrc={currentAction.appsrc} />
     </div>
-    <div className="py-24">
-    <Comments postId={parseInt('555' + action_id)} />
-    </div>
     </>
     )}
   }
@@ -44,7 +41,12 @@ export default function Action({ action }) {
 export async function getStaticPaths() {
   const allActionIds = await getAllActionIds();
   let actionPaths = [];
-  let actionIds = allActionIds.map(actionId => actionPaths.push({params: {action_id: actionId.id.toString()}}))
+  let actionIds = allActionIds.map(actionId =>
+  {
+    if (!actionId.isInternal){
+      actionPaths.push({params: {action_id: actionId.id.toString()}})
+    }
+  })
 
   return {
     paths: actionPaths,

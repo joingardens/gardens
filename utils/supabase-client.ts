@@ -60,7 +60,7 @@ export const getAllJobs = async () => {
 export const getAllActions = async () => {
   const { data, error } = await supabase
     .from('actions')
-    .select('id, action, appsrc')
+    .select('id, action, appsrc, isInternal')
 
   if (error) {
     console.log(error.message);
@@ -73,7 +73,7 @@ export const getAllActions = async () => {
 export const getAllActionIds = async () => {
   const { data, error } = await supabase
     .from('actions')
-    .select('id')
+    .select('id, isInternal')
 
   if (error) {
     console.log(error.message);

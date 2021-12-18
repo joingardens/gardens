@@ -75,8 +75,22 @@ export class WriterService extends SupabaseServiceClass {
         return data[0]
     }
 
+    async publishDraft(id:number, user: string) {
+        const {data} = await this.supabase.from("drafts").update({
+            isPublished: true
+        }).match({id: id, user})
+        return data
+    }
+
+    async unpublishDraft(id:number, user: string) {
+        const {data} = await this.supabase.from("drafts").update({
+            isPublished: false
+        }).match({id: id, user})
+        return data
+    }
+
     async getDraftsbyUser(id: string, page: number, limit:number) {
-        const {data, error} = await this.supabase.from("drafts").select("draftName,created,id").eq("user", id).range((page-1) * limit, page * limit).order("created")
+        const {data, error} = await this.supabase.from("drafts").select("draftName,created,id,isPublished").eq("user", id).range((page-1) * limit, page * limit).order("created")
         return data
     }
 

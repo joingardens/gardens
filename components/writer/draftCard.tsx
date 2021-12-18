@@ -11,13 +11,17 @@ interface DraftCardProps {
     draftName?: string,
     created: string,
     id: number,
+    isPublished: boolean,
     deleteDraft: (id:number) => void
+    publishDraft: (id:number) => void
+    unpublishDraft: (id:number) => void
 }
 
 
 
-const DraftCard = ({draftName, created, id, deleteDraft}: DraftCardProps) => { 
+const DraftCard = ({draftName, created, id, isPublished, deleteDraft, publishDraft, unpublishDraft}: DraftCardProps) => { 
     const {push} = useRouter()
+    console.log(isPublished)
     return (
         <div 
         onClick={() => {
@@ -28,14 +32,36 @@ const DraftCard = ({draftName, created, id, deleteDraft}: DraftCardProps) => {
                 <div className={`text-xl mb-2`}>
                 <h2>{draftName ? (draftName) : 'Untitled'}</h2>
                 </div>
+                <div className="h-8">
+                {(isPublished ? (
+                    <button
+                onClick={(e) => {
+                    e.stopPropagation()
+                    unpublishDraft(id)
+                }} className="border border-yellow-300 hover:bg-yellow-100 rounded px-4 h-full mr-4"
+                >
+                Make private
+                </button>
+                ) : (
+                    <button
+                onClick={(e) => {
+                    e.stopPropagation()
+                    publishDraft(id)
+                }} className="border border-green-300 hover:bg-green-100 rounded px-4 h-full mr-4"
+                >
+                Make public
+                </button>
+                ))}
+                
                 <button
                 onClick={(e) => {
                     e.stopPropagation()
                     deleteDraft(id)
-                }} className="border border-red-300 hover:bg-red-100 rounded px-4"
+                }} className="border border-red-300 hover:bg-red-100 rounded px-4 h-full"
                 >
                 Delete
                 </button>
+                </div>
             </div>
 
                 <div className="text-gray-600 text-sm">

@@ -41,9 +41,25 @@ const DraftsPage = () => {
             setDrafts(drafts.filter(a => a.id !== res.id))
         })
     }
+    const publishDraft = (id:number) => {
+        writerService.publishDraft(id, user.id)
+        .then((res) => {
+            console.log(drafts)
+            console.log(res)
+            alert("Your draft was published! Open to share it with the world")
+        })
+    }
+    const unpublishDraft = (id:number) => {
+        writerService.unpublishDraft(id, user.id)
+        .then((res) => {
+            console.log(drafts)
+            console.log(res)
+            alert("Your draft was unpublished! Only you can access it now")
+        })
+    }
 
     return (
-        <div className={`p-6 mt-4`}>
+        <div className={`p-6 mt-12`}>
             <h1 className={`mb-7 flex justify-between`}>
                 <div className={`text-2xl `}>
                     Your Drafts
@@ -69,6 +85,9 @@ const DraftsPage = () => {
                 {drafts.map(a => {
                     return  <DraftCard 
                     deleteDraft={deleteDraft}
+                    publishDraft={publishDraft}
+                    unpublishDraft={unpublishDraft}
+                    isPublished={a.isPublished}
                     draftName={a.draftName}
                     created={a.created}
                     id={a.id}
