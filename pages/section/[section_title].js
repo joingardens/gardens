@@ -118,7 +118,7 @@ export async function getStaticPaths() {
   let sectionTitles = [];
   allSections.map(section => {
     if (section){
-      sectionTitles.push({params: {section_title: section.toString()}})
+      sectionTitles.push({params: {section_title: section.section.toString()}})
     }
     
   })
