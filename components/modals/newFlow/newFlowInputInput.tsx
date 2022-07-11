@@ -47,15 +47,22 @@ const NewFlowInputInput = ({input, index}: Props) => {
     }, [debouncedValue, isOpen])
     return (
         <div 
-        className={`flex items-center  transition-all max-w-full w-full duration-300 ${mounted ? "max-h-full opacity-100" : "max-h-0 opacity-20"}`}>
+        className={`flex items-center transition-all max-w-full w-full duration-300 ${mounted ? "max-h-full opacity-100  bg-gray-50" : "max-h-0 opacity-20"}`}>
         {/*<div className={`w-12 h-12 mr-4 p-2 hidden md:block rounded-full bg-gray-100 flex-shrink-0 m-2`}>
             <Gear/>
         </div>
         */}
         <div className={`m-2 flex items-center relative w-full`}>
             <div className="flex flex-col flex-wrap w-full">
+            <div className="flex w-full">
+            <div className="flex flex-col w-full">
+            <div className="mb-1 mt-1 px-4 w-full">
+                    <span className="text-gray-500">
+                    {'Input #' + (index + 1)}
+                    </span>
+            </div>
             <div className="flex justify-between w-full pr-1">
-            <AutosizeInput
+            <input
             onFocus={() => {
                 setIsOpen(true)
             }}
@@ -66,13 +73,10 @@ const NewFlowInputInput = ({input, index}: Props) => {
             value={input.input}
             onChange={(e) => {newFlowService.setInputInput(e.target.value, index)}}
             autoComplete={"off"}
-            inputClassName={`border-none`}
-            placeholderIsMinWidth
             placeholder="Brand assets"
-            className={`px-4 mr-3 border py-2 rounded-md max-w-full bg-gray-50`}
-            inputStyle={{ backgroundColor: "rgb(249, 250, 251)", outline: "none"}}
+            className={`px-4 mr-3 py-2 rounded-md w-full bg-gray-50`}
             type="text" />
-            <div className={`absolute left-0 z-20 top-10`}>
+            <div className={`absolute left-0 z-20 top-16`}>
                 <div className={`absolute ${isOpen && input.input ? "opacity-100 scale-100 visible" : "opacity-0 scale-75 invisible"} rounded-md overflow-y-auto transform origin-top-left w-40 top-1 left-0 max-h-20 shadow-md bg-white  transition-all duration-300 `}>
                     {loading ? <div className={`px-2 py-2`}>...loading</div> : suggestion && suggestion.map(suggestion => {
                         return <button onClick={() => {setIsOpen(false); 
@@ -81,20 +85,27 @@ const NewFlowInputInput = ({input, index}: Props) => {
                     })}
                 </div>
             </div>
+            </div>
+            </div>
             <button 
         onClick={() => {
             newFlowService.removeInput(index)
         }}
-        className={`w-5 h-5 text-red-600 opacity-60 hover:opacity-100`}>
+        className={`w-5 h-5 text-gray-600 mr-2 mt-2 opacity-60 hover:opacity-100`}>
             <Cross/>
         </button>
             </div>
-        <div className={`w-full border mr-3 bg-gray-50 rounded-md mt-3 py-2`}>
+        <div className={`w-full bg-gray-50 rounded-md mt-2 pb-2 pt-2`}>
+        <div className="mb-1 px-4 w-full">
+                    <span className="text-gray-500">
+                    Description 
+                    </span>
+            </div>
             <TextareaAutosize
                 value={input.description}
                 onChange={(e) => {newFlowService.setInputDescription(e.target.value,index)}}
                 autoComplete={"off"}
-                className={`px-4 h-full rounded-md max-w-full bg-gray-50 w-full resize-none overflow-y-hidden focus:border-transparent`}
+                className={`px-4 h-full mt-2 rounded-md max-w-full bg-gray-50 w-full resize-none overflow-y-hidden focus:border-transparent`}
                 placeholder={"Visuals, fonts, colors. Everything you need to design something"}
                 minRows={3}
             />

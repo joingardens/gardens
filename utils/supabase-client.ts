@@ -43,6 +43,35 @@ export const getAllTools = async () => {
   return data || [];
 };
 
+export const getAllSections = async () => {
+  const { data, error } = await supabase
+    .from('tools')
+    .select('section')
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
+
+export const getToolsBySection = async (section_title) => {
+  const { data, error } = await supabase
+    .from('tools')
+    .select('*')
+    .eq('section', section_title)
+    .order('category');
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
 export const getAllJobs = async () => {
   const { data, error } = await supabase
     .from('jobs')
@@ -300,7 +329,7 @@ export const getAllFlows = async () => {
   const { data, error } = await supabase
     .from('flows')
     .select('id, flow, job_group (id, job_group, emoji), created, user_public_profile!author(full_name)')
-    .order('created')
+    .order('created', { ascending: false })
 
   if (error) {
     console.log(error.message);

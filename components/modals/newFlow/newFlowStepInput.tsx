@@ -84,27 +84,17 @@ const NewFlowStepInput = ({index, step}) => {
     }, [step.tool])
 
     return (
-        <div className={`flex items-center transition-all ${mounted ? "max-h-full opacity-100" : "max-h-0 opacity-20"}`}>
-            <div className={`flex flex-wrap`}>
-            <div className="w-full flex justify-between items-center ml-2 mb-2">
-            <span className="font-semibold text-gray-900">
-            {'Step ' + (index + 1)}
-            </span>
-            <button 
-            onClick={() => {
-                newFlowService.removeStep(index)
-            }}
-            className={`w-5 h-5 text-red-600 opacity-60 hover:opacity-100 m-2 transition-all`}>
-                <Cross/>
-            </button>
-            </div>
-                <div className={`ml-2 mt-2 mb-1 w-full`}>
+        <div className={`flex flex-col transition-all max-w-full w-full duration-300 ${mounted ? "max-h-full opacity-100  bg-gray-50" : "max-h-0 opacity-20"}`}>
+            <div className={`m-2 flex flex-col items-center relative w-full`}>
+            <div className="flex flex-col flex-wrap w-full">
+            <div className="flex w-full">
+            <div className="flex flex-col w-full mt-1 mb-1 px-4">
                     <div className="mb-1 w-full">
                     <span className="text-gray-500">
-                    Task
+                    {'Step #' + (index + 1)}
                     </span>
                     </div>
-                    <AutosizeInput
+                    <input
                     onFocus={() => {
                         setTaskDropdownState({
                             ...taskDropdownState,
@@ -120,11 +110,9 @@ const NewFlowStepInput = ({index, step}) => {
                     value={step.task}
                     onChange={(e) => {newFlowService.setStepTask(e.target.value, index)}}
                     placeholder={"Create a web page"}
-                    inputClassName={`border-none max-w-full`}
-                    inputStyle={{ backgroundColor: "rgb(249, 250, 251)", outline: "none"}}
-                    className={` px-3  border py-1 rounded-md  max-w-full bg-gray-50`}
+                    className={`py-1 rounded-md  w-full bg-gray-50`}
                     />
-                    <div className={`absolute left-0 bottom-0 z-20`}>
+                    <div className={`absolute left-0 top-16 z-20`}>
                             <div className={`absolute ${taskDropdownState.isOpen && step.task ? "opacity-100 scale-100 visible" : "opacity-0 scale-75 invisible"} rounded-md overflow-y-auto transform origin-top-left w-60 top-1 left-0 max-h-32 shadow-md bg-white  transition-all duration-300 `}>
                                 {taskDropdownState.loading ? <div className={`px-2 py-2`}>...loading</div> : taskDropdownState.suggestions 
                                 && taskDropdownState.suggestions.map(suggestion => {
@@ -139,14 +127,23 @@ const NewFlowStepInput = ({index, step}) => {
                                 })}
                             </div>
                     </div>
-                </div>
-            <div className={`ml-2 mt-1 mb-1 w-full`}>
+            </div>
+            <button 
+        onClick={() => {
+            newFlowService.removeStep(index)
+        }}
+        className={`w-5 h-5 text-gray-600 mr-6 mt-2 opacity-60 hover:opacity-100`}>
+            <Cross/>
+        </button>
+            </div>
+            </div>
+            <div className={`mt-1 mb-1 px-4 w-full`}>
             <div className="mb-1 w-full">
             <span className="text-gray-500">
             Tool
             </span>
             </div>
-            <AutosizeInput
+            <input
             onFocus={() => {
                 setToolDropdownState({
                     ...toolDropdownState,
@@ -162,9 +159,7 @@ const NewFlowStepInput = ({index, step}) => {
             value={step.tool}
             onChange={(e) => {newFlowService.setStepTool(e.target.value, index)}}
             placeholder={"Wordpress"}
-            inputStyle={{ backgroundColor: "rgb(249, 250, 251)", outline: "none"}}
-            inputClassName={`border-none max-w-full`}
-            className={` px-3 border py-1 rounded-md bg-gray-50`}
+            className={`py-1 rounded-md  w-full bg-gray-50`}
             />
                         <div className={`absolute left-3 bottom-0 z-20`}>
                         <div className={`absolute ${toolDropdownState.isOpen && step.tool ? "opacity-100 scale-100 visible" : "opacity-0 scale-75 invisible"} rounded-md overflow-y-auto transform origin-top-left w-60 top-1 left-0 max-h-32 shadow-md bg-white  transition-all duration-300 `}>
@@ -182,12 +177,13 @@ const NewFlowStepInput = ({index, step}) => {
                         </div>
                 </div>
             </div>
-            <div className="my-1 ml-2 w-full">
+            </div>
+            <div className="my-1 pl-6  w-full">
             <span className="text-gray-500">
             Description
             </span>
             </div>
-            <div className={`w-full border mr-3 bg-gray-50 rounded-md ml-2 py-2`}>
+            <div className={`w-full bg-gray-50 rounded-md px-2 py-2`}>
                 <TextareaAutosize
                     value={step.description}
                     onChange={(e) => {newFlowService.setStepDescription(e.target.value,index)}}
@@ -197,7 +193,7 @@ const NewFlowStepInput = ({index, step}) => {
                     minRows={3}
                 />
             </div>
-                <div className={`${imagesEnabled} mt-2 flex flex-wrap justify-between`}>
+                <div className={`${imagesEnabled} mt-2 flex flex-wrap justify-start`}>
                 {
             useMemo(() => {
                         return  <>
@@ -213,7 +209,6 @@ const NewFlowStepInput = ({index, step}) => {
             </button>
             </div>
             </div>
-    </div>
     )
 }
 

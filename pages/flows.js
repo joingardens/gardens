@@ -17,13 +17,14 @@ export default function Flows({ flows, flowItemsWithTools }) {
   const uniqueGroups = [];
   const map = new Map();
   for (const flow of flows){
+    if(flow.job_group){
     if(!map.has(flow.job_group.id)){
       map.set(flow.job_group.id, true);
       uniqueGroups.push({
         id: flow.job_group.id,
         job_group: flow.job_group.job_group
       });
-    }
+    }}
   };
   console.log(uniqueGroups)
   const listFlows = uniqueGroups.map((group) => {

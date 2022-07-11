@@ -22,26 +22,25 @@ const newFlow = () => {
                     e.stopPropagation()
                 }}
                 className={`
-        overflow-y-hidden w-full h-full relative bg-white rounded-lg opacity-100 visible scale-100
+        overflow-y-hidden w-full md:w-2/3 mx-auto h-full relative bg-white rounded-lg opacity-100 visible scale-100
         transition-all duration-300 transform origin-center
         pb-10 overflow-x-hidden 
         `}>
-                <div className={`w-full ml-2 mt-4 px-8 md:px-16 z-30 sticky left-0 h-20 top-0 flex px-4 pr-6 md:px-8 items-center `}>
+                <div className={`w-full mt-4 px-8 md:px-16 z-30 sticky left-0 h-20 top-0 flex px-4 pr-6 md:px-8 items-center `}>
                     <div />
                     <AutosizeInput
                         value={newFlowState.title}
                         onChange={(e) => {
                             newFlowService.dispatch({ type: "setTitle", payload: e.target.value })
                         }}
-                        placeholder="Flow title..."
                         inputStyle={{ backgroundColor: "#fff", outline: "none", fontWeight: "bold"}}
-                        className={`placeholder-gray-800  text-black text-center text-2xl font-bold`}
+                        className={`text-black text-center text-2xl font-bold`}
                     />
                 </div>
                 <div className="flex flex-col px-8 md:px-16">
                 <div className="mt-4">
                     <div>
-                        <div className={`text-lg font-semibold mb-4 w-full text-center`}>Inputs</div>
+                        <div className={`text-lg font-semibold mb-4 w-full text-left ml-1`}>Inputs required</div>
                         <div className={`grid grid-cols-1 gap-y-4`}>
                             {newFlowState.inputs.map((input, index) => {
                                 return <NewFlowInputInput index={index} input={input} />
@@ -51,13 +50,13 @@ const newFlow = () => {
                             onClick={() => {
                                 newFlowService.addInput()
                             }}
-                            className={`w-12 h-12 mt-4 mr-4 ml-2 p-2 rounded-full bg-gray-100 flex-shrink-0 border`}>
-                            <Plus />
+                            className={`bg-white border bg-gray-50 py-1 px-3 ml-3 my-4 focus:outline-none hover:bg-gray-200 rounded text-gray-500`}>
+                            + New input
                         </button>
                     </div>
                 </div>
-                <div>
-                    <div className={`text-lg font-semibold mb-8 w-full text-center`}>Current steps</div>
+                <div className="mt-8">
+                    <div className={`text-lg font-semibold mb-8 w-full  text-left ml-1`}>Instruction steps</div>
                     <div className={`grid grid-cols-1 gap-y-8`}>
                         {newFlowState.steps.map((step, index) => {
                             return (
@@ -69,12 +68,12 @@ const newFlow = () => {
                             onClick={() => {
                                 newFlowService.addStep()
                             }}
-                            className={`w-12 h-12 mt-4 ml-2  mr-4 p-2 rounded-full bg-gray-100 flex-shrink-0 border`}>
-                            <Plus />
-                    </button>
+                            className={`bg-white border bg-gray-50 py-1 px-3 ml-3 my-4 focus:outline-none hover:bg-gray-200 rounded text-gray-500`}>
+                            + New step
+                        </button>
                 </div>
-                <div className={`flex-col items-center flex`}>
-                <div className={`text-lg font-semibold mb-4 w-full text-center `}>Output</div>
+                <div className={`flex-col items-center flex mt-8`}>
+                <div className={`text-lg font-semibold mb-4 w-full  text-left ml-1`}>End result</div>
                 <NewFlowOutputInput/>
                 <button onClick={async () => {
                     if (user.id) {
@@ -82,7 +81,7 @@ const newFlow = () => {
                         //service.closeModal("newFlow")
                     }
                     }} className={`inline-flex items-center bg-white border border-black py-1 px-3 mt-12 focus:outline-none hover:bg-gray-200 rounded text-base`}>
-                    {newFlowState.loading ? "loading..." : "Save input"}
+                    {newFlowState.loading ? "loading..." : "Publish guide"}
                 </button>
                 </div>
                 </div>

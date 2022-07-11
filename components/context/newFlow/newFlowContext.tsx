@@ -61,7 +61,7 @@ export type IAction =
 {type: "addInput"} 
 
 const InitialState:INewFlowState = {
-  title: "",
+  title: "Untitled Guide",
   inputs: [{input: "", description: ""}],
   steps: [
     {

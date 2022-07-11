@@ -48,12 +48,12 @@ const NewFlowOutputInput = () => {
     },[debouncedOutput])
 
     return (
-        <div className={`flex justify-center w-full`}>
-            <div className={`relative w-full flex flex-col `}>
+        <div className={`flex justify-center w-full bg-gray-50`}>
+            <div className={`relative w-full flex flex-col px-2 mt-2`}>
                 <div className={`relative`}>
                 <AutosizeInput 
             inputClassName={`border-none max-w-full`}
-            className={`px-3 border py-1 rounded-md bg-gray-50`}
+            className={`px-3 py-1 rounded-md bg-gray-50`}
             inputStyle={{ backgroundColor: "rgb(249, 250, 251)", outline: "none"}}
             onFocus={() => {
                 setOutputDropdownState({
@@ -87,7 +87,7 @@ const NewFlowOutputInput = () => {
                     </div>
                 </div>
                 </div>
-                <div className={`w-full border mr-3 bg-gray-50 rounded-md mt-3 py-2`}>
+                <div className={`w-full mr-3 bg-gray-50 rounded-md mt-3 py-2`}>
                     <TextareaAutosize
                         value={newFlowState.output.description}
                         onChange={(e) => {newFlowService.setOutputDescription(e.target.value)}}
