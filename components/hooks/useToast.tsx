@@ -5,10 +5,6 @@ import {v4} from "uuid"
 const useToast = () => {
     const {setToasts, toasts} = useContext(ToastContext)
 
-
-
-
-
     const makeToast = (text: string, type: ToastTypes, ttl: number) => {
 
         setToasts([

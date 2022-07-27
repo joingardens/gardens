@@ -1,6 +1,8 @@
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import { BigNumber } from "bignumber.js"
 
+export type SupabaseInsertionDoc<T> = Omit<Omit<T, "id">, "created_at">
+
 export class BaseAdapter<T> {
     private readonly supabase: SupabaseClient
     constructor(
@@ -12,16 +14,21 @@ export class BaseAdapter<T> {
         );
     }
 
-    async insert(entities: T[]) {
+    async insert(entities: Partial<T>[]) {
         const response = await this.supabase
             .from<T>(this.tableName)
             .insert(entities)
         return response
     }
 
-    async insertOne(entity: T) {
+    async insertOne(entity: Partial<T>) {
         const response = await this.insert([entity])
-        return response
+        if (response.data) {
+            return response.data[0]
+        }
+        if (response.error) {
+            return false
+        }
     }
 
     async findManyByQuery(query: Partial<T>, page = 1, limit = 10) {

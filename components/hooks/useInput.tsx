@@ -1,16 +1,26 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-export function useInput (
-    validatior: (a : string) => boolean
-) {
-    const [value, setValue] = useState("")
+export class UseInputState<T> {
+    value: T
+    setValue: Dispatch<SetStateAction<T>>
+    error: boolean
+    validate: () => boolean
+    name: string
+}
+
+export function useInput<T> (
+    validatior: (a : T) => boolean,
+    initState: T,
+    name: string
+): UseInputState<T> {
+    const [value, setValue] = useState<T>(initState)
     const [error, setError] = useState(false)
 
     const validate = () => {
         if (validatior) {
             const validationResult = validatior(value)
-            setError(validationResult)
-            return validationResult
+            setError(!validationResult)
+            return !validationResult
         } 
         return true
     }
@@ -25,6 +35,7 @@ export function useInput (
         value,
         setValue,
         error, 
-        validate
+        validate,
+        name
     }
 }
