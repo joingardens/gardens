@@ -9,14 +9,21 @@ import { NewFlowContextProvider } from '../components/context/newFlow/newFlowCon
 import { ToastContextProvider } from '../components/context/ToastContext';
 import { AppProps } from 'next/app'
 import { FC } from 'react';
+import { useRouter } from 'next/router';
+import { validationService } from '../services/validationService';
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
-
+  
+  const router = useRouter()
   usePostHog(process.env.NEXT_PUBLIC_POSTHOG_KEY, { api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST })
 
   useEffect(() => {
     document.body.classList?.remove('loading');
   }, []);
+
+  useEffect(() => {
+    console.log(validationService.validateSubdomainName("List"))
+  }, [])
 
   return (
     <div className="bg-white">

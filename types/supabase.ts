@@ -12,6 +12,105 @@ export interface paths {
       };
     };
   };
+  "/actions": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.actions.id"];
+          action?: parameters["rowFilter.actions.action"];
+          description?: parameters["rowFilter.actions.description"];
+          appsrc?: parameters["rowFilter.actions.appsrc"];
+          isInternal?: parameters["rowFilter.actions.isInternal"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["actions"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** actions */
+          actions?: definitions["actions"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.actions.id"];
+          action?: parameters["rowFilter.actions.action"];
+          description?: parameters["rowFilter.actions.description"];
+          appsrc?: parameters["rowFilter.actions.appsrc"];
+          isInternal?: parameters["rowFilter.actions.isInternal"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.actions.id"];
+          action?: parameters["rowFilter.actions.action"];
+          description?: parameters["rowFilter.actions.description"];
+          appsrc?: parameters["rowFilter.actions.appsrc"];
+          isInternal?: parameters["rowFilter.actions.isInternal"];
+        };
+        body: {
+          /** actions */
+          actions?: definitions["actions"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/comment_with_author": {
     get: {
       parameters: {
@@ -269,6 +368,102 @@ export interface paths {
       };
     };
   };
+  "/countries": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.countries.id"];
+          alpha2?: parameters["rowFilter.countries.alpha2"];
+          alpha3?: parameters["rowFilter.countries.alpha3"];
+          name?: parameters["rowFilter.countries.name"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["countries"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** countries */
+          countries?: definitions["countries"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.countries.id"];
+          alpha2?: parameters["rowFilter.countries.alpha2"];
+          alpha3?: parameters["rowFilter.countries.alpha3"];
+          name?: parameters["rowFilter.countries.name"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.countries.id"];
+          alpha2?: parameters["rowFilter.countries.alpha2"];
+          alpha3?: parameters["rowFilter.countries.alpha3"];
+          name?: parameters["rowFilter.countries.name"];
+        };
+        body: {
+          /** countries */
+          countries?: definitions["countries"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/customers": {
     get: {
       parameters: {
@@ -359,6 +554,114 @@ export interface paths {
       };
     };
   };
+  "/drafts": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.drafts.id"];
+          payload?: parameters["rowFilter.drafts.payload"];
+          user?: parameters["rowFilter.drafts.user"];
+          draftName?: parameters["rowFilter.drafts.draftName"];
+          created?: parameters["rowFilter.drafts.created"];
+          type?: parameters["rowFilter.drafts.type"];
+          isPublished?: parameters["rowFilter.drafts.isPublished"];
+          usecase?: parameters["rowFilter.drafts.usecase"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["drafts"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** drafts */
+          drafts?: definitions["drafts"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.drafts.id"];
+          payload?: parameters["rowFilter.drafts.payload"];
+          user?: parameters["rowFilter.drafts.user"];
+          draftName?: parameters["rowFilter.drafts.draftName"];
+          created?: parameters["rowFilter.drafts.created"];
+          type?: parameters["rowFilter.drafts.type"];
+          isPublished?: parameters["rowFilter.drafts.isPublished"];
+          usecase?: parameters["rowFilter.drafts.usecase"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.drafts.id"];
+          payload?: parameters["rowFilter.drafts.payload"];
+          user?: parameters["rowFilter.drafts.user"];
+          draftName?: parameters["rowFilter.drafts.draftName"];
+          created?: parameters["rowFilter.drafts.created"];
+          type?: parameters["rowFilter.drafts.type"];
+          isPublished?: parameters["rowFilter.drafts.isPublished"];
+          usecase?: parameters["rowFilter.drafts.usecase"];
+        };
+        body: {
+          /** drafts */
+          drafts?: definitions["drafts"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/flow_items": {
     get: {
       parameters: {
@@ -366,6 +669,8 @@ export interface paths {
           id?: parameters["rowFilter.flow_items.id"];
           flow?: parameters["rowFilter.flow_items.flow"];
           job_tool?: parameters["rowFilter.flow_items.job_tool"];
+          description?: parameters["rowFilter.flow_items.description"];
+          image_url?: parameters["rowFilter.flow_items.image_url"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -419,6 +724,8 @@ export interface paths {
           id?: parameters["rowFilter.flow_items.id"];
           flow?: parameters["rowFilter.flow_items.flow"];
           job_tool?: parameters["rowFilter.flow_items.job_tool"];
+          description?: parameters["rowFilter.flow_items.description"];
+          image_url?: parameters["rowFilter.flow_items.image_url"];
         };
         header: {
           /** Preference */
@@ -436,10 +743,216 @@ export interface paths {
           id?: parameters["rowFilter.flow_items.id"];
           flow?: parameters["rowFilter.flow_items.flow"];
           job_tool?: parameters["rowFilter.flow_items.job_tool"];
+          description?: parameters["rowFilter.flow_items.description"];
+          image_url?: parameters["rowFilter.flow_items.image_url"];
         };
         body: {
           /** flow_items */
           flow_items?: definitions["flow_items"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/flows": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.flows.id"];
+          flow?: parameters["rowFilter.flows.flow"];
+          job_group?: parameters["rowFilter.flows.job_group"];
+          created?: parameters["rowFilter.flows.created"];
+          author?: parameters["rowFilter.flows.author"];
+          type?: parameters["rowFilter.flows.type"];
+          usecase?: parameters["rowFilter.flows.usecase"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["flows"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** flows */
+          flows?: definitions["flows"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.flows.id"];
+          flow?: parameters["rowFilter.flows.flow"];
+          job_group?: parameters["rowFilter.flows.job_group"];
+          created?: parameters["rowFilter.flows.created"];
+          author?: parameters["rowFilter.flows.author"];
+          type?: parameters["rowFilter.flows.type"];
+          usecase?: parameters["rowFilter.flows.usecase"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.flows.id"];
+          flow?: parameters["rowFilter.flows.flow"];
+          job_group?: parameters["rowFilter.flows.job_group"];
+          created?: parameters["rowFilter.flows.created"];
+          author?: parameters["rowFilter.flows.author"];
+          type?: parameters["rowFilter.flows.type"];
+          usecase?: parameters["rowFilter.flows.usecase"];
+        };
+        body: {
+          /** flows */
+          flows?: definitions["flows"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/flows_inputs": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.flows_inputs.id"];
+          flow?: parameters["rowFilter.flows_inputs.flow"];
+          input?: parameters["rowFilter.flows_inputs.input"];
+          title?: parameters["rowFilter.flows_inputs.title"];
+          description?: parameters["rowFilter.flows_inputs.description"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["flows_inputs"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** flows_inputs */
+          flows_inputs?: definitions["flows_inputs"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.flows_inputs.id"];
+          flow?: parameters["rowFilter.flows_inputs.flow"];
+          input?: parameters["rowFilter.flows_inputs.input"];
+          title?: parameters["rowFilter.flows_inputs.title"];
+          description?: parameters["rowFilter.flows_inputs.description"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.flows_inputs.id"];
+          flow?: parameters["rowFilter.flows_inputs.flow"];
+          input?: parameters["rowFilter.flows_inputs.input"];
+          title?: parameters["rowFilter.flows_inputs.title"];
+          description?: parameters["rowFilter.flows_inputs.description"];
+        };
+        body: {
+          /** flows_inputs */
+          flows_inputs?: definitions["flows_inputs"];
         };
         header: {
           /** Preference */
@@ -460,6 +973,8 @@ export interface paths {
           flow?: parameters["rowFilter.flows_outputs.flow"];
           output?: parameters["rowFilter.flows_outputs.output"];
           title?: parameters["rowFilter.flows_outputs.title"];
+          description?: parameters["rowFilter.flows_outputs.description"];
+          image_url?: parameters["rowFilter.flows_outputs.image_url"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -514,6 +1029,8 @@ export interface paths {
           flow?: parameters["rowFilter.flows_outputs.flow"];
           output?: parameters["rowFilter.flows_outputs.output"];
           title?: parameters["rowFilter.flows_outputs.title"];
+          description?: parameters["rowFilter.flows_outputs.description"];
+          image_url?: parameters["rowFilter.flows_outputs.image_url"];
         };
         header: {
           /** Preference */
@@ -532,6 +1049,8 @@ export interface paths {
           flow?: parameters["rowFilter.flows_outputs.flow"];
           output?: parameters["rowFilter.flows_outputs.output"];
           title?: parameters["rowFilter.flows_outputs.title"];
+          description?: parameters["rowFilter.flows_outputs.description"];
+          image_url?: parameters["rowFilter.flows_outputs.image_url"];
         };
         body: {
           /** flows_outputs */
@@ -548,18 +1067,14 @@ export interface paths {
       };
     };
   };
-  "/growing": {
+  "/flows_posts": {
     get: {
       parameters: {
         query: {
-          Name?: parameters["rowFilter.growing.Name"];
-          Brief?: parameters["rowFilter.growing.Brief"];
-          Cover?: parameters["rowFilter.growing.Cover"];
-          "Created at"?: parameters["rowFilter.growing.Created at"];
-          Files?: parameters["rowFilter.growing.Files"];
-          Tags?: parameters["rowFilter.growing.Tags"];
-          Type?: parameters["rowFilter.growing.Type"];
-          URL?: parameters["rowFilter.growing.URL"];
+          id?: parameters["rowFilter.flows_posts.id"];
+          created_at?: parameters["rowFilter.flows_posts.created_at"];
+          flow?: parameters["rowFilter.flows_posts.flow"];
+          post?: parameters["rowFilter.flows_posts.post"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -581,7 +1096,7 @@ export interface paths {
       responses: {
         /** OK */
         200: {
-          schema: definitions["growing"][];
+          schema: definitions["flows_posts"][];
         };
         /** Partial Content */
         206: unknown;
@@ -590,8 +1105,8 @@ export interface paths {
     post: {
       parameters: {
         body: {
-          /** growing */
-          growing?: definitions["growing"];
+          /** flows_posts */
+          flows_posts?: definitions["flows_posts"];
         };
         query: {
           /** Filtering Columns */
@@ -610,14 +1125,10 @@ export interface paths {
     delete: {
       parameters: {
         query: {
-          Name?: parameters["rowFilter.growing.Name"];
-          Brief?: parameters["rowFilter.growing.Brief"];
-          Cover?: parameters["rowFilter.growing.Cover"];
-          "Created at"?: parameters["rowFilter.growing.Created at"];
-          Files?: parameters["rowFilter.growing.Files"];
-          Tags?: parameters["rowFilter.growing.Tags"];
-          Type?: parameters["rowFilter.growing.Type"];
-          URL?: parameters["rowFilter.growing.URL"];
+          id?: parameters["rowFilter.flows_posts.id"];
+          created_at?: parameters["rowFilter.flows_posts.created_at"];
+          flow?: parameters["rowFilter.flows_posts.flow"];
+          post?: parameters["rowFilter.flows_posts.post"];
         };
         header: {
           /** Preference */
@@ -632,18 +1143,14 @@ export interface paths {
     patch: {
       parameters: {
         query: {
-          Name?: parameters["rowFilter.growing.Name"];
-          Brief?: parameters["rowFilter.growing.Brief"];
-          Cover?: parameters["rowFilter.growing.Cover"];
-          "Created at"?: parameters["rowFilter.growing.Created at"];
-          Files?: parameters["rowFilter.growing.Files"];
-          Tags?: parameters["rowFilter.growing.Tags"];
-          Type?: parameters["rowFilter.growing.Type"];
-          URL?: parameters["rowFilter.growing.URL"];
+          id?: parameters["rowFilter.flows_posts.id"];
+          created_at?: parameters["rowFilter.flows_posts.created_at"];
+          flow?: parameters["rowFilter.flows_posts.flow"];
+          post?: parameters["rowFilter.flows_posts.post"];
         };
         body: {
-          /** growing */
-          growing?: definitions["growing"];
+          /** flows_posts */
+          flows_posts?: definitions["flows_posts"];
         };
         header: {
           /** Preference */
@@ -656,12 +1163,14 @@ export interface paths {
       };
     };
   };
-  "/industries": {
+  "/flows_tools": {
     get: {
       parameters: {
         query: {
-          id?: parameters["rowFilter.industries.id"];
-          industry?: parameters["rowFilter.industries.industry"];
+          id?: parameters["rowFilter.flows_tools.id"];
+          created_at?: parameters["rowFilter.flows_tools.created_at"];
+          flow?: parameters["rowFilter.flows_tools.flow"];
+          tool?: parameters["rowFilter.flows_tools.tool"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -683,7 +1192,7 @@ export interface paths {
       responses: {
         /** OK */
         200: {
-          schema: definitions["industries"][];
+          schema: definitions["flows_tools"][];
         };
         /** Partial Content */
         206: unknown;
@@ -692,8 +1201,8 @@ export interface paths {
     post: {
       parameters: {
         body: {
-          /** industries */
-          industries?: definitions["industries"];
+          /** flows_tools */
+          flows_tools?: definitions["flows_tools"];
         };
         query: {
           /** Filtering Columns */
@@ -712,8 +1221,10 @@ export interface paths {
     delete: {
       parameters: {
         query: {
-          id?: parameters["rowFilter.industries.id"];
-          industry?: parameters["rowFilter.industries.industry"];
+          id?: parameters["rowFilter.flows_tools.id"];
+          created_at?: parameters["rowFilter.flows_tools.created_at"];
+          flow?: parameters["rowFilter.flows_tools.flow"];
+          tool?: parameters["rowFilter.flows_tools.tool"];
         };
         header: {
           /** Preference */
@@ -728,12 +1239,203 @@ export interface paths {
     patch: {
       parameters: {
         query: {
-          id?: parameters["rowFilter.industries.id"];
-          industry?: parameters["rowFilter.industries.industry"];
+          id?: parameters["rowFilter.flows_tools.id"];
+          created_at?: parameters["rowFilter.flows_tools.created_at"];
+          flow?: parameters["rowFilter.flows_tools.flow"];
+          tool?: parameters["rowFilter.flows_tools.tool"];
         };
         body: {
-          /** industries */
-          industries?: definitions["industries"];
+          /** flows_tools */
+          flows_tools?: definitions["flows_tools"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/full_flows": {
+    get: {
+      parameters: {
+        query: {
+          name?: parameters["rowFilter.full_flows.name"];
+          id?: parameters["rowFilter.full_flows.id"];
+          type?: parameters["rowFilter.full_flows.type"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["full_flows"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** full_flows */
+          full_flows?: definitions["full_flows"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          name?: parameters["rowFilter.full_flows.name"];
+          id?: parameters["rowFilter.full_flows.id"];
+          type?: parameters["rowFilter.full_flows.type"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          name?: parameters["rowFilter.full_flows.name"];
+          id?: parameters["rowFilter.full_flows.id"];
+          type?: parameters["rowFilter.full_flows.type"];
+        };
+        body: {
+          /** full_flows */
+          full_flows?: definitions["full_flows"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/inputs": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.inputs.id"];
+          input?: parameters["rowFilter.inputs.input"];
+          description?: parameters["rowFilter.inputs.description"];
+          job_group?: parameters["rowFilter.inputs.job_group"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["inputs"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** inputs */
+          inputs?: definitions["inputs"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.inputs.id"];
+          input?: parameters["rowFilter.inputs.input"];
+          description?: parameters["rowFilter.inputs.description"];
+          job_group?: parameters["rowFilter.inputs.job_group"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.inputs.id"];
+          input?: parameters["rowFilter.inputs.input"];
+          description?: parameters["rowFilter.inputs.description"];
+          job_group?: parameters["rowFilter.inputs.job_group"];
+        };
+        body: {
+          /** inputs */
+          inputs?: definitions["inputs"];
         };
         header: {
           /** Preference */
@@ -753,6 +1455,7 @@ export interface paths {
           id?: parameters["rowFilter.job_groups.id"];
           job_group?: parameters["rowFilter.job_groups.job_group"];
           emoji?: parameters["rowFilter.job_groups.emoji"];
+          type?: parameters["rowFilter.job_groups.type"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -806,6 +1509,7 @@ export interface paths {
           id?: parameters["rowFilter.job_groups.id"];
           job_group?: parameters["rowFilter.job_groups.job_group"];
           emoji?: parameters["rowFilter.job_groups.emoji"];
+          type?: parameters["rowFilter.job_groups.type"];
         };
         header: {
           /** Preference */
@@ -823,6 +1527,7 @@ export interface paths {
           id?: parameters["rowFilter.job_groups.id"];
           job_group?: parameters["rowFilter.job_groups.job_group"];
           emoji?: parameters["rowFilter.job_groups.emoji"];
+          type?: parameters["rowFilter.job_groups.type"];
         };
         body: {
           /** job_groups */
@@ -943,6 +1648,7 @@ export interface paths {
           job?: parameters["rowFilter.jobs_tools.job"];
           tool?: parameters["rowFilter.jobs_tools.tool"];
           instruction_link?: parameters["rowFilter.jobs_tools.instruction_link"];
+          description?: parameters["rowFilter.jobs_tools.description"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -997,6 +1703,7 @@ export interface paths {
           job?: parameters["rowFilter.jobs_tools.job"];
           tool?: parameters["rowFilter.jobs_tools.tool"];
           instruction_link?: parameters["rowFilter.jobs_tools.instruction_link"];
+          description?: parameters["rowFilter.jobs_tools.description"];
         };
         header: {
           /** Preference */
@@ -1015,6 +1722,7 @@ export interface paths {
           job?: parameters["rowFilter.jobs_tools.job"];
           tool?: parameters["rowFilter.jobs_tools.tool"];
           instruction_link?: parameters["rowFilter.jobs_tools.instruction_link"];
+          description?: parameters["rowFilter.jobs_tools.description"];
         };
         body: {
           /** jobs_tools */
@@ -1038,9 +1746,10 @@ export interface paths {
           id?: parameters["rowFilter.listings.id"];
           listing?: parameters["rowFilter.listings.listing"];
           listing_type?: parameters["rowFilter.listings.listing_type"];
-          URL?: parameters["rowFilter.listings.URL"];
-          Description?: parameters["rowFilter.listings.Description"];
-          Rating?: parameters["rowFilter.listings.Rating"];
+          url?: parameters["rowFilter.listings.url"];
+          description?: parameters["rowFilter.listings.description"];
+          rating?: parameters["rowFilter.listings.rating"];
+          published?: parameters["rowFilter.listings.published"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -1094,9 +1803,10 @@ export interface paths {
           id?: parameters["rowFilter.listings.id"];
           listing?: parameters["rowFilter.listings.listing"];
           listing_type?: parameters["rowFilter.listings.listing_type"];
-          URL?: parameters["rowFilter.listings.URL"];
-          Description?: parameters["rowFilter.listings.Description"];
-          Rating?: parameters["rowFilter.listings.Rating"];
+          url?: parameters["rowFilter.listings.url"];
+          description?: parameters["rowFilter.listings.description"];
+          rating?: parameters["rowFilter.listings.rating"];
+          published?: parameters["rowFilter.listings.published"];
         };
         header: {
           /** Preference */
@@ -1114,100 +1824,14 @@ export interface paths {
           id?: parameters["rowFilter.listings.id"];
           listing?: parameters["rowFilter.listings.listing"];
           listing_type?: parameters["rowFilter.listings.listing_type"];
-          URL?: parameters["rowFilter.listings.URL"];
-          Description?: parameters["rowFilter.listings.Description"];
-          Rating?: parameters["rowFilter.listings.Rating"];
+          url?: parameters["rowFilter.listings.url"];
+          description?: parameters["rowFilter.listings.description"];
+          rating?: parameters["rowFilter.listings.rating"];
+          published?: parameters["rowFilter.listings.published"];
         };
         body: {
           /** listings */
           listings?: definitions["listings"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-  };
-  "/methods": {
-    get: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.methods.id"];
-          /** Filtering Columns */
-          select?: parameters["select"];
-          /** Ordering */
-          order?: parameters["order"];
-          /** Limiting and Pagination */
-          offset?: parameters["offset"];
-          /** Limiting and Pagination */
-          limit?: parameters["limit"];
-        };
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters["range"];
-          /** Limiting and Pagination */
-          "Range-Unit"?: parameters["rangeUnit"];
-          /** Preference */
-          Prefer?: parameters["preferCount"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions["methods"][];
-        };
-        /** Partial Content */
-        206: unknown;
-      };
-    };
-    post: {
-      parameters: {
-        body: {
-          /** methods */
-          methods?: definitions["methods"];
-        };
-        query: {
-          /** Filtering Columns */
-          select?: parameters["select"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** Created */
-        201: unknown;
-      };
-    };
-    delete: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.methods.id"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-    patch: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.methods.id"];
-        };
-        body: {
-          /** methods */
-          methods?: definitions["methods"];
         };
         header: {
           /** Preference */
@@ -1301,93 +1925,6 @@ export interface paths {
         body: {
           /** models */
           models?: definitions["models"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-  };
-  "/organisations": {
-    get: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.organisations.id"];
-          /** Filtering Columns */
-          select?: parameters["select"];
-          /** Ordering */
-          order?: parameters["order"];
-          /** Limiting and Pagination */
-          offset?: parameters["offset"];
-          /** Limiting and Pagination */
-          limit?: parameters["limit"];
-        };
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters["range"];
-          /** Limiting and Pagination */
-          "Range-Unit"?: parameters["rangeUnit"];
-          /** Preference */
-          Prefer?: parameters["preferCount"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions["organisations"][];
-        };
-        /** Partial Content */
-        206: unknown;
-      };
-    };
-    post: {
-      parameters: {
-        body: {
-          /** organisations */
-          organisations?: definitions["organisations"];
-        };
-        query: {
-          /** Filtering Columns */
-          select?: parameters["select"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** Created */
-        201: unknown;
-      };
-    };
-    delete: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.organisations.id"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-    patch: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.organisations.id"];
-        };
-        body: {
-          /** organisations */
-          organisations?: definitions["organisations"];
         };
         header: {
           /** Preference */
@@ -1622,6 +2159,132 @@ export interface paths {
       };
     };
   };
+  "/posts_archived": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.posts_archived.id"];
+          slug?: parameters["rowFilter.posts_archived.slug"];
+          createdAt?: parameters["rowFilter.posts_archived.createdAt"];
+          updatedAt?: parameters["rowFilter.posts_archived.updatedAt"];
+          title?: parameters["rowFilter.posts_archived.title"];
+          content?: parameters["rowFilter.posts_archived.content"];
+          isPublished?: parameters["rowFilter.posts_archived.isPublished"];
+          authorId?: parameters["rowFilter.posts_archived.authorId"];
+          parentId?: parameters["rowFilter.posts_archived.parentId"];
+          live?: parameters["rowFilter.posts_archived.live"];
+          siteId?: parameters["rowFilter.posts_archived.siteId"];
+          isPinned?: parameters["rowFilter.posts_archived.isPinned"];
+          isDeleted?: parameters["rowFilter.posts_archived.isDeleted"];
+          isApproved?: parameters["rowFilter.posts_archived.isApproved"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["posts_archived"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** posts_archived */
+          posts_archived?: definitions["posts_archived"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.posts_archived.id"];
+          slug?: parameters["rowFilter.posts_archived.slug"];
+          createdAt?: parameters["rowFilter.posts_archived.createdAt"];
+          updatedAt?: parameters["rowFilter.posts_archived.updatedAt"];
+          title?: parameters["rowFilter.posts_archived.title"];
+          content?: parameters["rowFilter.posts_archived.content"];
+          isPublished?: parameters["rowFilter.posts_archived.isPublished"];
+          authorId?: parameters["rowFilter.posts_archived.authorId"];
+          parentId?: parameters["rowFilter.posts_archived.parentId"];
+          live?: parameters["rowFilter.posts_archived.live"];
+          siteId?: parameters["rowFilter.posts_archived.siteId"];
+          isPinned?: parameters["rowFilter.posts_archived.isPinned"];
+          isDeleted?: parameters["rowFilter.posts_archived.isDeleted"];
+          isApproved?: parameters["rowFilter.posts_archived.isApproved"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.posts_archived.id"];
+          slug?: parameters["rowFilter.posts_archived.slug"];
+          createdAt?: parameters["rowFilter.posts_archived.createdAt"];
+          updatedAt?: parameters["rowFilter.posts_archived.updatedAt"];
+          title?: parameters["rowFilter.posts_archived.title"];
+          content?: parameters["rowFilter.posts_archived.content"];
+          isPublished?: parameters["rowFilter.posts_archived.isPublished"];
+          authorId?: parameters["rowFilter.posts_archived.authorId"];
+          parentId?: parameters["rowFilter.posts_archived.parentId"];
+          live?: parameters["rowFilter.posts_archived.live"];
+          siteId?: parameters["rowFilter.posts_archived.siteId"];
+          isPinned?: parameters["rowFilter.posts_archived.isPinned"];
+          isDeleted?: parameters["rowFilter.posts_archived.isDeleted"];
+          isApproved?: parameters["rowFilter.posts_archived.isApproved"];
+        };
+        body: {
+          /** posts_archived */
+          posts_archived?: definitions["posts_archived"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/prices": {
     get: {
       parameters: {
@@ -1838,6 +2501,74 @@ export interface paths {
       responses: {
         /** No Content */
         204: never;
+      };
+    };
+  };
+  "/searchable": {
+    get: {
+      parameters: {
+        query: {
+          name?: parameters["rowFilter.searchable.name"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["searchable"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+  };
+  "/searchable_entries": {
+    get: {
+      parameters: {
+        query: {
+          name?: parameters["rowFilter.searchable_entries.name"];
+          id?: parameters["rowFilter.searchable_entries.id"];
+          type?: parameters["rowFilter.searchable_entries.type"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["searchable_entries"][];
+        };
+        /** Partial Content */
+        206: unknown;
       };
     };
   };
@@ -2078,6 +2809,9 @@ export interface paths {
           portability?: parameters["rowFilter.tools.portability"];
           description?: parameters["rowFilter.tools.description"];
           logo_url?: parameters["rowFilter.tools.logo_url"];
+          section?: parameters["rowFilter.tools.section"];
+          type?: parameters["rowFilter.tools.type"];
+          featured?: parameters["rowFilter.tools.featured"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -2136,6 +2870,9 @@ export interface paths {
           portability?: parameters["rowFilter.tools.portability"];
           description?: parameters["rowFilter.tools.description"];
           logo_url?: parameters["rowFilter.tools.logo_url"];
+          section?: parameters["rowFilter.tools.section"];
+          type?: parameters["rowFilter.tools.type"];
+          featured?: parameters["rowFilter.tools.featured"];
         };
         header: {
           /** Preference */
@@ -2158,6 +2895,9 @@ export interface paths {
           portability?: parameters["rowFilter.tools.portability"];
           description?: parameters["rowFilter.tools.description"];
           logo_url?: parameters["rowFilter.tools.logo_url"];
+          section?: parameters["rowFilter.tools.section"];
+          type?: parameters["rowFilter.tools.type"];
+          featured?: parameters["rowFilter.tools.featured"];
         };
         body: {
           /** tools */
@@ -2171,6 +2911,330 @@ export interface paths {
       responses: {
         /** No Content */
         204: never;
+      };
+    };
+  };
+  "/usecases": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.usecases.id"];
+          usecase?: parameters["rowFilter.usecases.usecase"];
+          description?: parameters["rowFilter.usecases.description"];
+          created_at?: parameters["rowFilter.usecases.created_at"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["usecases"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** usecases */
+          usecases?: definitions["usecases"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.usecases.id"];
+          usecase?: parameters["rowFilter.usecases.usecase"];
+          description?: parameters["rowFilter.usecases.description"];
+          created_at?: parameters["rowFilter.usecases.created_at"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.usecases.id"];
+          usecase?: parameters["rowFilter.usecases.usecase"];
+          description?: parameters["rowFilter.usecases.description"];
+          created_at?: parameters["rowFilter.usecases.created_at"];
+        };
+        body: {
+          /** usecases */
+          usecases?: definitions["usecases"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/user_paas": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.user_paas.id"];
+          created_at?: parameters["rowFilter.user_paas.created_at"];
+          user?: parameters["rowFilter.user_paas.user"];
+          slug?: parameters["rowFilter.user_paas.slug"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["user_paas"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** user_paas */
+          user_paas?: definitions["user_paas"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.user_paas.id"];
+          created_at?: parameters["rowFilter.user_paas.created_at"];
+          user?: parameters["rowFilter.user_paas.user"];
+          slug?: parameters["rowFilter.user_paas.slug"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.user_paas.id"];
+          created_at?: parameters["rowFilter.user_paas.created_at"];
+          user?: parameters["rowFilter.user_paas.user"];
+          slug?: parameters["rowFilter.user_paas.slug"];
+        };
+        body: {
+          /** user_paas */
+          user_paas?: definitions["user_paas"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/user_public_profile": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.user_public_profile.id"];
+          full_name?: parameters["rowFilter.user_public_profile.full_name"];
+          avatar_url?: parameters["rowFilter.user_public_profile.avatar_url"];
+          username?: parameters["rowFilter.user_public_profile.username"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["user_public_profile"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** user_public_profile */
+          user_public_profile?: definitions["user_public_profile"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.user_public_profile.id"];
+          full_name?: parameters["rowFilter.user_public_profile.full_name"];
+          avatar_url?: parameters["rowFilter.user_public_profile.avatar_url"];
+          username?: parameters["rowFilter.user_public_profile.username"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.user_public_profile.id"];
+          full_name?: parameters["rowFilter.user_public_profile.full_name"];
+          avatar_url?: parameters["rowFilter.user_public_profile.avatar_url"];
+          username?: parameters["rowFilter.user_public_profile.username"];
+        };
+        body: {
+          /** user_public_profile */
+          user_public_profile?: definitions["user_public_profile"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/user_viewables": {
+    get: {
+      parameters: {
+        query: {
+          name?: parameters["rowFilter.user_viewables.name"];
+          id?: parameters["rowFilter.user_viewables.id"];
+          type?: parameters["rowFilter.user_viewables.type"];
+          created?: parameters["rowFilter.user_viewables.created"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["user_viewables"][];
+        };
+        /** Partial Content */
+        206: unknown;
       };
     };
   };
@@ -2282,99 +3346,6 @@ export interface paths {
       };
     };
   };
-  "/values": {
-    get: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.values.id"];
-          value?: parameters["rowFilter.values.value"];
-          description?: parameters["rowFilter.values.description"];
-          /** Filtering Columns */
-          select?: parameters["select"];
-          /** Ordering */
-          order?: parameters["order"];
-          /** Limiting and Pagination */
-          offset?: parameters["offset"];
-          /** Limiting and Pagination */
-          limit?: parameters["limit"];
-        };
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters["range"];
-          /** Limiting and Pagination */
-          "Range-Unit"?: parameters["rangeUnit"];
-          /** Preference */
-          Prefer?: parameters["preferCount"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions["values"][];
-        };
-        /** Partial Content */
-        206: unknown;
-      };
-    };
-    post: {
-      parameters: {
-        body: {
-          /** values */
-          values?: definitions["values"];
-        };
-        query: {
-          /** Filtering Columns */
-          select?: parameters["select"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** Created */
-        201: unknown;
-      };
-    };
-    delete: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.values.id"];
-          value?: parameters["rowFilter.values.value"];
-          description?: parameters["rowFilter.values.description"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-    patch: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.values.id"];
-          value?: parameters["rowFilter.values.value"];
-          description?: parameters["rowFilter.values.description"];
-        };
-        body: {
-          /** values */
-          values?: definitions["values"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-  };
   "/votes": {
     get: {
       parameters: {
@@ -2468,11 +3439,14 @@ export interface paths {
       };
     };
   };
-  "/rpc/handle_new_user": {
+  "/rpc/find_entries": {
     post: {
       parameters: {
         body: {
-          args: { [key: string]: any };
+          args: {
+            /** Format: text */
+            search_input: string;
+          };
         };
         header: {
           /** Preference */
@@ -2488,394 +3462,852 @@ export interface paths {
 }
 
 export interface definitions {
+  actions: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /** Format: text */
+    action?: string;
+    /** Format: text */
+    description?: string;
+    /** Format: text */
+    appsrc?: string;
+    /**
+     * Format: boolean
+     * @default false
+     */
+    isInternal?: boolean;
+  };
   comment_with_author: {
     /**
-     * Note:
+     * Format: bigint
+     * @description Note:
      * This is a Primary Key.<pk/>
      */
     id?: number;
+    /** Format: text */
     slug?: string;
+    /** Format: timestamp with time zone */
     createdAt?: string;
+    /** Format: timestamp with time zone */
     updatedAt?: string;
+    /** Format: text */
     title?: string;
+    /** Format: text */
     content?: string;
+    /** Format: boolean */
     isPublished?: boolean;
     /**
-     * Note:
+     * Format: uuid
+     * @description Note:
      * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
      */
     authorId?: string;
     /**
-     * Note:
+     * Format: bigint
+     * @description Note:
      * This is a Foreign Key to `posts.id`.<fk table='posts' column='id'/>
      */
     parentId?: number;
+    /** Format: boolean */
     live?: boolean;
+    /** Format: bigint */
     siteId?: number;
+    /** Format: boolean */
     isPinned?: boolean;
+    /** Format: boolean */
     isDeleted?: boolean;
+    /** Format: boolean */
     isApproved?: boolean;
+    /** Format: jsonb */
     author?: string;
   };
   comments_linear_view: {
     /**
-     * Note:
+     * Format: bigint
+     * @description Note:
      * This is a Primary Key.<pk/>
      */
     id?: number;
+    /** Format: text */
     slug?: string;
+    /** Format: timestamp with time zone */
     createdAt?: string;
+    /** Format: timestamp with time zone */
     updatedAt?: string;
+    /** Format: text */
     title?: string;
+    /** Format: text */
     content?: string;
+    /** Format: boolean */
     isPublished?: boolean;
     /**
-     * Note:
+     * Format: uuid
+     * @description Note:
      * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
      */
     authorId?: string;
     /**
-     * Note:
+     * Format: bigint
+     * @description Note:
      * This is a Foreign Key to `posts.id`.<fk table='posts' column='id'/>
      */
     parentId?: number;
+    /** Format: boolean */
     live?: boolean;
+    /** Format: bigint */
     siteId?: number;
+    /** Format: boolean */
     isPinned?: boolean;
+    /** Format: boolean */
     isDeleted?: boolean;
+    /** Format: boolean */
     isApproved?: boolean;
+    /** Format: jsonb */
     author?: string;
+    /** Format: jsonb */
     parent?: string;
+    /** Format: json */
     responses?: string;
   };
   comments_thread: {
+    /** Format: bigint */
     id?: number;
+    /** Format: text */
     slug?: string;
+    /** Format: timestamp with time zone */
     createdAt?: string;
+    /** Format: timestamp with time zone */
     updatedAt?: string;
+    /** Format: text */
     title?: string;
+    /** Format: text */
     content?: string;
+    /** Format: boolean */
     isPublished?: boolean;
+    /** Format: uuid */
     authorId?: string;
+    /** Format: bigint */
     parentId?: number;
+    /** Format: boolean */
     live?: boolean;
+    /** Format: bigint */
     siteId?: number;
+    /** Format: boolean */
     isPinned?: boolean;
+    /** Format: boolean */
     isDeleted?: boolean;
+    /** Format: boolean */
     isApproved?: boolean;
+    /** Format: jsonb */
     author?: string;
+    /** Format: bigint */
     votes?: number;
+    /** Format: bigint */
     upvotes?: number;
+    /** Format: bigint */
     downvotes?: number;
+    /** Format: integer */
     depth?: number;
-    path?: string;
-    pathVotesRecent?: string;
-    pathLeastRecent?: string;
-    pathMostRecent?: string;
+    /** Format: ARRAY */
+    path?: unknown[];
+    /** Format: ARRAY */
+    pathVotesRecent?: unknown[];
+    /** Format: ARRAY */
+    pathLeastRecent?: unknown[];
+    /** Format: ARRAY */
+    pathMostRecent?: unknown[];
   };
   comments_thread_with_user_vote: {
+    /** Format: bigint */
     id?: number;
+    /** Format: text */
     slug?: string;
+    /** Format: timestamp with time zone */
     createdAt?: string;
+    /** Format: timestamp with time zone */
     updatedAt?: string;
+    /** Format: text */
     title?: string;
+    /** Format: text */
     content?: string;
+    /** Format: boolean */
     isPublished?: boolean;
+    /** Format: uuid */
     authorId?: string;
+    /** Format: bigint */
     parentId?: number;
+    /** Format: boolean */
     live?: boolean;
+    /** Format: bigint */
     siteId?: number;
+    /** Format: boolean */
     isPinned?: boolean;
+    /** Format: boolean */
     isDeleted?: boolean;
+    /** Format: boolean */
     isApproved?: boolean;
+    /** Format: jsonb */
     author?: string;
+    /** Format: bigint */
     votes?: number;
+    /** Format: bigint */
     upvotes?: number;
+    /** Format: bigint */
     downvotes?: number;
+    /** Format: integer */
     depth?: number;
-    path?: string;
-    pathVotesRecent?: string;
-    pathLeastRecent?: string;
-    pathMostRecent?: string;
+    /** Format: ARRAY */
+    path?: unknown[];
+    /** Format: ARRAY */
+    pathVotesRecent?: unknown[];
+    /** Format: ARRAY */
+    pathLeastRecent?: unknown[];
+    /** Format: ARRAY */
+    pathMostRecent?: unknown[];
+    /** Format: integer */
     userVoteValue?: number;
   };
   comments_with_author_votes: {
     /**
-     * Note:
+     * Format: bigint
+     * @description Note:
      * This is a Primary Key.<pk/>
      */
     id?: number;
+    /** Format: text */
     slug?: string;
+    /** Format: timestamp with time zone */
     createdAt?: string;
+    /** Format: timestamp with time zone */
     updatedAt?: string;
+    /** Format: text */
     title?: string;
+    /** Format: text */
     content?: string;
+    /** Format: boolean */
     isPublished?: boolean;
     /**
-     * Note:
+     * Format: uuid
+     * @description Note:
      * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
      */
     authorId?: string;
     /**
-     * Note:
+     * Format: bigint
+     * @description Note:
      * This is a Foreign Key to `posts.id`.<fk table='posts' column='id'/>
      */
     parentId?: number;
+    /** Format: boolean */
     live?: boolean;
+    /** Format: bigint */
     siteId?: number;
+    /** Format: boolean */
     isPinned?: boolean;
+    /** Format: boolean */
     isDeleted?: boolean;
+    /** Format: boolean */
     isApproved?: boolean;
+    /** Format: jsonb */
     author?: string;
+    /** Format: bigint */
     votes?: number;
+    /** Format: bigint */
     upvotes?: number;
+    /** Format: bigint */
     downvotes?: number;
+  };
+  countries: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /** Format: text */
+    alpha2?: string;
+    /** Format: text */
+    alpha3?: string;
+    /** Format: text */
+    name?: string;
   };
   customers: {
     /**
-     * Note:
+     * Format: uuid
+     * @description Note:
      * This is a Primary Key.<pk/>
-     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
      */
     id: string;
+    /** Format: text */
     stripe_customer_id?: string;
+  };
+  drafts: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /** Format: json */
+    payload?: string;
+    /** Format: uuid */
+    user?: string;
+    /** Format: text */
+    draftName?: string;
+    /**
+     * Format: timestamp with time zone
+     * @default timezone('utc'::text, now())
+     */
+    created: string;
+    /**
+     * Format: text
+     * @default draft
+     */
+    type?: string;
+    /**
+     * Format: boolean
+     * @default false
+     */
+    isPublished?: boolean;
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Foreign Key to `usecases.id`.<fk table='usecases' column='id'/>
+     */
+    usecase?: number;
   };
   flow_items: {
     /**
-     * Note:
+     * Format: bigint
+     * @description Note:
      * This is a Primary Key.<pk/>
      */
     id: number;
+    /** Format: integer */
     flow?: number;
     /**
-     * Note:
+     * Format: integer
+     * @description Note:
      * This is a Foreign Key to `jobs_tools.id`.<fk table='jobs_tools' column='id'/>
      */
     job_tool?: number;
+    /** Format: text */
+    description?: string;
+    /** Format: ARRAY */
+    image_url?: unknown[];
   };
-  flows_outputs: {
+  flows: {
     /**
-     * Note:
+     * Format: bigint
+     * @description Note:
      * This is a Primary Key.<pk/>
      */
     id: number;
-    flow?: number;
+    /** Format: text */
+    flow?: string;
     /**
-     * Note:
-     * This is a Foreign Key to `outputs.id`.<fk table='outputs' column='id'/>
-     */
-    output?: number;
-    title?: string;
-  };
-  growing: {
-    /**
-     * Note:
-     * This is a Primary Key.<pk/>
-     */
-    Name: string;
-    Brief?: string;
-    Cover?: string;
-    "Created at"?: string;
-    Files?: string;
-    Tags?: string;
-    Type?: string;
-    URL?: string;
-  };
-  industries: {
-    /**
-     * Note:
-     * This is a Primary Key.<pk/>
-     */
-    id: number;
-    industry?: string;
-  };
-  job_groups: {
-    /**
-     * Note:
-     * This is a Primary Key.<pk/>
-     */
-    id: number;
-    job_group?: string;
-    emoji?: string;
-  };
-  /** Major fields of productive activity */
-  jobs: {
-    /**
-     * Note:
-     * This is a Primary Key.<pk/>
-     */
-    id: number;
-    job?: string;
-    /**
-     * Note:
+     * Format: integer
+     * @description Note:
      * This is a Foreign Key to `job_groups.id`.<fk table='job_groups' column='id'/>
      */
     job_group?: number;
+    /**
+     * Format: timestamp without time zone
+     * @default now()
+     */
+    created?: string;
+    /**
+     * Format: uuid
+     * @description Note:
+     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
+     */
+    author?: string;
+    /**
+     * Format: text
+     * @default flow
+     */
+    type: string;
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Foreign Key to `usecases.id`.<fk table='usecases' column='id'/>
+     */
+    usecase?: number;
+  };
+  flows_inputs: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /** Format: bigint */
+    flow?: number;
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Foreign Key to `inputs.id`.<fk table='inputs' column='id'/>
+     */
+    input?: number;
+    /** Format: character varying */
+    title?: string;
+    /** Format: text */
+    description?: string;
+  };
+  flows_outputs: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /** Format: bigint */
+    flow?: number;
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Foreign Key to `outputs.id`.<fk table='outputs' column='id'/>
+     */
+    output?: number;
+    /** Format: character varying */
+    title?: string;
+    /** Format: text */
+    description?: string;
+    /** Format: ARRAY */
+    image_url?: unknown[];
+  };
+  flows_posts: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string;
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Foreign Key to `flows.id`.<fk table='flows' column='id'/>
+     */
+    flow?: number;
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Foreign Key to `posts.id`.<fk table='posts' column='id'/>
+     */
+    post?: number;
+  };
+  flows_tools: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string;
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Foreign Key to `flows.id`.<fk table='flows' column='id'/>
+     */
+    flow?: number;
+    /**
+     * Format: integer
+     * @description Note:
+     * This is a Foreign Key to `tools.id`.<fk table='tools' column='id'/>
+     */
+    tool?: number;
+  };
+  full_flows: {
+    /** Format: text */
+    name?: string;
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id?: number;
+    /** Format: text */
+    type?: string;
+  };
+  inputs: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /** Format: text */
+    input?: string;
+    /** Format: text */
+    description?: string;
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Foreign Key to `job_groups.id`.<fk table='job_groups' column='id'/>
+     */
+    job_group?: number;
+  };
+  job_groups: {
+    /**
+     * Format: integer
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /** Format: text */
+    job_group?: string;
+    /**
+     * Format: text
+     * @default 🔨
+     */
+    emoji?: string;
+    /** Format: text */
+    type?: string;
+  };
+  /** @description Major fields of productive activity */
+  jobs: {
+    /**
+     * Format: integer
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /** Format: text */
+    job?: string;
+    /**
+     * Format: integer
+     * @description Note:
+     * This is a Foreign Key to `job_groups.id`.<fk table='job_groups' column='id'/>
+     */
+    job_group?: number;
+    /** Format: text */
     description?: string;
   };
   jobs_tools: {
     /**
-     * Note:
+     * Format: integer
+     * @description Note:
      * This is a Primary Key.<pk/>
      */
     id: number;
     /**
-     * Note:
+     * Format: integer
+     * @description Note:
      * This is a Foreign Key to `jobs.id`.<fk table='jobs' column='id'/>
      */
     job?: number;
     /**
-     * Note:
+     * Format: integer
+     * @description Note:
      * This is a Foreign Key to `tools.id`.<fk table='tools' column='id'/>
      */
     tool?: number;
+    /** Format: character varying */
     instruction_link?: string;
+    /** Format: character varying */
+    description?: string;
   };
   listings: {
     /**
-     * Note:
+     * Format: integer
+     * @description Note:
      * This is a Primary Key.<pk/>
      */
     id: number;
+    /** Format: text */
     listing?: string;
-    listing_type?:
-      | "open_tools"
-      | "general_tools"
-      | "general_education"
-      | "use_cases"
-      | "methods_and_processes"
-      | "general_communities"
-      | "work_repositories"
-      | "salary_levels"
-      | "app_templates"
-      | "markets_and_industries"
-      | "work_communities"
-      | "organizations";
-    URL?: string;
-    Description?: string;
-    Rating?: number;
-  };
-  /** General frameworks for getting things done */
-  methods: {
     /**
-     * Note:
-     * This is a Primary Key.<pk/>
+     * Format: public.listing_type
+     * @enum {string}
      */
-    id: number;
+    listing_type?:
+      | "Open-Source Tools"
+      | "Other Tools"
+      | "General Education"
+      | "use_cases"
+      | "Methods and Processes"
+      | "general_communities"
+      | "Work and Business"
+      | "Salaries and Income"
+      | "App Templates"
+      | "Markets and Industries"
+      | "Work Communities"
+      | "Organizations"
+      | "Products and services";
+    /** Format: text */
+    url?: string;
+    /** Format: text */
+    description?: string;
+    /** Format: smallint */
+    rating?: number;
+    /** Format: boolean */
+    published?: boolean;
   };
-  /** Legal frameworks for doing things */
+  /** @description Legal frameworks for doing things */
   models: {
     /**
-     * Note:
+     * Format: integer
+     * @description Note:
      * This is a Primary Key.<pk/>
      */
     id: number;
+    /** Format: text */
     model?: string;
-    applications?: string;
-  };
-  organisations: {
-    /**
-     * Note:
-     * This is a Primary Key.<pk/>
-     */
-    id: number;
+    /** Format: ARRAY */
+    applications?: unknown[];
   };
   outputs: {
     /**
-     * Note:
+     * Format: bigint
+     * @description Note:
      * This is a Primary Key.<pk/>
      */
     id: number;
+    /** Format: character varying */
     output?: string;
+    /** Format: text */
     description?: string;
     /**
-     * Note:
+     * Format: integer
+     * @description Note:
      * This is a Foreign Key to `job_groups.id`.<fk table='job_groups' column='id'/>
      */
     job_group?: number;
   };
   posts: {
     /**
-     * Note:
+     * Format: bigint
+     * @description Note:
      * This is a Primary Key.<pk/>
      */
     id: number;
+    /** Format: text */
     slug: string;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
     createdAt: string;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
     updatedAt?: string;
+    /** Format: text */
     title?: string;
+    /** Format: text */
     content?: string;
+    /**
+     * Format: boolean
+     * @default false
+     */
     isPublished: boolean;
     /**
-     * Note:
+     * Format: uuid
+     * @description Note:
      * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
      */
     authorId: string;
     /**
-     * Note:
+     * Format: bigint
+     * @description Note:
      * This is a Foreign Key to `posts.id`.<fk table='posts' column='id'/>
      */
     parentId?: number;
+    /**
+     * Format: boolean
+     * @default true
+     */
     live?: boolean;
+    /** Format: bigint */
     siteId: number;
+    /**
+     * Format: boolean
+     * @default false
+     */
     isPinned: boolean;
+    /**
+     * Format: boolean
+     * @default false
+     */
     isDeleted: boolean;
+    /**
+     * Format: boolean
+     * @default false
+     */
+    isApproved: boolean;
+  };
+  posts_archived: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /** Format: text */
+    slug: string;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    createdAt: string;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    updatedAt?: string;
+    /** Format: text */
+    title?: string;
+    /** Format: text */
+    content?: string;
+    /**
+     * Format: boolean
+     * @default false
+     */
+    isPublished: boolean;
+    /**
+     * Format: uuid
+     * @description Note:
+     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
+     */
+    authorId: string;
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Foreign Key to `posts_archived.id`.<fk table='posts_archived' column='id'/>
+     */
+    parentId?: number;
+    /**
+     * Format: boolean
+     * @default true
+     */
+    live?: boolean;
+    /** Format: bigint */
+    siteId: number;
+    /**
+     * Format: boolean
+     * @default false
+     */
+    isPinned: boolean;
+    /**
+     * Format: boolean
+     * @default false
+     */
+    isDeleted: boolean;
+    /**
+     * Format: boolean
+     * @default false
+     */
     isApproved: boolean;
   };
   prices: {
     /**
-     * Note:
+     * Format: text
+     * @description Note:
      * This is a Primary Key.<pk/>
      */
     id: string;
     /**
-     * Note:
+     * Format: text
+     * @description Note:
      * This is a Foreign Key to `products.id`.<fk table='products' column='id'/>
      */
     product_id?: string;
+    /** Format: boolean */
     active?: boolean;
+    /** Format: text */
     description?: string;
+    /** Format: bigint */
     unit_amount?: number;
+    /** Format: text */
     currency?: string;
+    /**
+     * Format: public.pricing_type
+     * @enum {string}
+     */
     type?: "one_time" | "recurring";
+    /**
+     * Format: public.pricing_plan_interval
+     * @enum {string}
+     */
     interval?: "day" | "week" | "month" | "year";
+    /** Format: integer */
     interval_count?: number;
+    /** Format: integer */
     trial_period_days?: number;
+    /** Format: jsonb */
     metadata?: string;
   };
   products: {
     /**
-     * Note:
+     * Format: text
+     * @description Note:
      * This is a Primary Key.<pk/>
      */
     id: string;
+    /** Format: boolean */
     active?: boolean;
+    /** Format: text */
     name?: string;
+    /** Format: text */
     description?: string;
+    /** Format: text */
     image?: string;
+    /** Format: jsonb */
     metadata?: string;
+  };
+  searchable: {
+    /** Format: text */
+    name?: string;
+  };
+  searchable_entries: {
+    /** Format: text */
+    name?: string;
+    /** Format: bigint */
+    id?: number;
+    /** Format: text */
+    type?: string;
   };
   sites: {
     /**
-     * Note:
+     * Format: bigint
+     * @description Note:
      * This is a Primary Key.<pk/>
      */
     id: number;
+    /** Format: text */
     siteDomain: string;
+    /** Format: uuid */
     ownerId: string;
+    /** Format: text */
     name: string;
   };
   subscriptions: {
     /**
-     * Note:
+     * Format: text
+     * @description Note:
      * This is a Primary Key.<pk/>
      */
     id: string;
-    /**
-     * Note:
-     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
-     */
+    /** Format: uuid */
     user_id: string;
+    /**
+     * Format: public.subscription_status
+     * @enum {string}
+     */
     status?:
       | "trialing"
       | "active"
@@ -2884,371 +4316,894 @@ export interface definitions {
       | "incomplete_expired"
       | "past_due"
       | "unpaid";
+    /** Format: jsonb */
     metadata?: string;
     /**
-     * Note:
+     * Format: text
+     * @description Note:
      * This is a Foreign Key to `prices.id`.<fk table='prices' column='id'/>
      */
     price_id?: string;
+    /** Format: integer */
     quantity?: number;
+    /** Format: boolean */
     cancel_at_period_end?: boolean;
+    /**
+     * Format: timestamp with time zone
+     * @default timezone('utc'::text, now())
+     */
     created: string;
+    /**
+     * Format: timestamp with time zone
+     * @default timezone('utc'::text, now())
+     */
     current_period_start: string;
+    /**
+     * Format: timestamp with time zone
+     * @default timezone('utc'::text, now())
+     */
     current_period_end: string;
+    /**
+     * Format: timestamp with time zone
+     * @default timezone('utc'::text, now())
+     */
     ended_at?: string;
+    /**
+     * Format: timestamp with time zone
+     * @default timezone('utc'::text, now())
+     */
     cancel_at?: string;
+    /**
+     * Format: timestamp with time zone
+     * @default timezone('utc'::text, now())
+     */
     canceled_at?: string;
+    /**
+     * Format: timestamp with time zone
+     * @default timezone('utc'::text, now())
+     */
     trial_start?: string;
+    /**
+     * Format: timestamp with time zone
+     * @default timezone('utc'::text, now())
+     */
     trial_end?: string;
   };
-  /** Products and services used for productive activity */
+  /** @description Products and services used for productive activity */
   tools: {
     /**
-     * Note:
+     * Format: integer
+     * @description Note:
      * This is a Primary Key.<pk/>
      */
     id: number;
+    /** Format: text */
     tool?: string;
+    /** Format: text */
     category?: string;
+    /** Format: text */
     link?: string;
     /**
-     * Note:
+     * Format: integer
+     * @description Note:
      * This is a Foreign Key to `models.id`.<fk table='models' column='id'/>
+     * @default 3
      */
     model?: number;
+    /** Format: text */
     portability?: string;
+    /** Format: character varying */
     description?: string;
+    /** Format: text */
     logo_url?: string;
+    /**
+     * Format: public.tool_sections
+     * @enum {string}
+     */
+    section?:
+      | "No-Code"
+      | "Operations"
+      | "Engineering"
+      | "DevOps"
+      | "Analytics"
+      | "Data & Search"
+      | "Sales"
+      | "Marketing"
+      | "Content"
+      | "Community & Support"
+      | "Design"
+      | "General"
+      | "E-commerce";
+    /**
+     * Format: character varying
+     * @default tool
+     */
+    type?: string;
+    /** Format: boolean */
+    featured?: boolean;
+  };
+  usecases: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /** Format: text */
+    usecase?: string;
+    /** Format: text */
+    description?: string;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string;
+  };
+  user_paas: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at: string;
+    /** Format: uuid */
+    user: string;
+    /** Format: text */
+    slug: string;
+  };
+  user_public_profile: {
+    /**
+     * Format: uuid
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id?: string;
+    /** Format: text */
+    full_name?: string;
+    /** Format: text */
+    avatar_url?: string;
+    /** Format: text */
+    username?: string;
+  };
+  user_viewables: {
+    /** Format: text */
+    name?: string;
+    /** Format: bigint */
+    id?: number;
+    /** Format: text */
+    type?: string;
+    /** Format: timestamp with time zone */
+    created?: string;
   };
   users: {
     /**
-     * Note:
+     * Format: uuid
+     * @description Note:
      * This is a Primary Key.<pk/>
-     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
      */
     id: string;
+    /** Format: text */
     full_name?: string;
+    /** Format: text */
     avatar_url?: string;
+    /** Format: jsonb */
     billing_address?: string;
+    /** Format: jsonb */
     payment_method?: string;
+    /** Format: timestamp with time zone */
     updated_at?: string;
+    /** Format: text */
     username?: string;
+    /** Format: text */
     website?: string;
-  };
-  values: {
-    /**
-     * Note:
-     * This is a Primary Key.<pk/>
-     */
-    id: number;
-    value?: string;
-    description?: string;
   };
   votes: {
     /**
-     * Note:
+     * Format: bigint
+     * @description Note:
      * This is a Primary Key.<pk/>
      * This is a Foreign Key to `posts.id`.<fk table='posts' column='id'/>
      */
     postId: number;
     /**
-     * Note:
+     * Format: uuid
+     * @description Note:
      * This is a Primary Key.<pk/>
      * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
      */
     userId: string;
+    /** Format: integer */
     value: number;
   };
 }
 
 export interface parameters {
-  /** Preference */
+  /**
+   * @description Preference
+   * @enum {string}
+   */
   preferParams: "params=single-object";
-  /** Preference */
+  /**
+   * @description Preference
+   * @enum {string}
+   */
   preferReturn: "return=representation" | "return=minimal" | "return=none";
-  /** Preference */
+  /**
+   * @description Preference
+   * @enum {string}
+   */
   preferCount: "count=none";
-  /** Filtering Columns */
+  /** @description Filtering Columns */
   select: string;
-  /** On Conflict */
+  /** @description On Conflict */
   on_conflict: string;
-  /** Ordering */
+  /** @description Ordering */
   order: string;
-  /** Limiting and Pagination */
+  /** @description Limiting and Pagination */
   range: string;
-  /** Limiting and Pagination */
+  /**
+   * @description Limiting and Pagination
+   * @default items
+   */
   rangeUnit: string;
-  /** Limiting and Pagination */
+  /** @description Limiting and Pagination */
   offset: string;
-  /** Limiting and Pagination */
+  /** @description Limiting and Pagination */
   limit: string;
-  /** comment_with_author */
+  /** @description actions */
+  "body.actions": definitions["actions"];
+  /** Format: bigint */
+  "rowFilter.actions.id": string;
+  /** Format: text */
+  "rowFilter.actions.action": string;
+  /** Format: text */
+  "rowFilter.actions.description": string;
+  /** Format: text */
+  "rowFilter.actions.appsrc": string;
+  /** Format: boolean */
+  "rowFilter.actions.isInternal": string;
+  /** @description comment_with_author */
   "body.comment_with_author": definitions["comment_with_author"];
+  /** Format: bigint */
   "rowFilter.comment_with_author.id": string;
+  /** Format: text */
   "rowFilter.comment_with_author.slug": string;
+  /** Format: timestamp with time zone */
   "rowFilter.comment_with_author.createdAt": string;
+  /** Format: timestamp with time zone */
   "rowFilter.comment_with_author.updatedAt": string;
+  /** Format: text */
   "rowFilter.comment_with_author.title": string;
+  /** Format: text */
   "rowFilter.comment_with_author.content": string;
+  /** Format: boolean */
   "rowFilter.comment_with_author.isPublished": string;
+  /** Format: uuid */
   "rowFilter.comment_with_author.authorId": string;
+  /** Format: bigint */
   "rowFilter.comment_with_author.parentId": string;
+  /** Format: boolean */
   "rowFilter.comment_with_author.live": string;
+  /** Format: bigint */
   "rowFilter.comment_with_author.siteId": string;
+  /** Format: boolean */
   "rowFilter.comment_with_author.isPinned": string;
+  /** Format: boolean */
   "rowFilter.comment_with_author.isDeleted": string;
+  /** Format: boolean */
   "rowFilter.comment_with_author.isApproved": string;
+  /** Format: jsonb */
   "rowFilter.comment_with_author.author": string;
-  /** comments_linear_view */
+  /** @description comments_linear_view */
   "body.comments_linear_view": definitions["comments_linear_view"];
+  /** Format: bigint */
   "rowFilter.comments_linear_view.id": string;
+  /** Format: text */
   "rowFilter.comments_linear_view.slug": string;
+  /** Format: timestamp with time zone */
   "rowFilter.comments_linear_view.createdAt": string;
+  /** Format: timestamp with time zone */
   "rowFilter.comments_linear_view.updatedAt": string;
+  /** Format: text */
   "rowFilter.comments_linear_view.title": string;
+  /** Format: text */
   "rowFilter.comments_linear_view.content": string;
+  /** Format: boolean */
   "rowFilter.comments_linear_view.isPublished": string;
+  /** Format: uuid */
   "rowFilter.comments_linear_view.authorId": string;
+  /** Format: bigint */
   "rowFilter.comments_linear_view.parentId": string;
+  /** Format: boolean */
   "rowFilter.comments_linear_view.live": string;
+  /** Format: bigint */
   "rowFilter.comments_linear_view.siteId": string;
+  /** Format: boolean */
   "rowFilter.comments_linear_view.isPinned": string;
+  /** Format: boolean */
   "rowFilter.comments_linear_view.isDeleted": string;
+  /** Format: boolean */
   "rowFilter.comments_linear_view.isApproved": string;
+  /** Format: jsonb */
   "rowFilter.comments_linear_view.author": string;
+  /** Format: jsonb */
   "rowFilter.comments_linear_view.parent": string;
+  /** Format: json */
   "rowFilter.comments_linear_view.responses": string;
-  /** comments_thread */
+  /** @description comments_thread */
   "body.comments_thread": definitions["comments_thread"];
+  /** Format: bigint */
   "rowFilter.comments_thread.id": string;
+  /** Format: text */
   "rowFilter.comments_thread.slug": string;
+  /** Format: timestamp with time zone */
   "rowFilter.comments_thread.createdAt": string;
+  /** Format: timestamp with time zone */
   "rowFilter.comments_thread.updatedAt": string;
+  /** Format: text */
   "rowFilter.comments_thread.title": string;
+  /** Format: text */
   "rowFilter.comments_thread.content": string;
+  /** Format: boolean */
   "rowFilter.comments_thread.isPublished": string;
+  /** Format: uuid */
   "rowFilter.comments_thread.authorId": string;
+  /** Format: bigint */
   "rowFilter.comments_thread.parentId": string;
+  /** Format: boolean */
   "rowFilter.comments_thread.live": string;
+  /** Format: bigint */
   "rowFilter.comments_thread.siteId": string;
+  /** Format: boolean */
   "rowFilter.comments_thread.isPinned": string;
+  /** Format: boolean */
   "rowFilter.comments_thread.isDeleted": string;
+  /** Format: boolean */
   "rowFilter.comments_thread.isApproved": string;
+  /** Format: jsonb */
   "rowFilter.comments_thread.author": string;
+  /** Format: bigint */
   "rowFilter.comments_thread.votes": string;
+  /** Format: bigint */
   "rowFilter.comments_thread.upvotes": string;
+  /** Format: bigint */
   "rowFilter.comments_thread.downvotes": string;
+  /** Format: integer */
   "rowFilter.comments_thread.depth": string;
+  /** Format: ARRAY */
   "rowFilter.comments_thread.path": string;
+  /** Format: ARRAY */
   "rowFilter.comments_thread.pathVotesRecent": string;
+  /** Format: ARRAY */
   "rowFilter.comments_thread.pathLeastRecent": string;
+  /** Format: ARRAY */
   "rowFilter.comments_thread.pathMostRecent": string;
-  /** comments_thread_with_user_vote */
+  /** @description comments_thread_with_user_vote */
   "body.comments_thread_with_user_vote": definitions["comments_thread_with_user_vote"];
+  /** Format: bigint */
   "rowFilter.comments_thread_with_user_vote.id": string;
+  /** Format: text */
   "rowFilter.comments_thread_with_user_vote.slug": string;
+  /** Format: timestamp with time zone */
   "rowFilter.comments_thread_with_user_vote.createdAt": string;
+  /** Format: timestamp with time zone */
   "rowFilter.comments_thread_with_user_vote.updatedAt": string;
+  /** Format: text */
   "rowFilter.comments_thread_with_user_vote.title": string;
+  /** Format: text */
   "rowFilter.comments_thread_with_user_vote.content": string;
+  /** Format: boolean */
   "rowFilter.comments_thread_with_user_vote.isPublished": string;
+  /** Format: uuid */
   "rowFilter.comments_thread_with_user_vote.authorId": string;
+  /** Format: bigint */
   "rowFilter.comments_thread_with_user_vote.parentId": string;
+  /** Format: boolean */
   "rowFilter.comments_thread_with_user_vote.live": string;
+  /** Format: bigint */
   "rowFilter.comments_thread_with_user_vote.siteId": string;
+  /** Format: boolean */
   "rowFilter.comments_thread_with_user_vote.isPinned": string;
+  /** Format: boolean */
   "rowFilter.comments_thread_with_user_vote.isDeleted": string;
+  /** Format: boolean */
   "rowFilter.comments_thread_with_user_vote.isApproved": string;
+  /** Format: jsonb */
   "rowFilter.comments_thread_with_user_vote.author": string;
+  /** Format: bigint */
   "rowFilter.comments_thread_with_user_vote.votes": string;
+  /** Format: bigint */
   "rowFilter.comments_thread_with_user_vote.upvotes": string;
+  /** Format: bigint */
   "rowFilter.comments_thread_with_user_vote.downvotes": string;
+  /** Format: integer */
   "rowFilter.comments_thread_with_user_vote.depth": string;
+  /** Format: ARRAY */
   "rowFilter.comments_thread_with_user_vote.path": string;
+  /** Format: ARRAY */
   "rowFilter.comments_thread_with_user_vote.pathVotesRecent": string;
+  /** Format: ARRAY */
   "rowFilter.comments_thread_with_user_vote.pathLeastRecent": string;
+  /** Format: ARRAY */
   "rowFilter.comments_thread_with_user_vote.pathMostRecent": string;
+  /** Format: integer */
   "rowFilter.comments_thread_with_user_vote.userVoteValue": string;
-  /** comments_with_author_votes */
+  /** @description comments_with_author_votes */
   "body.comments_with_author_votes": definitions["comments_with_author_votes"];
+  /** Format: bigint */
   "rowFilter.comments_with_author_votes.id": string;
+  /** Format: text */
   "rowFilter.comments_with_author_votes.slug": string;
+  /** Format: timestamp with time zone */
   "rowFilter.comments_with_author_votes.createdAt": string;
+  /** Format: timestamp with time zone */
   "rowFilter.comments_with_author_votes.updatedAt": string;
+  /** Format: text */
   "rowFilter.comments_with_author_votes.title": string;
+  /** Format: text */
   "rowFilter.comments_with_author_votes.content": string;
+  /** Format: boolean */
   "rowFilter.comments_with_author_votes.isPublished": string;
+  /** Format: uuid */
   "rowFilter.comments_with_author_votes.authorId": string;
+  /** Format: bigint */
   "rowFilter.comments_with_author_votes.parentId": string;
+  /** Format: boolean */
   "rowFilter.comments_with_author_votes.live": string;
+  /** Format: bigint */
   "rowFilter.comments_with_author_votes.siteId": string;
+  /** Format: boolean */
   "rowFilter.comments_with_author_votes.isPinned": string;
+  /** Format: boolean */
   "rowFilter.comments_with_author_votes.isDeleted": string;
+  /** Format: boolean */
   "rowFilter.comments_with_author_votes.isApproved": string;
+  /** Format: jsonb */
   "rowFilter.comments_with_author_votes.author": string;
+  /** Format: bigint */
   "rowFilter.comments_with_author_votes.votes": string;
+  /** Format: bigint */
   "rowFilter.comments_with_author_votes.upvotes": string;
+  /** Format: bigint */
   "rowFilter.comments_with_author_votes.downvotes": string;
-  /** customers */
+  /** @description countries */
+  "body.countries": definitions["countries"];
+  /** Format: bigint */
+  "rowFilter.countries.id": string;
+  /** Format: text */
+  "rowFilter.countries.alpha2": string;
+  /** Format: text */
+  "rowFilter.countries.alpha3": string;
+  /** Format: text */
+  "rowFilter.countries.name": string;
+  /** @description customers */
   "body.customers": definitions["customers"];
+  /** Format: uuid */
   "rowFilter.customers.id": string;
+  /** Format: text */
   "rowFilter.customers.stripe_customer_id": string;
-  /** flow_items */
+  /** @description drafts */
+  "body.drafts": definitions["drafts"];
+  /** Format: bigint */
+  "rowFilter.drafts.id": string;
+  /** Format: json */
+  "rowFilter.drafts.payload": string;
+  /** Format: uuid */
+  "rowFilter.drafts.user": string;
+  /** Format: text */
+  "rowFilter.drafts.draftName": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.drafts.created": string;
+  /** Format: text */
+  "rowFilter.drafts.type": string;
+  /** Format: boolean */
+  "rowFilter.drafts.isPublished": string;
+  /** Format: bigint */
+  "rowFilter.drafts.usecase": string;
+  /** @description flow_items */
   "body.flow_items": definitions["flow_items"];
+  /** Format: bigint */
   "rowFilter.flow_items.id": string;
+  /** Format: integer */
   "rowFilter.flow_items.flow": string;
+  /** Format: integer */
   "rowFilter.flow_items.job_tool": string;
-  /** flows_outputs */
+  /** Format: text */
+  "rowFilter.flow_items.description": string;
+  /** Format: ARRAY */
+  "rowFilter.flow_items.image_url": string;
+  /** @description flows */
+  "body.flows": definitions["flows"];
+  /** Format: bigint */
+  "rowFilter.flows.id": string;
+  /** Format: text */
+  "rowFilter.flows.flow": string;
+  /** Format: integer */
+  "rowFilter.flows.job_group": string;
+  /** Format: timestamp without time zone */
+  "rowFilter.flows.created": string;
+  /** Format: uuid */
+  "rowFilter.flows.author": string;
+  /** Format: text */
+  "rowFilter.flows.type": string;
+  /** Format: bigint */
+  "rowFilter.flows.usecase": string;
+  /** @description flows_inputs */
+  "body.flows_inputs": definitions["flows_inputs"];
+  /** Format: bigint */
+  "rowFilter.flows_inputs.id": string;
+  /** Format: bigint */
+  "rowFilter.flows_inputs.flow": string;
+  /** Format: bigint */
+  "rowFilter.flows_inputs.input": string;
+  /** Format: character varying */
+  "rowFilter.flows_inputs.title": string;
+  /** Format: text */
+  "rowFilter.flows_inputs.description": string;
+  /** @description flows_outputs */
   "body.flows_outputs": definitions["flows_outputs"];
+  /** Format: bigint */
   "rowFilter.flows_outputs.id": string;
+  /** Format: bigint */
   "rowFilter.flows_outputs.flow": string;
+  /** Format: bigint */
   "rowFilter.flows_outputs.output": string;
+  /** Format: character varying */
   "rowFilter.flows_outputs.title": string;
-  /** growing */
-  "body.growing": definitions["growing"];
-  "rowFilter.growing.Name": string;
-  "rowFilter.growing.Brief": string;
-  "rowFilter.growing.Cover": string;
-  "rowFilter.growing.Created at": string;
-  "rowFilter.growing.Files": string;
-  "rowFilter.growing.Tags": string;
-  "rowFilter.growing.Type": string;
-  "rowFilter.growing.URL": string;
-  /** industries */
-  "body.industries": definitions["industries"];
-  "rowFilter.industries.id": string;
-  "rowFilter.industries.industry": string;
-  /** job_groups */
+  /** Format: text */
+  "rowFilter.flows_outputs.description": string;
+  /** Format: ARRAY */
+  "rowFilter.flows_outputs.image_url": string;
+  /** @description flows_posts */
+  "body.flows_posts": definitions["flows_posts"];
+  /** Format: bigint */
+  "rowFilter.flows_posts.id": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.flows_posts.created_at": string;
+  /** Format: bigint */
+  "rowFilter.flows_posts.flow": string;
+  /** Format: bigint */
+  "rowFilter.flows_posts.post": string;
+  /** @description flows_tools */
+  "body.flows_tools": definitions["flows_tools"];
+  /** Format: bigint */
+  "rowFilter.flows_tools.id": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.flows_tools.created_at": string;
+  /** Format: bigint */
+  "rowFilter.flows_tools.flow": string;
+  /** Format: integer */
+  "rowFilter.flows_tools.tool": string;
+  /** @description full_flows */
+  "body.full_flows": definitions["full_flows"];
+  /** Format: text */
+  "rowFilter.full_flows.name": string;
+  /** Format: bigint */
+  "rowFilter.full_flows.id": string;
+  /** Format: text */
+  "rowFilter.full_flows.type": string;
+  /** @description inputs */
+  "body.inputs": definitions["inputs"];
+  /** Format: bigint */
+  "rowFilter.inputs.id": string;
+  /** Format: text */
+  "rowFilter.inputs.input": string;
+  /** Format: text */
+  "rowFilter.inputs.description": string;
+  /** Format: bigint */
+  "rowFilter.inputs.job_group": string;
+  /** @description job_groups */
   "body.job_groups": definitions["job_groups"];
+  /** Format: integer */
   "rowFilter.job_groups.id": string;
+  /** Format: text */
   "rowFilter.job_groups.job_group": string;
+  /** Format: text */
   "rowFilter.job_groups.emoji": string;
-  /** jobs */
+  /** Format: text */
+  "rowFilter.job_groups.type": string;
+  /** @description jobs */
   "body.jobs": definitions["jobs"];
+  /** Format: integer */
   "rowFilter.jobs.id": string;
+  /** Format: text */
   "rowFilter.jobs.job": string;
+  /** Format: integer */
   "rowFilter.jobs.job_group": string;
+  /** Format: text */
   "rowFilter.jobs.description": string;
-  /** jobs_tools */
+  /** @description jobs_tools */
   "body.jobs_tools": definitions["jobs_tools"];
+  /** Format: integer */
   "rowFilter.jobs_tools.id": string;
+  /** Format: integer */
   "rowFilter.jobs_tools.job": string;
+  /** Format: integer */
   "rowFilter.jobs_tools.tool": string;
+  /** Format: character varying */
   "rowFilter.jobs_tools.instruction_link": string;
-  /** listings */
+  /** Format: character varying */
+  "rowFilter.jobs_tools.description": string;
+  /** @description listings */
   "body.listings": definitions["listings"];
+  /** Format: integer */
   "rowFilter.listings.id": string;
+  /** Format: text */
   "rowFilter.listings.listing": string;
+  /** Format: public.listing_type */
   "rowFilter.listings.listing_type": string;
-  "rowFilter.listings.URL": string;
-  "rowFilter.listings.Description": string;
-  "rowFilter.listings.Rating": string;
-  /** methods */
-  "body.methods": definitions["methods"];
-  "rowFilter.methods.id": string;
-  /** models */
+  /** Format: text */
+  "rowFilter.listings.url": string;
+  /** Format: text */
+  "rowFilter.listings.description": string;
+  /** Format: smallint */
+  "rowFilter.listings.rating": string;
+  /** Format: boolean */
+  "rowFilter.listings.published": string;
+  /** @description models */
   "body.models": definitions["models"];
+  /** Format: integer */
   "rowFilter.models.id": string;
+  /** Format: text */
   "rowFilter.models.model": string;
+  /** Format: ARRAY */
   "rowFilter.models.applications": string;
-  /** organisations */
-  "body.organisations": definitions["organisations"];
-  "rowFilter.organisations.id": string;
-  /** outputs */
+  /** @description outputs */
   "body.outputs": definitions["outputs"];
+  /** Format: bigint */
   "rowFilter.outputs.id": string;
+  /** Format: character varying */
   "rowFilter.outputs.output": string;
+  /** Format: text */
   "rowFilter.outputs.description": string;
+  /** Format: integer */
   "rowFilter.outputs.job_group": string;
-  /** posts */
+  /** @description posts */
   "body.posts": definitions["posts"];
+  /** Format: bigint */
   "rowFilter.posts.id": string;
+  /** Format: text */
   "rowFilter.posts.slug": string;
+  /** Format: timestamp with time zone */
   "rowFilter.posts.createdAt": string;
+  /** Format: timestamp with time zone */
   "rowFilter.posts.updatedAt": string;
+  /** Format: text */
   "rowFilter.posts.title": string;
+  /** Format: text */
   "rowFilter.posts.content": string;
+  /** Format: boolean */
   "rowFilter.posts.isPublished": string;
+  /** Format: uuid */
   "rowFilter.posts.authorId": string;
+  /** Format: bigint */
   "rowFilter.posts.parentId": string;
+  /** Format: boolean */
   "rowFilter.posts.live": string;
+  /** Format: bigint */
   "rowFilter.posts.siteId": string;
+  /** Format: boolean */
   "rowFilter.posts.isPinned": string;
+  /** Format: boolean */
   "rowFilter.posts.isDeleted": string;
+  /** Format: boolean */
   "rowFilter.posts.isApproved": string;
-  /** prices */
+  /** @description posts_archived */
+  "body.posts_archived": definitions["posts_archived"];
+  /** Format: bigint */
+  "rowFilter.posts_archived.id": string;
+  /** Format: text */
+  "rowFilter.posts_archived.slug": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.posts_archived.createdAt": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.posts_archived.updatedAt": string;
+  /** Format: text */
+  "rowFilter.posts_archived.title": string;
+  /** Format: text */
+  "rowFilter.posts_archived.content": string;
+  /** Format: boolean */
+  "rowFilter.posts_archived.isPublished": string;
+  /** Format: uuid */
+  "rowFilter.posts_archived.authorId": string;
+  /** Format: bigint */
+  "rowFilter.posts_archived.parentId": string;
+  /** Format: boolean */
+  "rowFilter.posts_archived.live": string;
+  /** Format: bigint */
+  "rowFilter.posts_archived.siteId": string;
+  /** Format: boolean */
+  "rowFilter.posts_archived.isPinned": string;
+  /** Format: boolean */
+  "rowFilter.posts_archived.isDeleted": string;
+  /** Format: boolean */
+  "rowFilter.posts_archived.isApproved": string;
+  /** @description prices */
   "body.prices": definitions["prices"];
+  /** Format: text */
   "rowFilter.prices.id": string;
+  /** Format: text */
   "rowFilter.prices.product_id": string;
+  /** Format: boolean */
   "rowFilter.prices.active": string;
+  /** Format: text */
   "rowFilter.prices.description": string;
+  /** Format: bigint */
   "rowFilter.prices.unit_amount": string;
+  /** Format: text */
   "rowFilter.prices.currency": string;
+  /** Format: public.pricing_type */
   "rowFilter.prices.type": string;
+  /** Format: public.pricing_plan_interval */
   "rowFilter.prices.interval": string;
+  /** Format: integer */
   "rowFilter.prices.interval_count": string;
+  /** Format: integer */
   "rowFilter.prices.trial_period_days": string;
+  /** Format: jsonb */
   "rowFilter.prices.metadata": string;
-  /** products */
+  /** @description products */
   "body.products": definitions["products"];
+  /** Format: text */
   "rowFilter.products.id": string;
+  /** Format: boolean */
   "rowFilter.products.active": string;
+  /** Format: text */
   "rowFilter.products.name": string;
+  /** Format: text */
   "rowFilter.products.description": string;
+  /** Format: text */
   "rowFilter.products.image": string;
+  /** Format: jsonb */
   "rowFilter.products.metadata": string;
-  /** sites */
+  /** @description searchable */
+  "body.searchable": definitions["searchable"];
+  /** Format: text */
+  "rowFilter.searchable.name": string;
+  /** @description searchable_entries */
+  "body.searchable_entries": definitions["searchable_entries"];
+  /** Format: text */
+  "rowFilter.searchable_entries.name": string;
+  /** Format: bigint */
+  "rowFilter.searchable_entries.id": string;
+  /** Format: text */
+  "rowFilter.searchable_entries.type": string;
+  /** @description sites */
   "body.sites": definitions["sites"];
+  /** Format: bigint */
   "rowFilter.sites.id": string;
+  /** Format: text */
   "rowFilter.sites.siteDomain": string;
+  /** Format: uuid */
   "rowFilter.sites.ownerId": string;
+  /** Format: text */
   "rowFilter.sites.name": string;
-  /** subscriptions */
+  /** @description subscriptions */
   "body.subscriptions": definitions["subscriptions"];
+  /** Format: text */
   "rowFilter.subscriptions.id": string;
+  /** Format: uuid */
   "rowFilter.subscriptions.user_id": string;
+  /** Format: public.subscription_status */
   "rowFilter.subscriptions.status": string;
+  /** Format: jsonb */
   "rowFilter.subscriptions.metadata": string;
+  /** Format: text */
   "rowFilter.subscriptions.price_id": string;
+  /** Format: integer */
   "rowFilter.subscriptions.quantity": string;
+  /** Format: boolean */
   "rowFilter.subscriptions.cancel_at_period_end": string;
+  /** Format: timestamp with time zone */
   "rowFilter.subscriptions.created": string;
+  /** Format: timestamp with time zone */
   "rowFilter.subscriptions.current_period_start": string;
+  /** Format: timestamp with time zone */
   "rowFilter.subscriptions.current_period_end": string;
+  /** Format: timestamp with time zone */
   "rowFilter.subscriptions.ended_at": string;
+  /** Format: timestamp with time zone */
   "rowFilter.subscriptions.cancel_at": string;
+  /** Format: timestamp with time zone */
   "rowFilter.subscriptions.canceled_at": string;
+  /** Format: timestamp with time zone */
   "rowFilter.subscriptions.trial_start": string;
+  /** Format: timestamp with time zone */
   "rowFilter.subscriptions.trial_end": string;
-  /** tools */
+  /** @description tools */
   "body.tools": definitions["tools"];
+  /** Format: integer */
   "rowFilter.tools.id": string;
+  /** Format: text */
   "rowFilter.tools.tool": string;
+  /** Format: text */
   "rowFilter.tools.category": string;
+  /** Format: text */
   "rowFilter.tools.link": string;
+  /** Format: integer */
   "rowFilter.tools.model": string;
+  /** Format: text */
   "rowFilter.tools.portability": string;
+  /** Format: character varying */
   "rowFilter.tools.description": string;
+  /** Format: text */
   "rowFilter.tools.logo_url": string;
-  /** users */
+  /** Format: public.tool_sections */
+  "rowFilter.tools.section": string;
+  /** Format: character varying */
+  "rowFilter.tools.type": string;
+  /** Format: boolean */
+  "rowFilter.tools.featured": string;
+  /** @description usecases */
+  "body.usecases": definitions["usecases"];
+  /** Format: bigint */
+  "rowFilter.usecases.id": string;
+  /** Format: text */
+  "rowFilter.usecases.usecase": string;
+  /** Format: text */
+  "rowFilter.usecases.description": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.usecases.created_at": string;
+  /** @description user_paas */
+  "body.user_paas": definitions["user_paas"];
+  /** Format: bigint */
+  "rowFilter.user_paas.id": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.user_paas.created_at": string;
+  /** Format: uuid */
+  "rowFilter.user_paas.user": string;
+  /** Format: text */
+  "rowFilter.user_paas.slug": string;
+  /** @description user_public_profile */
+  "body.user_public_profile": definitions["user_public_profile"];
+  /** Format: uuid */
+  "rowFilter.user_public_profile.id": string;
+  /** Format: text */
+  "rowFilter.user_public_profile.full_name": string;
+  /** Format: text */
+  "rowFilter.user_public_profile.avatar_url": string;
+  /** Format: text */
+  "rowFilter.user_public_profile.username": string;
+  /** @description user_viewables */
+  "body.user_viewables": definitions["user_viewables"];
+  /** Format: text */
+  "rowFilter.user_viewables.name": string;
+  /** Format: bigint */
+  "rowFilter.user_viewables.id": string;
+  /** Format: text */
+  "rowFilter.user_viewables.type": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.user_viewables.created": string;
+  /** @description users */
   "body.users": definitions["users"];
+  /** Format: uuid */
   "rowFilter.users.id": string;
+  /** Format: text */
   "rowFilter.users.full_name": string;
+  /** Format: text */
   "rowFilter.users.avatar_url": string;
+  /** Format: jsonb */
   "rowFilter.users.billing_address": string;
+  /** Format: jsonb */
   "rowFilter.users.payment_method": string;
+  /** Format: timestamp with time zone */
   "rowFilter.users.updated_at": string;
+  /** Format: text */
   "rowFilter.users.username": string;
+  /** Format: text */
   "rowFilter.users.website": string;
-  /** values */
-  "body.values": definitions["values"];
-  "rowFilter.values.id": string;
-  "rowFilter.values.value": string;
-  "rowFilter.values.description": string;
-  /** votes */
+  /** @description votes */
   "body.votes": definitions["votes"];
+  /** Format: bigint */
   "rowFilter.votes.postId": string;
+  /** Format: uuid */
   "rowFilter.votes.userId": string;
+  /** Format: integer */
   "rowFilter.votes.value": string;
 }
 
