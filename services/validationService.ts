@@ -10,6 +10,13 @@ class ValidationService {
         }
         return matchResult.input === matchResult[0]
     }
+
+    validateOrganisationName(string: string) {
+        if (string.length > 3 && string.length < 100) {
+            return true
+        }
+        return false
+    }
 }
 
 export const validationService = new ValidationService()

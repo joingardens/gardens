@@ -1,17 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UseInputState } from "./useInput";
+
+export class FormError {
+    constructor(
+        public isError: boolean,
+        public errorText: string
+    ) {}
+
+    static getDefaultState() {
+        return new FormError(false, "")
+    }
+}
 
 export function useForm<T>(
     inputs: UseInputState<string | number | boolean>[],
     handler: () => Promise<T>
     ) {
     const [ isSubmited, setIsSubmited ] = useState(false)
+    const [ formError, setFormError ] = useState(FormError.getDefaultState())
     const errors = Object.fromEntries(inputs.map(a => [a.name, a.error]))
     const values = Object.fromEntries(inputs.map(a => [a.name, a.value]))
+
+
     const submit = () => {
         setIsSubmited(true)
+        const errors = []
         for (let input of inputs) {
-            const result = input.validate()
+            errors.push(input.validate())
         }
         if (Object.values(errors).includes(true)) {
             return false
@@ -29,7 +44,9 @@ export function useForm<T>(
         submit,
         values,
         errors,
-        isSubmited
+        isSubmited,
+        setFormError,
+        formError
     }
 
 }

@@ -19,6 +19,7 @@ export function useInput<T> (
     const validate = () => {
         if (validatior) {
             const validationResult = validatior(value)
+            console.log(name, validationResult)
             setError(!validationResult)
             return !validationResult
         } 

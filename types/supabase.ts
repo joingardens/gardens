@@ -3018,6 +3018,7 @@ export interface paths {
           created_at?: parameters["rowFilter.user_paas.created_at"];
           user?: parameters["rowFilter.user_paas.user"];
           slug?: parameters["rowFilter.user_paas.slug"];
+          org_name?: parameters["rowFilter.user_paas.org_name"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -3072,6 +3073,7 @@ export interface paths {
           created_at?: parameters["rowFilter.user_paas.created_at"];
           user?: parameters["rowFilter.user_paas.user"];
           slug?: parameters["rowFilter.user_paas.slug"];
+          org_name?: parameters["rowFilter.user_paas.org_name"];
         };
         header: {
           /** Preference */
@@ -3090,6 +3092,7 @@ export interface paths {
           created_at?: parameters["rowFilter.user_paas.created_at"];
           user?: parameters["rowFilter.user_paas.user"];
           slug?: parameters["rowFilter.user_paas.slug"];
+          org_name?: parameters["rowFilter.user_paas.org_name"];
         };
         body: {
           /** user_paas */
@@ -4455,6 +4458,8 @@ export interface definitions {
     user: string;
     /** Format: text */
     slug: string;
+    /** Format: text */
+    org_name: string;
   };
   user_public_profile: {
     /**
@@ -5159,6 +5164,8 @@ export interface parameters {
   "rowFilter.user_paas.user": string;
   /** Format: text */
   "rowFilter.user_paas.slug": string;
+  /** Format: text */
+  "rowFilter.user_paas.org_name": string;
   /** @description user_public_profile */
   "body.user_public_profile": definitions["user_public_profile"];
   /** Format: uuid */
