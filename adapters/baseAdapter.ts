@@ -4,7 +4,7 @@ import { BigNumber } from "bignumber.js"
 export type SupabaseInsertionDoc<T> = Omit<Omit<T, "id">, "created_at">
 
 export class BaseAdapter<T> {
-    private readonly supabase: SupabaseClient
+    readonly supabase: SupabaseClient
     constructor(
         private tableName: string
     ) {

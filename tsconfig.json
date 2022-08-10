@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "pages/flows.js"  ],
+, "pages/flows.js", "components/ui/Button/Button.tsx"  ],
   "exclude": [
     "node_modules"
   ]

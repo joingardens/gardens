@@ -10,7 +10,6 @@ import { ToastContextProvider } from '../components/context/ToastContext';
 import { AppProps } from 'next/app'
 import { FC } from 'react';
 import { useRouter } from 'next/router';
-import { validationService } from '../services/validationService';
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   
@@ -22,8 +21,11 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   }, []);
 
   useEffect(() => {
-    console.log(validationService.validateSubdomainName("List"))
-  }, [])
+    console.log(router.query)
+    if (router.query.type === "recovery") {
+      router.push("/recovery")
+    }
+  }, [router.query])
 
   return (
     <div className="bg-white">
@@ -32,11 +34,10 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
       <ModalsContextProvider>
       <ToastContextProvider>
         <NewFlowContextProvider>
-
         <Layout meta={{}}>
           <Component {...pageProps} />
         </Layout>
-      </NewFlowContextProvider>
+        </NewFlowContextProvider>
       </ToastContextProvider>
       </ModalsContextProvider>
       </UserContextProvider>

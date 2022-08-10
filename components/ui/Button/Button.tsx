@@ -5,7 +5,7 @@ import s from './Button.module.css';
 
 import LoadingDots from '../LoadingDots';
 
-const Button = forwardRef((props, buttonRef) => {
+const Button = forwardRef((props:any, buttonRef) => {
   const {
     className,
     variant = 'flat',
