@@ -19,9 +19,17 @@ export type IAction =
 {type: "setOutputImages", payload: File[]} |
 {type: "setStepImages", payload: {index:number, images: File[]}} |
 {type: "setLoading", payload: boolean} |
-{type: "setErrors", payload: string[]}
+{type: "setErrors", payload: string[]} |
+{type: "setIsPrivate", payload: boolean}
 
 export const NewFlowReducer: Reducer<INewFlowState, IAction> = (state, action: IAction) => {
+
+    if (action.type === "setIsPrivate") {
+        return {
+            ...state,
+            isPrivate: action.payload
+        }
+    }
 
     if (action.type === "setTitle") {
         return {

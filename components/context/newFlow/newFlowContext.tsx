@@ -42,7 +42,8 @@ export interface INewFlowState {
   steps: IStep[],
   output: IOutput,
   loading: boolean,
-  errors: string[]
+  errors: string[],
+  isPrivate: boolean
 }
 
 export const defaultNewFlowInput:IInput = {
@@ -73,7 +74,8 @@ const InitialState:INewFlowState = {
   ],
   output: {output: "", description: "", images: []},
   loading: false,
-  errors: []
+  errors: [],
+  isPrivate: false
 }
 const NewFlowContextProvider = ({ children }: Props) => {
   const [newFlowState, newFlowDispatch] = useReducer(NewFlowReducer, InitialState)

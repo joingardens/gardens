@@ -772,6 +772,7 @@ export interface paths {
           author?: parameters["rowFilter.flows.author"];
           type?: parameters["rowFilter.flows.type"];
           usecase?: parameters["rowFilter.flows.usecase"];
+          is_private?: parameters["rowFilter.flows.is_private"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -829,6 +830,7 @@ export interface paths {
           author?: parameters["rowFilter.flows.author"];
           type?: parameters["rowFilter.flows.type"];
           usecase?: parameters["rowFilter.flows.usecase"];
+          is_private?: parameters["rowFilter.flows.is_private"];
         };
         header: {
           /** Preference */
@@ -850,6 +852,7 @@ export interface paths {
           author?: parameters["rowFilter.flows.author"];
           type?: parameters["rowFilter.flows.type"];
           usecase?: parameters["rowFilter.flows.usecase"];
+          is_private?: parameters["rowFilter.flows.is_private"];
         };
         body: {
           /** flows */
@@ -3840,6 +3843,11 @@ export interface definitions {
      * This is a Foreign Key to `usecases.id`.<fk table='usecases' column='id'/>
      */
     usecase?: number;
+    /**
+     * Format: boolean
+     * @default false
+     */
+    is_private: boolean;
   };
   flows_inputs: {
     /**
@@ -4838,6 +4846,8 @@ export interface parameters {
   "rowFilter.flows.type": string;
   /** Format: bigint */
   "rowFilter.flows.usecase": string;
+  /** Format: boolean */
+  "rowFilter.flows.is_private": string;
   /** @description flows_inputs */
   "body.flows_inputs": definitions["flows_inputs"];
   /** Format: bigint */

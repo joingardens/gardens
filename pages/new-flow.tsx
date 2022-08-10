@@ -75,12 +75,16 @@ const newFlow = () => {
                 <div className={`flex-col items-center flex mt-8`}>
                 <div className={`text-lg font-semibold mb-4 w-full  text-left ml-1`}>End result</div>
                 <NewFlowOutputInput/>
+                <div className="flex mt-12">
+                    <input checked={newFlowState.isPrivate} onClick={() => {newFlowService.setChecked(!newFlowState.isPrivate)}} type="checkbox"/>
+                    <span className="ml-2">Make private?</span>
+                </div>
                 <button onClick={async () => {
                     if (user.id) {
                         await newFlowService.saveFlow(user.id)
                         //service.closeModal("newFlow")
                     }
-                    }} className={`inline-flex items-center bg-white border border-black py-1 px-3 mt-12 focus:outline-none hover:bg-gray-200 rounded text-base`}>
+                    }} className={`inline-flex items-center bg-white border border-black py-1 px-3 mt-4 focus:outline-none hover:bg-gray-200 rounded text-base`}>
                     {newFlowState.loading ? "loading..." : "Publish guide"}
                 </button>
                 </div>

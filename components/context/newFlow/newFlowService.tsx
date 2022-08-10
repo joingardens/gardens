@@ -26,6 +26,9 @@ export class NewFlowService extends SupabaseServiceClass {
       this.dispatch = dispatch
       this.state = state
     }
+    setChecked(checked: boolean) {
+        this.dispatch({type: "setIsPrivate", payload: checked})
+    }
     setTitle(title: string){
         this.dispatch({type: "setTitle", payload: title})
     }
@@ -290,7 +293,8 @@ export class NewFlowService extends SupabaseServiceClass {
         }
         const flowArr = await this.insertItem("flows", [{
             flow: this.state.title,
-            author: id
+            author: id,
+            is_private: this.state.isPrivate
         }])
         console.log(flowArr)
         const flow = flowArr[0]
