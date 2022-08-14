@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-
 import LoadingDots from '../components/ui/LoadingDots';
 import Button from '../components/ui/Button';
 import { useUser } from '../utils/useUser';
@@ -24,7 +23,7 @@ function Card({ title, description, footer, children }) {
 export default function Account() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const { userLoaded, user, session, userDetails, subscription } = useUser();
+  const { userLoaded, user, session, userDetails, subscription } = useUser(); 
 
   useEffect(() => {
     if (!user) router.replace('/signin');

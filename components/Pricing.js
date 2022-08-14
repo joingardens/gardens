@@ -9,9 +9,11 @@ import { useUser } from '../utils/useUser';
 
 export default function Pricing({ products }) {
   const router = useRouter();
-  const [billingInterval, setBillingInterval] = useState('year');
+  const [billingInterval, setBillingInterval] = useState('month');
   const [priceIdLoading, setPriceIdLoading] = useState();
   const { session, userLoaded, subscription } = useUser();
+
+  console.log(products)
 
   const handleCheckout = async (price) => {
     setPriceIdLoading(price.id);
@@ -61,14 +63,10 @@ export default function Pricing({ products }) {
 
   return (
     <section id="pricing">
-      <div className="max-w-6xl mx-auto py-8 sm:py-24 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto  px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:flex-col sm:align-center">
-          <h1 className="text-4xl font-extrabold sm:text-center sm:text-6xl">
-            Pricing Plans
-          </h1>
-          <p className="mt-5 text-xl text-accents-6 sm:text-center sm:text-2xl max-w-2xl m-auto">
-            Start building for free, then add a site plan to go live. Account
-            plans unlock additional features.
+          <p className="text-xl text-accents-6 sm:text-center sm:text-2xl max-w-2xl m-auto">
+           Select a subscription plan to get started.
           </p>
           <div className="relative self-center mt-6 rounded-lg p-0.5 flex sm:mt-8 border border-accents-0">
             <button
@@ -95,8 +93,9 @@ export default function Pricing({ products }) {
             </button>
           </div>
         </div>
-        <div className="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-4">
+        <div className="mt-12 sm:mt-16 flex flex-wrap lg:flex-nowrap">
           {products.map((product) => {
+            console.log(product)
             const price = product.prices.find(
               (price) => price.interval === billingInterval
             );
@@ -130,6 +129,15 @@ export default function Pricing({ products }) {
                       /{billingInterval}
                     </span>
                   </p>
+                  <div className="prose text-lg mt-2">
+                  For small teams and hobbyists
+                  <ul>
+                  <li>Deploy apps to your cloud in one click</li>
+                  <li>Access our curated library of high-quality apps</li>
+                  <li>Get a home page for your team and an admin dashboard to manage your apps</li>
+                  </ul>
+                  <div className="pb-6"></div>
+                  </div>
                   <Button
                     variant="slim"
                     type="button"
@@ -146,59 +154,37 @@ export default function Pricing({ products }) {
               </div>
             );
           })}
+          <div className='rounded-lg shadow-sm divide-y divide-accents-2 bg-gray-50 mt-4 lg:mt-0 lg:ml-4'>
+                <div className="p-6">
+                  <h2 className="text-2xl leading-6 font-semibold">
+                   Enterprise
+                  </h2>
+                  <p className="mt-8">
+                    <span className="text-5xl font-extrabold white">
+                      Contact us
+                    </span>
+                  </p>
+                  <div className="prose text-lg mt-2">
+                  For bigger organisations and teams looking to scale. Everything in Subscription plus:
+                  <ul>
+                  <li>Designated Support manager</li>
+                  <li>Complex deployments</li>
+                  <li>Custom config and back-ups</li>
+                  <li>Done-for-you migrations and integrating with existing infrastructure</li>
+                  </ul>
+                  </div>
+                  <Button
+                    variant="slim"
+                    type="button"
+                    disabled={session && !userLoaded}
+                    onClick={() => location.replace("https://cal.com/gardens/intro")}
+                    className="mt-8 block w-full rounded-md py-2 text-sm font-semibold text-center hover:bg-gray-900"
+                  >
+                    Talk to us
+                  </Button>
+                </div>
+              </div>
         </div>
-        {/*<div>
-          <p className="mt-24 text-xs uppercase text-accents-3 text-center font-bold tracking-widest">
-            Brought to you by
-          </p>
-          <div className="flex flex-col items-center my-12 space-y-4 sm:mt-8 sm:space-y-0 md:mx-auto md:max-w-2xl sm:grid sm:gap-6 sm:grid-cols-5">
-            <div className="flex items-center justify-start">
-              <a href="https://nextjs.org" aria-label="Next.js Link">
-                <img
-                  src="/nextjs.svg"
-                  alt="Next.js Logo"
-                  className="h-12 text-primary"
-                />
-              </a>
-            </div>
-            <div className="flex items-center justify-start">
-              <a href="https://vercel.com" aria-label="Vercel.com Link">
-                <img
-                  src="/vercel.svg"
-                  alt="Vercel.com Logo"
-                  className="h-6 text-primary"
-                />
-              </a>
-            </div>
-            <div className="flex items-center justify-start">
-              <a href="https://stripe.com" aria-label="stripe.com Link">
-                <img
-                  src="/stripe.svg"
-                  alt="stripe.com Logo"
-                  className="h-12 text-primary"
-                />
-              </a>
-            </div>
-            <div className="flex items-center justify-start">
-              <a href="https://supabase.io" aria-label="supabase.io Link">
-                <img
-                  src="/supabase.svg"
-                  alt="supabase.io Logo"
-                  className="h-10 text-primary"
-                />
-              </a>
-            </div>
-            <div className="flex items-center justify-start">
-              <a href="https://github.com" aria-label="github.com Link">
-                <img
-                  src="/github.svg"
-                  alt="github.com Logo"
-                  className="h-8 text-primary"
-                />
-              </a>
-            </div>
-        </div>
-        </div>*/}
       </div>
     </section>
   );
