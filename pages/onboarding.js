@@ -22,7 +22,7 @@ export default function Apps({ products }) {
   	<>
     <div className="mt-12"></div>
     <div className="md:w-2/3 w-4/5 mx-auto flex flex-col md:items-center">
-    <h1 className="text-3xl py-4 text-center font-bold">Welcome to Gardens!</h1>
+    <h1 className="text-3xl py-4 text-center font-bold">Select a plan</h1>
     <Pricing products={products} />
     <div className="mb-24"/>
     </div>
