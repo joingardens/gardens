@@ -4,7 +4,7 @@ import urlify from '../../../utils/helpers.js';
 
 function LightFeatureH(props) {
 
-  const listItems = props.items.map(item => 
+  const listItems = (props.items ? (props.items.map(item => 
     <a href={item ? ('#' + urlify(item)) : null} className="w-full text-gray-900 font-medium" key={item ? urlify(item) : ''}>
     <div className="flex items-center px-2 py-2">
                 <span className={`bg-${props.theme}-100 text-${props.theme}-500 w-4 h-4 mr-2 rounded-full inline-flex items-center justify-center`}>
@@ -23,12 +23,12 @@ function LightFeatureH(props) {
                {item}
                </div>
               </a>
-    )
+    )) : null) 
   
   return (
             <div className="flex flex-col h-full mt-0.5 overflow-y-auto space-y-2.5 items-center w-full bg-gray-50 shadow-inner">
             <div className="h-4" />
-              {listItems}
+              {(listItems ? listItems : props.children)}
             </div>
   );
 }

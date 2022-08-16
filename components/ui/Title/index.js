@@ -7,10 +7,10 @@ function LightHeroB(props) {
     <section className="text-gray-600 body-font">
       <div className={`mx-auto flex px-5 md:pb-12 pt-24 items-center justify-center flex-col`}>
         <div className="text-center lg:w-2/3 w-full">
-          <h1 className="title-font sm:text-4xl text-3xl mb-4 mt-4 font-bold text-gray-900 underline">
+          <h1 className="title-font sm:text-4xl text-3xl mb-4 mt-4 font-bold text-gray-900">
             {props.titleTitle}
           </h1>
-          <p className="leading-relaxed text-gray-900 font-semibold">
+          <p className="leading-relaxed text-gray-900 text-lg">
             {props.titleDescription}
           </p>
         </div>

@@ -1,17 +1,27 @@
-import LightHeroD from '../components/ui/Hero';
-import ParagraphWithButton from '../components/ui/ParagraphWithButton';
-import ListItem from '../components/ui/ListItem';
-import TextList from '../components/ui/TextList';
-import ListItemMirrored from '../components/ui/ListItemMirrored';
-import Title from '../components/ui/Title';
-import { getAllFlows, getAllFlowItems, getAllFlowItemsWithTools, getAllActions } from '../utils/supabase-client';
-import SquareBlock from '../components/ui/SquareBlock';
-import getRandomGradient from '../utils/getRandomGradient';
-import PrettyBlock from '../components/ui/PrettyBlock';
+import router, { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { useUser } from "../../utils/useUser";
+import Link from "next/link";
+import Image from "next/image";
+import useToast from "../../components/hooks/useToast";
+import Sidebar from '../../components/ui/Sidebar';
+import ListItem from '../../components/ui/ListItem';
+import TextList from '../../components/ui/TextList';
+import ListItemMirrored from '../../components/ui/ListItemMirrored';
+import Title from '../../components/ui/Title';
+import { getAllFlows, getAllFlowItems, getAllFlowItemsWithTools, getAllActions } from '../../utils/supabase-client';
+import SquareBlock from '../../components/ui/SquareBlock';
+import PrettyBlock from '../../components/ui/PrettyBlock';
 
-export default function Flows({ flows, flowItemsWithTools }) {
+const limit = 10
 
-  let groupArray = []
+const MyFlowsPage = ({ flows, flowItemsWithTools }) => {
+    const {user} = useUser()
+    const {makeToast} = useToast()
+    const router = useRouter()
+    const [loading, setLoading] = useState(true)
+    const [page, setPage] = useState(1)
+    let groupArray = []
   //const uniqueGroups = [...new Set(flows.map(flow => flow.job_group))];
 
   const uniqueGroups = [];
@@ -62,25 +72,25 @@ export default function Flows({ flows, flowItemsWithTools }) {
     );
 
 
-  return (
+    return (
     <>
     <div className="-mb-20 -mt-20">
-    <Title titleTitle={'Guides'} 
-    titleDescription={'All guides, sorted by category'} />
+    <Title titleTitle={'My Guides'} 
+    titleDescription={'Welcome to your guides section'} />
     </div>
     <div className="flex justify-center">
-    <aside className="h-screen sticky top-0 w-1/5 hidden md:block">
-    <div className="pt-20 h-full">
-    <TextList items={groupArray} />
-    </div>
-    </aside>
+    <Sidebar page="myflows" />
+    <div className="px-5 w-full mb-24 mt-12 md:mt-8">
     <div className="flex flex-wrap px-5 w-full justify-start mb-24">
     {listFlows}
+    </div>
     </div>
     </div>
     </>
     )
 }
+
+export default MyFlowsPage
 
 export async function getStaticProps() { 
   const flows = await getAllFlows();

@@ -1,10 +1,12 @@
 import router, { useRouter } from "next/router"
 import { useEffect, useState } from "react"
+import { useUser } from "../../utils/useUser"
 import useToast from "../../components/hooks/useToast"
 import Plus from "../../components/icons/Plus"
 import DraftCard from "../../components/writer/draftCard"
 import writerService from "../../components/writer/writerService"
-import { useUser } from "../../utils/useUser"
+import Title from '../../components/ui/Title';
+import Sidebar from '../../components/ui/Sidebar';
 
 const limit = 10
 
@@ -59,12 +61,16 @@ const DraftsPage = () => {
     }
 
     return (
-        <div className={`p-6 mt-12`}>
-            <h1 className={`mb-7 flex justify-between`}>
-                <div className={`text-2xl `}>
-                    Your Drafts
-                </div>
-                <button 
+    <>
+    <div className="-mb-20 -mt-20">
+    <Title titleTitle={'My Posts'} 
+    titleDescription={'Welcome to your posts section'} />
+    </div>
+    <div className="flex justify-center">
+    <Sidebar page="drafts" />
+    <div className="px-5 w-full mb-24 mt-24 md:mt-16">
+    <div className="flex flex-wrap justify-center items-center w-4/5 sm:pl-8 md:pl-16 md:justify-start mx-auto py-4">
+    <button 
                 onClick={async (e) => {
                     if (user) {
                        const result = await writerService.createNewDraft(user.id)
@@ -79,8 +85,6 @@ const DraftsPage = () => {
                         + New Draft
                     </div>
                 </button>
-
-            </h1>
             <div className={`grid grid-cols-1 gap-5`}>
                 {drafts.map(a => {
                     return  <DraftCard 
@@ -95,6 +99,9 @@ const DraftsPage = () => {
                 })}
             </div>
         </div>
+        </div>
+        </div>
+     </>
     )
 }
 
