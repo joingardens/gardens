@@ -11,7 +11,6 @@ export const useDigitalOcean = () => {
     }, [])
 
     const changeToken = (token: string) => {
-        console.log(token)
         setToken(token)
         localStorage.setItem("digital_ocean_access_token", token)
     }
