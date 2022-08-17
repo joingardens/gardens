@@ -11,6 +11,8 @@ export default function Connect() {
 
   const [user, setUser] = useState(null);
   const router = useRouter();
+  const clientId = process.env.NEXT_PUBLIC_DIGITAL_OCEAN_CLIENT_ID
+
 
   return (
   	<>
@@ -21,16 +23,18 @@ export default function Connect() {
     Let's connect your Digital Ocean account. Press "Connect DigitalOcean" to start.
     </div>
     <div className="mt-8 mx-auto text-xl">
-    <Link href="/">
-                <a  target="_blank" rel="noopener" style={{color: 'white', textDecoration: 'none', fontWeight: 700}} className="bg-blue-500 hover:bg-blue-400 transition py-1 px-2 focus:outline-none rounded">
-                  Connect DigitalOcean
-                </a>
+    <Link href={`
+            https://cloud.digitalocean.com/v1/oauth/authorize?response_type=code&client_id=${clientId}&redirect_uri=https://joingardens.com/onboarding/provision&scope=read write
+          `}>
+          <a  style={{color: 'white', textDecoration: 'none', fontWeight: 700}} className="bg-blue-500 hover:bg-blue-400 transition py-1 px-2 focus:outline-none rounded">
+            Connect DigitalOcean
+          </a>
     </Link>
     </div>
     <div className="mx-auto mt-8 flex">
     <Link href="/onboarding/prerequisites">
     <a className="border border-gray hover:bg-gray-400 hover:text-white  text-xl transition py-1 px-2 focus:outline-none rounded">
-    Previous step
+      Previous step
     </a>
     </Link>
     <Link href="/onboarding/provision">

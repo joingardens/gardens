@@ -6,11 +6,24 @@ import Link from 'next/link';
 import Button from '../../components/ui/Button';
 import Image from 'next/image'
 import Input from '../../components/ui/Input';
+import { apiAdapter } from '../../adapters/other-apps/api/adapter';
+import { useDigitalOcean } from '../../components/hooks/useDigitalOcean';
 
 export default function Provision() {
 
   const [user, setUser] = useState(null);
-  const router = useRouter();
+  const router = useRouter()
+  const { token, changeToken } = useDigitalOcean()
+
+  useEffect(() => {
+    if (!token) {
+      if (router.query.code) {
+        apiAdapter.getDigitalOceanCode(router.query.code as string).then((r) => changeToken(
+          r.data.token
+        ))
+      }
+    }
+  }, [router.query])
 
   return (
   	<>
