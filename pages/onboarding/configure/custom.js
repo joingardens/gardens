@@ -1,13 +1,13 @@
-import { useUser } from '../../utils/useUser';
+import { useUser } from '../../../utils/useUser';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
-import ParagraphWithButton from '../../components/ui/ParagraphWithButton';
+import ParagraphWithButton from '../../../components/ui/ParagraphWithButton';
 import Link from 'next/link';
-import Button from '../../components/ui/Button';
+import Button from '../../../components/ui/Button';
 import Image from 'next/image'
-import Input from '../../components/ui/Input';
+import Input from '../../../components/ui/Input';
 
-export default function Configure() {
+export default function ConfigureCustom() {
 
   const [user, setUser] = useState(null);
   const router = useRouter();
@@ -51,7 +51,7 @@ export default function Configure() {
     </Link>
     </div>
     <div className="mx-auto mt-16 flex">
-    <Link href="/onboarding/provision">
+    <Link href="/onboarding/select">
     <a className="border border-gray hover:bg-gray-400 hover:text-white  text-xl transition py-1 px-2 focus:outline-none rounded">
     Previous step
     </a>

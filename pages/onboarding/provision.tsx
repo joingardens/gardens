@@ -46,7 +46,7 @@ export default function Provision() {
     Previous step
     </a>
     </Link>
-    <Link href="/onboarding/configure">
+    <Link href="/onboarding/select">
     <a className="border border-seaweed hover:bg-seaweed hover:text-white ml-4 text-xl transition py-1 px-2 focus:outline-none rounded">
     Next step
     </a>
