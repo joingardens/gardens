@@ -50,12 +50,4 @@ function ListItem(props) {
   );
 }
 
-ListItem.defaultProps = {
-  theme: 'indigo'
-};
-
-ListItem.propTypes = {
-  theme: PropTypes.string.isRequired
-};
-
 export default ListItem;
