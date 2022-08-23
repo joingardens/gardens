@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from  "prop-types";
 import getRandomGradient from '../../../utils/getRandomGradient'
 import Image from 'next/image';
 
@@ -53,13 +52,6 @@ function PrettyBlock(props) {
   );
 }
 
-PrettyBlock.defaultProps = {
-  theme: 'indigo'
-};
-
-PrettyBlock.propTypes = {
-  theme: PropTypes.string.isRequired
-};
 
 export default PrettyBlock;
   
