@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from  "prop-types";
 
 function LightHeroB(props) {
   
@@ -28,13 +27,5 @@ function LightHeroB(props) {
     </section>
   );
 }
-
-LightHeroB.defaultProps = {
-  theme: 'indigo'
-};
-
-LightHeroB.propTypes = {
-  theme: PropTypes.string.isRequired
-};
 
 export default LightHeroB;
