@@ -27,7 +27,7 @@ const MyAppsPage = () => {
     <Sidebar page="myapps" />
     <div className="px-5 w-full mb-24 mt-24 md:mt-16">
     <div className="flex flex-wrap justify-center items-center w-4/5 sm:pl-8 md:pl-16 md:justify-start mx-auto py-4">
-    <Link href="/flows" className="w-full text-gray-900 font-medium">
+    <Link href="/flows">
         <a className="flex items-center w-48 text-center pl-2 pr-1 py-2 shadow my-4 md:my-0 rounded border border-blue-600 text-lg hover:bg-blue-50">
         <Image alt="Caprover logo" width="25" height="25"
         src="https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/caprover.png?t=2022-08-16T09%3A37%3A46.977Z" />
@@ -35,7 +35,7 @@ const MyAppsPage = () => {
         </a>
       </Link>
     <div className="sm:mx-2" />
-    <Link href="/" className="w-full text-gray-900 font-medium">
+    <Link href="/">
         <a className="w-48 text-center py-2 px-4 shadow rounded bg-white text-lg hover:bg-gray-100">
         📘 Documentation
         </a>
