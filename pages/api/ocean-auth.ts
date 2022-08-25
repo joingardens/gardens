@@ -12,6 +12,7 @@ export default async (req: NextApiRequest, res : NextApiResponse) => {
                 grant_type: "authorization_code"
             }
         })
+        console.log(req.body.code)
         if (response.data) {
             console.log(response.data)
             return res.status(201).json({token: response.data.access_token})
