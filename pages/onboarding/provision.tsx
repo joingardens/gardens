@@ -8,14 +8,23 @@ import { apiAdapter } from '../../adapters/other-apps/api/adapter';
 import { useDigitalOcean } from '../../components/hooks/useDigitalOcean';
 import { DigitalOceanRegion } from '../../adapters/other-apps/digital-ocean/digitalOceanAdapter';
 import { useAutoAnimate } from '@formkit/auto-animate/react'
+import { useInput } from '../../components/hooks/useInput';
+import { validationService } from "../../services/validationService"
+import Input from '../../components/ui/Input';
+import { userDropletsAdapter } from '../../adapters/userDroplets/adapter';
 
 class ProvisionState {
-  region: string
+  region: DigitalOceanRegion
   size: string
 
   static default() {
     return {
-      region: "",
+      region: {
+        name: "",
+        slug: "",
+        sizes: [],
+        available: true
+      },
       size: ''
     }
   }
@@ -27,13 +36,13 @@ const ProvisionRegionSelector: FC<{
   region: DigitalOceanRegion
 }> = ({provisionState, setProvisionState, region}) => {
   const [ parent ] = useAutoAnimate<HTMLDivElement>()
-  const regionMatch = provisionState.region === region.name
+  const regionMatch = provisionState.region.name === region.name
   return (
-    <div ref={parent} className='w-full'>
+    <div ref={parent} className='w-full transition-all'>
     <button 
     className={`
-    ${regionMatch ? "border-yellow-400" : ""}
-    border-2 p-2 w-full flex justify-center focus:outline-none
+    ${regionMatch ? "ring-yellow-400" : ""}
+    ring-2 p-2 w-full flex justify-center focus:outline-none
     `}
     onClick={() => {
       if (regionMatch) {
@@ -41,20 +50,42 @@ const ProvisionRegionSelector: FC<{
         return
       }
       setProvisionState({
-        region: region.name,
+        region: region,
         size: ''
       })
     }}>
       {region.name}
     </button>
     {
-      provisionState.region === region.name
+      regionMatch
         ?
-        <div className='grid w-full grid-cols-1 rounded-b-md bg-gray-300'>
+        <div className={`
+          grid grid-cols-1
+        
+        `}>
           {region.sizes.map(a => {
+            const sizeMatch = provisionState.size === a
+
             if (a === "s-1vcpu-1gb" || a === "s-2vcpu-2gb")
             return (
-              <button className='p-1 border'> 
+              <button 
+              onClick={() => {
+                if (regionMatch && sizeMatch) {
+                  setProvisionState({
+                    region: region,
+                    size: ""
+                  })
+                  return
+                }
+                return setProvisionState({
+                  region: region,
+                  size: a
+                })
+              }}
+              className={`
+              ${regionMatch && sizeMatch ? "bg-yellow-300" : ""}
+              p-1 focus:outline-none
+              `}> 
                 {a}
               </button>
             )
@@ -69,17 +100,23 @@ const ProvisionRegionSelector: FC<{
 
 export default function Provision() {
 
-  const [user, setUser] = useState(null);
+  const { user } = useUser()
   const router = useRouter()
   const { changeToken, digitalOceanApiAdapter, token } = useDigitalOcean()
   const [pageLoading, setPageLoading] = useState<boolean>(true)
   const [regions, setRegions] = useState<DigitalOceanRegion[]>([])
   const [provisionState, setProvisionState] = useState<ProvisionState>(ProvisionState.default())
+  const dropletNameInput = useInput<string>(validationService.validateOrganisationName, "", "droplet-name")
+
+  useEffect(() => {
+    if (regions.length && user && token) {
+      setPageLoading(false)
+    }
+  }, [user, token, regions])
 
   useEffect(() => {
     if (token) {
       digitalOceanApiAdapter.getRegions().then((r) => {
-        setPageLoading(false)
         setRegions(r)
       })
     }
@@ -108,17 +145,49 @@ export default function Provision() {
           <ProvisionRegionSelector
           provisionState={provisionState}
           setProvisionState={setProvisionState}
-          region={region}
-          >
+          region={region}/>)}
+        </div>
+        <div className='flex p-2 items-center'>
+          <span className='mr-4'>
+            Droplet Name: 
+          </span>
+          <input type="text" className={`
+          p-2 border-2
+          ${dropletNameInput.error ? "border-red-500" : "border-green-200 "}
+          `} value={dropletNameInput.value} 
+          onChange={(e) => {
+            e.preventDefault()
+            dropletNameInput.setValue(e.target.value.toLowerCase())
+          }} 
+          name="droplet-name" />
 
-          </ProvisionRegionSelector>)}
         </div>
         <div className="mt-8 text-xl mx-auto">
           <Button
-
+            onClick={() => {
+              if (!dropletNameInput.validate()) {
+                setPageLoading(true)
+                digitalOceanApiAdapter.createDroplet(
+                  dropletNameInput.value,
+                  provisionState.region.slug,
+                  provisionState.size
+                ).then(r => {
+                  userDropletsAdapter.insertOne({
+                    user: user.id,
+                    droplet_id: r.data.droplet.id
+                  })
+                })
+                setPageLoading(false)
+              }
+            }}
+            disabled={!provisionState.region || !provisionState.size}
+            loading = {pageLoading}
           >
             Set Up Droplet
           </Button>
+          <div>
+            
+          </div>
         </div>
         <div className="mx-auto mt-16 flex">
           <Link href="/onboarding/connect">

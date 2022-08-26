@@ -2815,6 +2815,7 @@ export interface paths {
           section?: parameters["rowFilter.tools.section"];
           type?: parameters["rowFilter.tools.type"];
           featured?: parameters["rowFilter.tools.featured"];
+          one_click?: parameters["rowFilter.tools.one_click"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -2876,6 +2877,7 @@ export interface paths {
           section?: parameters["rowFilter.tools.section"];
           type?: parameters["rowFilter.tools.type"];
           featured?: parameters["rowFilter.tools.featured"];
+          one_click?: parameters["rowFilter.tools.one_click"];
         };
         header: {
           /** Preference */
@@ -2901,6 +2903,7 @@ export interface paths {
           section?: parameters["rowFilter.tools.section"];
           type?: parameters["rowFilter.tools.type"];
           featured?: parameters["rowFilter.tools.featured"];
+          one_click?: parameters["rowFilter.tools.one_click"];
         };
         body: {
           /** tools */
@@ -3001,6 +3004,102 @@ export interface paths {
         body: {
           /** usecases */
           usecases?: definitions["usecases"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/user_droplets": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.user_droplets.id"];
+          created_at?: parameters["rowFilter.user_droplets.created_at"];
+          user?: parameters["rowFilter.user_droplets.user"];
+          droplet_id?: parameters["rowFilter.user_droplets.droplet_id"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["user_droplets"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** user_droplets */
+          user_droplets?: definitions["user_droplets"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.user_droplets.id"];
+          created_at?: parameters["rowFilter.user_droplets.created_at"];
+          user?: parameters["rowFilter.user_droplets.user"];
+          droplet_id?: parameters["rowFilter.user_droplets.droplet_id"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.user_droplets.id"];
+          created_at?: parameters["rowFilter.user_droplets.created_at"];
+          user?: parameters["rowFilter.user_droplets.user"];
+          droplet_id?: parameters["rowFilter.user_droplets.droplet_id"];
+        };
+        body: {
+          /** user_droplets */
+          user_droplets?: definitions["user_droplets"];
         };
         header: {
           /** Preference */
@@ -4424,14 +4523,23 @@ export interface definitions {
       | "Community & Support"
       | "Design"
       | "General"
-      | "E-commerce";
+      | "E-commerce"
+      | "Personal";
     /**
      * Format: character varying
      * @default tool
      */
     type?: string;
-    /** Format: boolean */
+    /**
+     * Format: boolean
+     * @default false
+     */
     featured?: boolean;
+    /**
+     * Format: boolean
+     * @default false
+     */
+    one_click?: boolean;
   };
   usecases: {
     /**
@@ -4449,6 +4557,23 @@ export interface definitions {
      * @default now()
      */
     created_at?: string;
+  };
+  user_droplets: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string;
+    /** Format: uuid */
+    user: string;
+    /** Format: bigint */
+    droplet_id: number;
   };
   user_paas: {
     /**
@@ -5154,6 +5279,8 @@ export interface parameters {
   "rowFilter.tools.type": string;
   /** Format: boolean */
   "rowFilter.tools.featured": string;
+  /** Format: boolean */
+  "rowFilter.tools.one_click": string;
   /** @description usecases */
   "body.usecases": definitions["usecases"];
   /** Format: bigint */
@@ -5164,6 +5291,16 @@ export interface parameters {
   "rowFilter.usecases.description": string;
   /** Format: timestamp with time zone */
   "rowFilter.usecases.created_at": string;
+  /** @description user_droplets */
+  "body.user_droplets": definitions["user_droplets"];
+  /** Format: bigint */
+  "rowFilter.user_droplets.id": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.user_droplets.created_at": string;
+  /** Format: uuid */
+  "rowFilter.user_droplets.user": string;
+  /** Format: bigint */
+  "rowFilter.user_droplets.droplet_id": string;
   /** @description user_paas */
   "body.user_paas": definitions["user_paas"];
   /** Format: bigint */
