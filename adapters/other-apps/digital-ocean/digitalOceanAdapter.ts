@@ -18,11 +18,15 @@ export class DigitalOceanDroplet {
     id: number;
     name: string;
     networks: {
-        "ip_address": string,
-        "netmask": string,
-        "gateway": string,
-        "type": "public" | "private"
-    }[]
+        "v4": DigitalOceanNetworkType[]
+    }
+}
+
+export class DigitalOceanNetworkType {
+    "ip_address": string
+    "netmask": string
+    "gateway": string
+    "type": "public" | "private"
 }
 
 export class DigitalOceanDropletResponse {
@@ -55,8 +59,8 @@ class DigitalOceanApiAdapter extends BaseHttpAdapter {
         return response
     }
 
-    async getDroplet(id: string) {
-        const response = await this.instance.get(`droplets/${id}`)
+    async getDroplet(id: number) {
+        const response = await this.instance.get<DigitalOceanDropletResponse>(`droplets/${id}`)
         return response
     }
 }

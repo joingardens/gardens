@@ -14,10 +14,11 @@ export class FormError {
 
 export function useForm<T>(
     inputs: UseInputState<string | number | boolean>[],
-    handler: () => Promise<T>
+    handler: () => Promise<T>,
     ) {
     const [ isSubmited, setIsSubmited ] = useState(false)
     const [ formError, setFormError ] = useState(FormError.getDefaultState())
+    const [ loading, setLoading ] = useState<boolean>(false)
     const errors = Object.fromEntries(inputs.map(a => [a.name, a.error]))
     const values = Object.fromEntries(inputs.map(a => [a.name, a.value]))
 
@@ -25,6 +26,7 @@ export function useForm<T>(
     const submit = () => {
         setIsSubmited(true)
         const errors = []
+        setLoading(true)
         for (let input of inputs) {
             errors.push(input.validate())
         }
@@ -38,6 +40,9 @@ export function useForm<T>(
         catch {
             return false
         }
+        finally {
+            setLoading(false)
+        }
     }
 
     return {
@@ -46,7 +51,8 @@ export function useForm<T>(
         errors,
         isSubmited,
         setFormError,
-        formError
+        formError,
+        loading
     }
 
 }

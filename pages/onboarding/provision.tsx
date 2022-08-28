@@ -12,6 +12,7 @@ import { useInput } from '../../components/hooks/useInput';
 import { validationService } from "../../services/validationService"
 import Input from '../../components/ui/Input';
 import { userDropletsAdapter } from '../../adapters/userDroplets/adapter';
+import axios from 'axios';
 
 class ProvisionState {
   region: DigitalOceanRegion
@@ -113,6 +114,9 @@ export default function Provision() {
       setPageLoading(false)
     }
   }, [user, token, regions])
+
+  useEffect(() => {
+  }, [])
 
   useEffect(() => {
     if (token) {
