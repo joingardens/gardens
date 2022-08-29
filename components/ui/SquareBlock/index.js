@@ -7,14 +7,14 @@ function SquareBlock(props) {
 
   const md = new MarkdownIt();
 
-  const blockColor = (props.blockType == 'Open') ? 'green-50 hover:bg-green-100' : (props.blockType == 'Fair') ? 'green-50 hover:bg-green-100' : (props.blockType == 'Exportable') ? 'gray-50 hover:bg-gray-100' : 'gray-50 hover:bg-gray-100';
+  const blockColor = (props.blockType == 'Open') ? 'border border-green-300 hover:bg-green-100' : (props.blockType == 'Fair') ? 'gray-50 hover:bg-green-100' : (props.blockType == 'Exportable') ? 'gray-50 hover:bg-gray-100' : 'gray-50 hover:bg-gray-100';
   const typeColor = (props.blockType == 'Open') ? 'text-green-500' : (props.blockType == 'Fair') ? 'text-green-500' : 'text-primary'
   const fontWeight = (props.blockType == 'Open') ? 'medium' : (props.blockType == 'Fair') ? 'medium' : (props.blockType == 'Closed') ? 'medium' : 'medium'
   const pillColor = getRandomGradient();
 
   return (
     <>
-    <div className={`my-2 w-full flex relative ${props.blockType ? ('border border-gray-300 bg-' + blockColor) : null}`}>
+    <div className={`my-2 w-full flex relative ${props.blockType ? ('shadow border bg-' + blockColor) : null}`}>
     <a className="absolute -top-48" id={props.blockId}/>
     <a href={props.ctaLink ? props.ctaLink : props.blockLink} className="text-gray-900 w-full h-full" target="_blank">
 

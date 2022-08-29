@@ -23,7 +23,7 @@ function ListItem(props) {
             </a>
             </h2>
             {
-            props.noUrl ? null : (<span className="hover:underline text-center md:text-end">
+            props.noJump ? null : (<span className="hover:underline text-center md:text-end">
             <a href="#" className="text-gray-700">Jump to top</a></span>)
             }
           </div>

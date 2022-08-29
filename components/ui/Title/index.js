@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 function LightHeroB(props) {
   
@@ -13,6 +14,12 @@ function LightHeroB(props) {
             {props.titleDescription}
           </p>
         </div>
+        {props.smallImage ? (
+          <div className="w-48 h-48 relative">
+          <Image src={props.smallImage} alt={props.smallImageAlt} 
+            layout='fill' objectFit='contain' objectPosition='center center' />
+          </div>
+            ) : null}
         {/*
           <div className="flex justify-center">
             <button className={`inline-flex text-white bg-${props.theme}-500 border-0 py-2 px-6 focus:outline-none hover:bg-${props.theme}-600 rounded text-lg`}>

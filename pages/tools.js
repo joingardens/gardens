@@ -19,7 +19,14 @@ export default function ToolsPage({ products, tools, jobTools }) {
   jobTools.map(jobTool => toolsWithJobs.push(jobTool.tool))
   const uniqueCategories = [...new Set(tools.map(tool => tool.category))];
   const uniqueSections = [...new Set(tools.map(tool => tool.section))];
-  let categoriesWithSections = uniqueSections.map(section => ({section: section, categories: []})); 
+  const sortedSections = uniqueSections.sort((a, b) => {if (a && b){
+    if(a == "General"){
+      return -2
+    } else {
+      return a.localeCompare(b)
+    }
+  }} );
+  let categoriesWithSections = sortedSections.map(section => ({section: section, categories: []})); 
   tools.map(tool => {
     let currentSection = categoriesWithSections.findIndex(categoryWithSection => categoryWithSection.section == tool.section);
     (!categoriesWithSections[currentSection].categories.includes(tool.category)) ? categoriesWithSections[currentSection].categories.push(tool.category) : null
@@ -55,21 +62,21 @@ export default function ToolsPage({ products, tools, jobTools }) {
    	
      const itemElements = sortedItemArray.map(item => 
    {
-     let includesJobs = toolsWithJobs.includes(item.id);
+     let isOneClick = (item.one_click) ? true : false;
      return (<SquareBlock key={item.id} blockBody={item.tool} 
        smallImage={item.logo_url} smallImageAlt={item.tool + ' logo'}
-       blockLink={includesJobs ? null : item.link}
-       blockLinkTitle={includesJobs ? null : 'Press to open website'}
-       ctaLink={includesJobs ? ('/tool/' + item.id) : null}
-       ctaLinkTitle={includesJobs ? ('Press to use ' + item.tool + '!') : null}
+       blockLink={isOneClick ? null : item.link}
+       blockLinkTitle={isOneClick ? null : 'Press to open website'}
+       ctaLink={isOneClick ? ('/tool/' + item.id) : null}
+       ctaLinkTitle={isOneClick ? ('Press to use ' + item.tool + '!') : null}
        blockDescription={item.description}
-       blockType={(item.model == 1) ? 'Open' : (item.model == 2) ? 'Fair' : (item.model == 4) ? 'Closed' : (item.model == 3) ? 'Exportable' : null} />
+       blockType={isOneClick ? 'Open' : ((item.model == 2) | (item.model == 1)) ? 'Fair' : (item.model == 4) ? 'Closed' : (item.model == 3) ? 'Exportable' : null} />
     ) 
    });
 
     if (category && (category.length != 0)){
       return (
-    <ListItem key={category.toString()} 
+    <ListItem key={category.toString()} noUrl={true}
     categoryName={category.toString()} categoryDescription={''}
     addLink={'https://tally.so/r/w8Zo5m' + '?category=' + category.toString()}>
     {itemElements}
@@ -88,10 +95,6 @@ export default function ToolsPage({ products, tools, jobTools }) {
     titleDescription={'Open-source and fair-code tools are shown at the top. Pick a category — or keep scrolling to discover all tools.'} 
      />
     </div>
-    <SectionsAndCategories sections={categoriesWithSections} />
-    <div className="w-full">
-    <h2 className="sm:text-3xl text-2xl text-center font-semibold mt-24 text-gray-900">Tools by group</h2>
-    </div>
     <div className="flex space-between">
     <aside className="h-screen sticky top-0 w-1/5 hidden md:block">
     <div className="pt-20 h-full">
@@ -99,11 +102,10 @@ export default function ToolsPage({ products, tools, jobTools }) {
     </div>
     </aside>
     <div className="flex-col w-full w-4/5 mt-4">
+    <SectionsAndCategories sections={categoriesWithSections} />
     {listTools}
     </div>
     </div>
-  	{/*<ParagraphWithButton />
-  	<Pricing products={products} />*/}
     </>
     )
 }

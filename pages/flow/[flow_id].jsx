@@ -24,7 +24,14 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
   } else {
   const { flow_id } = router.query;
 
-  const allToolTitles = [...new Set(flow.map(item => item.job_tool.tool.tool))];
+  const allToolTitles = flow.map(item => {
+  return ({
+      toolTitle: item.job_tool.tool.tool,
+      toolLink: item.job_tool.tool.link,
+      toolId: item.job_tool.tool.id,
+      toolOneClick: item.job_tool.tool.one_click
+    })  
+  });
 
   const itemInputs = inputs.map(input => {
 
@@ -88,13 +95,26 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
      
   })
   const generatedTitle = (flowRecord[0].flow);
-  const generatedDescription = ('Using ' + allToolTitles.toString());
+
+  let uniqueToolTitles = [];
+  allToolTitles.filter(function(item){
+  var i = uniqueToolTitles.findIndex(x => (x.toolLink == item.toolLink && x.toolTitle == item.toolTitle && x.toolId == item.toolId && x.toolOneClick == item.toolOneClick));
+  if(i <= -1){
+        uniqueToolTitles.push(item);
+  }
+  return null;
+});
+
+  const toolLinks = uniqueToolTitles.map(tool => (
+    <a className="text-blue-600 font-semibold underline mr-2" href={(tool.toolOneClick) ? ('/tool/' + tool.toolId) : tool.toolLink} target="_blank">
+    {tool.toolTitle}
+    </a>))
   
   return (
   	<>
     <NextSeo
       title={generatedTitle}
-      description={generatedTitle + ' ' + generatedDescription}
+      description={generatedTitle}
     />
     <section class="text-gray-600 body-font">
   <div class="container mx-auto flex lg:px-48 py-4 mt-8 md:flex-row flex-col items-center">
@@ -102,7 +122,9 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
       <h1 class="title-font sm:text-4xl text-3xl mb-4 font-semibold text-gray-900">{generatedTitle}
         <br class="hidden lg:inline-block"/>
       </h1>
-      <p class="leading-relaxed">{generatedDescription}</p>
+     <div>
+     Using {toolLinks}
+     </div>
     </div>
     <div class="w-64 md:w-48 md:py-4 md:px-2 flex md:flex-col justify-center items-center">
       <div className="text-lg w-24 md:w-32 mr-4 md:mr-0 text-center">Created by</div>

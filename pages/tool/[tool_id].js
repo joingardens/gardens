@@ -10,6 +10,8 @@ import { getJobToolsByTool,
 	getAllJobGroups, getAllJobs, getAllJobTools, getToolById, getFlowItemsByJobToolIds, getFlowsByIds } from '../../utils/supabase-client';
 import SquareBlock from '../../components/ui/SquareBlock';
 import getRandomGradient from '../../utils/getRandomGradient';
+import Link from "next/link";
+
 
 export default function Tool({ jobGroups, jobTools, jobs, tool, flows }) {
 
@@ -87,7 +89,23 @@ export default function Tool({ jobGroups, jobTools, jobs, tool, flows }) {
     />
     <div className="-mb-20 -mt-20">
     <Title titleTitle={currentTool.tool} titleDescription={currentTool.category}
-     colorBg={getRandomGradient()} />
+     colorBg={getRandomGradient()} smallImage={currentTool.logo_url} />
+    <div className="flex flex-col w-3/4 sm:w-1/2 md:w-1/3 lg:w-1/4 mx-auto mt-8 md:mt-4 md:mb-16">
+    {currentTool.link ? (
+      <Link href={currentTool.link}>
+          <a target="_blank"  style={{textDecoration: 'none'}} 
+          className="w-full border shadow text-2xl hover:bg-green-200 py-2 px-2 mx-auto focus:outline-none rounded">
+            🌐 {currentTool.tool} website
+          </a>
+    </Link>
+    ) : null}
+    <Link href="/">
+          <a  style={{textDecoration: 'none', fontWeight: 600}} 
+          className="w-full bg-green-500 shadow border text-white text-2xl hover:bg-green-600 py-2 mt-2 px-2 mx-auto focus:outline-none rounded">
+            💻 Install {currentTool.tool}
+          </a>
+    </Link>
+    </div>
     </div>
     {currentTool.description ? (
     <div className="mt-6 pt-24 md:pt-10 px-12 lg:px-24">
@@ -97,13 +115,15 @@ export default function Tool({ jobGroups, jobTools, jobs, tool, flows }) {
     </p>
     <div className="border lg:w-3/5 mx-auto mb-4 mt-8" />
     </div>) : null}
-    <div className="w-full lg:w-3/6 mx-auto mt-8 py-4">
+    {(flowArray.length > 0) ? (
+    <div className="w-full lg:w-3/6 mx-auto mt-32 py-4">
     <h2 className="lg:w-4/5 text-center mx-auto px-6 sm:text-2xl text-xl font-semibold text-gray-900">
     Step-by-step guides for {currentTool.tool}</h2>
     <div className="flex-col w-4/5 mx-auto mt-8">
     {flowArray}
     </div>
     </div>
+    ) : null}
     <div className="flex space-between">
     {(typeof listJobs !== 'undefined' && (listJobs.length > 0)) ? (
     <aside className="h-screen sticky top-0 w-1/5 hidden md:block">
@@ -119,7 +139,6 @@ export default function Tool({ jobGroups, jobTools, jobs, tool, flows }) {
     Things you can do with {currentTool.tool}</h2>
     ) : null}
     {listJobs}
-    <Comments postId={parseInt('999' + tool_id)} />
     </div>
     </div>
     </div>

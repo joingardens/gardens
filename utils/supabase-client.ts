@@ -429,7 +429,7 @@ export const getFlowItemsById = async (flow_id) => {
 export const getFlowItemsByFlowId = async (flow_id) => {
   const { data, error } = await supabase
     .from('flow_items')
-    .select('id, flow, description, job_tool(id, job(id, job, job_group, description), tool(id, tool, category, model, logo_url), instruction_link, description), image_url')
+    .select('id, flow, description, job_tool(id, job(id, job, job_group, description), tool(id, tool, category, model, logo_url, link, one_click), instruction_link, description), image_url')
     .eq('flow', flow_id)
     .order('job_tool');
 

@@ -10,15 +10,15 @@ import ModalsContext from '../../modals/modalsContext';
 import useToast from '../../hooks/useToast';
 
 const Navbar = () => {
-  const { user, signOut } = useUser();
+  const { user, signOut, subscription } = useUser();
   const {service} = useContext(ModalsContext);
-  const linkCta = (user ? '/new-flow' : '/signup');
+  const linkCta = (user ? (subscription ? '/myapps' : '/new-flow') : '/signup');
 
   let listener = null;
   const [scrollState, setScrollState] = useState("bg-gray-50 border")
   const [buttonState, setButtonState] = useState("bg-white text-gray-900 hover:bg-gray-200 border border-gray-400")
   const [titleState, setTitleState] = useState("text-gray-900 font-semibold")
-  const [ctaState, setCtaState] = useState("bg-seaweed text-white hover:bg-green-500 transition")
+  const [ctaState, setCtaState] = useState("bg-green-500 text-white hover:bg-green-600 transition")
   const {makeToast} = useToast()
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const Navbar = () => {
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15z"/></svg>
             </button>
               <Link href="/flows">
-                <a className={`mr-1.5 md:mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded`}>Guides</a>
+                <a className={`mr-1.5 md:mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded hidden md:block`}>Guides</a>
               </Link>
               <Link href="/tools">
                 <a className={`hidden sm:block mr-1.5 md:mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded`}>Tools</a>
@@ -70,7 +70,7 @@ const Navbar = () => {
               {!user ? (
                 <Link href={`${linkCta}`}>
                 <a className={`mr-1.5 md:mr-2.5 ${ctaState} py-1 px-2 focus:outline-none rounded font-semibold`}>
-                  {user ? ('+ New') : ('Add a guide')}
+                  {user ? (subscription ? 'My apps' : '+ New') : ('Start self-hosting')}
                 </a>
               </Link>
               ) : null}
