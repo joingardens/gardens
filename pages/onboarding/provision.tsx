@@ -1,5 +1,6 @@
 import { useUser } from '../../utils/useUser';
 import { useRouter } from 'next/router';
+import useToast from '../../components/hooks/useToast';
 import React, { useState, useEffect, FC } from 'react';
 import ParagraphWithButton from '../../components/ui/ParagraphWithButton';
 import Link from 'next/link';
@@ -103,6 +104,7 @@ export default function Provision() {
 
   const { user } = useUser()
   const router = useRouter()
+  const {makeToast} = useToast()
   const { changeToken, digitalOceanApiAdapter, token } = useDigitalOcean()
   const [pageLoading, setPageLoading] = useState<boolean>(true)
   const [regions, setRegions] = useState<DigitalOceanRegion[]>([])
@@ -180,7 +182,8 @@ export default function Provision() {
                     user: user.id,
                     droplet_id: r.data.droplet.id
                   })
-                })
+                }).catch(error => {
+                  makeToast(error, "error", 3 )});
                 setPageLoading(false)
               }
             }}
