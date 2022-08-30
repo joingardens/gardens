@@ -1,4 +1,4 @@
-import { getAllFlows, getAllFlowItems, getAllFlowItemsWithTools, getAllActions, getAllSections } from '../utils/supabase-client';
+import { getAllFlows, getAllFlowItems, getAllFlowItemsWithTools, getAllActions, getAllSections, getActiveProductsWithPrices } from '../utils/supabase-client';
 import { useUser } from '../utils/useUser';
 import LightHeroD from '../components/ui/Hero';
 import ParagraphWithButton from '../components/ui/ParagraphWithButton';
@@ -9,8 +9,9 @@ import SquareBlock from '../components/ui/SquareBlock';
 import PrettyBlock from '../components/ui/PrettyBlock';
 import Link from 'next/link';
 import Button from '../components/ui/Button';
+import Pricing from '../components/Pricing'
 
-export default function Index({ flows, flowItemsWithTools, actions, sections }) {
+export default function Index({ flows, flowItemsWithTools, actions, sections, products }) {
 
   const { user, subscription } = useUser();
   const uniqueSections = [...new Set(sections.map(item => item ? item.section : null))]
@@ -61,7 +62,7 @@ export default function Index({ flows, flowItemsWithTools, actions, sections }) 
     </div>
     <div className="flex flex-col">
     <div className="w-full flex flex-col">
-    {subscription ? (
+    {(subscription) ? (
       <div className="bg-green-500 w-full py-36">
     <h2 className="text-center text-3xl font-bold text-white">🌿 Get started</h2>
     <div className="mt-8 mx-auto text-xl text-center">
@@ -73,7 +74,12 @@ export default function Index({ flows, flowItemsWithTools, actions, sections }) 
     </Link>
     </div>
     </div>
-    ) : null}
+    ) : (user ? (
+      <div className="bg-gray-50 w-full py-36">
+    <h1 className="text-3xl py-4 text-center font-bold">Select a plan</h1>
+    <Pricing products={products} />
+    </div>
+    ) : null)}
     <div>
     <h2 className="text-center md:text-left md:pl-8 text-2xl font-semibold py-4 px-5">Tools by section</h2>
     <div className="flex flex-wrap md:w-5/6 justify-center md:justify-start md:pl-4 mb-6">
@@ -105,13 +111,15 @@ export async function getStaticProps() {
   const flowItemsWithTools = await getAllFlowItemsWithTools();
   const actions = await getAllActions();
   const sections = await getAllSections();
+  const products = await getActiveProductsWithPrices();
 
   return {
     props: {
       actions,
       flows,
       flowItemsWithTools,
-      sections
+      sections,
+      products
     },
     revalidate: 60
   };

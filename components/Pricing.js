@@ -13,8 +13,6 @@ export default function Pricing({ products }) {
   const [priceIdLoading, setPriceIdLoading] = useState();
   const { session, userLoaded, subscription } = useUser();
 
-  console.log(products)
-
   const handleCheckout = async (price) => {
     setPriceIdLoading(price.id);
     if (!session) {
