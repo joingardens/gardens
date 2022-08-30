@@ -185,6 +185,7 @@ export default function Provision() {
                 }).catch(error => {
                   makeToast(error, "error", 3 )});
                 setPageLoading(false)
+                router.push("/onboarding/select")
               }
             }}
             disabled={!provisionState.region || !provisionState.size}
