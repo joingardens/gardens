@@ -26,7 +26,6 @@ const NewFlowInputInput = ({input, index}: Props) => {
         setLoading(true)
         const data =  await newFlowService.findEntityByString("inputs", "input", input.input)
         setSuggestions(data) 
-        console.log(data)
         setLoading(false)
     }
 
@@ -81,7 +80,9 @@ const NewFlowInputInput = ({input, index}: Props) => {
                     {loading ? <div className={`px-2 py-2`}>...loading</div> : suggestion && suggestion.map(suggestion => {
                         return <button onClick={() => {setIsOpen(false); 
                             newFlowService.setInputInput(suggestion.input, index); 
-                            newFlowService.setInputDescription(suggestion.description, index) }} className={`px-2 py-2 w-full text-left hover:bg-blue-100 focus:bg-blue-100  transition-all`}>{suggestion.input}</button>
+                            newFlowService.setInputDescription(suggestion.description, index) }} className={`px-2 py-2 w-full text-left hover:bg-blue-100 focus:bg-blue-100  transition-all`}>
+                            {suggestion.input}
+                            </button>
                     })}
                 </div>
             </div>

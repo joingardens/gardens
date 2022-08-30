@@ -94,7 +94,7 @@ const SignIn = () => {
 
   useEffect(() => {
     if (user) {
-      router.replace('/new-flow');
+      router.replace('/');
     }
   }, [user]);
 
