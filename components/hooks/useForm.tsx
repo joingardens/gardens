@@ -23,7 +23,7 @@ export function useForm<T>(
     const values = Object.fromEntries(inputs.map(a => [a.name, a.value]))
 
 
-    const submit = () => {
+    const submit = async () => {
         setIsSubmited(true)
         const errors = []
         setLoading(true)
@@ -34,7 +34,7 @@ export function useForm<T>(
             return false
         } 
         try {
-            const result = handler()
+            const result = await handler()
             return result
         }
         catch {
@@ -52,7 +52,8 @@ export function useForm<T>(
         isSubmited,
         setFormError,
         formError,
-        loading
+        loading,
+        setLoading
     }
 
 }
