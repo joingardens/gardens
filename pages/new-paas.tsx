@@ -5,6 +5,7 @@ import { useInput } from "../components/hooks/useInput"
 import { ErrorsDictionary } from "../core/errors"
 import { validationService } from "../services/validationService"
 import { useUser } from "../utils/useUser.js"
+import router from "next/router"
 
 export enum PaasInputNames {
     SLUG = "slug",
@@ -19,7 +20,7 @@ const NewPaasPage: FC = () => {
         "",
         PaasInputNames.SLUG
     )
-    const PaasOranisationInputState = useInput<string>(
+    const PaasOrganizationInputState = useInput<string>(
         validationService.validateOrganisationName,
         "",
         PaasInputNames.ORG_NAME
@@ -33,18 +34,25 @@ const NewPaasPage: FC = () => {
             return
         }
         const data = await userPaasAdapter.insertOne({
-            org_name: PaasOranisationInputState.value,
+            org_name: PaasOrganizationInputState.value,
             user: user.id,
             slug: PaasInputState.value
         })
         if (data) {
-            return data
+            router.push("/onboarding/prerequisites")
         }
     }
 
-    const PaasFormState = useForm([PaasInputState, PaasOranisationInputState], PaasFormHandler)
+    const PaasFormState = useForm([PaasInputState, PaasOrganizationInputState], PaasFormHandler)
     const [loaded, setLoaded] = useState(false)
+    const [slugIsCustom, setSlugIsCustom] = useState(false)
     const [pageError, setPageError] = useState("")
+
+    useEffect(() => {
+        if (PaasOrganizationInputState.value && !slugIsCustom){
+            PaasInputState.setValue(PaasOrganizationInputState.value.toLowerCase().split(' ').join('-'))
+        }
+    }, [PaasOrganizationInputState.value])
 
 
     useEffect(() => {
@@ -58,7 +66,7 @@ const NewPaasPage: FC = () => {
                     if (res.data) {
                         if (res.data.length) {
                             setPageError(ErrorsDictionary.BaseErrors.USER_ALREADY_HAS_ORGANISATION)
-                            return
+                            router.push("/onboarding/prerequisites")
                         }
                     }
 
@@ -96,9 +104,9 @@ const NewPaasPage: FC = () => {
 
 
     return (
-        <div className="px-20 py-10 w-full min-h-screen">
-            <h1 className={`text-2xl mb-5`}>
-                Create new PaaS
+        <div className="px-10 mt-10 w-full min-h-screen">
+            <h1 className={`text-2xl font-bold mb-5 mx-auto text-center`}>
+                Set up your organization
             </h1>
             <form onSubmit={async (e) => {
                 e.preventDefault()
@@ -107,10 +115,34 @@ const NewPaasPage: FC = () => {
                     window.location.href = `${window.location.protocol}//${data.slug}.${window.location.host}`
                 }
             }}>
-                <div className={`grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 mb-5 gap-5`}>
-                    <div className="">
-                        <p className={`mb-2`}>Subdomain name</p>
+                <div className={"flex flex-col md:w-1/2 w-full mx-auto"}>
+                    <div className={"my-2"}>
+                        <p className="mb-2 font-semibold">Organization name</p>
+                        <p className="mb-2 text-gray-600">Enter the name of your organization, e.g. "My Org"</p>
+                            <input
+                                name={PaasInputNames.ORG_NAME}
+                                onChange={(e) => {
+                                    PaasOrganizationInputState.setValue(e.target.value)
+                                }}
+                                value={PaasOrganizationInputState.value}
+                                type="text"
+                                className={`border w-full rounded-md text-xl py-1 px-1.5`}
+                            />
+                        {
+                            PaasFormState.isSubmited
+                            ?
+                            <p className="mt-2 text-red-600">
+                                {PaasOrganizationInputState.error ? ErrorsDictionary.PaasInputErrors.INVALID_ORGANISATION_NAME : ""}
+                            </p>
+                            :
+                            <></>
+                        }
+                    </div>
+                    <div className="my-2">
+                        <p className={`mb-2 font-semibold`}>Organization slug</p>
+                        <p className="mb-2 text-gray-600">This will be used to create your domain on Gardens. Only lowercase letters and hyphens.</p>
                         <input
+                            disabled={!slugIsCustom}
                             name={PaasInputNames.SLUG}
                             onChange={(e) => {
                                 PaasFormState.setFormError(FormError.getDefaultState())
@@ -118,8 +150,12 @@ const NewPaasPage: FC = () => {
                             }}
                             value={PaasInputState.value}
                             type="text"
-                            className={`ring-2 transition-all duration-300 ring-green-300 focus:ring-green-600 w-full rounded-md text-xl py-1 px-1.5`}
+                            className={`border ${!slugIsCustom ? ("bg-gray-50 cursor-not-allowed") : null} w-full rounded-md text-xl py-1 px-1.5`}
                         />
+                        <div className="flex my-4 items-center">
+                        <input className="h-4 w-4 my-auto" checked={slugIsCustom} onClick={() => {setSlugIsCustom(!slugIsCustom)}} type="checkbox"/>
+                        <span className="ml-2">Set custom slug</span>
+                        </div>
                         {
                             PaasFormState.isSubmited
                                 ?
@@ -130,32 +166,9 @@ const NewPaasPage: FC = () => {
                                 <></>
                         }
                     </div>
-                    <div className={``}>
-                        <p className="mb-2">Name of your organisation</p>
-                            <input
-                                name={PaasInputNames.ORG_NAME}
-                                onChange={(e) => {
-                                    PaasOranisationInputState.setValue(e.target.value)
-                                }}
-                                value={PaasOranisationInputState.value}
-                                type="text"
-                                className={`ring-2 transition-all duration-300 ring-green-300 focus:ring-green-600 w-full rounded-md text-xl py-1 px-1.5`}
-                            />
-                        {
-                            PaasFormState.isSubmited
-                            ?
-                            <p className="mt-2 text-red-600">
-                                {PaasOranisationInputState.error ? ErrorsDictionary.PaasInputErrors.INVALID_ORGANISATION_NAME : ""}
-                            </p>
-                            :
-                            <></>
-                        }
-                    </div>
-
-                </div>
-                <div className={`flex`}>
+                    <div className={`mt-6`}>
                     <button
-                        className="px-4 py-2 border-2 border-gray-700 rounded-md mr-5">
+                        className="px-4 py-2 border border-black hover:bg-gray-50 rounded-md mr-5">
                         Submit
                     </button>
                     {
@@ -170,7 +183,7 @@ const NewPaasPage: FC = () => {
                             </div>
                     }
                 </div>
-
+                </div>
             </form>
         </div>
     )
