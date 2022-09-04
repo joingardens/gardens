@@ -5,6 +5,7 @@ import writerService from "../../components/writer/writerService"
 import { useUser } from "../../utils/useUser"
 import { API, BlockAPI, OutputData} from "@editorjs/editorjs"
 import dynamic from "next/dynamic"
+import Link from "next/link";
 import useAutosave from "../../components/writer/useEditorAutosave"
 import AutosizeInput from "react-input-autosize"
 
@@ -73,6 +74,11 @@ const DraftPage = () => {
             >
                 Save
             </button>
+            <Link href="/drafts">
+            <a className="absolute top-0 left-0 ml-24 mt-20 border rounded py-1 px-2 hover:bg-gray-50">
+            Back to drafts
+            </a>
+            </Link>
             </div>
             <div className="p-4 mt-4 w-full">
             {!loading && <EditorJsWithNoSSR

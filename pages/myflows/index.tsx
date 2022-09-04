@@ -21,35 +21,10 @@ const MyFlowsPage = ({ flows, flowItemsWithTools }) => {
     const router = useRouter()
     const [loading, setLoading] = useState(true)
     const [page, setPage] = useState(1)
-    let groupArray = []
-  //const uniqueGroups = [...new Set(flows.map(flow => flow.job_group))];
-
-  const uniqueGroups = [];
-  const map = new Map();
-  for (const flow of flows){
-    if(flow.job_group){
-    if(!map.has(flow.job_group.id)){
-      map.set(flow.job_group.id, true);
-      uniqueGroups.push({
-        id: flow.job_group.id,
-        job_group: flow.job_group.job_group
-      });
-    }}
-  };
+    const map = new Map();
   
-  const listFlows = uniqueGroups.map((group) => {
-    let sortedItemArray = [];
-    if (group){
-     sortedItemArray = flows.filter(item => {
-      if ((item.job_group && (item.job_group.id == group.id))){
-        return item
-      }
-    });
-    } else {
-      sortedItemArray = flows.filter(item => !item.job_group)
-    }
-      
-      const itemElements = sortedItemArray.map(flow => {
+    let sortedItemArray = flows.slice(0,4);
+    const listFlows = sortedItemArray.map(flow => {
       const currentFlowItems = flowItemsWithTools.filter(flowItem => flowItem.flow == flow.id);
       const allToolTitles = [...new Set(currentFlowItems.map(item => item.job_tool.tool.tool))];
       const allToolImages = [...new Set(currentFlowItems.map(item => item.job_tool.tool.logo_url))];
@@ -57,19 +32,11 @@ const MyFlowsPage = ({ flows, flowItemsWithTools }) => {
         <PrettyBlock key={flow.id} smallImage={allToolImages[0] ? allToolImages[0] : null}
       blockLink={'/flow/' + flow.id} blockBody={flow.flow}
       flexibleHeight={true} fullWidth={true}
-      blockDescription={`Using ${allToolTitles.toString().split(',').join(', ')}`}
-      blockSubtitle={`By ${flow.user_public_profile ? (flow.user_public_profile.full_name) : null}`} />
+      blockDescription={`Using ${allToolTitles.toString().split(',').join(', ')}`} />
       )
      }
     );
-      let currentGroupTitle = group ? group.job_group : 'General';
-      groupArray.push(currentGroupTitle);
-    return (
-    <ListItem key={currentGroupTitle.toString()} categoryName={currentGroupTitle.toString()} emoji={group ? group.emoji : '📂'} categoryDescription={''}>
-    {itemElements}
-    </ListItem>)
-    }
-    );
+     
 
 
     return (
@@ -79,9 +46,16 @@ const MyFlowsPage = ({ flows, flowItemsWithTools }) => {
     titleDescription={'Welcome to your guides section'} />
     </div>
     <div className="flex justify-center">
+    <div className="w-full flex flex-col items-end mb-24 mt-20 md:mt-12">
     <Sidebar page="myflows" />
-    <div className="px-5 w-full mb-24 mt-12 md:mt-8">
-    <div className="flex flex-wrap px-5 w-full justify-start mb-24">
+    <div className="mr-4 px-4 md:px-24 lg:px-48">
+    <Link href="/new-flow">
+    <a className="py-2 px-4 border border-black hover:bg-gray-50 rounded font-semibold">
+                        + New Guide
+    </a>
+    </Link>
+    </div>
+    <div className="flex flex-col mx-auto px-4 w-full md:px-24 lg:px-48 mt-6 justify-start mb-24">
     {listFlows}
     </div>
     </div>
