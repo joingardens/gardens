@@ -1,21 +1,67 @@
-import React from 'react';
+import { useEffect, useState, useContext } from "react";
 import { useRouter } from 'next/router'
+import { useUser } from "../../utils/useUser";
 import { NextSeo } from 'next-seo';
 import Pricing from '../../components/Pricing';
 import ListItem from '../../components/ui/ListItem';
 import TextList from '../../components/ui/TextList';
 import { Comments } from '../../components/Comments';
+import { userAppsAdapter } from "../../adapters/userApps/adapter"
 import Title from '../../components/ui/Title';
 import { getJobToolsByTool, 
-	getAllJobGroups, getAllJobs, getAllJobTools, getToolById, getFlowItemsByJobToolIds, getFlowsByIds } from '../../utils/supabase-client';
+	getAllJobGroups, getAllJobs, getAllJobTools, getToolById, 
+  getFlowItemsByJobToolIds, getFlowsByIds, getPaasByUserId, getDropletsByPaasId } from '../../utils/supabase-client';
 import SquareBlock from '../../components/ui/SquareBlock';
 import getRandomGradient from '../../utils/getRandomGradient';
+import ModalsContext from '../../components/modals/modalsContext';
 import Link from "next/link";
-
 
 export default function Tool({ jobGroups, jobTools, jobs, tool, flows }) {
 
   const router = useRouter()
+  const { user } = useUser()
+  const {service} = useContext(ModalsContext);
+  const [paasId, setPaasId] = useState(null)
+  const [userDropletId, setUserDropletId] = useState(null)
+
+  async function getPaasById(user_id){
+    const paasDetails = await getPaasByUserId(user_id);
+    setPaasId(paasDetails[0].id);
+    return
+    }
+
+  
+  async function getDropletsById(paas_id){
+    const dropletsDetails = await getDropletsByPaasId(paas_id);
+    setUserDropletId(dropletsDetails[0].id)
+    return
+    }
+
+
+  async function appInstallHandler(user_droplet_id){
+        const data = await userAppsAdapter.insertOne({
+            user_droplet_id: user_droplet_id,
+            tool_id: currentTool.id
+        })
+        if (data) {
+            console.log(data)
+            return
+        }
+    }
+  
+  useEffect(() => {
+    if (user){
+     getPaasById(user.id)
+    }
+    }, [user])
+
+    useEffect(() => {
+    if (paasId){
+     getDropletsById(paasId)
+    }
+    }, [paasId])
+     
+
    if (router.isFallback) {
     return (<div className="py-36">
     <h1 className="text-2xl text-center">Nothing here... 
@@ -27,6 +73,7 @@ export default function Tool({ jobGroups, jobTools, jobs, tool, flows }) {
   let groupArray = [];
   let toolIds = [];
   let currentTool = tool ? tool[0] : null
+
   if (currentTool != null){
   jobTools.map(jobTool => toolIds.push(jobTool.job));
   const filteredJobs = jobs.filter(job => toolIds.includes(job.id))
@@ -99,12 +146,13 @@ export default function Tool({ jobGroups, jobTools, jobs, tool, flows }) {
           </a>
     </Link>
     ) : null}
-    <Link href="/">
-          <a  style={{textDecoration: 'none', fontWeight: 600}} 
-          className="w-full bg-green-500 shadow border text-white text-2xl hover:bg-green-600 py-2 mt-2 px-2 mx-auto focus:outline-none rounded">
+    <a onClick={() => {
+      // service.openModal("installTool")
+
+    }} style={{textDecoration: 'none', fontWeight: 600}} 
+        className="w-full cursor-pointer bg-green-500 shadow border text-white text-2xl hover:bg-green-600 py-2 mt-2 px-2 mx-auto focus:outline-none rounded">
             💻 Install {currentTool.tool}
-          </a>
-    </Link>
+    </a>
     </div>
     </div>
     {currentTool.description ? (
