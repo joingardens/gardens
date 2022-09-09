@@ -16,7 +16,7 @@
     "@supabase/supabase-js": "^1.18.0",
     "@tailwindcss/typography": "^0.4.1",
     "@types/body-scroll-lock": "^3.1.0",
-    "@types/react": "^17.0.13",
+    "@types/react": "^17.0.48",
     "@types/react-input-autosize": "^2.2.1",
     "@types/uuid": "^8.3.1",
     "axios": "^0.27.2",
