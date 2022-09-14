@@ -68,7 +68,7 @@ const ProvisionRegionSelector: FC<{
           {region.sizes.map(a => {
             const sizeMatch = provisionState.size === a
 
-            if (a === "s-1vcpu-1gb" || a === "s-2vcpu-2gb")
+            if (a === "s-1vcpu-1gb" || a === "s-2vcpu-2gb" || a === "s-2vcpu-4gb")
             return (
               <button 
               onClick={() => {
