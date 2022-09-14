@@ -98,6 +98,7 @@ export default function Pricing({ products }) {
             const price = product.prices.find(
               (price) => price.interval === billingInterval
             );
+            if (price){
             const priceString = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: price.currency,
@@ -152,6 +153,7 @@ export default function Pricing({ products }) {
                 </div>
               </div>
             );
+            }
             }
           })}
           <div className='rounded-lg shadow-sm divide-y divide-accents-2 bg-gray-50 mt-4 lg:mt-0 lg:ml-4'>
