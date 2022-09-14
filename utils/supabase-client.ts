@@ -23,6 +23,7 @@ export async function signInWithGoogle() {
 
 export async function signInWithKeycloak() {
   const { user, session, error } = await supabase.auth.signIn({
+    // @ts-ignore
     provider: 'keycloak',
   }
 }

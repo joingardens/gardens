@@ -2816,6 +2816,7 @@ export interface paths {
           type?: parameters["rowFilter.tools.type"];
           featured?: parameters["rowFilter.tools.featured"];
           one_click?: parameters["rowFilter.tools.one_click"];
+          caprover_id?: parameters["rowFilter.tools.caprover_id"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -2878,6 +2879,7 @@ export interface paths {
           type?: parameters["rowFilter.tools.type"];
           featured?: parameters["rowFilter.tools.featured"];
           one_click?: parameters["rowFilter.tools.one_click"];
+          caprover_id?: parameters["rowFilter.tools.caprover_id"];
         };
         header: {
           /** Preference */
@@ -2904,6 +2906,7 @@ export interface paths {
           type?: parameters["rowFilter.tools.type"];
           featured?: parameters["rowFilter.tools.featured"];
           one_click?: parameters["rowFilter.tools.one_click"];
+          caprover_id?: parameters["rowFilter.tools.caprover_id"];
         };
         body: {
           /** tools */
@@ -3016,6 +3019,102 @@ export interface paths {
       };
     };
   };
+  "/user_apps": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.user_apps.id"];
+          created_at?: parameters["rowFilter.user_apps.created_at"];
+          user_droplet_id?: parameters["rowFilter.user_apps.user_droplet_id"];
+          tool_id?: parameters["rowFilter.user_apps.tool_id"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["user_apps"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** user_apps */
+          user_apps?: definitions["user_apps"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.user_apps.id"];
+          created_at?: parameters["rowFilter.user_apps.created_at"];
+          user_droplet_id?: parameters["rowFilter.user_apps.user_droplet_id"];
+          tool_id?: parameters["rowFilter.user_apps.tool_id"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.user_apps.id"];
+          created_at?: parameters["rowFilter.user_apps.created_at"];
+          user_droplet_id?: parameters["rowFilter.user_apps.user_droplet_id"];
+          tool_id?: parameters["rowFilter.user_apps.tool_id"];
+        };
+        body: {
+          /** user_apps */
+          user_apps?: definitions["user_apps"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/user_droplets": {
     get: {
       parameters: {
@@ -3024,6 +3123,9 @@ export interface paths {
           created_at?: parameters["rowFilter.user_droplets.created_at"];
           user?: parameters["rowFilter.user_droplets.user"];
           droplet_id?: parameters["rowFilter.user_droplets.droplet_id"];
+          paas_id?: parameters["rowFilter.user_droplets.paas_id"];
+          domain?: parameters["rowFilter.user_droplets.domain"];
+          password?: parameters["rowFilter.user_droplets.password"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -3078,6 +3180,9 @@ export interface paths {
           created_at?: parameters["rowFilter.user_droplets.created_at"];
           user?: parameters["rowFilter.user_droplets.user"];
           droplet_id?: parameters["rowFilter.user_droplets.droplet_id"];
+          paas_id?: parameters["rowFilter.user_droplets.paas_id"];
+          domain?: parameters["rowFilter.user_droplets.domain"];
+          password?: parameters["rowFilter.user_droplets.password"];
         };
         header: {
           /** Preference */
@@ -3096,6 +3201,9 @@ export interface paths {
           created_at?: parameters["rowFilter.user_droplets.created_at"];
           user?: parameters["rowFilter.user_droplets.user"];
           droplet_id?: parameters["rowFilter.user_droplets.droplet_id"];
+          paas_id?: parameters["rowFilter.user_droplets.paas_id"];
+          domain?: parameters["rowFilter.user_droplets.domain"];
+          password?: parameters["rowFilter.user_droplets.password"];
         };
         body: {
           /** user_droplets */
@@ -3580,10 +3688,7 @@ export interface definitions {
     description?: string;
     /** Format: text */
     appsrc?: string;
-    /**
-     * Format: boolean
-     * @default false
-     */
+    /** Format: boolean */
     isInternal?: boolean;
   };
   comment_with_author: {
@@ -3873,10 +3978,7 @@ export interface definitions {
      * @default draft
      */
     type?: string;
-    /**
-     * Format: boolean
-     * @default false
-     */
+    /** Format: boolean */
     isPublished?: boolean;
     /**
      * Format: bigint
@@ -3942,10 +4044,7 @@ export interface definitions {
      * This is a Foreign Key to `usecases.id`.<fk table='usecases' column='id'/>
      */
     usecase?: number;
-    /**
-     * Format: boolean
-     * @default false
-     */
+    /** Format: boolean */
     is_private: boolean;
   };
   flows_inputs: {
@@ -4139,10 +4238,7 @@ export interface definitions {
     id: number;
     /** Format: text */
     listing?: string;
-    /**
-     * Format: public.listing_type
-     * @enum {string}
-     */
+    /** Format: public.listing_type */
     listing_type?:
       | "Open-Source Tools"
       | "Other Tools"
@@ -4220,10 +4316,7 @@ export interface definitions {
     title?: string;
     /** Format: text */
     content?: string;
-    /**
-     * Format: boolean
-     * @default false
-     */
+    /** Format: boolean */
     isPublished: boolean;
     /**
      * Format: uuid
@@ -4244,20 +4337,11 @@ export interface definitions {
     live?: boolean;
     /** Format: bigint */
     siteId: number;
-    /**
-     * Format: boolean
-     * @default false
-     */
+    /** Format: boolean */
     isPinned: boolean;
-    /**
-     * Format: boolean
-     * @default false
-     */
+    /** Format: boolean */
     isDeleted: boolean;
-    /**
-     * Format: boolean
-     * @default false
-     */
+    /** Format: boolean */
     isApproved: boolean;
   };
   posts_archived: {
@@ -4283,10 +4367,7 @@ export interface definitions {
     title?: string;
     /** Format: text */
     content?: string;
-    /**
-     * Format: boolean
-     * @default false
-     */
+    /** Format: boolean */
     isPublished: boolean;
     /**
      * Format: uuid
@@ -4307,20 +4388,11 @@ export interface definitions {
     live?: boolean;
     /** Format: bigint */
     siteId: number;
-    /**
-     * Format: boolean
-     * @default false
-     */
+    /** Format: boolean */
     isPinned: boolean;
-    /**
-     * Format: boolean
-     * @default false
-     */
+    /** Format: boolean */
     isDeleted: boolean;
-    /**
-     * Format: boolean
-     * @default false
-     */
+    /** Format: boolean */
     isApproved: boolean;
   };
   prices: {
@@ -4344,15 +4416,9 @@ export interface definitions {
     unit_amount?: number;
     /** Format: text */
     currency?: string;
-    /**
-     * Format: public.pricing_type
-     * @enum {string}
-     */
+    /** Format: public.pricing_type */
     type?: "one_time" | "recurring";
-    /**
-     * Format: public.pricing_plan_interval
-     * @enum {string}
-     */
+    /** Format: public.pricing_plan_interval */
     interval?: "day" | "week" | "month" | "year";
     /** Format: integer */
     interval_count?: number;
@@ -4414,10 +4480,7 @@ export interface definitions {
     id: string;
     /** Format: uuid */
     user_id: string;
-    /**
-     * Format: public.subscription_status
-     * @enum {string}
-     */
+    /** Format: public.subscription_status */
     status?:
       | "trialing"
       | "active"
@@ -4506,10 +4569,7 @@ export interface definitions {
     description?: string;
     /** Format: text */
     logo_url?: string;
-    /**
-     * Format: public.tool_sections
-     * @enum {string}
-     */
+    /** Format: public.tool_sections */
     section?:
       | "No-Code"
       | "Operations"
@@ -4530,16 +4590,12 @@ export interface definitions {
      * @default tool
      */
     type?: string;
-    /**
-     * Format: boolean
-     * @default false
-     */
+    /** Format: boolean */
     featured?: boolean;
-    /**
-     * Format: boolean
-     * @default false
-     */
+    /** Format: boolean */
     one_click?: boolean;
+    /** Format: text */
+    caprover_id?: string;
   };
   usecases: {
     /**
@@ -4558,6 +4614,31 @@ export interface definitions {
      */
     created_at?: string;
   };
+  user_apps: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string;
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Foreign Key to `user_droplets.id`.<fk table='user_droplets' column='id'/>
+     */
+    user_droplet_id?: number;
+    /**
+     * Format: integer
+     * @description Note:
+     * This is a Foreign Key to `tools.id`.<fk table='tools' column='id'/>
+     */
+    tool_id?: number;
+  };
   user_droplets: {
     /**
      * Format: bigint
@@ -4574,6 +4655,16 @@ export interface definitions {
     user: string;
     /** Format: bigint */
     droplet_id: number;
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Foreign Key to `user_paas.id`.<fk table='user_paas' column='id'/>
+     */
+    paas_id?: number;
+    /** Format: text */
+    domain?: string;
+    /** Format: character varying */
+    password?: string;
   };
   user_paas: {
     /**
@@ -4661,20 +4752,11 @@ export interface definitions {
 }
 
 export interface parameters {
-  /**
-   * @description Preference
-   * @enum {string}
-   */
+  /** @description Preference */
   preferParams: "params=single-object";
-  /**
-   * @description Preference
-   * @enum {string}
-   */
+  /** @description Preference */
   preferReturn: "return=representation" | "return=minimal" | "return=none";
-  /**
-   * @description Preference
-   * @enum {string}
-   */
+  /** @description Preference */
   preferCount: "count=none";
   /** @description Filtering Columns */
   select: string;
@@ -5281,6 +5363,8 @@ export interface parameters {
   "rowFilter.tools.featured": string;
   /** Format: boolean */
   "rowFilter.tools.one_click": string;
+  /** Format: text */
+  "rowFilter.tools.caprover_id": string;
   /** @description usecases */
   "body.usecases": definitions["usecases"];
   /** Format: bigint */
@@ -5291,6 +5375,16 @@ export interface parameters {
   "rowFilter.usecases.description": string;
   /** Format: timestamp with time zone */
   "rowFilter.usecases.created_at": string;
+  /** @description user_apps */
+  "body.user_apps": definitions["user_apps"];
+  /** Format: bigint */
+  "rowFilter.user_apps.id": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.user_apps.created_at": string;
+  /** Format: bigint */
+  "rowFilter.user_apps.user_droplet_id": string;
+  /** Format: integer */
+  "rowFilter.user_apps.tool_id": string;
   /** @description user_droplets */
   "body.user_droplets": definitions["user_droplets"];
   /** Format: bigint */
@@ -5301,6 +5395,12 @@ export interface parameters {
   "rowFilter.user_droplets.user": string;
   /** Format: bigint */
   "rowFilter.user_droplets.droplet_id": string;
+  /** Format: bigint */
+  "rowFilter.user_droplets.paas_id": string;
+  /** Format: text */
+  "rowFilter.user_droplets.domain": string;
+  /** Format: character varying */
+  "rowFilter.user_droplets.password": string;
   /** @description user_paas */
   "body.user_paas": definitions["user_paas"];
   /** Format: bigint */
