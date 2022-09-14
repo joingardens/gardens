@@ -99,7 +99,7 @@ export default function Tool({ jobGroups, jobTools, jobs, tool, flows }) {
           </a>
     </Link>
     ) : null}
-    <Link href="/">
+    <Link href="/apps">
           <a  style={{textDecoration: 'none', fontWeight: 600}} 
           className="w-full bg-green-500 shadow border text-white text-2xl hover:bg-green-600 py-2 mt-2 px-2 mx-auto focus:outline-none rounded">
             💻 Install {currentTool.tool}
