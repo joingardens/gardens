@@ -21,6 +21,12 @@ export async function signInWithGoogle() {
   })
 }
 
+async function signInWithKeycloak() {
+  const { user, session, error } = await supabase.auth.signIn({
+    provider: 'keycloak',
+  }
+}
+
 export const findInputsByString = async (string) => {
   const {data} = await supabase
   .from("inputs")
