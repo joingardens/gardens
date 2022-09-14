@@ -94,7 +94,7 @@ export default function Pricing({ products }) {
         </div>
         <div className="mt-12 sm:mt-16 flex flex-wrap lg:flex-nowrap">
           {products.map((product) => {
-            console.log(product)
+            if (product){
             const price = product.prices.find(
               (price) => price.interval === billingInterval
             );
@@ -152,6 +152,7 @@ export default function Pricing({ products }) {
                 </div>
               </div>
             );
+            }
           })}
           <div className='rounded-lg shadow-sm divide-y divide-accents-2 bg-gray-50 mt-4 lg:mt-0 lg:ml-4'>
                 <div className="p-6">
