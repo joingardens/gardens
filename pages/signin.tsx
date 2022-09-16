@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { signInWithKeycloak } from '../utils/supabase-client';
 
 import GoogleButton from 'react-google-button'
 import Button from '../components/ui/Button';
@@ -118,14 +119,14 @@ const SignIn = () => {
           )}
           <Button
               variant="slim"
-              className="bg-blue-100"
+              className="bg-green-100"
               type="submit"
               loading={loading}
               onClick={() => { signInWithKeycloak() }}
             >
-              Sign in with Keycloak
+              Sign in to Gardens
             </Button>
-          {
+          {/*
             inputState === InputStateTypes.MAGIC_LINK
             ?
             <form onSubmit={handleSignin} className="flex flex-col space-y-4">
@@ -144,6 +145,7 @@ const SignIn = () => {
             >
               Send magic link
             </Button>
+
             <GoogleButton style={{width: '100%', marginTop: '1rem'}}
             type="light" 
             onClick={() => { signInWithGoogle() }}
@@ -200,7 +202,7 @@ const SignIn = () => {
             </div>
             : 
             <></>
-          }
+          
           <span className="pt-1 text-center text-sm">
               <a
                 href="#"
@@ -241,7 +243,7 @@ const SignIn = () => {
               </a>
             </Link>
         </span>
-      {/*
+      
         <div className="flex items-center my-6">
           <div
             className="border-t border-accents-2 flex-grow mr-3"
@@ -263,6 +265,7 @@ const SignIn = () => {
           <span className="ml-2">Continue with GitHub</span>
         </Button>
       */}
+      </div>
         
       </div>
     );
