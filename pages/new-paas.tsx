@@ -112,6 +112,7 @@ const NewPaasPage: FC = () => {
                 e.preventDefault()
                 const data = await PaasFormState.submit()
                 if (data) {
+                    //@ts-ignore
                     window.location.href = `${window.location.protocol}//${data.slug}.${window.location.host}`
                 }
             }}>
