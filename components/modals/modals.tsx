@@ -2,6 +2,7 @@ import { useContext } from "react"
 import NewFlowModal from "./newFlowModal"
 import SearchModal from "./search/searchModal"
 import NewItemModal from "./newItem/newItemModal"
+import InstallToolModal from "./installTool/installToolModal"
 
 const Modals = () => {
     return (
@@ -9,6 +10,7 @@ const Modals = () => {
             <NewFlowModal/>
             <SearchModal/>
             <NewItemModal/>
+            <InstallToolModal/>
             </>
     )
 }

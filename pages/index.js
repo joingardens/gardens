@@ -66,7 +66,7 @@ export default function Index({ flows, flowItemsWithTools, actions, sections, pr
       <div className="bg-green-500 w-full py-36">
     <h2 className="text-center text-3xl font-bold text-white">🌿 Get started</h2>
     <div className="mt-8 mx-auto text-xl text-center">
-    <Link href="onboarding/prerequisites">
+    <Link href="/new-paas">
           <a  style={{textDecoration: 'none', fontWeight: 600}} 
           className="bg-white border border-blue-400 hover:bg-blue-400 transition py-1 px-2 mx-auto focus:outline-none rounded">
             Press here to set up your site

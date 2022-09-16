@@ -12,7 +12,7 @@ import useToast from '../../hooks/useToast';
 const Navbar = () => {
   const { user, signOut, subscription } = useUser();
   const {service} = useContext(ModalsContext);
-  const linkCta = (user ? (subscription ? '/myapps' : '/new-flow') : '/signup');
+  const linkCta = (user ? '/myapps' : '/signup');
 
   let listener = null;
   const [scrollState, setScrollState] = useState("bg-gray-50 border")
@@ -67,14 +67,14 @@ const Navbar = () => {
               <Link href="/tools">
                 <a className={`hidden sm:block mr-1.5 md:mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded`}>Tools</a>
               </Link>
-              {!user ? (
+              {user ? (
                 <Link href={`${linkCta}`}>
                 <a className={`mr-1.5 md:mr-2.5 ${ctaState} py-1 px-2 focus:outline-none rounded font-semibold`}>
-                  {user ? (subscription ? 'My apps' : '+ New') : ('Start self-hosting')}
+                  {user ? ('My apps') : ('Start self-hosting')}
                 </a>
               </Link>
               ) : null}
-              {user ? (
+              {/*user ? (
             <>
             <button 
             onClick={() => {
@@ -91,7 +91,7 @@ const Navbar = () => {
                </>
             ) : (
             null
-            )}
+            )*/}
               {/*
               <Link href="/account">
                 <a className="mr-2.5 bg-white py-1 px-2 focus:outline-none hover:bg-gray-200 rounded text-base">Account</a>

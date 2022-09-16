@@ -1,21 +1,22 @@
-import { useUser } from '../../../utils/useUser';
+import { useUser } from '../../utils/useUser';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
-import ParagraphWithButton from '../../../components/ui/ParagraphWithButton';
+import ParagraphWithButton from '../../components/ui/ParagraphWithButton';
+import PrettyBlock from '../../components/ui/PrettyBlock'
 import Link from 'next/link';
-import Button from '../../../components/ui/Button';
+import Button from '../../components/ui/Button';
 import Image from 'next/image'
-import Input from '../../../components/ui/Input';
-import { useDigitalOcean } from '../../../components/hooks/useDigitalOcean';
-import { userDropletsAdapter } from '../../../adapters/userDroplets/adapter';
-import { apiAdapter, CaproverServerApiAdapter, DreamhostServerAdapter } from '../../../adapters/other-apps/api/adapter';
-import { DigitalOceanNetworkType } from '../../../adapters/other-apps/digital-ocean/digitalOceanAdapter';
+import Input from '../../components/ui/Input';
+import { useDigitalOcean } from '../../components/hooks/useDigitalOcean';
+import { userDropletsAdapter } from '../../adapters/userDroplets/adapter';
+import { apiAdapter, CaproverServerApiAdapter, DreamhostServerAdapter } from '../../adapters/other-apps/api/adapter';
+import { DigitalOceanNetworkType } from '../../adapters/other-apps/digital-ocean/digitalOceanAdapter';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { useInput } from '../../../components/hooks/useInput';
-import { validationService } from '../../../services/validationService';
-import { useForm } from '../../../components/hooks/useForm';
-import { userPaasAdapter } from '../../../adapters/userPaas/adapter';
-import useToast from '../../../components/hooks/useToast';
+import { useInput } from '../../components/hooks/useInput';
+import { validationService } from '../../services/validationService';
+import { useForm } from '../../components/hooks/useForm';
+import { userPaasAdapter } from '../../adapters/userPaas/adapter';
+import useToast from '../../components/hooks/useToast';
 
 export enum ConfigureInputNames {
   DOMAIN="domain",
@@ -50,6 +51,7 @@ export default function ConfigureCustom() {
     console.log(resp2)
     const resp3 = await serverAdapter.caproverForceSSL()
     console.log(resp3)
+    router.push("/myapps")
     return resp3
   }
 
@@ -106,30 +108,27 @@ export default function ConfigureCustom() {
         :
         <>
         <div className="md:w-2/3 w-4/5 mx-auto flex flex-col md:items-center mt-12">
-          <div className='w-full mx-auto grid grid-cols-2 gap-x-2'>
-              <Button 
-              className={`
-              ${flowType === "custom" ? "ring-2" : "ring-0"}
-              ring-blue-500
-              `}
-              onClick={() => setFlowType("custom")}>
-                Custom flow
-              </Button>
-              <Button 
-              className={`
-              ${flowType === "gardens" ? "ring-2" : "ring-0"}
-              ring-blue-500
-              `}
-              onClick={() => setFlowType("gardens")}>
-                Gardens flow
-              </Button>
+          <h1 className="text-3xl text-center font-bold">3️ Configure</h1>
+          <div className='w-full mx-auto flex flex-col md:flex-row mt-6'>
+          <div className="cursor-pointer md:w-1/2" onClick={() => setFlowType("custom")}>
+          <PrettyBlock smallImage='https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/globe-with-meridians_1f310.png?t=2022-08-21T14%3A46%3A25.867Z'
+             blockBody='Use custom domain'
+             flexibleHeight={true} fullWidth={true}
+             blockDescription='Your very own domain! And more secure, too'
+              />
+          </div>
+          <div className="cursor-pointer md:w-1/2" onClick={() => setFlowType("gardens")}>
+          <PrettyBlock smallImage='https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/Gardens_circle_logo.svg'
+             blockBody='Use a collective.garden domain'
+             flexibleHeight={true} fullWidth={true}
+             blockDescription='Get a domain in the form orgname.collective.garden. Not recommended!'/>
+          </div>
           </div>
           <div className='w-full pt-5' ref={parent2}>
           {
             flowType === "custom" 
             ? 
             <>
-            <h1 className="text-3xl text-center font-bold">3️ Configure</h1>
             <div className="prose prose-xl">
               <div>
                 You will need to point your domain to your Droplet.
@@ -270,25 +269,25 @@ export default function ConfigureCustom() {
               </Button>
             </form>
           </>
-          :
-          <div className='mx-auto mt-5'>
-            Select flow type
-          </div>
+          : null
           }
-          <div className="mx-auto mt-16 flex">
-            <Link href="/onboarding/select">
+
+          </div>  
+          <div className="mx-auto mt-16 flex flex-wrap">
+            <Link href="/onboarding/provision">
               <a className="border border-gray hover:bg-gray-400 hover:text-white  text-xl transition py-1 px-2 focus:outline-none rounded">
                 Previous step
               </a>
             </Link>
+            {/*
             <Link href="/myapps">
               <a className="border border-seaweed hover:bg-seaweed hover:text-white ml-4 text-xl transition py-1 px-2 focus:outline-none rounded">
                 Go to my apps
               </a>
             </Link>
+          */}
           </div>
           <div className="mb-24" />
-          </div>  
         </div>
 
 

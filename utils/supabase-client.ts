@@ -552,6 +552,48 @@ export const getActionById = async (action_id) => {
   return data || [];
 };
 
+export const getPaasByUserId = async (user_id) => {
+  const { data, error } = await supabase
+    .from('user_paas')
+    .select('*')
+    .eq('user', user_id)
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
+export const getDropletsByPaasId = async (paas_id) => {
+  const { data, error } = await supabase
+    .from('user_droplets')
+    .select('*')
+    .eq('paas_id', paas_id)
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
+export const getAppsByUserDropletId = async (user_droplet_id) => {
+  const { data, error } = await supabase
+    .from('user_apps')
+    .select('id, user_droplet_id, tool_id(id, tool, logo_url)')
+    .eq('user_droplet_id', user_droplet_id)
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
 export const updateUserName = async (user, name) => {
   await supabase
     .from('users')

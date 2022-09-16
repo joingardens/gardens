@@ -67,9 +67,9 @@ const DraftsPage = () => {
     titleDescription={'Welcome to your posts section'} />
     </div>
     <div className="flex justify-center">
-    <Sidebar page="drafts" />
     <div className="px-5 w-full mb-24 mt-24 md:mt-16">
-    <div className="flex flex-wrap justify-center items-center w-4/5 sm:pl-8 md:pl-16 md:justify-start mx-auto py-4">
+    <Sidebar page="drafts" />
+    <div className="flex flex-col flex-wrap justify-center items-end w-4/5 sm:pl-8 md:pl-16 md:justify-start mx-auto py-4">
     <button 
                 onClick={async (e) => {
                     if (user) {
@@ -80,12 +80,12 @@ const DraftsPage = () => {
                         makeToast("Not logged in", "error", 3)
                     }
                 }}
-                className={`flex items-center bg-gray-50 rounded border border-black hover:bg-gray-100 transition-all px-3`}>
-                    <div>
-                        + New Draft
+                className={`flex items-center hover:bg-gray-50 rounded border border-black hover:bg-gray-100 transition-all px-2`}>
+                    <div className="py-2 px-2 font-semibold">
+                        + New Post
                     </div>
                 </button>
-            <div className={`grid grid-cols-1 gap-5`}>
+            <div className="flex flex-col mt-4 w-full">
                 {drafts.map(a => {
                     return  <DraftCard 
                     deleteDraft={deleteDraft}
