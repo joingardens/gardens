@@ -14,8 +14,21 @@ class ApiAdapter extends BaseHttpAdapter {
         const response = await this.instance.post<DigitalOceanResponseData>("/api/ocean-auth", {code})
         return response
     }
+}
 
-  
+export class DreamhostServerAdapter extends ApiAdapter {
+    constructor(private ip: string) {
+        super()
+    }
+
+    async addDnsRecord(domain: string) {
+        const response = await this.instance.post("api/dreamhost/add-dns", {
+            domain,
+            ip: this.ip
+        }) 
+        return response
+    }
+
 }
 
 export class CaproverServerApiAdapter extends ApiAdapter {
@@ -63,7 +76,6 @@ export class CaproverServerApiAdapter extends ApiAdapter {
         })
         return response
     }
-
 
 }
 

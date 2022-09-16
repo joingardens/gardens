@@ -14,6 +14,9 @@ import { validationService } from "../../services/validationService"
 import Input from '../../components/ui/Input';
 import { userDropletsAdapter } from '../../adapters/userDroplets/adapter';
 import axios from 'axios';
+import { flagUrlMap } from '../../utils/getFlagUrl';
+
+
 
 class ProvisionState {
   region: DigitalOceanRegion
@@ -44,7 +47,7 @@ const ProvisionRegionSelector: FC<{
     <button 
     className={`
     ${regionMatch ? "ring-yellow-400" : ""}
-    ring-2 p-2 w-full flex justify-center focus:outline-none
+    ring-2 p-2 w-full flex justify-center items-center focus:outline-none
     `}
     onClick={() => {
       if (regionMatch) {
@@ -56,7 +59,14 @@ const ProvisionRegionSelector: FC<{
         size: ''
       })
     }}>
-      {region.name}
+      <span className="mr-2">
+        {region.name}
+      </span>
+      <div className='w-6 h-4 flex justify-center items-center'>
+        <img src={flagUrlMap[region.name.substring(0, region.name.length-2).toLowerCase()]} className='w-full h-full' alt="" />
+      </div>
+      
+
     </button>
     {
       regionMatch
@@ -104,7 +114,7 @@ export default function Provision() {
 
   const { user } = useUser()
   const router = useRouter()
-  const {makeToast} = useToast()
+  const { makeToast } = useToast()
   const { changeToken, digitalOceanApiAdapter, token } = useDigitalOcean()
   const [pageLoading, setPageLoading] = useState<boolean>(true)
   const [regions, setRegions] = useState<DigitalOceanRegion[]>([])
@@ -146,14 +156,14 @@ export default function Provision() {
         {/* <div className="prose prose-xl">
       Just smash the button below. We'll set up your Droplet where your apps will be hosted, and an admin panel you can use to manage your instance.
     </div> */}
-        <div className={`grid grid-cols-4 gap-x-8 gap-y-5 mt-5 w-full items-start justify-items-center`}>
+        <div className={`grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2  gap-x-8 gap-y-5 mt-5 w-full items-start justify-items-center`}>
           {regions.map((region) => 
           <ProvisionRegionSelector
           provisionState={provisionState}
           setProvisionState={setProvisionState}
           region={region}/>)}
         </div>
-        <div className='flex p-2 items-center'>
+        <div className='flex p-2 items-center mt-5'>
           <span className='mr-4'>
             Droplet Name: 
           </span>
@@ -181,14 +191,21 @@ export default function Provision() {
                   userDropletsAdapter.insertOne({
                     user: user.id,
                     droplet_id: r.data.droplet.id
-                  })
+                  }).then(r => {
+                    if (r) {
+                        router.push("/onboarding/select")
+                    }
+                    if (!r) {
+                      makeToast("ERROR", "error", 3 )
+                    }
+                    setPageLoading(false)
                 }).catch(error => {
-                  makeToast(error, "error", 3 )});
-                setPageLoading(false)
-                router.push("/onboarding/select")
-              }
-            }}
-            disabled={!provisionState.region || !provisionState.size}
+                  console.log(error)
+                  makeToast(error, "error", 3 )
+                });
+              })
+            }}}
+            disabled={!provisionState.region || !provisionState.size || pageLoading}
             loading = {pageLoading}
           >
             Set Up Droplet
