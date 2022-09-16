@@ -75,6 +75,7 @@ const Navbar = () => {
                 <a className={`mr-1.5 md:mr-2.5 ${ctaState} py-1 px-2 focus:outline-none rounded font-semibold`}>
                   Finish registration
                 </a>
+              </Link>) : 
               <Link href={"/apps"}>
                 <a className={`mr-1.5 md:mr-2.5 ${ctaState} py-1 px-2 focus:outline-none rounded font-semibold`}>
                   Start self-hosting
