@@ -1,10 +1,10 @@
 import React from 'react';
 import { useRouter } from 'next/router'
+import { useUser } from '../../utils/useUser';
 import { NextSeo } from 'next-seo';
 import Pricing from '../../components/Pricing';
 import ListItem from '../../components/ui/ListItem';
 import TextList from '../../components/ui/TextList';
-import { Comments } from '../../components/Comments';
 import Title from '../../components/ui/Title';
 import { getJobToolsByTool, 
 	getAllJobGroups, getAllJobs, getAllJobTools, getToolById, getFlowItemsByJobToolIds, getFlowsByIds } from '../../utils/supabase-client';
@@ -14,7 +14,8 @@ import Link from "next/link";
 
 
 export default function Tool({ jobGroups, jobTools, jobs, tool, flows }) {
-
+  
+  const { user, subscription } = useUser();
   const router = useRouter()
    if (router.isFallback) {
     return (<div className="py-36">
@@ -23,6 +24,7 @@ export default function Tool({ jobGroups, jobTools, jobs, tool, flows }) {
     </div>
     )
   } else {
+  const linkCta = (user ? '/' : '/apps');
   const { tool_id } = router.query
   let groupArray = [];
   let toolIds = [];
@@ -99,7 +101,7 @@ export default function Tool({ jobGroups, jobTools, jobs, tool, flows }) {
           </a>
     </Link>
     ) : null}
-    <Link href="/apps">
+    <Link href={`${linkCta}`}>
           <a  style={{textDecoration: 'none', fontWeight: 600}} 
           className="w-full bg-green-500 shadow border text-white text-2xl hover:bg-green-600 py-2 mt-2 px-2 mx-auto focus:outline-none rounded">
             💻 Install {currentTool.tool}

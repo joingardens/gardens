@@ -2,7 +2,6 @@ import React from 'react';
 import { useRouter } from 'next/router'
 import Link from 'next/link';
 import Pricing from '../../components/Pricing';
-import { Comments } from '../../components/Comments';
 import Title from '../../components/ui/Title';
 import { getAllActionIds, getActionById } from '../../utils/supabase-client';
 import Image from 'next/image';

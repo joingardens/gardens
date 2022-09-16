@@ -4,7 +4,6 @@ import { NextSeo } from 'next-seo';
 import Pricing from '../../components/Pricing';
 import ListItem from '../../components/ui/ListItem';
 import TextList from '../../components/ui/TextList';
-import { Comments } from '../../components/Comments';
 import Title from '../../components/ui/Title';
 import { getJobToolsByTask, getFlowItemsByJobToolIds,
 	getAllJobTools, getFlowsByIds, getTaskById } from '../../utils/supabase-client';
@@ -101,7 +100,6 @@ export default function Task({ jobTools, task, flows }) {
     ) : null}
     </div>
     <div className="py-24">
-    <Comments postId={parseInt('888' + task_id)} />
     </div>
     </div>
     </>

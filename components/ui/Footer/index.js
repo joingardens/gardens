@@ -15,7 +15,7 @@ import ModalsContext from '../../modals/modalsContext';
 function LightFooterA(props) {
     const {service} = useContext(ModalsContext);
     const { user, signOut } = useUser();
-    const linkCta = (user ? '/new-flow' : '/signin');
+    const linkCta = (user ? '/myapps' : '/apps');
 
 
   return (
@@ -96,7 +96,7 @@ function LightFooterA(props) {
             <nav className="flex flex-col mb-10">
               <Link href={`${linkCta}`}>
                 <a className="text-gray-600 hover:text-gray-800 font-medium" >
-                  Add a guide
+                  Self-host
                 </a>
               </Link>
               
@@ -107,11 +107,9 @@ function LightFooterA(props) {
                 </a>
               </Link>
              */}
-             <Link href="/signin">
-                <a className="text-gray-600 hover:text-gray-800 font-medium" >
-                  Join the Community
+             <a className="text-gray-600 hover:text-gray-800 font-medium" href="https://masto.cloud.joingardens.com/public" target="_blank">
+                  Join the community
                 </a>
-              </Link>
                 <a className="text-gray-600 hover:text-gray-800 font-medium" href="https://tally.so/r/wMOjXm" target="_blank">
                   For organizations
                 </a>
@@ -125,7 +123,6 @@ function LightFooterA(props) {
               CONTACT US
             </h3>
             <nav className="flex flex-col mb-10">
-              
                 <a href="mailto:hello@joingardens.com" target="_blank" className="text-gray-600 hover:text-gray-800 font-medium" >
                   hello@joingardens.com
                 </a>

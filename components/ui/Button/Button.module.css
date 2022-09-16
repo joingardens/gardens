@@ -1,5 +1,5 @@
 .root {
-  @apply text-gray-900 shadow-md border-gray-400 cursor-pointer inline-flex px-10 rounded-sm leading-6  transition ease-in-out duration-150 shadow-sm font-semibold text-center justify-center uppercase py-4 border  items-center;
+  @apply text-gray-900 rounded shadow border-gray-500 cursor-pointer inline-flex px-10 rounded-sm leading-6  transition ease-in-out duration-150 shadow-sm font-semibold text-center justify-center uppercase py-4 border  items-center;
 }
 
 .root:hover {

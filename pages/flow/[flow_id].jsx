@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import Pricing from '../../components/Pricing';
-import { Comments } from '../../components/Comments';
 import Title from '../../components/ui/Title';
 import { getFlowItemsByFlowId, 
   getFlowInputsByFlowId, getFlowOutputsByFlowId, getAllFlowIds, getFlowById, getPersonalDetailsByUserId } from '../../utils/supabase-client';
@@ -173,7 +172,6 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
     </div>
     </div>
     <div className="py-24">
-    <Comments postId={parseInt('888' + flow_id)} />
     </div>
     </div>
     </>

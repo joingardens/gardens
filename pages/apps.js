@@ -4,6 +4,7 @@ import { updateUserName } from '../utils/supabase-client';
 import LightHeroD from '../components/ui/Hero';
 import React, { useState, useEffect } from 'react';
 import ParagraphWithButton from '../components/ui/ParagraphWithButton';
+import { signInWithKeycloak } from '../utils/supabase-client';
 import Link from 'next/link';
 import Button from '../components/ui/Button';
 import Image from 'next/image'
@@ -56,10 +57,10 @@ export default function Apps() {
       />
       <form
       onSubmit={handleSignin}
-      className="flex p-3 items-center w-full"
+      className="flex items-center w-full"
     >
-      <div className="flex flex-wrap">
-        <Input type="email" className="h-12" placeholder="Email" onChange={setEmail} required />
+      <div className="flex flex-wrap mx-auto -mt-4">
+        {/*<Input type="email" className="h-12" placeholder="Email" onChange={setEmail} required />*/}
         {message.content && (
           <div
             className={`${
@@ -72,14 +73,23 @@ export default function Apps() {
           </div>
         )}
        <div className="flex">
-          <Button
+        <Button
+              variant="slim"
+              className="bg-green-500 w-72 md:w-96 border"
+              type="submit"
+              loading={loading}
+              onClick={() => { signInWithKeycloak() }}
+            >
+              <span className="text-white font-bold">Get Started</span>
+            </Button>
+          {/*<Button
             variant="slim"
             type="submit"
             loading={loading}
             className="bg-green-300"
           >
             Get Started
-          </Button>
+          </Button>*/}
         </div>
       </div>
     </form>

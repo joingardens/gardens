@@ -1,6 +1,7 @@
 import Link from 'next/link';
 //import s from './Navbar.module.css';
 import React, { useState, useEffect } from 'react';
+import { signInWithKeycloak } from '../../../utils/supabase-client';
 import Logo from '../../icons/Logo';
 import { useUser } from '../../../utils/useUser';
 import SearchBar from '../SearchBar/SearchBar';
@@ -12,7 +13,6 @@ import useToast from '../../hooks/useToast';
 const Navbar = () => {
   const { user, signOut, subscription } = useUser();
   const {service} = useContext(ModalsContext);
-  const linkCta = (user ? '/myapps' : '/signup');
 
   let listener = null;
   const [scrollState, setScrollState] = useState("bg-gray-50 border")
@@ -67,13 +67,21 @@ const Navbar = () => {
               <Link href="/tools">
                 <a className={`hidden sm:block mr-1.5 md:mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded`}>Tools</a>
               </Link>
-              {user ? (
-                <Link href={`${linkCta}`}>
+              {(user && subscription) ? (<Link href={"/myapps"}>
                 <a className={`mr-1.5 md:mr-2.5 ${ctaState} py-1 px-2 focus:outline-none rounded font-semibold`}>
-                  {user ? ('My apps') : ('Start self-hosting')}
+                  My apps
                 </a>
-              </Link>
-              ) : null}
+              </Link>) : (user ? (<Link href={"/onboarding/"}>
+                <a className={`mr-1.5 md:mr-2.5 ${ctaState} py-1 px-2 focus:outline-none rounded font-semibold`}>
+                  Finish registration
+                </a>
+              <Link href={"/apps"}>
+                <a className={`mr-1.5 md:mr-2.5 ${ctaState} py-1 px-2 focus:outline-none rounded font-semibold`}>
+                  Start self-hosting
+                </a>
+              </Link>)
+              
+              }
               {/*user ? (
             <>
             <button 
