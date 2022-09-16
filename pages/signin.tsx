@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { signInWithGoogle } from '../utils/supabase-client';
+import { signInWithGoogle, signInWithKeycloak } from '../utils/supabase-client';
 
 import GoogleButton from 'react-google-button'
 import Button from '../components/ui/Button';
@@ -135,6 +135,16 @@ const SignIn = () => {
               disabled={!email.length}
             >
               Send magic link
+            </Button>
+            <Button
+              variant="slim"
+              className="bg-blue-100"
+              type="submit"
+              loading={loading}
+              disabled={!email.length}
+              onClick={() => { signInWithKeycloak() }}
+            >
+              Sign in with Keycloak
             </Button>
             <GoogleButton style={{width: '100%', marginTop: '1rem'}}
             type="light" 
