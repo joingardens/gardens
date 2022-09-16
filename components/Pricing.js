@@ -35,7 +35,7 @@ export default function Pricing({ products }) {
       return alert(error.message);
     } finally {
       setPriceIdLoading(false);
-      return router.push('/onboarding/prerequisites');
+      //return router.push('/onboarding/prerequisites');
     }
   };
 
