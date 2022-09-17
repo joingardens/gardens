@@ -54,7 +54,7 @@ class DigitalOceanApiAdapter extends BaseHttpAdapter {
             name,
             region,
             size,
-            image: "caprover-18-04"
+            image: "caprover-18-04",
         })
         return response
     }

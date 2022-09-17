@@ -21,10 +21,12 @@ export class DreamhostServerAdapter extends ApiAdapter {
         super()
     }
 
-    async addDnsRecord(domain: string) {
+    async addDnsRecord(domain: string, user: string, digitalOceanToken: string) {
         const response = await this.instance.post("api/dreamhost/add-dns", {
             domain,
-            ip: this.ip
+            ip: this.ip,
+            user,
+            digiocean: digitalOceanToken
         }) 
         return response
     }
@@ -76,6 +78,18 @@ export class CaproverServerApiAdapter extends ApiAdapter {
         })
         return response
     }
+
+    async caproverChangePassword(userDropletId: number, password: string, domain: string) {
+        const response = await this.instance.post<any>("api/configure-domain", {
+            url: this.url,
+            token: this.token,
+            userDropletId, 
+            password, 
+            domain,
+        })
+        return response
+    }
+
 
 }
 

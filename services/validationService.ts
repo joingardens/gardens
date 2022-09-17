@@ -41,6 +41,13 @@ class ValidationService {
         }
         return matchResult.input === matchResult[0]
     }
+
+    validatePassword(string:string) {
+        if (!string || string.length < 8) {
+            return false
+        }
+        return true
+    }
 }
 
 export const validationService = new ValidationService()

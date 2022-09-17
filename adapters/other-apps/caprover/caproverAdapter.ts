@@ -21,6 +21,8 @@ export class CaproverAdapter extends BaseHttpAdapter {
         return this
     }
 
+
+
     async login(password?: string) {
         const response = await this.instance.post<CaproverResponse<CaproverTokenData>>("/api/v2/login/", {
             "password": password ? password : "captain42"
@@ -45,6 +47,15 @@ export class CaproverAdapter extends BaseHttpAdapter {
     async forceSsl(bool: boolean) {
         const response = await this.instance.post<CaproverResponse<any>>("/api/v2/user/system/forcessl", {
             isEnabled: bool
+        })
+        return response
+    }
+
+
+    async caproverChangePassword( newPassword: string, oldPassword?: string,) {
+        const response = await this.instance.post<CaproverResponse<any>>("api/v2/user/changepassword", {
+            oldPassword: oldPassword ? oldPassword : "captain42",
+            newPassword
         })
         return response
     }

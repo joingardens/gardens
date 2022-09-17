@@ -8,5 +8,8 @@ export class BaseHttpAdapter {
         })
     }
 
+    setUrl(url: string) {
+        this.instance.defaults.baseURL = url
+    }
     
 }

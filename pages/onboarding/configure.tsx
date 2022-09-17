@@ -1,8 +1,6 @@
 import { useUser } from '../../utils/useUser';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
-import ParagraphWithButton from '../../components/ui/ParagraphWithButton';
-import PrettyBlock from '../../components/ui/PrettyBlock'
 import Link from 'next/link';
 import Button from '../../components/ui/Button';
 import Image from 'next/image'
@@ -17,10 +15,12 @@ import { validationService } from '../../services/validationService';
 import { useForm } from '../../components/hooks/useForm';
 import { userPaasAdapter } from '../../adapters/userPaas/adapter';
 import useToast from '../../components/hooks/useToast';
+import { dreamhostAdapter as drm } from "../../adapters/other-apps/dreamhost/dreamhostAdapter"
 
 export enum ConfigureInputNames {
   DOMAIN="domain",
-  EMAIL="email"
+  EMAIL="email",
+  PASSWORD="password"
 }
 
 export enum FlowTypes {
@@ -31,7 +31,6 @@ export enum FlowTypes {
 export default function ConfigureCustom() {
 
   const { user } = useUser()
-  const router = useRouter();
   const { digitalOceanApiAdapter, token} = useDigitalOcean()
   const [ dreamhostAdapter, setDreamhostAdapter ] = useState<DreamhostServerAdapter>()
   const [ dropletId, setDropletId ] = useState<number>()
@@ -41,18 +40,22 @@ export default function ConfigureCustom() {
   const [ parent2 ] = useAutoAnimate<HTMLDivElement>({duration: 1000})
   const domainInput = useInput(validationService.validateDomainName, "", ConfigureInputNames.DOMAIN)
   const emailInput = useInput(validationService.validateEmail, "", ConfigureInputNames.EMAIL)
+  const passwordInput = useInput(validationService.validatePassword, "", ConfigureInputNames.PASSWORD)
   const [ flowType, setFlowType ] = useState<`${FlowTypes}`>(null)
   const toaster = useToast()
 
+  
+
   const ConfigureFormHandler = async () => {
-    const resp1 = await serverAdapter.caproverSetRootDomain(domainInput.value)
-    console.log(resp1)
-    const resp2 = await serverAdapter.caproverEnableSSL(emailInput.value)
-    console.log(resp2)
-    const resp3 = await serverAdapter.caproverForceSSL()
-    console.log(resp3)
-    router.push("/myapps")
-    return resp3
+      const resp1 = await serverAdapter.caproverSetRootDomain(domainInput.value)
+      console.log(resp1)
+      const resp2 = await serverAdapter.caproverEnableSSL(emailInput.value)
+      console.log(resp2)
+      const resp3 = await serverAdapter.caproverForceSSL()
+      console.log(resp3)
+      serverAdapter.setUrl("https://" + domainInput.value)
+      const resp4 = await serverAdapter.caproverChangePassword(dropletId, passwordInput.value, domainInput.value)
+      console.log(resp4)
   }
 
   const formState = useForm([domainInput, emailInput], ConfigureFormHandler)
@@ -98,6 +101,18 @@ export default function ConfigureCustom() {
     }
   }, [dropletId, token])
 
+  // useEffect(() => {
+  //   if (serverAdapter) {
+  //     serverAdapter.caproverChangePassword(dropletId, "captain42", "ebal.joingardens.online")
+  //     .then(r => {
+  //       console.log(r)
+  //     })
+  //     .catch(r => {
+  //       console.log(r)
+  //     })
+  //   }
+  // }, [serverAdapter])
+
 
   return (
     <div ref={parent}>
@@ -108,27 +123,30 @@ export default function ConfigureCustom() {
         :
         <>
         <div className="md:w-2/3 w-4/5 mx-auto flex flex-col md:items-center mt-12">
-          <h1 className="text-3xl text-center font-bold">3️ Configure</h1>
-          <div className='w-full mx-auto flex flex-col md:flex-row mt-6'>
-          <div className="cursor-pointer md:w-1/2" onClick={() => setFlowType("custom")}>
-          <PrettyBlock smallImage='https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/globe-with-meridians_1f310.png?t=2022-08-21T14%3A46%3A25.867Z'
-             blockBody='Use custom domain'
-             flexibleHeight={true} fullWidth={true}
-             blockDescription='Your very own domain! And more secure, too'
-              />
-          </div>
-          <div className="cursor-pointer md:w-1/2" onClick={() => setFlowType("gardens")}>
-          <PrettyBlock smallImage='https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/Gardens_circle_logo.svg'
-             blockBody='Use a collective.garden domain'
-             flexibleHeight={true} fullWidth={true}
-             blockDescription='Get a domain in the form orgname.collective.garden. Not recommended!'/>
-          </div>
+          <div className='w-full mx-auto grid grid-cols-2 gap-x-2'>
+              <Button 
+              className={`
+              ${flowType === "custom" ? "ring-2" : "ring-0"}
+              ring-blue-500
+              `}
+              onClick={() => setFlowType("custom")}>
+                Custom flow
+              </Button>
+              <Button 
+              className={`
+              ${flowType === "gardens" ? "ring-2" : "ring-0"}
+              ring-blue-500
+              `}
+              onClick={() => setFlowType("gardens")}>
+                Gardens flow
+              </Button>
           </div>
           <div className='w-full pt-5' ref={parent2}>
           {
             flowType === "custom" 
             ? 
             <>
+            <h1 className="text-3xl text-center font-bold">3️ Configure</h1>
             <div className="prose prose-xl">
               <div>
                 You will need to point your domain to your Droplet.
@@ -198,6 +216,25 @@ export default function ConfigureCustom() {
               : <></>
             }
           </div>
+          <div>
+              <div>
+                Password
+              </div>
+              <input
+              value={passwordInput.value}
+              type="password"
+              onChange={(e) => {
+                  passwordInput.setValue(e.target.value.toLowerCase())
+              }}
+              className={`
+              ${formState.errors[ConfigureInputNames.PASSWORD] ? "border-red-500" : "border-green-500"}
+              rounded-md transition-all p-2 border-2 mt-2 w-full`}/>
+            {formState.errors[ConfigureInputNames.PASSWORD] 
+              ?
+              "Password is too short"
+              : <></>
+            }
+          </div>
               <Button 
               disabled = {formState.errors[ConfigureInputNames.EMAIL] || formState.errors[ConfigureInputNames.DOMAIN]}
               loading = {formState.loading}
@@ -217,7 +254,7 @@ export default function ConfigureCustom() {
               userPaasAdapter.findOneByQuery({user: user.id})
               .then(r => {
                 domain = `${r.data[0].org_name.toLowerCase()}.collective.garden`
-                dreamhostAdapter.addDnsRecord(domain).then(async () => {
+                dreamhostAdapter.addDnsRecord(domain, user.id, token).then(async () => {
                   domainInput.setValue(domain)
                   const data = await formState.submit()
                   console.log(data)
@@ -261,6 +298,25 @@ export default function ConfigureCustom() {
                   : <></>
                 }
               </div>
+              <div>
+                  <div>
+                    Password
+                  </div>
+                  <input
+                  value={passwordInput.value}
+                  type="password"
+                  onChange={(e) => {
+                      passwordInput.setValue(e.target.value.toLowerCase())
+                  }}
+                  className={`
+                  ${formState.errors[ConfigureInputNames.PASSWORD] ? "border-red-500" : "border-green-500"}
+                  rounded-md transition-all p-2 border-2 mt-2 w-full`}/>
+                {formState.errors[ConfigureInputNames.PASSWORD] 
+                  ?
+                  "Password is too short"
+                  : <></>
+                }
+              </div>
               <Button 
               disabled = {formState.errors[ConfigureInputNames.EMAIL] || formState.loading}
               loading = {formState.loading}
@@ -269,25 +325,25 @@ export default function ConfigureCustom() {
               </Button>
             </form>
           </>
-          : null
+          :
+          <div className='mx-auto mt-5'>
+            Select flow type
+          </div>
           }
-
-          </div>  
-          <div className="mx-auto mt-16 flex flex-wrap">
-            <Link href="/onboarding/provision">
+          <div className="mx-auto mt-16 flex">
+            <Link href="/onboarding/select">
               <a className="border border-gray hover:bg-gray-400 hover:text-white  text-xl transition py-1 px-2 focus:outline-none rounded">
                 Previous step
               </a>
             </Link>
-            {/*
             <Link href="/myapps">
               <a className="border border-seaweed hover:bg-seaweed hover:text-white ml-4 text-xl transition py-1 px-2 focus:outline-none rounded">
                 Go to my apps
               </a>
             </Link>
-          */}
           </div>
           <div className="mb-24" />
+          </div>  
         </div>
 
 
@@ -299,4 +355,3 @@ export default function ConfigureCustom() {
 
   )
 }
-

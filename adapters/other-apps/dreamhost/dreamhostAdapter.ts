@@ -45,7 +45,23 @@ class DreamhostAdapter extends BaseHttpAdapter {
                 cmd: "dns-list_records",
             }
         })
-        return result.data
+
+        const split: string[][] = result.data.split("\n").map(a => a.split("\t"))
+        split.shift()
+        split.pop()
+        let parsed = []
+        for (let arrayNumber in split) {
+                let middleResult = {}
+                let keyArray = split[0]
+                if (arrayNumber === "0") {
+                    continue
+                }
+                for (let keyNumber in keyArray) {
+                    middleResult[keyArray[keyNumber]] = split[arrayNumber][keyNumber]
+                }
+                parsed.push(middleResult)
+        }
+        return parsed
     }
 }
 

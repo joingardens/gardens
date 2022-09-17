@@ -52,5 +52,15 @@ export class BaseAdapter<T> {
         return response
     }
 
+    async update(query: Partial<T>, updateQuery: Partial<T>) {
+        let response = this.supabase
+        .from<T>(this.tableName)
+        .update(updateQuery)
+        for (let key of Object.entries(query)) {
+            response = response.eq(key[0] as keyof T, key[1] as T[keyof T])
+        }
+        return await response
+    }
+
 
 }
