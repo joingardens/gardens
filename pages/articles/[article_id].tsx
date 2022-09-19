@@ -13,7 +13,8 @@ export const ReadOnlyEditor = dynamic(() => import("../../components/writer/Read
 
 export default function Article({ article }) {
     //const {userLoaded, user} = useUser()
-   const router = useRouter()
+   const router = useRouter();
+   const [loading, setLoading] = useState(true);
    if (router.isFallback) {
     return (<div className="py-36">
     <h1 className="text-2xl text-center">Nothing here... 
@@ -21,10 +22,12 @@ export default function Article({ article }) {
     </div>
     )
   } else {
+    const handleComplete = () => { setLoading(!loading); };
+    router.events.on('routeChangeComplete', handleComplete);
     
     return (
         <div className={`p-6 w-full flex flex-col justify-center`}>
-        {article[0].payload ? (<ReadOnlyEditor data={article[0].payload} tools={EDITOR_JS_TOOLS} />) : null}
+        {(article[0].payload && !loading) ? (<ReadOnlyEditor data={article[0].payload} tools={EDITOR_JS_TOOLS} />) : null}
         </div>
     )
 }
