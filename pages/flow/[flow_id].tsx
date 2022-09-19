@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
+import updateFieldHeight from '../../utils/autosize';
 import { NextSeo } from 'next-seo';
+import { mastodonAdapter } from "../../adapters/other-apps/mastodon/adapter";
 import Link from 'next/link';
 import Pricing from '../../components/Pricing';
 import Title from '../../components/ui/Title';
@@ -13,7 +15,59 @@ import ScaleableImage from "../../components/scaleableImage"
 
 export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDomain }) {
 
-  const router = useRouter()
+  const router = useRouter();
+  const [commentContents, setCommentContents] = useState("");
+  const [repliesList, setRepliesList] = useState([]);
+  const [postReplies, setPostReplies] = useState([]);
+  const [parentUri, setParentUri] = useState("");
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  async function getPostReplies(mastodonId){
+      const repliesResponse = await mastodonAdapter.getRepliesByStatusId(mastodonId);
+      const replies = repliesResponse.data.descendants;
+      const parentResponse = await mastodonAdapter.getStatusById(mastodonId);
+      setParentUri(parentResponse.data.uri);
+      setRepliesList(replies);  
+      }
+
+  useEffect(() => {
+    if (flowRecord[0].mastodon_id) {
+      console.log(flowRecord[0].mastodon_id);
+    getPostReplies(flowRecord[0].mastodon_id);      
+    }
+  }, [flowRecord[0].mastodon_id]);
+
+  useEffect(() => {
+    if (repliesList){
+
+    const finalRepliesList = repliesList.map(reply => (
+    <a href={reply.uri} className="hover:bg-gray-50 mt-4" target="_blank">
+    <div className="w-full flex border shadow rounded px-2 py-2">
+    <div className="md:w-20 md:h-20 w-12 h-12 relative ml-2 my-2">
+    <Image src={reply.account.avatar} alt={reply.account.display_name} 
+            layout='fill' objectFit='contain' objectPosition='center center' />
+    </div>
+    <div className="flex flex-col">
+    <p className="px-4 text-lg font-semibold pt-3">{reply.account.display_name}</p>
+    <div className="text-lg pl-5 max-w-sm py-2" dangerouslySetInnerHTML={{__html: reply.content}}/>
+    </div>
+    </div>
+    </a>
+    ))
+    setPostReplies(finalRepliesList)
+  }
+  }, [repliesList]);
+
+  
+
+  function handleChange(e) {
+    setCommentContents(e.target.value);
+    if (textareaRef?.current) {
+      updateFieldHeight(textareaRef.current);
+    }
+  }
+
    if (router.isFallback) {
     return (<div className="py-36">
     <h1 className="text-2xl text-center">Nothing here... 
@@ -108,6 +162,7 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
     <a className="text-blue-600 font-semibold underline mr-2" href={(tool.toolOneClick) ? ('/tool/' + tool.toolId) : tool.toolLink} target="_blank">
     {tool.toolTitle}
     </a>))
+
   
   return (
   	<>
@@ -115,20 +170,22 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
       title={generatedTitle}
       description={generatedTitle}
     />
-    <section class="text-gray-600 body-font">
-  <div class="container mx-auto flex lg:px-48 py-4 mt-8 md:flex-row flex-col items-center">
-    <div class="flex-grow flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-      <h1 class="title-font sm:text-4xl text-3xl mb-4 font-semibold text-gray-900">{generatedTitle}
-        <br class="hidden lg:inline-block"/>
+    <section className="text-gray-600 body-font">
+  <div className="container mx-auto flex lg:px-48 py-4 mt-8 md:flex-row flex-col items-center">
+    <div className="flex-grow flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+      <h1 className="title-font sm:text-4xl text-3xl mb-4 font-semibold text-gray-900">{generatedTitle}
+        <br className="hidden lg:inline-block"/>
       </h1>
      <div>
      Using {toolLinks}
      </div>
     </div>
-    <div class="w-64 md:w-48 md:py-4 md:px-2 flex md:flex-col justify-center items-center">
+    <div className="w-64 md:w-48 md:py-4 md:px-2 flex md:flex-col justify-center items-center">
       <div className="text-lg w-24 md:w-32 mr-4 md:mr-0 text-center">Created by</div>
       <div className="relative h-16 w-16 md:h-32 md:w-32 my-2" >
-      <Image className="rounded-full" layout="fill" objectFit="cover" alt={user[0].full_name} src={user[0].avatar_url}/>
+      {(user[0].avatar_url) ? (
+        <Image className="rounded-full" layout="fill" objectFit="cover" alt={user[0].full_name} src={user[0].avatar_url}/>
+      ) : null}
       </div>
       <div className="flex flex-col items-center md:ml-0 ml-4">
       <h2 className="font-bold text-lg">{user[0].full_name}</h2>
@@ -171,7 +228,42 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
     <div className="mx-auto text-center text-gray-600 font-semibold mt-2">↑ Press to view all guides for this result</div>
     </div>
     </div>
-    <div className="py-24">
+    <div className="py-24 max-w-lg px-2  mx-auto flex flex-col">
+    {(postReplies.length > 0) ? (
+    <>
+    <h2 className="px-9 sm:text-2xl text-center text-xl font-semibold text-gray-900 bg-gray-50 py-1">
+    Comments</h2>
+    {(parentUri.length > 0) ? (
+      <h3 className="text-lg text-center my-3">Add a comment by replying to this post <br/> in the <a className="text-blue-700 underline font-bold" href={parentUri} target="_blank">Gardens Community</a></h3>
+    ) : null}
+    {postReplies}
+      </>) : null}
+    
+    {/*<h3 className="text-lg font-semibold mx-auto mt-12">Leave a comment</h3>
+    <div className="w-full border border-gray-500 p-4 rounded mt-4 my-2">
+    <label className="flex-grow flex items-center cursor-text select-none focus-within-ring min-h-14">
+            <span className="sr-only">Enter a comment</span>
+            <textarea
+              className="block bg-transparent flex-grow leading-5 min-h-5 max-h-36 resize-none m-0 px-0 text-gray-800 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-300 border-none overflow-auto text-md transition-opacity disabled:opacity-50 focus:outline-none focus:shadow-none focus:ring-0"
+              placeholder="Add a comment..."
+              rows={1}
+              value={commentContents}
+              onChange={handleChange}
+              ref={textareaRef}
+              disabled={isLoading}
+            ></textarea>
+    </label>
+    </div>
+    <div className="flex justify-center">
+      <button 
+            onClick={() => {
+              console.log("hoi")
+            }}
+            className={`bg-green-500 text-white py-1 px-5 mt-4 text-lg hover:bg-green-600  focus:outline-none rounded font-semibold`}>
+            Submit
+            </button>
+    </div>
+    */}
     </div>
     </div>
     </>
@@ -202,6 +294,7 @@ export async function getStaticProps(context) {
   const inputs = await getFlowInputsByFlowId(context.params.flow_id);
   const outputs = await getFlowOutputsByFlowId(context.params.flow_id);
   const imageDomain = process.env.IMAGES_DOMAIN_2;
+  
 
   if (!flow) {
     return {

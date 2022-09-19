@@ -1,4 +1,4 @@
-import { getAllFlows, getAllFlowItems, getAllFlowItemsWithTools, getAllActions, getAllSections, getActiveProductsWithPrices } from '../utils/supabase-client';
+import { getPublishedFlows, getAllFlowItems, getAllFlowItemsWithTools, getPublishedDrafts, getAllActions, getAllSections, getActiveProductsWithPrices } from '../utils/supabase-client';
 import { useUser } from '../utils/useUser';
 import LightHeroD from '../components/ui/Hero';
 import ParagraphWithButton from '../components/ui/ParagraphWithButton';
@@ -11,7 +11,7 @@ import Link from 'next/link';
 import Button from '../components/ui/Button';
 import Pricing from '../components/Pricing'
 
-export default function Index({ flows, flowItemsWithTools, actions, sections, products }) {
+export default function Index({ flows, flowItemsWithTools, actions, sections, products,  drafts }) {
 
   const { user, subscription } = useUser();
   const uniqueSections = [...new Set(sections.map(item => item ? item.section : null))]
@@ -39,6 +39,12 @@ export default function Index({ flows, flowItemsWithTools, actions, sections, pr
       blockDescription={'Using ' + allToolTitles.toString().split(',').join(', ')} />
       )
     } );
+  const draftArray = drafts.map(draft => {
+    return (
+        <PrettyBlock key={draft.id} avatarImage={draft.user_public_profile.avatar_url ? draft.user_public_profile.avatar_url : null}
+      blockLink={'/articles/' + draft.id} blockBody={draft.draftName} avatarImageAlt={draft.user_public_profile.full_name} blockDescription={'By ' + draft.user_public_profile.full_name} />
+      )
+  })
     const actionItems = actions.map(action => (
       <div key={action.id} className="w-48">
       <Link href={(action.isInternal) ? (action.appsrc) : ('/action/' + action.id)}>
@@ -91,8 +97,16 @@ export default function Index({ flows, flowItemsWithTools, actions, sections, pr
     </div>
     </div>
     </div>
+    {(draftArray.length > 0) ? (
+      <div className="w-full flex flex-col pb-4">
+    <h2 className="text-center md:text-left md:pl-8 text-2xl font-semibold py-4 px-5">Recent articles</h2>
+    <div className="flex flex-wrap px-5 w-full justify-start">
+    {draftArray}
+    </div>
+    </div>
+    ) : null}
     <div className="w-full flex flex-col">
-    <h2 className="text-center md:text-left md:pl-8 text-2xl font-semibold py-4 px-5">Recent guides</h2>
+    <h2 className="text-center md:text-left md:pl-8 text-2xl font-semibold py-4 px-5">Recent step-by-step guides</h2>
     <div className="flex flex-wrap px-5 w-full justify-start mb-24">
     {flowArray}
     </div>
@@ -111,8 +125,9 @@ export default function Index({ flows, flowItemsWithTools, actions, sections, pr
 }
 
 export async function getStaticProps() {
-  const flows = await getAllFlows();
+  const flows = await getPublishedFlows();
   const flowItemsWithTools = await getAllFlowItemsWithTools();
+  const drafts = await getPublishedDrafts();
   const actions = await getAllActions();
   const sections = await getAllSections();
   const products = await getActiveProductsWithPrices();
@@ -122,6 +137,7 @@ export async function getStaticProps() {
       actions,
       flows,
       flowItemsWithTools,
+      drafts,
       sections,
       products
     },

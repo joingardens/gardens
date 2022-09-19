@@ -67,6 +67,14 @@ a {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+.ce-header {
+ @apply text-2xl font-semibold;
+}
+
+.ce-block a {
+  @apply text-blue-700 font-semibold;
+}
+
 .animated {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;

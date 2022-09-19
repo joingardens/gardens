@@ -23,10 +23,11 @@ function PrettyBlock(props) {
     <a href={props.blockLink} className={'font-semibold w-full items-center text-center mr-4'}>
         <div className={`shadow border hover:bg-gray-100 transition rounded h-full w-full md:${blockWidth} items-center justify-center flex `}>
           <div className="flex items-center bg-gray-100 w-full h-full py-2 bg-opacity-50 text-ce">
-          {/*<svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" className="w-6 h-6 flex-shrink-0 mr-4" viewBox="0 0 24 24">
-            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
-            <path d="M22 4L12 14.01l-3-3"></path>
-          </svg>*/}
+          {props.avatarImage ? (
+            <div className="w-24 h-24 relative mx-2">
+            <Image src={props.avatarImage} alt={props.avatarImageAlt} 
+            layout='fill' objectFit='contain' objectPosition='center center' />
+            </div>) : null}
           <div className="flex flex-col px-2 w-full">
           <span className="title-font text-gray-700 text-md text-left">{shortBlockBody}</span>
           {props.blockDescription ? (
