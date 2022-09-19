@@ -560,12 +560,12 @@ export interface paths {
         query: {
           id?: parameters["rowFilter.drafts.id"];
           payload?: parameters["rowFilter.drafts.payload"];
-          user?: parameters["rowFilter.drafts.user"];
           draftName?: parameters["rowFilter.drafts.draftName"];
           created?: parameters["rowFilter.drafts.created"];
           type?: parameters["rowFilter.drafts.type"];
           isPublished?: parameters["rowFilter.drafts.isPublished"];
           usecase?: parameters["rowFilter.drafts.usecase"];
+          user?: parameters["rowFilter.drafts.user"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -618,12 +618,12 @@ export interface paths {
         query: {
           id?: parameters["rowFilter.drafts.id"];
           payload?: parameters["rowFilter.drafts.payload"];
-          user?: parameters["rowFilter.drafts.user"];
           draftName?: parameters["rowFilter.drafts.draftName"];
           created?: parameters["rowFilter.drafts.created"];
           type?: parameters["rowFilter.drafts.type"];
           isPublished?: parameters["rowFilter.drafts.isPublished"];
           usecase?: parameters["rowFilter.drafts.usecase"];
+          user?: parameters["rowFilter.drafts.user"];
         };
         header: {
           /** Preference */
@@ -640,12 +640,12 @@ export interface paths {
         query: {
           id?: parameters["rowFilter.drafts.id"];
           payload?: parameters["rowFilter.drafts.payload"];
-          user?: parameters["rowFilter.drafts.user"];
           draftName?: parameters["rowFilter.drafts.draftName"];
           created?: parameters["rowFilter.drafts.created"];
           type?: parameters["rowFilter.drafts.type"];
           isPublished?: parameters["rowFilter.drafts.isPublished"];
           usecase?: parameters["rowFilter.drafts.usecase"];
+          user?: parameters["rowFilter.drafts.user"];
         };
         body: {
           /** drafts */
@@ -773,6 +773,7 @@ export interface paths {
           type?: parameters["rowFilter.flows.type"];
           usecase?: parameters["rowFilter.flows.usecase"];
           is_private?: parameters["rowFilter.flows.is_private"];
+          mastodon_id?: parameters["rowFilter.flows.mastodon_id"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -831,6 +832,7 @@ export interface paths {
           type?: parameters["rowFilter.flows.type"];
           usecase?: parameters["rowFilter.flows.usecase"];
           is_private?: parameters["rowFilter.flows.is_private"];
+          mastodon_id?: parameters["rowFilter.flows.mastodon_id"];
         };
         header: {
           /** Preference */
@@ -853,6 +855,7 @@ export interface paths {
           type?: parameters["rowFilter.flows.type"];
           usecase?: parameters["rowFilter.flows.usecase"];
           is_private?: parameters["rowFilter.flows.is_private"];
+          mastodon_id?: parameters["rowFilter.flows.mastodon_id"];
         };
         body: {
           /** flows */
@@ -3964,8 +3967,6 @@ export interface definitions {
     id: number;
     /** Format: json */
     payload?: string;
-    /** Format: uuid */
-    user?: string;
     /** Format: text */
     draftName?: string;
     /**
@@ -3986,6 +3987,12 @@ export interface definitions {
      * This is a Foreign Key to `usecases.id`.<fk table='usecases' column='id'/>
      */
     usecase?: number;
+    /**
+     * Format: uuid
+     * @description Note:
+     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
+     */
+    user?: string;
   };
   flow_items: {
     /**
@@ -4046,6 +4053,8 @@ export interface definitions {
     usecase?: number;
     /** Format: boolean */
     is_private: boolean;
+    /** Format: text */
+    mastodon_id?: string;
   };
   flows_inputs: {
     /**
@@ -5013,8 +5022,6 @@ export interface parameters {
   "rowFilter.drafts.id": string;
   /** Format: json */
   "rowFilter.drafts.payload": string;
-  /** Format: uuid */
-  "rowFilter.drafts.user": string;
   /** Format: text */
   "rowFilter.drafts.draftName": string;
   /** Format: timestamp with time zone */
@@ -5025,6 +5032,8 @@ export interface parameters {
   "rowFilter.drafts.isPublished": string;
   /** Format: bigint */
   "rowFilter.drafts.usecase": string;
+  /** Format: uuid */
+  "rowFilter.drafts.user": string;
   /** @description flow_items */
   "body.flow_items": definitions["flow_items"];
   /** Format: bigint */
@@ -5055,6 +5064,8 @@ export interface parameters {
   "rowFilter.flows.usecase": string;
   /** Format: boolean */
   "rowFilter.flows.is_private": string;
+  /** Format: text */
+  "rowFilter.flows.mastodon_id": string;
   /** @description flows_inputs */
   "body.flows_inputs": definitions["flows_inputs"];
   /** Format: bigint */

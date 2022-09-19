@@ -222,6 +222,20 @@ export const getFlowById = async (flow_id) => {
   return data || [];
 };
 
+export const getArticleById = async (article_id) => {
+  const { data, error } = await supabase
+    .from('drafts')
+    .select('*')
+    .eq('id', article_id)
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
 export const getFlowsByIds = async (flow_ids) => {
   
   
@@ -337,6 +351,52 @@ export const getAllFlows = async () => {
     .from('flows')
     .select('id, flow, job_group (id, job_group, emoji), created, user_public_profile!author(full_name)')
     .order('created', { ascending: false })
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
+export const getPublishedFlows = async () => {
+  const { data, error } = await supabase
+    .from('flows')
+    .select('id, flow, job_group (id, job_group, emoji), created, user_public_profile!author(full_name)')
+    .eq("is_private", false)
+    .order('created', { ascending: false })
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
+
+export const getFlowsByAuthor = async (user_id) => {
+  const { data, error } = await supabase
+    .from('flows')
+    .select('id, flow, job_group (id, job_group, emoji), created, user_public_profile!author(full_name)')
+    .eq('author', user_id)
+    .order('created', { ascending: false })
+
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
+export const getPublishedDrafts = async () => {
+  const { data, error } = await supabase
+    .from('drafts')
+    .select('id, user_public_profile!drafts_user_fkey(id, full_name, avatar_url), draftName, created, isPublished')
+    .order('created', { ascending: false })
+    .eq('isPublished', true)
 
   if (error) {
     console.log(error.message);

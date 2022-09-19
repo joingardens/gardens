@@ -9,21 +9,44 @@ import ListItem from '../../components/ui/ListItem';
 import TextList from '../../components/ui/TextList';
 import ListItemMirrored from '../../components/ui/ListItemMirrored';
 import Title from '../../components/ui/Title';
-import { getAllFlows, getAllFlowItems, getAllFlowItemsWithTools, getAllActions } from '../../utils/supabase-client';
+import { getAllFlowItems, getAllFlowItemsWithTools, getAllActions, getFlowsByAuthor } from '../../utils/supabase-client';
 import SquareBlock from '../../components/ui/SquareBlock';
 import PrettyBlock from '../../components/ui/PrettyBlock';
 
 const limit = 10
 
-const MyFlowsPage = ({ flows, flowItemsWithTools }) => {
+const MyFlowsPage = () => {
+
     const {user} = useUser()
     const {makeToast} = useToast()
     const router = useRouter()
+    const [authorFlows, setAuthorFlows] = useState([]);
+    const [flowItemsWithTools, setFlowItems] = useState([]);
     const [loading, setLoading] = useState(true)
     const [page, setPage] = useState(1)
     const map = new Map();
+
+    async function returnAuthorFlows(user_id){
+      if (user_id){
+      const authorFlowsResponse = await getFlowsByAuthor(user_id);
+      setAuthorFlows(authorFlowsResponse);
+    }}
+
+    async function returnFlowItems(){
+      const flowItemsResponse = await getAllFlowItemsWithTools();
+      setFlowItems(flowItemsResponse);
+    }
+
+    useEffect(() => {
+      if(user){
+      returnAuthorFlows(user.id);
+    }}, [user])
+
+    useEffect(() => {
+      returnFlowItems();
+    }, [])
   
-    let sortedItemArray = flows.slice(0,4);
+    let sortedItemArray = authorFlows.slice(0,4);
     const listFlows = sortedItemArray.map(flow => {
       const currentFlowItems = flowItemsWithTools.filter(flowItem => flowItem.flow == flow.id);
       const allToolTitles = [...new Set(currentFlowItems.map(item => item.job_tool.tool.tool))];
@@ -55,7 +78,7 @@ const MyFlowsPage = ({ flows, flowItemsWithTools }) => {
     </a>
     </Link>
     </div>
-    <div className="flex flex-col mx-auto px-4 w-full md:px-24 lg:px-48 mt-6 justify-start mb-24">
+    <div className="flex flex-col mx-auto px-4 w-full md:w-3/4 md:px-24 lg:px-48 mt-6 justify-start mb-24">
     {listFlows}
     </div>
     </div>
@@ -65,16 +88,3 @@ const MyFlowsPage = ({ flows, flowItemsWithTools }) => {
 }
 
 export default MyFlowsPage
-
-export async function getStaticProps() { 
-  const flows = await getAllFlows();
-  const flowItemsWithTools = await getAllFlowItemsWithTools();
-
-  return {
-    props: {
-      flows,
-      flowItemsWithTools
-    },
-    revalidate: 60
-  };
-}

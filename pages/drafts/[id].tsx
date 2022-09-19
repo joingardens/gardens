@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import writerService from "../../components/writer/writerService"
 import { useUser } from "../../utils/useUser"
 import { API, BlockAPI, OutputData} from "@editorjs/editorjs"
+import { EDITOR_JS_TOOLS } from '../../components/writer/tools'
 import dynamic from "next/dynamic"
 import Link from "next/link";
 import useAutosave from "../../components/writer/useEditorAutosave"
@@ -84,6 +85,7 @@ const DraftPage = () => {
             {!loading && <EditorJsWithNoSSR
             data={payload}
             setState={setPayload}
+            tools={EDITOR_JS_TOOLS}
             />}
             </div>
         </div>

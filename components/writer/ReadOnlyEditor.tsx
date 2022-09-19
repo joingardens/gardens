@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import EditorJs from "react-editor-js";
 import { API, BlockAPI, OutputBlockData, OutputData} from "@editorjs/editorjs"
 
-export const Editor = ({data, setState, tools}) => {
-
+export const ReadOnlyEditor = ({data, tools, className}) => {
 
   return (
     <div>
@@ -11,15 +10,11 @@ export const Editor = ({data, setState, tools}) => {
       data={{
         blocks: data
       }}
-      onChange={(api, data) => {
-        //console.log(data.blocks)
-        setState(data.blocks)
-      }}
-      placeholder="Start typing here..."
+      readOnly={true}
       tools={tools}
       />
     </div>
   );
 };
 
-export default Editor;
+export default ReadOnlyEditor;
