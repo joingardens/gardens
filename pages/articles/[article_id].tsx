@@ -15,15 +15,18 @@ export default function Article({ article }) {
     //const {userLoaded, user} = useUser()
    const router = useRouter();
    const [loading, setLoading] = useState(true);
-   if (router.isFallback) {
+   
+   useEffect(() => {
+      setLoading(!loading);
+   }, []) 
+   
+    if (router.isFallback) {
     return (<div className="py-36">
     <h1 className="text-2xl text-center">Nothing here... 
     <a href="/" className="text-blue-600 hover:underline">Go home?</a></h1>
     </div>
     )
   } else {
-    const handleComplete = () => { setLoading(!loading); };
-    router.events.on('routeChangeComplete', handleComplete);
     
     return (
         <div className={`p-6 w-full flex flex-col justify-center`}>
