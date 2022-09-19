@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import EditorJs from "react-editor-js";
 import { API, BlockAPI, OutputBlockData, OutputData} from "@editorjs/editorjs"
 
-export const ReadOnlyEditor = ({data, tools, className}) => {
+export const ReadOnlyEditor = ({data, tools}) => {
 
   return (
     <div>
