@@ -82,7 +82,7 @@ const DraftPage = () => {
             </Link>
             </div>
             <div className="p-4 mt-4 w-full">
-            {!loading && <EditorJsWithNoSSR
+            {(!loading && window) && <EditorJsWithNoSSR
             data={payload}
             setState={setPayload}
             tools={EDITOR_JS_TOOLS}
