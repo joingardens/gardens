@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
 import { useUser } from '../../utils/useUser';
 import { NextSeo } from 'next-seo';
@@ -7,7 +7,8 @@ import ListItem from '../../components/ui/ListItem';
 import TextList from '../../components/ui/TextList';
 import Title from '../../components/ui/Title';
 import { getJobToolsByTool, 
-	getAllJobGroups, getAllJobs, getAllJobTools, getToolById, getFlowItemsByJobToolIds, getFlowsByIds } from '../../utils/supabase-client';
+	getAllJobGroups, getAllJobs, getAllJobTools, getToolById, getFlowItemsByJobToolIds, 
+  getFlowsByIds, getPaasByUserId, getDropletsByPaasId, insertUserApp } from '../../utils/supabase-client';
 import SquareBlock from '../../components/ui/SquareBlock';
 import getRandomGradient from '../../utils/getRandomGradient';
 import Link from "next/link";
@@ -16,6 +17,33 @@ import Link from "next/link";
 export default function Tool({ jobGroups, jobTools, jobs, tool, flows }) {
   
   const { user, subscription } = useUser();
+  const [installOpen, setInstallOpen] = useState(false);
+  const [dropletDomain, setDropletDomain] = useState("");
+  const [userDropletId, setUserDropletId] = useState("")
+
+  async function getCaptainAppURL(user_id){
+    const paasResponse = await getPaasByUserId(user_id);
+    const dropletResponse = await getDropletsByPaasId(paasResponse[0].id);
+    if (dropletResponse){
+      setDropletDomain(dropletResponse[0].domain);
+      setUserDropletId(dropletResponse[0].id)
+    }
+  }
+
+  async function addToDashboard(user_droplet_id, tool_id){
+    if (user_droplet_id && tool_id){
+      const insertionResponse = await insertUserApp(user_droplet_id, tool_id);
+      if (insertionResponse){alert("App added successfuly! Check on your apps page")}
+    }
+  }
+
+
+  useEffect(() => {
+    if (user){
+      getCaptainAppURL(user.id);
+    }
+  }, [user])
+
   const router = useRouter()
    if (router.isFallback) {
     return (<div className="py-36">
@@ -24,7 +52,6 @@ export default function Tool({ jobGroups, jobTools, jobs, tool, flows }) {
     </div>
     )
   } else {
-  const linkCta = (user ? '/' : '/apps');
   const { tool_id } = router.query
   let groupArray = [];
   let toolIds = [];
@@ -94,19 +121,58 @@ export default function Tool({ jobGroups, jobTools, jobs, tool, flows }) {
      colorBg={getRandomGradient()} smallImage={currentTool.logo_url} />
     <div className="flex flex-col w-3/4 sm:w-1/2 md:w-1/3 lg:w-1/4 mx-auto mt-8 md:mt-4 md:mb-16">
     {currentTool.link ? (
+      <>
       <Link href={currentTool.link}>
           <a target="_blank"  style={{textDecoration: 'none'}} 
           className="w-full border shadow text-2xl hover:bg-green-200 py-2 px-2 mx-auto focus:outline-none rounded">
             🌐 {currentTool.tool} website
           </a>
     </Link>
+    </>
     ) : null}
-    <Link href={`${linkCta}`}>
-          <a  style={{textDecoration: 'none', fontWeight: 600}} 
-          className="w-full bg-green-500 shadow border text-white text-2xl hover:bg-green-600 py-2 mt-2 px-2 mx-auto focus:outline-none rounded">
+    {user ? (subscription ? (
+      <>
+      <a  onClick={() => addToDashboard(userDropletId, currentTool.id)} style={{textDecoration: 'none', fontWeight: 600}} 
+          className="w-full cursor-pointer bg-blue-400 shadow border text-white text-2xl hover:bg-blue-500 py-2 mt-2 px-2 mx-auto focus:outline-none rounded">
+            ➕ Add to My Apps
+      </a>
+      <a  onClick={() => setInstallOpen(!installOpen)} style={{textDecoration: 'none', fontWeight: 600}} 
+          className="w-full cursor-pointer bg-green-500 shadow border text-white text-2xl hover:bg-green-600 py-2 mt-2 px-2 mx-auto focus:outline-none rounded">
             💻 Install {currentTool.tool}
-          </a>
-    </Link>
+      </a>
+          </>
+          ) : (
+          <>
+          <Link href="/onboarding"><a style={{textDecoration: 'none', fontWeight: 600}} 
+          className="w-full bg-green-500 shadow border text-white text-2xl hover:bg-green-600 py-2 mt-2 px-2 mx-auto focus:outline-none rounded">
+            💻 Self-host {currentTool.tool}
+          </a></Link>
+          </>
+          )) : (
+          <><Link href="/apps"><a style={{textDecoration: 'none', fontWeight: 600}} 
+          className="w-full bg-green-500 shadow border text-white text-2xl hover:bg-green-600 py-2 mt-2 px-2 mx-auto focus:outline-none rounded">
+            💻 Self-host {currentTool.tool}
+          </a></Link>
+          </>)}
+     {installOpen ? (
+       dropletDomain.length > 0 ? (<div className="p-2 mt-4 bg-gray-50 duration-150">
+       <p className="font-semibold text-center">
+       Are you sure you want to install {currentTool.tool}?
+       </p>
+       <p className="text-center">
+       To configure this app and confirm installation <a className="text-blue-600 underline font-bold" href={"https://captain." + dropletDomain + "/#/apps/oneclick/" + currentTool.caprover_id} target="_blank">press here. </a>
+       </p>
+       <p className="mt-2 text-gray-500 text-center">If the link doesn't work, press "Remember me" and "Use localStorage", then try again</p>
+       </div>) : (
+       <div className="p-2 mt-4 bg-gray-50 duration-150">
+       <p className="font-semibold text-center">
+       Couldn't find a droplet.
+       </p>
+       <p className="text-center">
+       Did you <Link href="/onboarding/provision"><a className="text-blue-600 underline font-bold">create a droplet yet?</a></Link>
+       </p>
+       </div>)
+       ) : null}
     </div>
     </div>
     {currentTool.description ? (

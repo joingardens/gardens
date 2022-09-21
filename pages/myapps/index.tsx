@@ -26,8 +26,11 @@ const MyAppsPage = () => {
 
     async function getPaasById(user_id){
     const paasDetails = await getPaasByUserId(user_id);
+    if (paasDetails[0]){
     setPaasId(paasDetails[0].id);
-    setPaasName(paasDetails[0].org_name);
+    setPaasName(paasDetails[0].org_name);    
+    }
+    
     return
     }
 
@@ -75,16 +78,17 @@ const MyAppsPage = () => {
     <div className="w-full"><Sidebar page="myapps" /></div>
     <div className="flex flex-wrap my-8 w-full">
     {apps.map((app, i) => (
-        <SquareCard blockBody={app.tool_id.tool} key={i} blockLink={"/tool/" + app.tool_id.id} 
+        <SquareCard blockBody={app.tool_id.tool} key={i} blockLink={("https://captain." + dropletDomain)} 
     smallImage={app.tool_id.logo_url} />
     ))}
-    <Link href="/tools">
+    {dropletDomain ? (<Link href="/tools">
     <div className="rounded-full cursor-pointer border border-blue-500 hover:bg-blue-50 shadow ml-20 md:ml-24 h-24 mt-10 w-24 mx-auto my-auto">
     <div className="text-center text-5xl py-0.5 my-4">+</div>
     </div>
-    </Link>
+    </Link>) : null}
     </div>
-    <div className="w-full flex flex-col md:flex-row justify-between  md:ml-16 items-center border shadow bg-gray-50 rounded py-4 md:py-2 px-2">
+    {dropletDomain ? (
+        <div className="w-full flex flex-col md:flex-row justify-between  md:ml-16 items-center border shadow bg-gray-50 rounded py-4 md:py-2 px-2">
     <div className="flex flex-col md:flex-row">
     <div className="p-2 bg-white rounded-full w-16 mx-auto">
     <Image alt="Water droplet icon" width="50" height="50"
@@ -114,6 +118,12 @@ const MyAppsPage = () => {
      </div>
      </div>
      </div>
+     ) : (
+     <div className="pb-12 mx-auto">
+    <h1 className="text-2xl text-center text-blue-700 pb-4 font-semibold">Get Started</h1>
+    <p className="text-xl text-center">Looks like you don't have a droplet yet.</p>
+    <p className="text-xl text-center"><Link href="/onboarding"><a className="text-blue-600 underline font-bold">Select a plan</a></Link> to start self-hosting!</p>
+    </div>)}
     <div className="w-full mt-6 flex justify-center">
         <a href="" className="w-48 text-center py-2 px-4 shadow rounded bg-white text-lg hover:bg-gray-100">
         📕 Gardens Docs

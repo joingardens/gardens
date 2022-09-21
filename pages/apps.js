@@ -60,8 +60,8 @@ export default function Apps() {
       className="flex items-center w-full"
     >
       <div className="flex flex-wrap mx-auto -mt-4">
-        {/*<Input type="email" className="h-12" placeholder="Email" onChange={setEmail} required />*/}
-        {message.content && (
+        {/*<Input type="email" className="h-12" placeholder="Email" onChange={setEmail} required />
+        message.content && (
           <div
             className={`${
               message.type === 'error' ? 'text-pink-600' : 'text-green-600'
@@ -71,7 +71,8 @@ export default function Apps() {
           >
             {message.content}
           </div>
-        )}
+        )
+        */}
        <div className="flex">
         <Button
               variant="slim"

@@ -36,6 +36,7 @@ export default function ConfigureCustom() {
   const [ dreamhostAdapter, setDreamhostAdapter ] = useState<DreamhostServerAdapter>()
   const [ dropletId, setDropletId ] = useState<number>()
   const [ serverAdapter, setServerAdapter ] = useState<CaproverServerApiAdapter>()
+  const [ dropletIp, setDropletIp] = useState("118.0.0.0 (this should be the IP of your droplet from DigitalOcean)")
   const [ pageLoading, setPageLoading ] = useState<boolean>(true)
   const [ parent ] = useAutoAnimate<HTMLDivElement>()
   const [ parent2 ] = useAutoAnimate<HTMLDivElement>({duration: 1000})
@@ -62,8 +63,9 @@ export default function ConfigureCustom() {
       userDropletsAdapter
       .findOneByQuery({user: user.id})
       .then((r) => {
+        if (r.body[0]){
         setDropletId(r.body[0].droplet_id)
-      })
+      }})
     }
   }, [user])
 
@@ -80,6 +82,7 @@ export default function ConfigureCustom() {
           }
         }
         if (publicNetwork) {
+          setDropletIp(publicNetwork.ip_address)
           const adapter = new CaproverServerApiAdapter(publicNetwork.ip_address)
           const adapter2 = new DreamhostServerAdapter(publicNetwork.ip_address)
           adapter
@@ -104,7 +107,11 @@ export default function ConfigureCustom() {
       {
         pageLoading 
         ? 
-        <h1>Waiting for page to load...</h1>
+        <div className="py-36">
+    <h1 className="text-2xl text-center text-blue-700 py-4 font-semibold">Droplet provisioned successfully!</h1>
+    <p className="text-xl text-center">Your droplet is being configured on DigitalOcean.</p>
+    <p className="text-xl text-center"> Refresh this page in a few minutes or <a className="text-blue-600 underline font-bold" href="https://cloud.digitalocean.com/projects" target="_blank">visit your dashboard</a> to check the status.</p>
+    </div>
         :
         <>
         <div className="md:w-2/3 w-4/5 mx-auto flex flex-col md:items-center mt-12">
@@ -138,7 +145,7 @@ export default function ConfigureCustom() {
                 <ul>
                   <li>Type: <strong>A</strong></li>
                   <li>Host: <strong>*.apps</strong></li>
-                  <li>Destination: <strong>118.0.0.0</strong></li>
+                  <li>Destination: <strong>{dropletIp}</strong></li>
                   <li>TTL: (leave as default, not important)</li>
                 </ul>
                 <div>

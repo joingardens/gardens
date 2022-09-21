@@ -661,6 +661,18 @@ export const getAppsByUserDropletId = async (user_droplet_id) => {
   return data || [];
 };
 
+export const insertUserApp = async (user_droplet_id, tool_id) => {
+  const {data, error} = await supabase
+    .from('user_apps')
+    .insert([{ user_droplet_id: user_droplet_id, tool_id: tool_id }])
+  if (error) {
+    console.log(error.message);
+    throw error;
+  }
+
+  return data || [];
+};
+
 export const updateUserName = async (user, name) => {
   await supabase
     .from('users')
