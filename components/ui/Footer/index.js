@@ -38,6 +38,9 @@ function LightFooterA(props) {
           </p>
           </div>
           </div>
+          <p className="text-sm text-center text-gray-500 my-2">
+           By continuing to use the site you agree to our <Link href="/privacy"><a className="font-bold underline">Privacy Policy</a></Link>
+          </p>
           <div className="flex items=center justify-between mx-auto my-3 md:my-2 w-48">
           <a href="https://twitter.com/joingardens" target="_blank">
           <TwitterIcon/>

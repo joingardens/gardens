@@ -122,7 +122,7 @@ const MyAppsPage = () => {
     How add Gardens one-click apps to Caprover
     </button>
     {appNoticeOpen ?  (
-        <h2 className="text-lg text-center py-4">To add Gardens custom apps to your Caprover library open your Caprover, go to "Apps" -> "One-click apps", scroll down to "3rd party repositories" and add oneclickapps.joingardens.com </h2>
+        <h2 className="text-lg text-center py-4">To add Gardens custom apps to your Caprover library open your Caprover, go to "Apps", then "One-click apps", scroll down to "3rd party repositories" and add oneclickapps.joingardens.com </h2>
     ) : null
     }
     </div> 
