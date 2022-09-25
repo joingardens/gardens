@@ -11,6 +11,11 @@ class MastodonApiAdapter extends BaseHttpAdapter {
         return response
     }
 
+    async getRecentMastoPosts() {
+        const response = await this.instance.get(("/timelines/public?limit=4"))
+        return response
+    }
+
     async getStatusById(statusId: string) {
         const response = await this.instance.get(("/statuses/" + statusId))
         return response

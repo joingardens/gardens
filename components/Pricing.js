@@ -67,6 +67,8 @@ export default function Pricing({ products }) {
           <p className="text-xl text-accents-6 sm:text-center sm:text-2xl max-w-2xl m-auto">
            Select a subscription plan to get started.
           </p>
+          <p className="text-lg text-accents-6 sm:text-center  max-w-xl mt-2 mx-auto underline">
+          If you are an employee or owner of a company with more than $1M annual revenue see "Annual billing"</p>
           <div className="relative self-center mt-6 rounded-lg p-0.5 flex sm:mt-8 border border-accents-0">
             <button
               onClick={() => setBillingInterval('month')}
@@ -129,15 +131,26 @@ export default function Pricing({ products }) {
                       /{billingInterval}
                     </span>
                   </p>
+                  {product.name == "Gardens Apps Subscription" ? (
                   <div className="prose text-lg mt-2">
-                  For small teams and hobbyists
+                  For small teams and hobbyists. Commercial use for small companies
                   <ul>
-                  <li>Deploy apps to your cloud in one click</li>
+                  <li>Deploy apps to your cloud in one click. </li>
                   <li>Access our curated library of high-quality apps</li>
-                  <li>Get a home page for your team and an admin dashboard to manage your apps</li>
+                  <li>Get an admin dashboard to manage your apps</li>
                   </ul>
                   <div className="pb-6"></div>
-                  </div>
+                  </div>) : null}
+                  {product.name == "Corporate plan" ? (
+                  <div className="prose text-lg mt-2">
+                  <ul>
+                  <li>For employees or owners of companies with more than $1M annual revenue</li>
+                  <li>Same features as Gardens Apps Subscription</li>
+                  <li>Commercial use allowed</li>
+                  <li>Annual billing only</li>
+                  </ul>
+                  <div className="pb-6"></div>
+                  </div>) : null}
                   <Button
                     variant="slim"
                     type="button"
@@ -174,6 +187,7 @@ export default function Pricing({ products }) {
                   <li>Custom config and back-ups</li>
                   <li>Done-for-you migrations and integrating with existing infrastructure</li>
                   </ul>
+                  <div className="py-6" />
                   </div>
                   <Button
                     variant="slim"
@@ -187,6 +201,9 @@ export default function Pricing({ products }) {
                 </div>
               </div>
         </div>
+        <p className="text-center text-lg mt-8 p-2 rounded border">
+              Are you from a Global South / low income country? Fill out <a className="text-blue-600 font-bold underline" href="https://tally.so/r/nWO7pa" target="_blank">this form</a> to get Gardens for free
+              </p>
       </div>
     </section>
   );

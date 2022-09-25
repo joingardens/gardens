@@ -24,7 +24,7 @@ export default function Tool({ jobGroups, jobTools, jobs, tool, flows }) {
   async function getCaptainAppURL(user_id){
     const paasResponse = await getPaasByUserId(user_id);
     const dropletResponse = await getDropletsByPaasId(paasResponse[0].id);
-    if (dropletResponse){
+    if (dropletResponse[0]){
       setDropletDomain(dropletResponse[0].domain);
       setUserDropletId(dropletResponse[0].id)
     }
@@ -160,7 +160,7 @@ export default function Tool({ jobGroups, jobTools, jobs, tool, flows }) {
        Are you sure you want to install {currentTool.tool}?
        </p>
        <p className="text-center">
-       To configure this app and confirm installation <a className="text-blue-600 underline font-bold" href={"https://captain." + dropletDomain + "/#/apps/oneclick/" + currentTool.caprover_id} target="_blank">press here. </a>
+       To configure this app and confirm installation <a className="text-blue-600 underline font-bold" href={"https://captain." + dropletDomain + "/#/apps/oneclick/" + (currentTool.caprover_id ? currentTool.caprover_id : currentTool.gardens_id)} target="_blank">press here. </a>
        </p>
        <p className="mt-2 text-gray-500 text-center">If the link doesn't work, press "Remember me" and "Use localStorage", then try again</p>
        </div>) : (

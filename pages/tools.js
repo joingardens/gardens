@@ -68,7 +68,7 @@ export default function ToolsPage({ products, tools, jobTools }) {
        blockLink={isOneClick ? null : item.link}
        blockLinkTitle={isOneClick ? null : 'Press to open website'}
        ctaLink={isOneClick ? ('/tool/' + item.id) : null}
-       ctaLinkTitle={isOneClick ? ('Press to use ' + item.tool + '!') : null}
+       ctaLinkTitle={isOneClick ? ('Press to self-host ' + item.tool + '!') : null}
        blockDescription={item.description}
        blockType={isOneClick ? 'Open' : ((item.model == 2) | (item.model == 1)) ? 'Fair' : (item.model == 4) ? 'Closed' : (item.model == 3) ? 'Exportable' : null} />
     ) 

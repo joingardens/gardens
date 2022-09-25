@@ -65,7 +65,8 @@ export default function ConfigureCustom() {
       .then((r) => {
         if (r.body[0]){
         setDropletId(r.body[0].droplet_id)
-      }})
+      }
+    })
     }
   }, [user])
 
@@ -96,9 +97,14 @@ export default function ConfigureCustom() {
             console.log(e)
             toaster.makeToast("ERROR", "error", 3)
           })
-        }
+        } else {
+        setTimeout(() => {
+          console.log("Performing automatic reload")
+    router.reload()
+   }, 60000)
+      }
       })
-    }
+    } 
   }, [dropletId, token])
 
 
@@ -107,8 +113,12 @@ export default function ConfigureCustom() {
       {
         pageLoading 
         ? 
-        <div className="py-36">
+        <div className="py-36 flex flex-col justify-center">
     <h1 className="text-2xl text-center text-blue-700 py-4 font-semibold">Droplet provisioned successfully!</h1>
+    <div className="mx-auto my-2">
+    <Image alt="Animated tea with teabag" width="100" height="100"
+        src={"https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/icons8-tea.gif"} />
+    </div>
     <p className="text-xl text-center">Your droplet is being configured on DigitalOcean.</p>
     <p className="text-xl text-center"> Refresh this page in a few minutes or <a className="text-blue-600 underline font-bold" href="https://cloud.digitalocean.com/projects" target="_blank">visit your dashboard</a> to check the status.</p>
     </div>

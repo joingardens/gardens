@@ -18,7 +18,7 @@ export default function Prerequisites() {
     <div className="md:w-2/3 w-4/5 mx-auto flex flex-col md:items-center">
     <h1 className="text-3xl py-4 text-center font-bold">✨ Welcome to Gardens! ✨</h1>
     <div className="prose prose-xl">
-    Before we get started, you'll need two things: a Digital Ocean account and a domain name.
+    Before we get started, you'll need two things: a Digital Ocean account and a domain name. Right now, we only support Digital Ocean. If you would like to use another cloud provider, <a href="https://tally.so/r/wA7Xqk" target="_blank">fill out a request here</a>. We will redirect you back when done.
     <ol>
     <li>Sign up for a free Digital Ocean account. Use our referral link if you like, this will get you a couple months of free cloud: </li>
     <Link href="https://m.do.co/c/317321ad1205">

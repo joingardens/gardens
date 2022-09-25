@@ -62,13 +62,14 @@ export default function ToolsBySection({ products, tools, jobTools }) {
      
      const itemElements = sortedItemArray.map(item => 
    {
-     let includesJobs = toolsWithJobs.includes(item.id);
+     //let includesJobs = toolsWithJobs.includes(item.id);
+     let isOneClick = (item.one_click) ? true : false;
      return (<SquareBlock key={item.id} blockBody={item.tool} 
        smallImage={item.logo_url} smallImageAlt={item.tool + ' logo'}
-       blockLink={includesJobs ? null : item.link}
-       blockLinkTitle={includesJobs ? null : 'Press to open website'}
-       ctaLink={includesJobs ? ('/tool/' + item.id) : null}
-       ctaLinkTitle={includesJobs ? ('Press to use ' + item.tool + '!') : null}
+       blockLink={isOneClick ? null : item.link}
+       blockLinkTitle={isOneClick ? null : 'Press to open website'}
+       ctaLink={isOneClick ? ('/tool/' + item.id) : null}
+       ctaLinkTitle={isOneClick ? ('Press to self-host ' + item.tool + '!') : null}
        blockDescription={item.description}
        blockType={(item.model == 1) ? 'Open' : (item.model == 2) ? 'Fair' : (item.model == 4) ? 'Closed' : (item.model == 3) ? 'Exportable' : null} />
     ) 

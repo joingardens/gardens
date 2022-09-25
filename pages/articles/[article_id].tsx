@@ -30,7 +30,7 @@ export default function Article({ article }) {
     
     return (
         <div className={`p-6 w-full flex flex-col justify-center`}>
-        {(article[0].payload && !loading && window) ? (<ReadOnlyEditor data={article[0].payload} tools={EDITOR_JS_TOOLS} />) : null}
+        {/*(article[0].payload && !loading && window) ? (<ReadOnlyEditor data={article[0].payload} tools={EDITOR_JS_TOOLS} />) : null*/}
         </div>
     )
 }

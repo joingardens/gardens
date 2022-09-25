@@ -1,5 +1,9 @@
-import { getPublishedFlows, getAllFlowItems, getAllFlowItemsWithTools, getPublishedDrafts, getAllActions, getAllSections, getActiveProductsWithPrices } from '../utils/supabase-client';
+import { getPublishedFlows, getAllFlowItems, getAllFlowItemsWithTools, 
+  getPublishedDrafts, getAllActions, getAllSections, getActiveProductsWithPrices,
+  getPaasByUserId, getDropletsByPaasId } from '../utils/supabase-client';
 import { useUser } from '../utils/useUser';
+import { useEffect, useState } from "react";
+import { mastodonAdapter } from "../adapters/other-apps/mastodon/adapter";
 import LightHeroD from '../components/ui/Hero';
 import ParagraphWithButton from '../components/ui/ParagraphWithButton';
 import ListItem from '../components/ui/ListItem';
@@ -14,6 +18,50 @@ import Pricing from '../components/Pricing'
 export default function Index({ flows, flowItemsWithTools, actions, sections, products,  drafts }) {
 
   const { user, subscription } = useUser();
+
+  const [paasId, setPaasId] = useState(null);
+  const [dropletId, setDropletId] = useState(null);
+  const [postList, setPostList] = useState([]);
+
+  async function getMastoPosts(){
+      const postsResponse = await mastodonAdapter.getRecentMastoPosts();
+      setPostList(postsResponse.data);
+      }
+
+  useEffect(() => {
+    getMastoPosts()
+  }, []);
+    
+  
+  async function getPaasById(user_id){
+    const paasDetails = await getPaasByUserId(user_id);
+    if (paasDetails[0]){
+    setPaasId(paasDetails[0].id);
+    }
+    return
+    }
+
+  async function getDropletsById(paas_id){
+    const dropletsDetails = await getDropletsByPaasId(paas_id);
+    if (dropletsDetails[0]){
+    setDropletId(dropletsDetails[0].droplet_id);
+    }
+    return
+    }
+
+
+    useEffect(() => {
+    if (user){
+     getPaasById(user.id)
+    }
+    }, [user])
+
+    useEffect(() => {
+    if (paasId){
+     getDropletsById(paasId)
+    }
+    }, [paasId])
+
   const uniqueSections = [...new Set(sections.map(item => item ? item.section : null))]
   const sectionArray = uniqueSections.map(section => {
     if(section){
@@ -45,8 +93,19 @@ export default function Index({ flows, flowItemsWithTools, actions, sections, pr
       blockLink={'/articles/' + draft.id} blockBody={draft.draftName} avatarImageAlt={draft.user_public_profile.full_name} blockDescription={'By ' + draft.user_public_profile.full_name} />
       )
   })
-    const actionItems = actions.map(action => (
-      <div key={action.id} className="w-48">
+  
+  const postArray = postList.map(post => {
+    const postContents = post.content.replace(/<[^>]*>?/gm, '');
+    if (postContents.length > 80){
+    return (
+      <PrettyBlock key={post.id} avatarImage={post.account.avatar_static ? post.account.avatar_static : null}
+      blockLink={post.uri} blockBody={postContents} 
+      avatarImageAlt={post.account.display_name ? post.account.display_name : null} blockDescription={'By ' + post.account.display_name} />
+      )}
+  })
+
+  const actionItems = actions.map(action => (
+      <div key={action.id} className="w-48 md:pr-4">
       <Link href={(action.isInternal) ? (action.appsrc) : ('/action/' + action.id)}>
       <div className="w-full text-center font-semibold border border-black hover:shadow transition cursor-pointer rounded py-3 px-1 mb-2">
       <span>{action.action}</span>
@@ -72,8 +131,18 @@ export default function Index({ flows, flowItemsWithTools, actions, sections, pr
     
     <div className="flex flex-col">
     <div className="w-full flex flex-col">
-    {(subscription) ? (
-      <div className="bg-green-500 w-full py-36">
+    {(subscription) ? (dropletId ? (<div className="bg-green-500 w-full py-36">
+    <h2 className="text-center text-3xl font-bold text-white">Go to home page to access your droplet and apps</h2>
+    <div className="mt-8 mx-auto text-xl text-center">
+    <Link href="/myapps">
+          <a  style={{textDecoration: 'none', fontWeight: 600}} 
+          className="bg-white border border-blue-400 hover:bg-blue-400 transition py-1 px-2 mx-auto focus:outline-none rounded">
+            Take me home
+          </a>
+    </Link>
+    </div>
+    </div>) : (
+    <div className="bg-green-500 w-full py-36">
     <h2 className="text-center text-3xl font-bold text-white">🌿 Get started</h2>
     <div className="mt-8 mx-auto text-xl text-center">
     <Link href="/new-paas">
@@ -84,7 +153,7 @@ export default function Index({ flows, flowItemsWithTools, actions, sections, pr
     </Link>
     </div>
     </div>
-    ) : (user ? (
+    )) : (user ? (
       <div className="bg-gray-50 w-full py-12">
     <h1 className="text-3xl py-4 text-center font-bold">Select a plan</h1>
     <Pricing products={products} />
@@ -97,14 +166,22 @@ export default function Index({ flows, flowItemsWithTools, actions, sections, pr
     </div>
     </div>
     </div>
-    {(draftArray.length > 0) ? (
+    {(postArray.length > 0) ? (
+      <div className="w-full flex flex-col pb-4">
+    <h2 className="text-center md:text-left md:pl-8 text-2xl font-semibold py-4 px-5">Recent community posts</h2>
+    <div className="flex flex-wrap px-5 w-full justify-start">
+    {postArray}
+    </div>
+    </div>
+    ) : null}
+    {/*(draftArray.length > 0) ? (
       <div className="w-full flex flex-col pb-4">
     <h2 className="text-center md:text-left md:pl-8 text-2xl font-semibold py-4 px-5">Recent articles</h2>
     <div className="flex flex-wrap px-5 w-full justify-start">
     {draftArray}
     </div>
     </div>
-    ) : null}
+    ) : null*/}
     <div className="w-full flex flex-col">
     <h2 className="text-center md:text-left md:pl-8 text-2xl font-semibold py-4 px-5">Recent step-by-step guides</h2>
     <div className="flex flex-wrap px-5 w-full justify-start mb-24">
@@ -114,7 +191,7 @@ export default function Index({ flows, flowItemsWithTools, actions, sections, pr
     {user ? (
       <>
     <h2 className="text-center md:text-left md:pl-8 text-2xl font-semibold py-4 mt-6 px-5">Actions</h2>
-    <div className="my-8 lg:mt-2 flex flex-wrap content-center mx-auto md:mx-0 justify-between w-2/3 px-5 md:pl-8">
+    <div className="my-8 lg:mt-2 flex flex-wrap content-center mx-auto md:mx-0 justify-start w-2/3 px-5 md:pl-8">
     {actionItems}
     </div>
     </>

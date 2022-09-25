@@ -23,6 +23,7 @@ const MyAppsPage = () => {
     const [apps, setApps] = useState([])
     const [dropletDomain, setDropletDomain] = useState("")
     const [paasName, setPaasName] = useState("")
+    const [appNoticeOpen, setAppNoticeOpen] = useState(false)
 
     async function getPaasById(user_id){
     const paasDetails = await getPaasByUserId(user_id);
@@ -36,9 +37,11 @@ const MyAppsPage = () => {
 
     async function getDropletsById(paas_id){
     const dropletsDetails = await getDropletsByPaasId(paas_id);
+    if(dropletsDetails[0]){
     setDropletId(dropletsDetails[0].droplet_id);
     setUserDropletId(dropletsDetails[0].id)
     setDropletDomain(dropletsDetails[0].domain);
+    }
     return
     }
 
@@ -69,24 +72,14 @@ const MyAppsPage = () => {
     return (
     <>
     <div className="-mb-20 -mt-20">
-    <Title titleTitle={`${paasName} Apps`} 
-    titleDescription={'Welcome to your apps section'} />
+    <Title titleTitle={`${paasName} Home`} 
+    titleDescription={'Here you can access your droplet or add apps to your app gallery.'} />
     </div>
     <div className="flex flex-col justify-center">
     <div className="px-5 w-full mb-24 mt-16 md:mt-8">
     <div className="flex flex-wrap justify-center items-center w-4/5 md:justify-start mx-auto py-4">
-    <div className="w-full"><Sidebar page="myapps" /></div>
     <div className="flex flex-wrap my-8 w-full">
-    {apps.map((app, i) => (
-        <SquareCard blockBody={app.tool_id.tool} key={i} blockLink={("https://captain." + dropletDomain)} 
-    smallImage={app.tool_id.logo_url} />
-    ))}
-    {dropletDomain ? (<Link href="/tools">
-    <div className="rounded-full cursor-pointer border border-blue-500 hover:bg-blue-50 shadow ml-20 md:ml-24 h-24 mt-10 w-24 mx-auto my-auto">
-    <div className="text-center text-5xl py-0.5 my-4">+</div>
-    </div>
-    </Link>) : null}
-    </div>
+    
     {dropletDomain ? (
         <div className="w-full flex flex-col md:flex-row justify-between  md:ml-16 items-center border shadow bg-gray-50 rounded py-4 md:py-2 px-2">
     <div className="flex flex-col md:flex-row">
@@ -95,7 +88,7 @@ const MyAppsPage = () => {
         src="https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/droplet.png?t=2022-09-04T14%3A29%3A00.230Z" />
     </div>
     <div className="flex flex-col md:ml-4 py-2 ">
-    <h2 className="text-xl text-center md:text-left">Droplet</h2>
+    <h2 className="text-xl text-center md:text-left t">Droplet</h2>
     <h3 className="text-gray-600 text-md font-semibold text-center md:text-left">{dropletDomain}</h3>
     </div>
     </div>
@@ -119,12 +112,21 @@ const MyAppsPage = () => {
      </div>
      </div>
      ) : (
-     <div className="pb-12 mx-auto">
+    <div className="py-12 mx-auto bg-gray-200 px-8 rounded">
     <h1 className="text-2xl text-center text-blue-700 pb-4 font-semibold">Get Started</h1>
     <p className="text-xl text-center">Looks like you don't have a droplet yet.</p>
     <p className="text-xl text-center"><Link href="/onboarding"><a className="text-blue-600 underline font-bold">Select a plan</a></Link> to start self-hosting!</p>
     </div>)}
-    <div className="w-full mt-6 flex justify-center">
+    <div className="w-full mx-auto text-center my-4">
+    <button className="my-4 py-2 px-4 rounded border bg-gray-100 hover:bg-gray-200 shadow font-semibold" onClick={() => {setAppNoticeOpen(!appNoticeOpen)}}>
+    How add Gardens one-click apps to Caprover
+    </button>
+    {appNoticeOpen ?  (
+        <h2 className="text-lg text-center py-4">To add Gardens custom apps to your Caprover library open your Caprover, go to "Apps" -> "One-click apps", scroll down to "3rd party repositories" and add oneclickapps.joingardens.com </h2>
+    ) : null
+    }
+    </div> 
+    <div className="w-full mt-6 mb-6 flex justify-center">
         <a href="" className="w-48 text-center py-2 px-4 shadow rounded bg-white text-lg hover:bg-gray-100">
         📕 Gardens Docs
         </a>
@@ -132,6 +134,28 @@ const MyAppsPage = () => {
         📘 Caprover Docs
         </a>
     </div>
+    <div className="w-full flex flex-col">
+    {dropletId ? (
+        <h2 className="w-full text-2xl md:px-16 pt-8 pb-4 font-semibold text-center md:text-left">My Apps</h2>
+    ) : null
+    }
+    <div className="w-full flex flex-col md:flex-row">
+    {apps.map((app, i) => (
+        <SquareCard blockBody={app.tool_id.tool} key={i} blockLink={("https://captain." + dropletDomain)} 
+    smallImage={app.tool_id.logo_url} />
+    ))}
+    {dropletDomain ? (
+    <Link href="/tools">
+    <div className="rounded-full cursor-pointer border border-blue-500 hover:bg-blue-50 shadow ml-20 md:ml-24 h-24 mt-10 w-24 mx-auto my-auto">
+    <div className="text-center text-5xl py-0.5 my-4">+</div>
+    </div>
+    </Link>
+    ) : null}
+    </div>
+    </div>
+    </div>
+    <h2 className="w-full text-2xl px-16 pt-8 pb-4 font-semibold">Quick Links</h2>
+    <div className="w-72 my-8"><Sidebar page="myapps" /></div>
     </div> 
     </div>
     </div>
