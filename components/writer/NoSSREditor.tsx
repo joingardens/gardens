@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import EditorJs from "react-editor-js";
 import { API, BlockAPI, OutputBlockData, OutputData} from "@editorjs/editorjs"
 
-export const Editor = ({data, setState, tools}) => {
+export const Editor = ({data, setState}) => {
 
 
   return (
@@ -16,7 +16,7 @@ export const Editor = ({data, setState, tools}) => {
         setState(data.blocks)
       }}
       placeholder="Start typing here..."
-      tools={tools}
+      //tools={tools}
       />
     </div>
   );
