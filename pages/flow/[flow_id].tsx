@@ -24,11 +24,16 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function getPostReplies(mastodonId){
-      const repliesResponse = await mastodonAdapter.getRepliesByStatusId(mastodonId);
+
+      const repliesResponse = await mastodonAdapter.getRepliesByStatusId(mastodonId)
+      if(repliesResponse){
       const replies = repliesResponse.data.descendants;
+      setRepliesList(replies); 
       const parentResponse = await mastodonAdapter.getStatusById(mastodonId);
+      if (parentResponse){
       setParentUri(parentResponse.data.uri);
-      setRepliesList(replies);  
+      }
+      } 
       }
 
   useEffect(() => {

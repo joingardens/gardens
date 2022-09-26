@@ -9,6 +9,8 @@ import Link from 'next/link';
 import Button from '../components/ui/Button';
 import Image from 'next/image'
 import Input from '../components/ui/Input';
+import Logo from '../components/icons/Logo';
+
 
 export default function Apps() {
 
@@ -83,16 +85,8 @@ export default function Apps() {
             >
               <span className="text-white font-bold">Get Started</span>
             </Button>
-          {/*<Button
-            variant="slim"
-            type="submit"
-            loading={loading}
-            className="bg-green-300"
-          >
-            Get Started
-          </Button>*/}
         </div>
-      </div>
+        </div>
     </form>
     </div>
     <div className="w-1/2 pt-8 md:pt-0 md:ml-12">
@@ -146,6 +140,21 @@ export default function Apps() {
     </div>
     </div>
     </div>
+    <div className="flex flex-col items-center bg-green-50 w-full justify-center mt-8">
+    <div className="flex items-center py-4">
+    <Logo className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white mt-8 mr-4 shadow" />
+    <h2 className="w-64">Start self-hosting your apps now!</h2>
+    </div>
+    <Button
+              variant="slim"
+              className="bg-green-500 w-72 md:w-96 border mb-12"
+              type="submit"
+              loading={loading}
+              onClick={() => { signInWithKeycloak() }}
+            >
+              <span className="text-white font-bold">Get Started</span>
+            </Button>
+    </div>
     <h2>🌟 No lock-in whatsoever</h2>
     All the data, along with apps, lives in your own cloud. You can always remove Gardens or the underlying <a href="https://caprover.com/">Caprover</a> software. Your apps will continue working.
     <h2>Only DevOps people could do this in the past!</h2>
@@ -165,6 +174,21 @@ export default function Apps() {
     <h2>Scaling? No problem!</h2>
     If you ever hit the limit of one instance of your app can do, you can scale by adding more instances of the app, or by adding more droplets. Load will be auto-magically distributed through the power of Docker Swarm.
     </div>
+    <div className="flex flex-col items-center bg-green-50 w-full justify-center mt-8">
+    <div className="flex items-center py-4">
+    <Logo className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white mt-8 mr-4 shadow" />
+    <h2 className="w-64">Seriously, try it.<br/> 7 days free trial! </h2>
+    </div>
+    <Button
+              variant="slim"
+              className="bg-green-500 w-72 md:w-96 border mb-12"
+              type="submit"
+              loading={loading}
+              onClick={() => { signInWithKeycloak() }}
+            >
+              <span className="text-white font-bold">Sign Up</span>
+            </Button>
+    </div>
     <h2>FAQ</h2>
     <div>
     <h3>❓ Who is this for?</h3>
@@ -178,7 +202,23 @@ export default function Apps() {
     <h3>❓ What is this Caprover thing that your platform is based on? How does it work?</h3>
     Caprover is an open-source PaaS (Platform-as-a-Service) offering developers a simple way to set up an admin dashboard on their cloud and deploy apps. Gardens is building on this great product by adding features for people who don't know how to code, and by curating a library of  no-code and low-code apps. We stay open-source ourselves, too. It's open-source all the way down!
     </div>
+    <div className="flex flex-col items-center bg-green-50 w-full justify-center mt-8">
+    <div className="flex items-center py-4">
+    <Logo className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white mt-8 mr-4 shadow" />
+    <h2 className="w-64">Start owning your digital infrastructure</h2>
     </div>
+    <Button
+              variant="slim"
+              className="bg-green-500 w-72 md:w-96 border mb-12"
+              type="submit"
+              loading={loading}
+              onClick={() => { signInWithKeycloak() }}
+            >
+              <span className="text-white font-bold">Join Gardens Now</span>
+            </Button>
+    </div>
+    </div>
+    
     <div className="mb-24"/>
     </div>
     </>

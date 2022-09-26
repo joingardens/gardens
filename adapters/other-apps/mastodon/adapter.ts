@@ -7,18 +7,30 @@ class MastodonApiAdapter extends BaseHttpAdapter {
     }
 
     async getRepliesByStatusId(statusId: string) {
-        const response = await this.instance.get(("/statuses/" + statusId + "/context"))
+        const response = await this.instance.get(("/statuses/" + statusId + "/context")).catch((error) => {
+            console.log(error)
+        })
+        if (response){
         return response
+    }
     }
 
     async getRecentMastoPosts() {
-        const response = await this.instance.get(("/timelines/public?limit=4"))
+        const response = await this.instance.get(("/timelines/public?limit=4")).catch((error) => {
+            console.log(error)
+        })
+        if (response){
         return response
+    }
     }
 
     async getStatusById(statusId: string) {
-        const response = await this.instance.get(("/statuses/" + statusId))
+        const response = await this.instance.get(("/statuses/" + statusId)).catch((error) => {
+            console.log(error)
+        })
+        if (response){
         return response
+    }
     }
 
     async postReply(replyToId: string) {
