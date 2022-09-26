@@ -187,7 +187,6 @@ export default function Pricing({ products }) {
                   <li>Custom config and back-ups</li>
                   <li>Done-for-you migrations and integrating with existing infrastructure</li>
                   </ul>
-                  <div className="py-6" />
                   </div>
                   <Button
                     variant="slim"
