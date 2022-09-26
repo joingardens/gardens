@@ -33,7 +33,6 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
 
   useEffect(() => {
     if (flowRecord[0].mastodon_id) {
-      console.log(flowRecord[0].mastodon_id);
     getPostReplies(flowRecord[0].mastodon_id);      
     }
   }, [flowRecord[0].mastodon_id]);
@@ -180,7 +179,8 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
      Using {toolLinks}
      </div>
     </div>
-    <div className="w-64 md:w-48 md:py-4 md:px-2 flex md:flex-col justify-center items-center">
+    {user ? (
+      <div className="w-64 md:w-48 md:py-4 md:px-2 flex md:flex-col justify-center items-center">
       <div className="text-lg w-24 md:w-32 mr-4 md:mr-0 text-center">Created by</div>
       <div className="relative h-16 w-16 md:h-32 md:w-32 my-2" >
       {(user[0].avatar_url) ? (
@@ -192,6 +192,8 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
       <span>{user[0].username}</span>
       </div>
     </div>
+    ) : null}
+    
   </div>
 </section>
     <div className="mt-4 pt-10">
