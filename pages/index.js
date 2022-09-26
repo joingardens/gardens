@@ -171,6 +171,9 @@ export default function Index({ flows, flowItemsWithTools, actions, sections, pr
     <h2 className="text-center md:text-left md:pl-8 text-2xl font-semibold py-4 px-5">Recent community posts</h2>
     <div className="flex flex-wrap px-5 w-full justify-start">
     {postArray}
+    <div className="w-full mx-4 md:w-64 h-24 rounded border border-gray-400 shadow hover:bg-green-200 cursor-pointer my-4 ml-2">
+    <h2 className="text-center mt-8 font-semibold"><a href="https://masto.cloud.joingardens.com/public" target="_blank">View more in the Community</a></h2>
+    </div>
     </div>
     </div>
     ) : null}

@@ -16,7 +16,7 @@ class MastodonApiAdapter extends BaseHttpAdapter {
     }
 
     async getRecentMastoPosts() {
-        const response = await this.instance.get(("/timelines/public?limit=4")).catch((error) => {
+        const response = await this.instance.get(("/timelines/public?limit=5")).catch((error) => {
             console.log(error)
         })
         if (response){
