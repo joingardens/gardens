@@ -40,7 +40,7 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
     if (flowRecord[0].mastodon_id) {
     getPostReplies(flowRecord[0].mastodon_id);      
     }
-  }, [flowRecord[0].mastodon_id]);
+  }, [flowRecord]);
 
   useEffect(() => {
     if (repliesList){
@@ -166,7 +166,6 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
     <a className="text-blue-600 font-semibold underline mr-2" href={(tool.toolOneClick) ? ('/tool/' + tool.toolId) : tool.toolLink} target="_blank">
     {tool.toolTitle}
     </a>))
-
   
   return (
   	<>
@@ -184,7 +183,7 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
      Using {toolLinks}
      </div>
     </div>
-    {user ? (
+    {(user[0].full_name || user[0].username) ? (
       <div className="w-64 md:w-48 md:py-4 md:px-2 flex md:flex-col justify-center items-center">
       <div className="text-lg w-24 md:w-32 mr-4 md:mr-0 text-center">Created by</div>
       <div className="relative h-16 w-16 md:h-32 md:w-32 my-2" >
@@ -193,12 +192,11 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
       ) : null}
       </div>
       <div className="flex flex-col items-center md:ml-0 ml-4">
-      <h2 className="font-bold text-lg">{user[0].full_name}</h2>
-      <span>{user[0].username}</span>
+      <h2 className="font-bold text-lg">{user[0].full_name ? user[0].full_name : null}</h2>
+      <span>{user[0].username ? user[0].username : null}</span>
       </div>
     </div>
     ) : null}
-    
   </div>
 </section>
     <div className="mt-4 pt-10">
@@ -236,11 +234,11 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
     </div>
     </div>
     <div className="py-24 max-w-lg px-2  mx-auto flex flex-col">
-    {(postReplies.length > 0) ? (
+    {(postReplies && postReplies.length > 0) ? (
     <>
     <h2 className="px-9 sm:text-2xl text-center text-xl font-semibold text-gray-900 bg-gray-50 py-1">
     Comments</h2>
-    {(parentUri.length > 0) ? (
+    {(parentUri && parentUri.length > 0) ? (
       <h3 className="text-lg text-center my-3">Add a comment by replying to this post <br/> in the <a className="text-blue-700 underline font-bold" href={parentUri} target="_blank">Gardens Community</a></h3>
     ) : null}
     {postReplies}
