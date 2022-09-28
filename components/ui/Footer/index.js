@@ -60,21 +60,28 @@ function LightFooterA(props) {
           </div>
          </div>
         <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
-          <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-            
+          {user ? (
+            <div className="lg:w-1/4 md:w-1/2 w-full px-4 md:mt-2 mb-12">
+            <Link href="#">
+                <a className={`text-gray-600 bg-white rounded px-8 font-semibold py-2 border border-gray-600 hover:bg-gray-100`} onClick={() => signOut()}>
+                  Sign out
+                </a>
+              </Link>
           </div>
+          ) : null}
+          
           <div className="lg:w-1/4 md:w-1/2 w-full px-4">
             <h3 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
               DISCOVER
             </h3>
             <nav className="flex flex-col mb-10">
-              {user ? (
+              {/*user ? (
                 <Link href="/drafts">
                 <a className="text-gray-600 hover:text-gray-800 font-medium" >
                   Drafts
                 </a>
               </Link>
-              ) : null}
+              ) : null*/}
               <Link href="/flows">
                 <a className="text-gray-600 hover:text-gray-800 font-medium" >
                   Guides

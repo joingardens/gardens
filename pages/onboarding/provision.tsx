@@ -7,7 +7,7 @@ import Link from 'next/link';
 import Button from '../../components/ui/Button';
 import { apiAdapter } from '../../adapters/other-apps/api/adapter';
 import { useDigitalOcean } from '../../components/hooks/useDigitalOcean';
-import { getPaasByUserId } from '../../utils/supabase-client';
+import { getPaasByUserId, getDropletsByPaasId } from '../../utils/supabase-client';
 import { DigitalOceanRegion } from '../../adapters/other-apps/digital-ocean/digitalOceanAdapter';
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { useInput } from '../../components/hooks/useInput';
@@ -120,6 +120,7 @@ export default function Provision() {
   const [pageLoading, setPageLoading] = useState<boolean>(true)
   const [regions, setRegions] = useState<DigitalOceanRegion[]>([])
   const [paasId, setPaasId] = useState(null)
+  const [dropletId, setDropletId] = useState(null)
   const [provisionState, setProvisionState] = useState<ProvisionState>(ProvisionState.default())
   const dropletNameInput = useInput<string>(validationService.validateOrganisationName, "", "droplet-name")
   
@@ -129,12 +130,34 @@ export default function Provision() {
   return
   }
 
+  async function getDropletsById(paas_id){
+    const dropletsDetails = await getDropletsByPaasId(paas_id);
+    if(dropletsDetails[0]){
+    setDropletId(dropletsDetails[0].droplet_id);
+    }
+    return
+    }
+
   useEffect(() => {
     
     if (user){
      getPaasById(user.id)
     }
   }, [user])
+
+  useEffect(() => {
+    
+    if (paasId){
+     getDropletsById(paasId)
+    }
+  }, [paasId])
+
+  useEffect(() => {
+    
+    if (dropletId){
+     router.push("/myapps/configure")
+    }
+  }, [dropletId])
   
   useEffect(() => {
     if (regions.length && user && token) {
@@ -164,7 +187,7 @@ export default function Provision() {
     <>
       <div className="mt-12"></div>
       <div className="md:w-2/3 w-4/5 mx-auto flex flex-col md:items-center">
-        <h1 className="text-3xl py-4 text-center font-bold">2️⃣ Set up</h1>
+        <h1 className="text-3xl py-4 text-center font-bold">Set up</h1>
          <div className="prose prose-xl">
          Select a region closer to you or your users, pick a droplet size, assign a name and smash the button below. We'll set up your Droplet where your apps will be hosted, and an admin panel you can use to manage your instance.
         </div> 
@@ -206,10 +229,10 @@ export default function Provision() {
                     paas_id: paasId
                   }).then(r => {
                     if (r) {
-                        router.push("/onboarding/configure")
+                        router.push("/myapps")
                     }
                     if (!r) {
-                      makeToast("ERROR", "error", 3 )
+                      makeToast("Could not provision a droplet. Go to the previous page and try again", "error", 3 )
                     }
                     setPageLoading(false)
                 }).catch(error => {
@@ -233,7 +256,7 @@ export default function Provision() {
               Previous step
             </a>
           </Link>
-          <Link href="/onboarding/configure">
+          <Link href="/myapps">
             <a className="border border-seaweed hover:bg-seaweed hover:text-white ml-4 text-xl transition py-1 px-2 focus:outline-none rounded">
               Next step
             </a>

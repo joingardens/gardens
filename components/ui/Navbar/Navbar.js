@@ -73,7 +73,7 @@ const Navbar = () => {
               </Link>
               {(user && subscription) ? (<Link href={"/myapps"}>
                 <a className={`mr-1.5 md:mr-2.5 ${ctaState} py-1 px-2 focus:outline-none rounded font-semibold`}>
-                  My apps
+                  Home
                 </a>
               </Link>) : (user ? (<Link href={"/onboarding/"}>
                 <a className={`mr-1.5 md:mr-2.5 ${ctaState} py-1 px-2 focus:outline-none rounded font-semibold`}>

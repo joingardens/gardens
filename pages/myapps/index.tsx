@@ -5,7 +5,6 @@ import { getPaasByUserId, getDropletsByPaasId, getAppsByUserDropletId } from '..
 import Link from "next/link";
 import Image from "next/image";
 import useToast from "../../components/hooks/useToast";
-import Sidebar from '../../components/ui/Sidebar';
 import Title from '../../components/ui/Title';
 import SquareCard from '../../components/ui/SquareCard';
 
@@ -72,42 +71,46 @@ const MyAppsPage = () => {
     return (
     <>
     <div className="-mb-20 -mt-20">
-    <Title titleTitle={`${paasName} Home`} 
-    titleDescription={'Here you can access your droplet or add apps to your app gallery.'} />
+    <Title titleTitle={`Home`}  />
     </div>
     <div className="flex flex-col justify-center">
     <div className="px-5 w-full mb-24 mt-16 md:mt-8">
     <div className="flex flex-wrap justify-center items-center w-4/5 md:justify-start mx-auto py-4">
-    <div className="flex flex-wrap my-8 w-full">
-    
-    {dropletDomain ? (
-        <div className="w-full flex flex-col md:flex-row justify-between  md:ml-16 items-center border shadow bg-gray-50 rounded py-4 md:py-2 px-2">
-    <div className="flex flex-col md:flex-row">
-    <div className="p-2 bg-white rounded-full w-16 mx-auto">
+    <div className="flex flex-col items-center mb-8 mt-4 w-full">
+    <h2 className="text-2xl mb-8 pb-2 border-b w-48 text-center">Resources</h2>
+    {dropletId ? (
+        <div className="max-w-2xl flex flex-col md:flex-row justify-between items-center border border-gray-300 bg-gray-100 rounded py-4 px-4">
+    <div className="flex flex-col md:flex-row w-2/3">
+    <div className="p-2 bg-white rounded-full w-18 md:w-24 h-18 mx-auto my-auto">
     <Image alt="Water droplet icon" width="50" height="50"
         src="https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/droplet.png?t=2022-09-04T14%3A29%3A00.230Z" />
     </div>
     <div className="flex flex-col md:ml-4 py-2 ">
     <h2 className="text-xl text-center md:text-left t">Droplet</h2>
-    <h3 className="text-gray-600 text-md font-semibold text-center md:text-left">{dropletDomain}</h3>
+    <h3 className="text-gray-600 text-md font-semibold text-center md:text-left">{dropletDomain ? dropletDomain : "Access by copying the IPv4 from your cloud dashboard into the address bar"}</h3>
     </div>
     </div>
     <div className="flex flex-col items-center">
-    <div>
-    <Link href={"https://captain." + dropletDomain}>
-        <a className="flex items-center w-48 bg-white text-center mx-auto pl-2 pr-1 py-2 shadow my-4 md:my-0 rounded border border-blue-600 text-lg hover:bg-blue-50">
+    {dropletDomain ? (
+        <div>
+        <a href={"https://captain." + dropletDomain} target="_blank" className="flex items-center w-48 bg-white text-center mx-auto pl-2 pr-1 py-2 shadow my-4 md:my-0 rounded border border-blue-600 text-lg hover:bg-blue-50">
         <Image alt="Caprover logo" width="25" height="25"
         src="https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/caprover.png?t=2022-08-16T09%3A37%3A46.977Z" />
         <span className="ml-1">Admin dashboard</span>
         </a>
-      </Link>
-     </div>
+     </div>) : (
+     <div>
+       <Link href="/onboarding/connect">
+        <a className="flex items-center w-48 bg-yellow-100 text-center mx-auto pl-2 pr-1 py-2 shadow my-4 md:my-0 rounded border border-blue-600 text-lg hover:bg-yellow-200">
+        <span className="ml-1">❗ Finish configuration</span>
+        </a>
+        </Link>
+     </div>)}
+
     <div className="md:mt-4 md:mb-2">
-    <Link href={"https://cloud.digitalocean.com/droplets/" + dropletId}>
-        <a className="w-48 text-center py-2 px-4 shadow rounded bg-white text-lg hover:bg-gray-100">
+        <a href={"https://cloud.digitalocean.com/droplets/" + dropletId} target="_blank" className="w-48 text-center py-2 px-4 shadow rounded bg-white text-lg hover:bg-gray-100">
         💻 Cloud dashboard
         </a>
-      </Link>
      </div>
      </div>
      </div>
@@ -117,25 +120,8 @@ const MyAppsPage = () => {
     <p className="text-xl text-center">Looks like you don't have a droplet yet.</p>
     <p className="text-xl text-center"><Link href="/onboarding"><a className="text-blue-600 underline font-bold">Select a plan</a></Link> to start self-hosting!</p>
     </div>)}
-    <div className="w-full mx-auto text-center my-4">
-    <button className="my-4 py-2 px-4 rounded border bg-gray-100 hover:bg-gray-200 shadow font-semibold" onClick={() => {setAppNoticeOpen(!appNoticeOpen)}}>
-    How add Gardens one-click apps to Caprover
-    </button>
-    {appNoticeOpen ?  (
-        <h2 className="text-lg text-center py-4">To add Gardens custom apps to your Caprover library open your Caprover, go to "Apps", then "One-click apps", scroll down to "3rd party repositories" and add oneclickapps.joingardens.com </h2>
-    ) : null
-    }
-    </div> 
-    <div className="w-full mt-6 mb-6 flex justify-center">
-        <a href="" className="w-48 text-center py-2 px-4 shadow rounded bg-white text-lg hover:bg-gray-100">
-        📕 Gardens Docs
-        </a>
-        <a href="https://caprover.com/docs/best-practices.html" target="_blank" className="w-48 text-center ml-2 py-2 px-4 shadow rounded bg-white text-lg hover:bg-gray-100">
-        📘 Caprover Docs
-        </a>
-    </div>
     <div className="w-full flex flex-col">
-    {dropletId ? (
+    {dropletDomain ? (
         <h2 className="w-full text-2xl md:px-16 pt-8 pb-4 font-semibold text-center md:text-left">My Apps</h2>
     ) : null
     }
@@ -154,8 +140,37 @@ const MyAppsPage = () => {
     </div>
     </div>
     </div>
-    <h2 className="w-full text-2xl px-16 pt-8 pb-4 font-semibold">Quick Links</h2>
-    <div className="w-72 my-8"><Sidebar page="myapps" /></div>
+    <div className="flex flex-col items-center max-w-2xl mx-auto">
+    <h2 className="text-2xl pt-8 pb-2 mb-4 border-b w-48 text-center">Help and Links</h2>
+    <div className="flex items-center">
+     <a href="" className="w-48 text-center py-2 px-4 shadow rounded bg-white text-lg hover:bg-gray-100">
+        Gardens Docs
+        </a>
+        <a href="https://caprover.com/docs/best-practices.html" target="_blank" className="w-48 text-center ml-2 py-2 px-4 shadow rounded bg-white text-lg hover:bg-gray-100">
+        Caprover Docs
+        </a>
+    </div>
+    <div className="flex items-center">
+    <Link href="/myflows">
+        <a className="w-48 text-center py-3 my-4 shadow rounded bg-white text-lg hover:bg-gray-100">
+        My guides
+        </a>
+      </Link>
+    <a href="https://masto.cloud.joingardens.com/public" 
+    target="_blank" className="w-48 text-center py-3 my-4 ml-2 shadow rounded bg-white text-lg hover:bg-gray-100">
+        Community
+    </a>
+    </div>
+    <div className="flex flex-col">
+    <button className="mb-4 mt-2 py-3 px-4 rounded text-lg hover:bg-gray-100 shadow w-96" onClick={() => {setAppNoticeOpen(!appNoticeOpen)}}>
+    How add Gardens one-click apps to Caprover
+    </button>
+    {appNoticeOpen ?  (
+        <h2 className="text-lg py-4 text-center w-96">To add Gardens custom apps to your Caprover library open your Caprover, go to "Apps", then "One-click apps", scroll down to "3rd party repositories" and add oneclickapps.joingardens.com </h2>
+    ) : null
+    }
+    </div>
+    </div>
     </div> 
     </div>
     </div>

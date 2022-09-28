@@ -18,7 +18,7 @@ export default function Connect() {
   	<>
     <div className="mt-12"></div>
     <div className="md:w-2/3 w-4/5 mx-auto flex flex-col md:items-center">
-    <h1 className="text-3xl py-4 text-center font-bold">1️⃣ Connect</h1>
+    <h1 className="text-3xl py-4 text-center font-bold">Connect</h1>
     <div className="prose prose-xl">
     Let's connect your Digital Ocean account. Press "Connect DigitalOcean" to start.
     </div>
@@ -34,7 +34,7 @@ export default function Connect() {
     <div className="mx-auto mt-8 flex">
     <Link href="/onboarding/prerequisites">
     <a className="border border-gray hover:bg-gray-400 hover:text-white  text-xl transition py-1 px-2 focus:outline-none rounded">
-      Previous step
+      Back to prerequisites
     </a>
     </Link>
     </div>

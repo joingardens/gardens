@@ -95,7 +95,7 @@ export default function ConfigureCustom() {
           })
           .catch((e) => {
             console.log(e)
-            toaster.makeToast("ERROR", "error", 3)
+            toaster.makeToast("Could not configure the droplet. Try again in a few minutes", "error", 3)
           })
         } else {
         setTimeout(() => {
@@ -114,7 +114,7 @@ export default function ConfigureCustom() {
         pageLoading 
         ? 
         <div className="py-36 flex flex-col justify-center">
-    <h1 className="text-2xl text-center text-blue-700 py-4 font-semibold">Droplet provisioned successfully!</h1>
+    <h1 className="text-2xl text-center text-blue-700 py-4 font-semibold">Connecting to cloud provider...</h1>
     <div className="mx-auto my-2">
     <Image alt="Animated tea with teabag" width="100" height="100"
         src={"https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/icons8-tea.gif"} />
@@ -124,8 +124,8 @@ export default function ConfigureCustom() {
     </div>
         :
         <>
-        <div className="md:w-2/3 w-4/5 mx-auto flex flex-col md:items-center mt-12">
-          <h1 className="text-3xl text-center font-bold">3️ Configure</h1>
+        <div className="md:w-2/3 w-4/5 mx-auto flex flex-col md:items-center mt-16">
+          <h1 className="text-3xl text-center font-bold mt-2">Configure</h1>
           <div className='w-full mx-auto flex flex-col md:flex-row mt-6'>
           <div className="cursor-pointer md:w-1/2" onClick={() => setFlowType("custom")}>
           <PrettyBlock smallImage='https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/globe-with-meridians_1f310.png?t=2022-08-21T14%3A46%3A25.867Z'
@@ -134,11 +134,11 @@ export default function ConfigureCustom() {
              blockDescription='Your very own domain! And more secure, too'
               />
           </div>
-          <div className="cursor-pointer md:w-1/2" onClick={() => setFlowType("gardens")}>
+          <div className="cursor-pointer md:w-1/2">
           <PrettyBlock smallImage='https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/Gardens_circle_logo.svg'
              blockBody='Use a collective.garden domain'
              flexibleHeight={true} fullWidth={true}
-             blockDescription='Get a domain in the form orgname.collective.garden. Not recommended!'/>
+             blockDescription='Get a free collective.garden domain. Coming soon!'/>
           </div>
           </div>
           <div className='w-full pt-5' ref={parent2}>
@@ -151,7 +151,10 @@ export default function ConfigureCustom() {
                 You will need to point your domain to your Droplet.
               </div>
               <div>
-                To do this, go to your domain management panel , and add a DNS record with the following settings:
+              If you don't have a domain yet, get one from a domain provider of your choice. If you're just testing, free domains are available on <a href="https://www.freenom.com/" target="_blank">Freenom</a>.
+              </div>
+              <div>
+                Once you have the domain, go to your domain management panel , and add a DNS record with the following settings:
                 <ul>
                   <li>Type: <strong>A</strong></li>
                   <li>Host: <strong>*.apps</strong></li>
@@ -289,20 +292,6 @@ export default function ConfigureCustom() {
           : null
           }
 
-          </div>  
-          <div className="mx-auto mt-16 flex flex-wrap">
-            <Link href="/onboarding/provision">
-              <a className="border border-gray hover:bg-gray-400 hover:text-white  text-xl transition py-1 px-2 focus:outline-none rounded">
-                Previous step
-              </a>
-            </Link>
-            {/*
-            <Link href="/myapps">
-              <a className="border border-seaweed hover:bg-seaweed hover:text-white ml-4 text-xl transition py-1 px-2 focus:outline-none rounded">
-                Go to my apps
-              </a>
-            </Link>
-          */}
           </div>
           <div className="mb-24" />
         </div>
