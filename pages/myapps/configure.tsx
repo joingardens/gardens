@@ -134,7 +134,7 @@ export default function ConfigureCustom() {
              blockDescription='Your very own domain! And more secure, too'
               />
           </div>
-          <div className="cursor-pointer md:w-1/2">
+          <div className="cursor-not-allowed md:w-1/2">
           <PrettyBlock smallImage='https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/Gardens_circle_logo.svg'
              blockBody='Use a collective.garden domain'
              flexibleHeight={true} fullWidth={true}
@@ -168,10 +168,10 @@ export default function ConfigureCustom() {
                   If you use one of these example values, your apps will have domains like "appname.apps.yourdomain.com" or "appname.internal.yourdomain.com". You're free to choose any value you want though.
                 </div>
                 <div className="mt-4">
-                  When ready, check that DNS settings updates have propagated, e.g. by using the following helper website. Be patient, it might take up to 24 hours for changes to propagate.
+                  When ready, check that DNS settings updates have propagated, e.g. by using the <a href="https://mxtoolbox.com/DnsLookup.aspx" target="_blank">following helper website</a>. Be patient, it might take up to 24 hours for changes to propagate.
                 </div>
                 <div className="mt-4">
-                  Once you see that the DNS records are correct, type your domain in below in the format of e.g. <strong>apps.yourdomain.com</strong> and press "Configure my domain".
+                  Once you see that the DNS records are correct, type your domain in below in the format of e.g. <strong>apps.yourdomain.com</strong>, depending on what you entered in the Host field, and press "Configure my domain".
                   We will also need your email to provision an SSL certificate.
                 </div>
               </div>
