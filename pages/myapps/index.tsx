@@ -80,7 +80,7 @@ const MyAppsPage = () => {
     <h2 className="text-2xl mb-8 pb-2 border-b w-48 text-center">Resources</h2>
     {dropletId ? (
         <div className="max-w-2xl flex flex-col md:flex-row justify-between items-center border border-gray-300 bg-gray-100 rounded py-4 px-4">
-    <div className="flex flex-col md:flex-row w-2/3">
+    <div className="flex flex-col md:flex-row w-1/2">
     <div className="p-2 bg-white rounded-full w-18 md:w-24 h-18 mx-auto my-auto">
     <Image alt="Water droplet icon" width="50" height="50"
         src="https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/droplet.png?t=2022-09-04T14%3A29%3A00.230Z" />
@@ -90,7 +90,7 @@ const MyAppsPage = () => {
     <h3 className="text-gray-600 text-md font-semibold text-center md:text-left">{dropletDomain ? dropletDomain : "Access by copying the IPv4 from your cloud dashboard into the address bar"}</h3>
     </div>
     </div>
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col">
     {dropletDomain ? (
         <div>
         <a href={"https://captain." + dropletDomain} target="_blank" className="flex items-center w-48 bg-white text-center mx-auto pl-2 pr-1 py-2 shadow my-4 md:my-0 rounded border border-blue-600 text-lg hover:bg-blue-50">
@@ -120,9 +120,9 @@ const MyAppsPage = () => {
     <p className="text-xl text-center">Looks like you don't have a droplet yet.</p>
     <p className="text-xl text-center"><Link href="/onboarding"><a className="text-blue-600 underline font-bold">Select a plan</a></Link> to start self-hosting!</p>
     </div>)}
-    <div className="w-full flex flex-col">
+    <div className="flex flex-col mx-auto max-w-2xl">
     {dropletDomain ? (
-        <h2 className="w-full text-2xl md:px-16 pt-8 pb-4 font-semibold text-center md:text-left">My Apps</h2>
+        <h2 className="text-2xl pt-8 pb-2 mb-4 border-b w-48 text-center mx-auto">My Apps</h2>
     ) : null
     }
     <div className="w-full flex flex-col md:flex-row">
@@ -132,20 +132,23 @@ const MyAppsPage = () => {
     ))}
     {dropletDomain ? (
     <Link href="/tools">
-    <div className="rounded-full cursor-pointer border border-blue-500 hover:bg-blue-50 shadow ml-20 md:ml-24 h-24 mt-10 w-24 mx-auto my-auto">
+    <div className={`rounded-full cursor-pointer border border-blue-500 hover:bg-blue-50 shadow h-24 ${(apps.length > 0) ? "mx-auto md:mx-4"  : "mx-auto"} mt-10 w-24 my-auto`}>
     <div className="text-center text-5xl py-0.5 my-4">+</div>
     </div>
     </Link>
     ) : null}
     </div>
+    {(dropletDomain && (apps.length > 0)) ? (<div className="text-center w-full mt-4">This will open your Caprover dashboard</div>) : null}
     </div>
     </div>
     <div className="flex flex-col items-center max-w-2xl mx-auto">
     <h2 className="text-2xl pt-8 pb-2 mb-4 border-b w-48 text-center">Help and Links</h2>
     <div className="flex items-center">
-     <a href="" className="w-48 text-center py-2 px-4 shadow rounded bg-white text-lg hover:bg-gray-100">
+     <Link href="/tool/426">
+     <a className="w-48 text-center py-2 px-4 shadow rounded bg-white text-lg hover:bg-gray-100">
         Gardens Docs
         </a>
+        </Link>
         <a href="https://caprover.com/docs/best-practices.html" target="_blank" className="w-48 text-center ml-2 py-2 px-4 shadow rounded bg-white text-lg hover:bg-gray-100">
         Caprover Docs
         </a>

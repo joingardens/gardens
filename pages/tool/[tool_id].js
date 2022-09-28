@@ -130,7 +130,7 @@ export default function Tool({ jobGroups, jobTools, jobs, tool, flows }) {
     </Link>
     </>
     ) : null}
-    {user ? (subscription ? (
+    {(user && currentTool.one_click) ? (subscription ? (
       <>
       <a  onClick={() => addToDashboard(userDropletId, currentTool.id)} style={{textDecoration: 'none', fontWeight: 600}} 
           className="w-full cursor-pointer bg-blue-400 shadow border text-white text-2xl hover:bg-blue-500 py-2 mt-2 px-2 mx-auto focus:outline-none rounded">
@@ -149,18 +149,20 @@ export default function Tool({ jobGroups, jobTools, jobs, tool, flows }) {
           </a></Link>
           </>
           )) : (
+          currentTool.one_click ? (
           <><Link href="/apps"><a style={{textDecoration: 'none', fontWeight: 600}} 
           className="w-full bg-green-500 shadow border text-white text-2xl hover:bg-green-600 py-2 mt-2 px-2 mx-auto focus:outline-none rounded">
             💻 Self-host {currentTool.tool}
           </a></Link>
-          </>)}
+          </>) : null
+          )}
      {installOpen ? (
        dropletDomain.length > 0 ? (<div className="p-2 mt-4 bg-gray-50 duration-150">
        <p className="font-semibold text-center">
        Are you sure you want to install {currentTool.tool}?
        </p>
        <p className="text-center">
-       To configure this app and confirm installation <a className="text-blue-600 underline font-bold" href={"https://captain." + dropletDomain + "/#/apps/oneclick/" + (currentTool.caprover_id ? currentTool.caprover_id : currentTool.gardens_id)} target="_blank">press here. </a>
+       To configure this app and confirm installation <a className="text-blue-600 underline font-bold" href={"https://captain." + dropletDomain + "/#/apps/oneclick/" + (currentTool.caprover_id ? currentTool.caprover_id : currentTool.gardens_id) + "?baseDomain=https%3A%2F%2Foneclickapps.caprover.com"} target="_blank">press here. </a>
        </p>
        <p className="mt-2 text-gray-500 text-center">If the link doesn't work, press "Remember me" and "Use localStorage", then try again</p>
        </div>) : (
