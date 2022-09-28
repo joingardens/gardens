@@ -9,6 +9,7 @@ import Image from 'next/image'
 import Input from '../../components/ui/Input';
 import { useDigitalOcean } from '../../components/hooks/useDigitalOcean';
 import { userDropletsAdapter } from '../../adapters/userDroplets/adapter';
+import { addDropletDomain } from '../../utils/supabase-client';
 import { apiAdapter, CaproverServerApiAdapter, DreamhostServerAdapter } from '../../adapters/other-apps/api/adapter';
 import { DigitalOceanNetworkType } from '../../adapters/other-apps/digital-ocean/digitalOceanAdapter';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
@@ -52,6 +53,7 @@ export default function ConfigureCustom() {
     console.log(resp2)
     const resp3 = await serverAdapter.caproverForceSSL()
     console.log(resp3)
+    const resp4 = await addDropletDomain(dropletId, domainInput.value)
     router.push("/myapps")
     return resp3
   }

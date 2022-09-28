@@ -673,6 +673,15 @@ export const insertUserApp = async (user_droplet_id, tool_id) => {
   return data || [];
 };
 
+export const addDropletDomain = async (droplet_id, domain_name) => {
+  await supabase
+    .from('user_droplets')
+    .update({
+      domain: domain_name
+    })
+    .eq('droplet_id', droplet_id);
+};
+
 export const updateUserName = async (user, name) => {
   await supabase
     .from('users')
