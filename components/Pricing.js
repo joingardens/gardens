@@ -67,8 +67,6 @@ export default function Pricing({ products }) {
           <p className="text-xl text-accents-6 sm:text-center sm:text-2xl max-w-2xl m-auto">
            Select a subscription plan to get started.
           </p>
-          <p className="text-lg text-accents-6 sm:text-center  max-w-xl mt-2 mx-auto underline">
-          If you are an employee or owner of a company with more than $1M annual revenue see "Annual billing"</p>
           <div className="relative self-center mt-6 rounded-lg p-0.5 flex sm:mt-8 border border-accents-0">
             <button
               onClick={() => setBillingInterval('month')}
@@ -94,7 +92,7 @@ export default function Pricing({ products }) {
             </button>
           </div>
         </div>
-        <div className="mt-12 sm:mt-16 flex flex-wrap lg:flex-nowrap">
+        <div className="mt-6 sm:mt-8 flex flex-wrap lg:flex-nowrap">
           {products.map((product) => {
             if (product){
             const price = product.prices.find(
@@ -124,7 +122,7 @@ export default function Pricing({ products }) {
                   </h2>
                   <p className="mt-4 text-accents-5">{product.description}</p>
                   <p className="mt-8">
-                    <span className="text-5xl font-extrabold white">
+                    <span className="text-4xl font-extrabold white">
                       {priceString}
                     </span>
                     <span className="text-base font-medium text-accents-8">
@@ -132,24 +130,25 @@ export default function Pricing({ products }) {
                     </span>
                   </p>
                   {product.name == "Gardens Apps Subscription" ? (
-                  <div className="prose text-lg mt-2">
+                  <>
+                  <h2 className="font-bold text-2xl mt-1 text-green-500">7 days free trial</h2>
+                  <div className="prose text-lg mt-3">
                   For small teams and hobbyists. Commercial use for small companies
                   <ul>
                   <li>Deploy apps to your cloud in one click. </li>
                   <li>Access our curated library of high-quality apps</li>
                   <li>Get an admin dashboard to manage your apps</li>
                   </ul>
-                  <div className="pb-6"></div>
-                  </div>) : null}
+                  </div>
+                  </>) : null}
                   {product.name == "Corporate plan" ? (
                   <div className="prose text-lg mt-2">
                   <ul>
                   <li>For employees or owners of companies with more than $1M annual revenue</li>
                   <li>Same features as Gardens Apps Subscription</li>
                   <li>Commercial use allowed</li>
-                  <li>Annual billing only</li>
+                  <div className="mt-4"></div>
                   </ul>
-                  <div className="pb-6"></div>
                   </div>) : null}
                   <Button
                     variant="slim"
@@ -175,15 +174,14 @@ export default function Pricing({ products }) {
                    Enterprise
                   </h2>
                   <p className="mt-8">
-                    <span className="text-5xl font-extrabold white">
+                    <span className="text-4xl font-extrabold white">
                       Contact us
                     </span>
                   </p>
-                  <div className="prose text-lg mt-2">
+                  <div className="prose text-lg mt-4">
                   For bigger organisations and teams looking to scale. Everything in Subscription plus:
                   <ul>
                   <li>Designated Support manager</li>
-                  <li>Complex deployments</li>
                   <li>Custom config and back-ups</li>
                   <li>Done-for-you migrations and integrating with existing infrastructure</li>
                   </ul>
@@ -203,6 +201,8 @@ export default function Pricing({ products }) {
         <p className="text-center text-lg mt-8 p-2 rounded border">
               Are you from a Global South / low income country? Fill out <a className="text-blue-600 font-bold underline" href="https://tally.so/r/nWO7pa" target="_blank">this form</a> to get Gardens for free
               </p>
+        <p className="text-lg text-accents-6 text-center  max-w-xl mt-2 mx-auto underline">
+          If you are an employee or owner of a company with more than $1M annual revenue see "Annual billing"</p>
       </div>
     </section>
   );

@@ -80,15 +80,15 @@ const MyAppsPage = () => {
     <h2 className="text-2xl mb-8 pb-2 border-b w-48 text-center">Resources</h2>
     {dropletId ? (
         <div className="max-w-2xl flex flex-col md:flex-row justify-between items-center border border-gray-300 bg-gray-100 rounded py-4 px-4">
-    <div className="flex flex-col md:flex-row w-1/2">
+    <div className="flex flex-col md:flex-row w-2/3 md:w-1/2">
     <div className="p-2 bg-white rounded-full w-18 md:w-24 h-18 mx-auto my-auto">
     <Image alt="Water droplet icon" width="50" height="50"
         src="https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/droplet.png?t=2022-09-04T14%3A29%3A00.230Z" />
     </div>
     <div className="flex flex-col md:ml-4 py-2 ">
     <h2 className="text-xl text-center md:text-left t">Droplet</h2>
-    <h3 className="text-gray-600 text-md font-semibold text-center md:text-left">{dropletDomain ? dropletDomain : "Access by copying the IPv4 from your cloud dashboard into the address bar"}</h3>
-    <h3 className="text-gray-600 text-md font-semibold text-center md:text-left">Default password: captain42. Do not forget to change it in Settings</h3>
+    <h3 className="text-gray-600 text-md font-semibold text-center md:text-left my-2">{dropletDomain ? dropletDomain : "Access by copying the IPv4 from your cloud dashboard into the address bar"}</h3>
+    <h3 className="text-gray-600 text-md text-center md:text-left">Default password: captain42. Do not forget to change it in Settings</h3>
     </div>
     </div>
     <div className="flex flex-col">

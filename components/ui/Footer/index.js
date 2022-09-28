@@ -61,9 +61,12 @@ function LightFooterA(props) {
          </div>
         <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
           {user ? (
-            <div className="lg:w-1/4 md:w-1/2 w-full px-4 md:mt-2 mb-12">
-            <Link href="/">
-                <a className={`text-gray-600 bg-white rounded px-8 font-semibold py-2 border border-gray-600 hover:bg-gray-100`} onClick={() => signOut()}>
+            <div className="lg:w-1/4 md:w-1/2 w-full px-4 md:mt-2 mb-12 flex flex-col text-center">
+             <a href="https://tally.so/r/n9qkMY" target="_blank" className={`text-gray-600 bg-white rounded px-8 font-semibold py-2 border border-gray-600 hover:bg-gray-100`} onClick={() => signOut()}>
+                  Share feedback
+                </a>
+                <Link href="/">
+                <a className={`text-gray-600 mt-3 bg-white rounded px-8 font-semibold py-2 border border-gray-600 hover:bg-gray-100`} onClick={() => signOut()}>
                   Sign out
                 </a>
               </Link>

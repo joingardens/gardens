@@ -3,7 +3,7 @@
 }
 
 .root:hover {
-  @apply text-black border border-secondary;
+  @apply text-white border;
 }
 
 .root:focus {

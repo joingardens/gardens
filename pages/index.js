@@ -154,7 +154,7 @@ export default function Index({ flows, flowItemsWithTools, actions, sections, pr
     </div>
     </div>
     )) : (user ? (
-      <div className="bg-gray-50 w-full py-12">
+      <div className="w-full py-12">
     <h1 className="text-3xl py-4 text-center font-bold">Select a plan</h1>
     <Pricing products={products} />
     </div>

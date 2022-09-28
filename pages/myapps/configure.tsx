@@ -97,7 +97,7 @@ export default function ConfigureCustom() {
           })
           .catch((e) => {
             console.log(e)
-            toaster.makeToast("Could not configure the droplet. Try again in a few minutes", "error", 3)
+            toaster.makeToast("Please refresh the page manually", "error", 3)
           })
         } else {
         setTimeout(() => {
