@@ -70,7 +70,8 @@ export default function ToolsPage({ products, tools, jobTools }) {
        ctaLink={isOneClick ? ('/tool/' + item.id) : null}
        ctaLinkTitle={isOneClick ? ('Press to self-host ' + item.tool + '!') : null}
        blockDescription={item.description}
-       blockType={isOneClick ? 'Open' : ((item.model == 2) | (item.model == 1)) ? 'Fair' : (item.model == 4) ? 'Closed' : (item.model == 3) ? 'Exportable' : null} />
+       blockColor={(isOneClick && item.model == 1) ? 'Green' : ((isOneClick && item.model == 2) ? 'Blue' : null)}
+       blockType={(item.model == 1) ? 'Open' : ((item.model == 2) ? 'Fair' : ((item.model == 3) ? 'Exportable' : ((item.model == 4) ? 'Closed' : null)))} />
     ) 
    });
 

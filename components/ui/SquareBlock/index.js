@@ -7,7 +7,7 @@ function SquareBlock(props) {
 
   const md = new MarkdownIt();
 
-  const blockColor = (props.blockType == 'Open') ? 'border border-green-300 hover:bg-green-100' : (props.blockType == 'Fair') ? 'gray-50 hover:bg-green-100' : (props.blockType == 'Exportable') ? 'gray-50 hover:bg-gray-100' : 'gray-50 hover:bg-gray-100';
+  const blockColor = (props.blockColor == 'Green') ? 'border border-green-300 hover:bg-green-100' : (props.blockColor == 'Blue') ? 'border border-blue-300 hover:bg-blue-100' : (props.blockColor == 'Yellow') ? 'border border-yellow-300 hover:bg-yellow-100' : 'gray-50 hover:bg-gray-100';
   const typeColor = (props.blockType == 'Open') ? 'text-green-500' : (props.blockType == 'Fair') ? 'text-green-500' : 'text-primary'
   const fontWeight = (props.blockType == 'Open') ? 'medium' : (props.blockType == 'Fair') ? 'medium' : (props.blockType == 'Closed') ? 'medium' : 'medium'
   const pillColor = getRandomGradient();
