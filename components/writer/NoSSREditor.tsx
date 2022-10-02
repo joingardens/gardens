@@ -1,24 +1,27 @@
 import React, { useState } from "react";
-import EditorJs from "react-editor-js";
-import { API, BlockAPI, OutputBlockData, OutputData} from "@editorjs/editorjs"
+import EditorJsWrapper from "./editorWrapper";
 
-export const Editor = ({data, setState}) => {
-
-
+export const Editor = ({data, setState }) => {
   return (
-    <div>
-      <EditorJs  
-      data={{
-        blocks: data
+     <div>
+      <EditorJsWrapper  
+
+      config= {{
+        onChange: async (api, event) => {
+          const state = await api.saver.save()
+          setState(state.blocks)
+        },
+        
+        data: {
+          blocks: data
+        },
+        placeholder: "Start typing here...",
+
       }}
-      onChange={(api, data) => {
-        //console.log(data.blocks)
-        setState(data.blocks)
-      }}
-      placeholder="Start typing here..."
-      //tools={tools}
+
       />
     </div>
+
   );
 };
 

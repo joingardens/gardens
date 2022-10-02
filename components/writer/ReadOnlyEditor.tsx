@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-import EditorJs from "react-editor-js";
-import { API, BlockAPI, OutputBlockData, OutputData} from "@editorjs/editorjs"
+import EditorJsWrapper from "./editorWrapper";
 
-export const ReadOnlyEditor = ({data, tools}) => {
+
+
+export const ReadOnlyEditor = ({data}) => {
 
   return (
     <div>
-      <EditorJs  
-      data={{
-        blocks: data
+      <EditorJsWrapper
+      config= {{
+        data: {
+          blocks: data
+        },
+        readOnly: true,
       }}
-      readOnly={true}
-      tools={tools}
       />
     </div>
   );

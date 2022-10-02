@@ -23,6 +23,8 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+
+
   async function getPostReplies(mastodonId){
 
       const repliesResponse = await mastodonAdapter.getRepliesByStatusId(mastodonId)
@@ -234,15 +236,12 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
     </div>
     </div>
     <div className="py-24 max-w-lg px-2  mx-auto flex flex-col">
-    {(postReplies && postReplies.length > 0) ? (
-    <>
-    <h2 className="px-9 sm:text-2xl text-center text-xl font-semibold text-gray-900 bg-gray-50 py-1">
+    <h2 className="px-9 sm:text-2xl text-center text-xl font-semibold text-gray-900 bg-green-50 py-1">
     Comments</h2>
     {(parentUri && parentUri.length > 0) ? (
-      <h3 className="text-lg text-center my-3">Add a comment by replying to this post <br/> in the <a className="text-blue-700 underline font-bold" href={parentUri} target="_blank">Gardens Community</a></h3>
+      <h3 className="text-2xl text-center my-3">Add a comment by replying to this post <br/> in the <a className="text-blue-700 underline font-bold" href={parentUri} target="_blank">Gardens Community</a></h3>
     ) : null}
-    {postReplies}
-      </>) : null}
+    {(postReplies && postReplies.length > 0) ? postReplies : null}
     
     {/*<h3 className="text-lg font-semibold mx-auto mt-12">Leave a comment</h3>
     <div className="w-full border border-gray-500 p-4 rounded mt-4 my-2">

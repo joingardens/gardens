@@ -90,7 +90,7 @@ export default function Index({ flows, flowItemsWithTools, actions, sections, pr
   const draftArray = drafts.map(draft => {
     return (
         <PrettyBlock key={draft.id} avatarImage={draft.user_public_profile.avatar_url ? draft.user_public_profile.avatar_url : null}
-      blockLink={'/articles/' + draft.id} blockBody={draft.draftName} avatarImageAlt={draft.user_public_profile.full_name} blockDescription={'By ' + draft.user_public_profile.full_name} />
+      blockLink={'/articles/' + draft.id} blockColor='Green' blockBody={'[Article] ' + draft.draftName} avatarImageAlt={draft.user_public_profile.full_name} blockDescription={'By ' + draft.user_public_profile.full_name} />
       )
   })
   
@@ -166,27 +166,18 @@ export default function Index({ flows, flowItemsWithTools, actions, sections, pr
     </div>
     </div>
     </div>
-    {(postArray.length > 0) ? (
-      <div className="w-full flex flex-col pb-4">
-    <h2 className="text-center md:text-left md:pl-8 text-2xl font-semibold py-4 px-5">Recent community posts</h2>
+    <div className="w-full flex flex-col pb-4">
+    <h2 className="text-center md:text-left md:pl-8 text-2xl font-semibold py-4 px-5">Articles and posts</h2>
     <div className="flex flex-wrap px-5 w-full justify-start">
-    {postArray}
-    <div className="w-full mx-4 md:w-64 h-24 rounded border border-gray-400 shadow hover:bg-green-200 cursor-pointer my-4 ml-2">
+    {(draftArray.length > 0) ? draftArray : null}
+    {(postArray.length > 0) ? postArray : null}
+    <div className="w-full mx-4 md:w-64 h-24 rounded border border-gray-400 shadow hover:shadow-md cursor-pointer my-4 ml-2">
     <h2 className="text-center mt-8 font-semibold"><a href="https://masto.cloud.joingardens.com/public" target="_blank">View more in the Community</a></h2>
     </div>
     </div>
     </div>
-    ) : null}
-    {/*(draftArray.length > 0) ? (
-      <div className="w-full flex flex-col pb-4">
-    <h2 className="text-center md:text-left md:pl-8 text-2xl font-semibold py-4 px-5">Recent articles</h2>
-    <div className="flex flex-wrap px-5 w-full justify-start">
-    {draftArray}
-    </div>
-    </div>
-    ) : null*/}
     <div className="w-full flex flex-col">
-    <h2 className="text-center md:text-left md:pl-8 text-2xl font-semibold py-4 px-5">Recent step-by-step guides</h2>
+    <h2 className="text-center md:text-left md:pl-8 text-2xl font-semibold py-4 px-5">Step-by-step guides</h2>
     <div className="flex flex-wrap px-5 w-full justify-start mb-24">
     {flowArray}
     </div>

@@ -227,6 +227,7 @@ export const getArticleById = async (article_id) => {
     .from('drafts')
     .select('*')
     .eq('id', article_id)
+    .eq("isPublished", true)
 
   if (error) {
     console.log(error.message);
