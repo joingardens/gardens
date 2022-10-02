@@ -145,23 +145,31 @@ const MyAppsPage = () => {
     <div className="flex flex-col items-center max-w-2xl mx-auto">
     <h2 className="text-2xl pt-8 pb-2 mb-4 border-b w-48 text-center">Help and Links</h2>
     <div className="flex items-center">
-     <Link href="/tool/426">
-     <a className="w-48 text-center py-2 px-4 shadow rounded bg-white text-lg hover:bg-gray-100">
-        Gardens Docs
-        </a>
-        </Link>
-        <a href="https://caprover.com/docs/best-practices.html" target="_blank" className="w-48 text-center ml-2 py-2 px-4 shadow rounded bg-white text-lg hover:bg-gray-100">
-        Caprover Docs
-        </a>
-    </div>
-    <div className="flex items-center">
     <Link href="/myflows">
-        <a className="w-48 text-center py-3 my-4 shadow rounded bg-white text-lg hover:bg-gray-100">
+        <a className="w-48 text-center py-3 my-4 shadow rounded border border-green-200 bg-white text-lg hover:bg-blue-100">
         My guides
         </a>
       </Link>
+   <Link href="/drafts">
+        <a className="w-48 text-center py-3 my-4 ml-2 shadow rounded border border-green-200 bg-white text-lg hover:bg-blue-100">
+        My articles
+        </a>
+      </Link>
+    </div>
+    <div className="flex items-center">
+     <Link href="/tool/426">
+     <a className="w-48 text-center py-2 px-4 shadow rounded border border-green-200 bg-white text-lg hover:bg-green-100">
+        Gardens Docs
+        </a>
+        </Link>
+        <a href="https://caprover.com/docs/best-practices.html" target="_blank" className="w-48 text-center border border-green-200 ml-2 py-2 px-4 shadow rounded bg-white text-lg hover:bg-green-100">
+        Caprover Docs
+        </a>
+    </div>
+    
+    <div className="flex flex-col">
     <a href="https://masto.cloud.joingardens.com/public" 
-    target="_blank" className="w-48 text-center py-3 my-4 ml-2 shadow rounded bg-white text-lg hover:bg-gray-100">
+    target="_blank" className="w-96 text-center py-3 my-4 shadow rounded bg-white border border-blue-200 text-lg hover:bg-blue-100">
         Community
     </a>
     </div>

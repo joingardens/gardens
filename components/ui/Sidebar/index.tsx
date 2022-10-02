@@ -9,15 +9,15 @@ return (
     {(props.page != "myapps" ? (
       <Link href="/myapps" >
         <a className="w-36 text-center py-2 mr-2 border border-black rounded bg-white text-lg hover:bg-gray-100">
-        My apps
+        Home
         </a>
       </Link>) : null)}
-    {/*(props.page != "drafts" ? (
+    {(props.page != "drafts" ? (
       <Link href="/drafts">
         <a className="w-36 text-center py-2 mr-2 border border-black rounded bg-white text-lg hover:bg-gray-100">
-        My posts
+        My articles
         </a>
-      </Link>) : null)*/}
+      </Link>) : null)}
     {(props.page != "myflows" ? (
       <Link href="/myflows">
         <a className="w-36 text-center py-2 mr-2 border border-black rounded bg-white text-lg hover:bg-gray-100">

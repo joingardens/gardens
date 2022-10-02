@@ -4,7 +4,7 @@ import { useUser } from "../../utils/useUser";
 import Link from "next/link";
 import Image from "next/image";
 import useToast from "../../components/hooks/useToast";
-//import Sidebar from '../../components/ui/Sidebar';
+import Sidebar from '../../components/ui/Sidebar';
 import ListItem from '../../components/ui/ListItem';
 import TextList from '../../components/ui/TextList';
 import ListItemMirrored from '../../components/ui/ListItemMirrored';
@@ -70,7 +70,7 @@ const MyFlowsPage = () => {
     </div>
     <div className="flex justify-center">
     <div className="w-full flex flex-col items-end mb-24 mt-24 md:mt-16">
-    {/*<Sidebar page="myflows" />*/}
+    <Sidebar page="myflows" />
     <div className="flex flex-col mx-auto px-4 w-full md:w-3/4 md:px-24 lg:px-48 mt-6 justify-start mb-24">
     {(sortedItemArray.length > 0) ? (listFlows) : (
       <div className="bg-gray-200 rounded w-full px-4 py-8 text-center">
