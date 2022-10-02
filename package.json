@@ -23,6 +23,7 @@
     "bignumber.js": "^9.0.2",
     "body-scroll-lock": "^4.0.0-beta.0",
     "classnames": "2.2.6",
+    "crypto-js": "^4.1.1",
     "cuid": "^2.1.8",
     "dayjs": "^1.10.7",
     "fp-ts": "^2.12.2",

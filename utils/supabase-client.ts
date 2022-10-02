@@ -223,10 +223,12 @@ export const getFlowById = async (flow_id) => {
 };
 
 export const getArticleById = async (article_id) => {
+  console.log(article_id)
   const { data, error } = await supabase
     .from('drafts')
     .select('*')
     .eq('id', article_id)
+    .eq("isPublished", true)
 
   if (error) {
     console.log(error.message);
