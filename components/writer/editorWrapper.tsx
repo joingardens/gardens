@@ -29,9 +29,9 @@ export default function EditorJsWrapper({
       const { default: delimiter } = await import('@editorjs/delimiter')
       const { default: inlineCode } = await import('@editorjs/inline-code')
       const { default: simpleImage } = await import('@editorjs/simple-image')
-      const { default: warning } = await import ("@editorjs/warning")
-      const { default: code } = await import("@editorjs/code")
-      const { default: quote } = await import("@editorjs/quote")
+      //const { default: warning } = await import ("@editorjs/warning")
+      //const { default: code } = await import("@editorjs/code")
+      //const { default: quote } = await import("@editorjs/quote")
 
       editorJs = new EditorJS({
         ...config,
@@ -44,9 +44,9 @@ export default function EditorJsWrapper({
           delimiter,
           inlineCode,
           simpleImage,
-          warning,
-          quote,
-          code,
+          //warning,
+          //quote,
+          //code,
         },
         holder: elmtRef.current,
       });

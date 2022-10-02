@@ -8,9 +8,7 @@ export const Editor = ({data, setState }) => {
 
       config= {{
         onChange: async (api, event) => {
-          console.log('Now I know that Editor\'s content changed!', )
           const state = await api.saver.save()
-          console.log(state)
           setState(state.blocks)
         },
         
