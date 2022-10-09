@@ -48,15 +48,15 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
     if (repliesList){
 
     const finalRepliesList = repliesList.map(reply => (
-    <a href={reply.uri} className="hover:bg-gray-50 mt-4" target="_blank">
-    <div className="w-full flex border shadow rounded px-2 py-2">
+    <a href={reply.uri} className="hover:bg-gray-50 mt-4 bg-white" target="_blank">
+    <div className="flex border shadow rounded px-2 py-2">
     <div className="md:w-20 md:h-20 w-12 h-12 relative ml-2 my-2">
     <Image src={reply.account.avatar} alt={reply.account.display_name} 
             layout='fill' objectFit='contain' objectPosition='center center' />
     </div>
-    <div className="flex flex-col">
+    <div className="flex flex-col overflow-hidden">
     <p className="px-4 text-lg font-semibold pt-3">{reply.account.display_name}</p>
-    <div className="text-lg pl-5 max-w-sm py-2" dangerouslySetInnerHTML={{__html: reply.content}}/>
+    <div className="prose px-4 overflow-hidden py-2" dangerouslySetInnerHTML={{__html: reply.content}}/>
     </div>
     </div>
     </a>
@@ -235,14 +235,15 @@ export default function Flow({ flow, user, inputs, outputs, flowRecord, imageDom
     <div className="mx-auto text-center text-gray-600 font-semibold mt-2">↑ Press to view all guides for this result</div>
     </div>
     </div>
-    <div className="py-24 max-w-lg px-2  mx-auto flex flex-col">
-    <h2 className="px-9 sm:text-2xl text-center text-xl font-semibold text-gray-900 bg-green-50 py-1">
+    <div className="pb-24 pt-6 mt-12 w-full justify-center flex flex-col bg-green-50 z-40">
+    <h2 className="px-9 sm:text-2xl text-center text-xl font-semibold text-gray-900  py-1">
     Comments</h2>
     {(parentUri && parentUri.length > 0) ? (
       <h3 className="text-2xl text-center my-3">Add a comment by replying to this post <br/> in the <a className="text-blue-700 underline font-bold" href={parentUri} target="_blank">Gardens Community</a></h3>
     ) : null}
+    <div className="md:w-1/2 w-4/5 flex flex-col mx-auto">
     {(postReplies && postReplies.length > 0) ? postReplies : null}
-    
+    </div>
     {/*<h3 className="text-lg font-semibold mx-auto mt-12">Leave a comment</h3>
     <div className="w-full border border-gray-500 p-4 rounded mt-4 my-2">
     <label className="flex-grow flex items-center cursor-text select-none focus-within-ring min-h-14">

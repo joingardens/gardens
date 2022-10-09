@@ -20,7 +20,7 @@ function PrettyBlock(props) {
   return (
     <>
     <div className={`my-4 ml-2 flex ${blockHeight} w-full md:w-auto`}>
-    <a href={props.blockLink} className={'font-semibold w-full items-center text-center mr-4'}>
+    <a href={props.blockLink} target={props.targetBlank ? "_blank" : "_self"} className={'font-semibold w-full items-center text-center mr-4'}>
         <div className={`shadow transition rounded h-full w-full md:${blockWidth} items-center justify-center flex `}>
           <div className={`flex items-center ${blockColor} w-full h-full py-2 bg-opacity-50 text-ce`}>
           {props.avatarImage ? (

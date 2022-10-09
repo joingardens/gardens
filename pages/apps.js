@@ -111,32 +111,104 @@ export default function Apps() {
     <li>Become part of a community of self-hosting enthusiasts, get advice and share knowledge</li>
     </ul>
     </div>
+    <h2>Hosting options</h2>
+    <div className="flex flex-row justify-between overflow-x-auto">
+    <div className="flex flex-col h-120 border pb-6 px-8 rounded-md items-center mr-4">
+    <h3 className="text-left w-full">DigitalOcean</h3>
+    <div className="w-20 h-20 min-w-20 relative mx-2 mb-2">
+            <Image src="https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/digital-ocean-logo-7B970FE624-seeklogo.com.png" alt="DigitalOcean logo" 
+            layout='fill' objectFit='contain' objectPosition='center center' />
+            </div>
+    <span className="w-full mt-2 text-green-700 font-semibold">Available</span>
+    <div className="mt-2">Use a DigitalOcean droplet, with prices starting at $4 per month and free credits</div>
+    <Button
+              variant="slim"
+              className="bg-green-500 border mt-4 w-full mx-8"
+              type="submit"
+              loading={loading}
+              onClick={() => { signInWithKeycloak() }}
+            >
+              <span className="text-white font-bold">Let's go!</span>
+    </Button>
+    </div>
+    <div className="flex flex-col h-120 border pb-6 px-8 rounded-md items-center mr-4">
+    <h3 className="text-left w-full">Local</h3>
+    <div className="w-20 h-20 min-w-20 relative mx-2 mb-2">
+            <Image src="https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/laptop_1f4bb.png" alt="Laptop emoji" 
+            layout='fill' objectFit='contain' objectPosition='center center' />
+            </div>
+    <span className="w-full mt-2 text-yellow-600 font-semibold">Coming in October 2022</span>
+    <div className="mt-2">Host on your own machine or server by running a couple CLI scripts</div>
+    <Button
+              variant="slim"
+              className="bg-green-800 border mt-4 w-full mx-8"
+              type="submit"
+              loading={loading}
+              onClick={() => { location.assign("https://tally.so/r/wA7Xqk") }}
+            >
+              <span className="text-white font-bold">Join Waitlist</span>
+    </Button>
+    </div>
+    <div className="flex flex-col h-120 border pb-6 px-8 rounded-md items-center mr-4">
+    <h3 className="text-left w-full">Oracle</h3>
+    <div className="w-20 h-20 min-w-20 relative mx-2 mb-2">
+            <Image src="https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/cloud_2601-fe0f.png" alt="Cloud emoji" 
+            layout='fill' objectFit='contain' objectPosition='center center' />
+            </div>
+    <span className="w-full mt-2 text-yellow-600 font-semibold">Coming in Q4 2022</span>
+    <div className="mt-2">Take advantage of Oracle infrastructure, including Always Free tier machines and more</div>
+    <Button
+              variant="slim"
+              className="bg-green-800 border mt-4 w-full mx-8"
+              type="submit"
+              loading={loading}
+              onClick={() => { location.assign("https://tally.so/r/wA7Xqk") }}
+            >
+              <span className="text-white font-bold">Join Waitlist</span>
+    </Button>
+    </div>
+    <div className="flex flex-col h-120 border pb-6 px-8 rounded-md items-center mr-4">
+    <h3 className="text-left w-full">Your Cloud</h3>
+    <div className="w-20 h-20 min-w-20 relative mx-2 mb-2">
+            <Image src="https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/magnifying-glass-tilted-left_1f50d.png" alt="Cloud emoji" 
+            layout='fill' objectFit='contain' objectPosition='center center' />
+            </div>
+    <div className="mt-2 mb-9">Request a different hosting option or let us know about your preferred cloud provider</div>
+    <Button
+              variant="slim"
+              className="bg-green-800 border mt-4 w-full mx-8"
+              type="submit"
+              loading={loading}
+              onClick={() => { location.assign("https://tally.so/r/wA7Xqk") }}
+            >
+              <span className="text-white font-bold">Add a Request</span>
+    </Button>
+    </div>
+    </div>
     <div>
     <h2>Three simple steps</h2>
-    <h3>Connect your cloud</h3>
-    <div className="flex md:flex-row flex-col w-full">
-    <div className="h-full mx-auto w-16 border border-blue-700 rounded-full shadow p-2 m-2 text-center my-auto">
-    <div className="my-2 md:my-0 py-1 px-3.5 font-bold">1</div></div>
-    <div className="ml-2 md:ml-4">
+    <h3 className="text-center md:text-left">Connect your cloud</h3>
+    <div className="flex md:flex-row flex-col w-full items-center">
+    <div className="h-full w-16 border border-blue-700 rounded-full shadow p-2 m-2 text-center my-auto">
+    <div className="my-2 md:my-0 px-3.5 font-bold">1</div></div>
+    <div className="ml-2 md:ml-4 text-center md:text-left pt-2">
     Sign up with Digital Ocean and grab a token. Gardens will provision a droplet with <a href="https://caprover.com/">Caprover</a> installed and configure everything for you. You will only need a domain.
     </div>
     </div>
-    <h3>Select apps</h3>
-    <div className="flex md:flex-row flex-col w-full">
-    <div className="h-full mx-auto w-16 border border-blue-700 rounded-full shadow p-2 m-2 text-center my-auto">
-    <div className="my-2 md:my-0 py-1 px-3.5 font-bold">2</div></div>
-    <div className="ml-2 md:ml-4">
+    <h3 className="text-center md:text-left">Select apps</h3>
+    <div className="flex md:flex-row flex-col w-full items-center">
+    <div className="h-full w-16 border border-blue-700 rounded-full shadow p-2 m-2 text-center my-auto">
+    <div className="my-2 md:my-0 px-3.5 font-bold">2</div></div>
+    <div className="ml-2 md:ml-4 text-center md:text-left pt-2">
     Pick from a library of 176 one-click apps, featuring classics like Wordpress, Discourse, and Nextcloud, but also new challengers. If you are a coder, deploy your apps from version control or using the CLI.
     </div>
     </div>
-    <div>
-    <h3>Enjoy!</h3>
-    <div className="flex md:flex-row flex-col w-full">
-    <div className="h-full mx-auto w-16 border border-blue-700 rounded-full shadow p-2 m-2 text-center my-auto">
-    <div className="my-2 md:my-0 py-1 px-3.5 font-bold">3</div></div>
-    <div className="ml-2 md:ml-4">
+    <h3 className="text-center md:text-left">Enjoy!</h3>
+    <div className="flex md:flex-row flex-col w-full items-center">
+    <div className="h-full w-16 border border-blue-700 rounded-full shadow p-2 m-2 text-center my-auto">
+    <div className="my-2 md:my-0 px-3.5 font-bold">3</div></div>
+    <div className="ml-2 md:ml-4 text-center md:text-left pt-2">
     Your apps are up and running with SSL, basic configuration and analytics taken care of. It just works, out of the box.
-    </div>
     </div>
     </div>
     </div>

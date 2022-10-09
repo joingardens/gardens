@@ -42,9 +42,9 @@ export default function Article({ article, user }) {
     <Image src={reply.account.avatar} alt={reply.account.display_name} 
             layout='fill' objectFit='contain' objectPosition='center center' />
     </div>
-    <div className="flex flex-col">
+    <div className="flex flex-col overflow-hidden">
     <p className="px-4 text-lg font-semibold pt-3">{reply.account.display_name}</p>
-    <div className="text-lg pl-5 max-w-sm py-2" dangerouslySetInnerHTML={{__html: reply.content}}/>
+    <div className="prose px-4 overflow-hidden py-2" dangerouslySetInnerHTML={{__html: reply.content}}/>
     </div>
     </div>
     </a>
@@ -91,13 +91,15 @@ export default function Article({ article, user }) {
         // (JSON.stringify(article[0].payload))
         (<>
           <ReadOnlyEditor data={article[0].payload} />
-          <div className="-mt-48 pb-24 pt-4 max-w-lg px-2  mx-auto flex flex-col z-40">
+          <div className="-mt-48 pb-24 pt-4 px-2 w-full justify-center flex flex-col z-40">
     <h2 className="px-9 sm:text-2xl text-center text-xl font-semibold text-gray-900 bg-green-50 py-1">
     Comments</h2>
     {(parentUri && parentUri.length > 0) ? (
       <h3 className="text-2xl text-center my-3">Add a comment by replying to this post <br/> in the <a className="text-blue-700 underline font-bold" href={parentUri} target="_blank">Gardens Community</a></h3>
     ) : null}
+    <div className="md:w-1/2 w-4/5 flex flex-col mx-auto">
     {(postReplies && postReplies.length > 0) ? postReplies : null}
+    </div>
     </div>
     </>) 
         : null}

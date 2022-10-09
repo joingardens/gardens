@@ -98,8 +98,8 @@ export default function Index({ flows, flowItemsWithTools, actions, sections, pr
     const postContents = post.content.replace(/<[^>]*>?/gm, '');
     if (postContents.length > 80){
     return (
-      <PrettyBlock key={post.id} avatarImage={post.account.avatar_static ? post.account.avatar_static : null}
-      blockLink={post.uri} blockBody={postContents} 
+      <PrettyBlock key={post.id} targetBlank={true} avatarImage={post.account.avatar_static ? post.account.avatar_static : null}
+      blockLink={"https://masto.cloud.joingardens.com/public"} blockBody={postContents} 
       avatarImageAlt={post.account.display_name ? post.account.display_name : null} blockDescription={'By ' + post.account.display_name} />
       )}
   })
