@@ -37,7 +37,7 @@ export default function ConfigureCustom() {
   const [ dreamhostAdapter, setDreamhostAdapter ] = useState<DreamhostServerAdapter>()
   const [ dropletId, setDropletId ] = useState<number>()
   const [ serverAdapter, setServerAdapter ] = useState<CaproverServerApiAdapter>()
-  const [ dropletIp, setDropletIp] = useState("118.0.0.0 (this should be the IP of your droplet from DigitalOcean)")
+  const [ dropletIp, setDropletIp] = useState("localhost")
   const [ pageLoading, setPageLoading ] = useState<boolean>(true)
   const [ parent ] = useAutoAnimate<HTMLDivElement>()
   const [ parent2 ] = useAutoAnimate<HTMLDivElement>({duration: 1000})

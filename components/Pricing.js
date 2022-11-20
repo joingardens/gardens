@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-
+import { signInWithKeycloak } from '../utils/supabase-client';
 import Button from './ui/Button';
 import { postData } from '../utils/helpers';
 import { getStripe } from '../utils/stripe-client';
@@ -62,12 +62,9 @@ export default function Pricing({ products }) {
 
   return (
     <section id="pricing">
-      <div className="max-w-6xl mx-auto  px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
         <div className="sm:flex sm:flex-col sm:align-center">
-          <p className="text-xl text-accents-6 sm:text-center sm:text-2xl max-w-2xl m-auto">
-           Select a subscription plan to get started.
-          </p>
-          <div className="relative self-center mt-6 rounded-lg p-0.5 flex sm:mt-8 border border-accents-0">
+          <div className="relative self-start ml-4 mt-6 rounded-lg p-0.5 flex sm:mt-8 border border-accents-0">
             <button
               onClick={() => setBillingInterval('month')}
               type="button"
@@ -92,7 +89,7 @@ export default function Pricing({ products }) {
             </button>
           </div>
         </div>
-        <div className="mt-6 sm:mt-8 flex flex-wrap lg:flex-nowrap">
+        <div className="mt-2 sm:mt-4 flex sm:flex-row flex-col">
           {products.map((product) => {
             if (product){
             const price = product.prices.find(
@@ -108,7 +105,7 @@ export default function Pricing({ products }) {
               <div
                 key={product.id}
                 className={cn(
-                  'rounded-lg shadow-sm divide-y divide-accents-2 bg-gray-50',
+                  'rounded-lg shadow-sm divide-y divide-accents-2 bg-gray-50  mx-4 sm:w-1/2',
                   {
                     'border border-pink': subscription
                       ? product.name === subscription?.prices?.products.name
@@ -116,11 +113,10 @@ export default function Pricing({ products }) {
                   }
                 )}
               >
-                <div className="p-6">
-                  <h2 className="text-2xl leading-6 font-semibold">
+                <div className="px-6 pb-4">
+                  <h2 className="text-2xl font-semibold" style={{marginTop: "1em"}}>
                     {product.name}
                   </h2>
-                  <p className="mt-4 text-accents-5">{product.description}</p>
                   <p className="mt-8">
                     <span className="text-4xl font-extrabold white">
                       {priceString}
@@ -129,11 +125,11 @@ export default function Pricing({ products }) {
                       /{billingInterval}
                     </span>
                   </p>
-                  {product.name == "Gardens Apps Subscription" ? (
+                  {product.name == "Hobby" ? (
                   <>
-                  <h2 className="font-bold text-2xl mt-1 text-green-500">7 days free trial</h2>
+                  <span className="font-bold mt-1 text-green-500">7 days free trial</span>
                   <div className="prose text-lg mt-3">
-                  For small teams and hobbyists. Commercial use for small companies
+                  For small teams and hobbyists.
                   <ul>
                   <li>Deploy apps to your cloud in one click. </li>
                   <li>Access our curated library of high-quality apps</li>
@@ -141,34 +137,49 @@ export default function Pricing({ products }) {
                   </ul>
                   </div>
                   </>) : null}
-                  {product.name == "Corporate plan" ? (
+                  {product.name == "Corporate" ? (
                   <div className="prose text-lg mt-2">
                   <ul>
                   <li>For employees or owners of companies with more than $1M annual revenue</li>
-                  <li>Same features as Gardens Apps Subscription</li>
+                  <li>Same features as Hobby subscription plan</li>
                   <li>Commercial use allowed</li>
-                  <div className="mt-4"></div>
+                  <div className="mt-20 pt-1"></div>
                   </ul>
                   </div>) : null}
-                  <Button
-                    variant="slim"
-                    type="button"
-                    disabled={session && !userLoaded}
-                    loading={priceIdLoading === price.id}
-                    onClick={() => handleCheckout(price.id)}
-                    className="mt-8 block w-full rounded-md py-2 text-sm font-semibold text-center hover:bg-gray-900"
-                  >
-                    {product.name === subscription?.prices?.products.name
-                      ? 'Manage'
-                      : 'Subscribe'}
-                  </Button>
+                   <Button
+              variant="slim"
+              className="bg-green-500 w-64 md:w-44 lg:w-64 border mt-4 mx-2"
+              type="submit"
+              onClick={() => { signInWithKeycloak() }}
+            >
+              <span className="text-white font-bold">Let's go!</span>
+            </Button>
                 </div>
               </div>
             );
             }
             }
           })}
-          <div className='rounded-lg shadow-sm divide-y divide-accents-2 bg-gray-50 mt-4 lg:mt-0 lg:ml-4'>
+          {(billingInterval === 'month') ? (
+          <div className="md:w-1/2 bg">
+                <div className="px-6 pb-4 ">
+                  <h2 className="text-2xl leading-6 font-semibold" style={{marginTop: "1em"}}>
+                    Corporate
+                  </h2>
+                  <div className="mt-6 sm:mt-28 pt-4 md:mt-30"></div>
+                  <div className="prose text-lg mt-2">
+                  <ul>
+                  <li>For employees or owners of companies with more than $1M annual revenue</li>
+                  <li>Same features as Hobby subscription plan</li>
+                  </ul>
+          <div className="mt-4 text-center cursor-pointer"
+              onClick={() => { setBillingInterval('year') }}>
+              <div className="font-semibold underline">Annual only, press to view</div>
+            </div>
+                  </div>
+                  </div>
+                  </div>): null}
+        {/*<div className='rounded-lg shadow-sm divide-y divide-accents-2 bg-gray-50 mt-4 lg:mt-0 lg:ml-4'>
                 <div className="p-6">
                   <h2 className="text-2xl leading-6 font-semibold">
                    Enterprise
@@ -196,13 +207,13 @@ export default function Pricing({ products }) {
                     Talk to us
                   </Button>
                 </div>
-              </div>
+              </div>*/}
+          
         </div>
         <p className="text-center text-lg mt-8 p-2 rounded border">
               Are you from a Global South / low income country? Fill out <a className="text-blue-600 font-bold underline" href="https://tally.so/r/nWO7pa" target="_blank">this form</a> to get Gardens for free
               </p>
-        <p className="text-lg text-accents-6 text-center  max-w-xl mt-2 mx-auto underline">
-          If you are an employee or owner of a company with more than $1M annual revenue see "Annual billing"</p>
+        
       </div>
     </section>
   );

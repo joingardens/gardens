@@ -37,7 +37,7 @@ const MyAppsPage = () => {
     async function getDropletsById(paas_id){
     const dropletsDetails = await getDropletsByPaasId(paas_id);
     if(dropletsDetails[0]){
-    setDropletId(dropletsDetails[0].droplet_id);
+    setDropletId(dropletsDetails[0].droplet_id ? dropletsDetails[0].droplet_id : 1);
     setUserDropletId(dropletsDetails[0].id)
     setDropletDomain(dropletsDetails[0].domain);
     }
@@ -87,7 +87,7 @@ const MyAppsPage = () => {
     </div>
     <div className="flex flex-col md:ml-4 py-2 ">
     <h2 className="text-xl text-center md:text-left t">Droplet</h2>
-    <h3 className="text-gray-600 text-md font-semibold text-center md:text-left my-2">{dropletDomain ? dropletDomain : "Access by copying the IPv4 from your cloud dashboard into the address bar"}</h3>
+    <h3 className="text-gray-600 text-md font-semibold text-center md:text-left my-2">{dropletDomain ? dropletDomain : ((!dropletDomain && (dropletId !== 1)) ? ("Access by copying the IPv4 from your cloud dashboard into the address bar") : ("Local installation"))}</h3>
     <h3 className="text-gray-600 text-md text-center md:text-left">Default password: captain42. Do not forget to change it in Settings</h3>
     </div>
     </div>
@@ -100,19 +100,37 @@ const MyAppsPage = () => {
         <span className="ml-1">Admin dashboard</span>
         </a>
      </div>) : (
-     <div>
+     <>
+     {(dropletId !== 1) ? (<div>
        <Link href="/onboarding/connect">
         <a className="flex items-center w-48 bg-yellow-100 text-center mx-auto pl-2 pr-1 py-2 shadow my-4 md:my-0 rounded border border-blue-600 text-lg hover:bg-yellow-200">
         <span className="ml-1">❗ Finish configuration</span>
         </a>
         </Link>
-     </div>)}
-
-    <div className="md:mt-4 md:mb-2">
+     </div>) : (
+     <>
+     <div>
+        <a href="https://caprover.com/docs/get-started#step-2-connect-root-domain" target="_blank" className="flex items-center w-48 bg-white text-center mx-auto pl-2 pr-1 py-2 shadow my-4 md:my-0 rounded border border-blue-600 text-lg">
+        <span className="ml-1">Add domain</span>
+        </a>
+     </div>
+     <div className="mt-2">
+       <Link href="/flow/92">
+        <a className="flex items-center w-48 bg-white text-center mx-auto pl-2 pr-1 py-2 shadow my-4 md:my-0 rounded border border-blue-600 text-lg">
+        <span className="ml-1">Use without domain</span>
+        </a>
+        </Link>
+     </div>
+     </>)}
+     
+     </>)}
+     {(dropletId !== 1) ? (
+         <div className="md:mt-4 md:mb-2">
         <a href={"https://cloud.digitalocean.com/droplets/" + dropletId} target="_blank" className="w-48 text-center py-2 px-4 shadow rounded bg-white text-lg hover:bg-gray-100">
         💻 Cloud dashboard
         </a>
-     </div>
+     </div>) : null}
+    
      </div>
      </div>
      ) : (
@@ -122,16 +140,16 @@ const MyAppsPage = () => {
     <p className="text-xl text-center"><Link href="/onboarding"><a className="text-blue-600 underline font-bold">Select a plan</a></Link> to start self-hosting!</p>
     </div>)}
     <div className="flex flex-col mx-auto max-w-2xl">
-    {dropletDomain ? (
+    {dropletId ? (
         <h2 className="text-2xl pt-8 pb-2 mb-4 border-b w-48 text-center mx-auto">My Apps</h2>
     ) : null
     }
     <div className="w-full flex flex-col md:flex-row">
     {apps.map((app, i) => (
-        <SquareCard blockBody={app.tool_id.tool} key={i} blockLink={("https://captain." + dropletDomain)} 
+        <SquareCard blockBody={app.tool_id.tool} key={i} blockLink={dropletDomain ? ("https://captain." + dropletDomain) : null} 
     smallImage={app.tool_id.logo_url} />
     ))}
-    {dropletDomain ? (
+    {dropletId ? (
     <Link href="/tools">
     <div className={`rounded-full cursor-pointer border border-blue-500 hover:bg-blue-50 shadow h-24 ${(apps.length > 0) ? "mx-auto md:mx-4"  : "mx-auto"} mt-10 w-24 my-auto`}>
     <div className="text-center text-5xl py-0.5 my-4">+</div>
@@ -139,7 +157,7 @@ const MyAppsPage = () => {
     </Link>
     ) : null}
     </div>
-    {(dropletDomain && (apps.length > 0)) ? (<div className="text-center w-full mt-4">This will open your Caprover dashboard</div>) : null}
+    {(dropletId && (apps.length > 0)) ? (<div className="text-center w-full mt-4">{dropletDomain ? ("This will open your Caprover dashboard") : ("Save apps here for reference. We do not have access to your local installation")}</div>) : null}
     </div>
     </div>
     <div className="flex flex-col items-center max-w-2xl mx-auto">
@@ -171,6 +189,10 @@ const MyAppsPage = () => {
     <a href="https://masto.cloud.joingardens.com/public" 
     target="_blank" className="w-96 text-center py-3 my-4 shadow rounded bg-white border border-blue-200 text-lg hover:bg-blue-100">
         Community
+    </a>
+    <a href="https://billing.stripe.com/p/login/eVa9Cx5E81Cl58c144" 
+    target="_blank" className="w-96 text-center py-3 mb-2 shadow rounded bg-white border border-blue-200 text-lg hover:bg-blue-100">
+    Manage subscription
     </a>
     </div>
     <div className="flex flex-col">

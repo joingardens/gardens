@@ -168,10 +168,10 @@ export default function Tool({ jobGroups, jobTools, jobs, tool, flows }) {
        </div>) : (
        <div className="p-2 mt-4 bg-gray-50 duration-150">
        <p className="font-semibold text-center">
-       Couldn't find a droplet.
+       Did you install locally?
        </p>
        <p className="text-center">
-       Did you <Link href="/onboarding/provision"><a className="text-blue-600 underline font-bold">create a droplet yet?</a></Link>
+       Find instructions on how to deploy one-click apps <a href="https://caprover.com/docs/one-click-apps.html" target="_blank" className="text-blue-600 underline font-bold">here</a>. See advanced deployment options, including CI/CD integration <a href="https://caprover.com/docs/deployment-methods.html" target="_blank" className="text-blue-600 underline font-bold"> here </a>.
        </p>
        </div>)
        ) : null}

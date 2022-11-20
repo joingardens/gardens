@@ -4,15 +4,15 @@ import { updateUserName } from '../utils/supabase-client';
 import LightHeroD from '../components/ui/Hero';
 import React, { useState, useEffect } from 'react';
 import ParagraphWithButton from '../components/ui/ParagraphWithButton';
-import { signInWithKeycloak } from '../utils/supabase-client';
+import { signInWithKeycloak, getActiveProductsWithPrices } from '../utils/supabase-client';
 import Link from 'next/link';
 import Button from '../components/ui/Button';
 import Image from 'next/image'
 import Input from '../components/ui/Input';
 import Logo from '../components/icons/Logo';
+import Pricing from '../components/Pricing'
 
-
-export default function Apps() {
+export default function Apps({ products }) {
 
   const [ctaState, setCtaState] = useState("bg-seaweed text-white hover:bg-green-500 transition")
   const [user, setUser] = useState(null);
@@ -91,7 +91,7 @@ export default function Apps() {
     </div>
     <div className="w-1/2 pt-8 md:pt-0 md:ml-12">
     <div className="rounded w-5/6">
-    <div className="w-96 h-72 relative mx-auto">
+    <div className="w-96 h-72 relative  mx-auto">
     <Image
     layout="fill" 
     objectFit="cover"
@@ -110,7 +110,9 @@ export default function Apps() {
     <li>Use open-source apps, support the movement while enjoying high-quality products </li>
     <li>Become part of a community of self-hosting enthusiasts, get advice and share knowledge</li>
     </ul>
+    <h2>Pricing</h2>
     </div>
+    <Pricing products={products} />
     <h2>Hosting options</h2>
     <div className="flex flex-row justify-between overflow-x-auto">
     <div className="flex flex-col h-120 border pb-6 px-8 rounded-md items-center mr-4">
@@ -137,16 +139,16 @@ export default function Apps() {
             <Image src="https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/laptop_1f4bb.png" alt="Laptop emoji" 
             layout='fill' objectFit='contain' objectPosition='center center' />
             </div>
-    <span className="w-full mt-2 text-yellow-600 font-semibold">Coming in October 2022</span>
+    <span className="w-full mt-2 text-green-700 font-semibold">Available</span>
     <div className="mt-2">Host on your own machine or server by running a couple CLI scripts</div>
     <Button
               variant="slim"
-              className="bg-green-800 border mt-4 w-full mx-8"
+              className="bg-green-500 border mt-4 w-full mx-8"
               type="submit"
               loading={loading}
-              onClick={() => { location.assign("https://tally.so/r/wA7Xqk") }}
+              onClick={() => { signInWithKeycloak() }}
             >
-              <span className="text-white font-bold">Join Waitlist</span>
+              <span className="text-white font-bold">Sign up</span>
     </Button>
     </div>
     <div className="flex flex-col h-120 border pb-6 px-8 rounded-md items-center mr-4">
@@ -295,4 +297,17 @@ export default function Apps() {
     </div>
     </>
     )
+}
+
+
+
+export async function getStaticProps() {
+  const products = await getActiveProductsWithPrices();
+
+  return {
+    props: {
+      products
+    },
+    revalidate: 60
+  };
 }
