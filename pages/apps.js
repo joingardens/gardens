@@ -189,12 +189,12 @@ export default function Apps({ products }) {
     </div>
     <div>
     <h2>Three simple steps</h2>
-    <h3 className="text-center md:text-left">Connect your cloud</h3>
+    <h3 className="text-center md:text-left">Connect your cloud or run a CLI script</h3>
     <div className="flex md:flex-row flex-col w-full items-center">
     <div className="h-full w-16 border border-blue-700 rounded-full shadow p-2 m-2 text-center my-auto">
     <div className="my-2 md:my-0 px-3.5 font-bold">1</div></div>
     <div className="ml-2 md:ml-4 text-center md:text-left pt-2">
-    Sign up with Digital Ocean and grab a token. Gardens will provision a droplet with <a href="https://caprover.com/">Caprover</a> installed and configure everything for you. You will only need a domain.
+    Run one line in CLI on your machine or install without code in the cloud. Gardens will provision a droplet with <a href="https://caprover.com/">Caprover</a> installed and configure everything for you. 
     </div>
     </div>
     <h3 className="text-center md:text-left">Select apps</h3>
@@ -269,7 +269,7 @@ export default function Apps({ products }) {
     Gardens Apps is meant for anyone who needs to host their own apps, or who is curious to learn more about self-hosting and open-source. It's perfect for non-profit and social enterprises, and for hobbyists who find themselves hosting many apps at once.
     </div>
     <div>
-    <h3>❓ If both the admin interface and apps live on my own cloud, how does Gardens make money?</h3>
+    <h3>❓ If both the admin interface and apps live on my own machine, how does Gardens make money?</h3>
     We charge a monthly subscription for access to our hand-picked library of best open-source apps, and for additional features, such as tools for organizing your knowledge and a nice home page for your team. You're free to cancel subscription at any time though, your apps and the admin interface will stay with you.
     </div>
     <div>
