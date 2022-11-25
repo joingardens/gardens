@@ -11,7 +11,7 @@ export default function Pricing({ products }) {
   const router = useRouter();
   const [billingInterval, setBillingInterval] = useState('month');
   const [priceIdLoading, setPriceIdLoading] = useState();
-  const { session, userLoaded, subscription } = useUser();
+  const { user, session, userLoaded, subscription } = useUser();
 
   const handleCheckout = async (price) => {
     setPriceIdLoading(price.id);
@@ -146,14 +146,29 @@ export default function Pricing({ products }) {
                   <div className="mt-20 pt-1"></div>
                   </ul>
                   </div>) : null}
-                   <Button
+                   {(user && !subscription) ? (
+                     <Button
+                    variant="slim"
+                    type="button"
+                    disabled={session && !userLoaded}
+                    loading={priceIdLoading === price.id}
+                    onClick={() => handleCheckout(price.id)}
+                    className="mt-8 block w-full rounded-md py-2 text-sm font-semibold text-center hover:bg-gray-900"
+                  >
+                    {product.name === subscription?.prices?.products.name
+                      ? 'Manage'
+                      : 'Subscribe'}
+                  </Button>) : (
+                     <Button
               variant="slim"
               className="bg-green-500 w-64 md:w-44 lg:w-64 border mt-4 mx-2"
               type="submit"
               onClick={() => { signInWithKeycloak() }}
             >
               <span className="text-white font-bold">Let's go!</span>
-            </Button>
+            </Button>)}
+
+                   
                 </div>
               </div>
             );
