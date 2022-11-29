@@ -88,6 +88,7 @@ const MyAppsPage = () => {
     <div className="flex flex-col md:ml-4 py-2 ">
     <h2 className="text-xl text-center md:text-left t">Droplet</h2>
     <h3 className="text-gray-600 text-md font-semibold text-center md:text-left my-2">{dropletDomain ? dropletDomain : ((!dropletDomain && (dropletId !== 1)) ? ("Access by copying the IPv4 from your cloud dashboard into the address bar") : ("Local installation"))}</h3>
+    <h3 className="text-gray-600 text-md text-center md:text-left">Do not forget to change the default password in Settings</h3>
     </div>
     </div>
     <div className="flex flex-col">
