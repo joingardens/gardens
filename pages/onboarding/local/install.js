@@ -47,7 +47,7 @@ export default function Prerequisites() {
     <div>
     Once you have Docker and a public IP address, run the following in the command line:</div>
     <div className="bg-gray-700 px-2 py-4 rounded text-white monospace my-2">
-    docker run -p 80:80 -p 443:443 -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock -v /captain:/captain caprover/caprover
+    docker run -p 80:80 -p 443:443 -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock -v /captain:/captain joingardens/gardens-engine-edge
     </div>
     <div>Done! Wait a couple minutes for everything to set up, then open <span className="bg-gray-200">http://[YOUR_SERVER_IP]:3000</span> and log in with default password <span className="bg-gray-200">captain42</span>. Then press "Confirm installation".</div>
     </div>
