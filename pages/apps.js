@@ -194,7 +194,7 @@ export default function Apps({ products }) {
     <div className="h-full w-16 border border-blue-700 rounded-full shadow p-2 m-2 text-center my-auto">
     <div className="my-2 md:my-0 px-3.5 font-bold">1</div></div>
     <div className="ml-2 md:ml-4 text-center md:text-left pt-2">
-    Run one line in CLI on your machine or install without code in the cloud. Gardens will provision a droplet with <a href="https://caprover.com/">Caprover</a> installed and configure everything for you. 
+    Run one line in CLI on your machine or install without code in the cloud. Gardens will provision a droplet with an admin app installed and configure everything for you. 
     </div>
     </div>
     <h3 className="text-center md:text-left">Select apps</h3>
@@ -230,7 +230,7 @@ export default function Apps({ products }) {
             </Button>
     </div>
     <h2>🌟 No lock-in whatsoever</h2>
-    All the data, along with apps, lives in your own cloud. You can always remove Gardens or the underlying <a href="https://caprover.com/">Caprover</a> software. Your apps will continue working.
+    All the data, along with apps, lives in your own cloud. You can always remove Gardens admin app from your server. Your apps will continue working.
     <h2>Only DevOps people could do this in the past!</h2>
     <h3>Before (Without Gardens)</h3>
     <ul>
@@ -271,10 +271,6 @@ export default function Apps({ products }) {
     <div>
     <h3>❓ If both the admin interface and apps live on my own machine, how does Gardens make money?</h3>
     We charge a monthly subscription for access to our hand-picked library of best open-source apps, and for additional features, such as tools for organizing your knowledge and a nice home page for your team. You're free to cancel subscription at any time though, your apps and the admin interface will stay with you.
-    </div>
-    <div>
-    <h3>❓ What is this Caprover thing that your platform is based on? How does it work?</h3>
-    Caprover is an open-source PaaS (Platform-as-a-Service) offering developers a simple way to set up an admin dashboard on their cloud and deploy apps. Gardens is building on this great product by adding features for people who don't know how to code, and by curating a library of  no-code and low-code apps. We stay open-source ourselves, too. It's open-source all the way down!
     </div>
     <div className="flex flex-col items-center bg-green-50 w-full justify-center mt-8">
     <div className="flex items-center py-4">

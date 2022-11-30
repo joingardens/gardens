@@ -125,11 +125,11 @@ export default function Pricing({ products }) {
                       /{billingInterval}
                     </span>
                   </p>
-                  {product.name == "Hobby" ? (
+                  {product.name == "Team" ? (
                   <>
                   <span className="font-bold mt-1 text-green-500">7 days free trial</span>
                   <div className="prose text-lg mt-3">
-                  For small teams and hobbyists.
+                  For teams and non-coders
                   <ul>
                   <li>Deploy apps to your cloud in one click. </li>
                   <li>Access our curated library of high-quality apps</li>
@@ -141,7 +141,7 @@ export default function Pricing({ products }) {
                   <div className="prose text-lg mt-2">
                   <ul>
                   <li>For employees or owners of companies with more than $1M annual revenue</li>
-                  <li>Same features as Hobby subscription plan</li>
+                  <li>Same features as Team subscription plan</li>
                   <li>Commercial use allowed</li>
                   <div className="mt-20 pt-1"></div>
                   </ul>
@@ -185,7 +185,7 @@ export default function Pricing({ products }) {
                   <div className="prose text-lg mt-2">
                   <ul>
                   <li>For employees or owners of companies with more than $1M annual revenue</li>
-                  <li>Same features as Hobby subscription plan</li>
+                  <li>Same features as Team subscription plan</li>
                   </ul>
           <div className="mt-4 text-center cursor-pointer"
               onClick={() => { setBillingInterval('year') }}>
