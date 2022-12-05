@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { signInWithKeycloak } from '../utils/supabase-client';
 import Button from './ui/Button';
+import Link from 'next/link';
 import { postData } from '../utils/helpers';
 import { getStripe } from '../utils/stripe-client';
 import { useUser } from '../utils/useUser';
@@ -61,16 +62,16 @@ export default function Pricing({ products }) {
     );
 
   return (
-    <section id="pricing">
-      <div className="max-w-6xl mx-auto">
+    <section id="pricing" className="w-4/5 mx-auto">
+      <div className="w-full mx-auto">
         <div className="sm:flex sm:flex-col sm:align-center">
-          <div className="relative self-start ml-4 mt-6 rounded-lg p-0.5 flex sm:mt-8 border border-accents-0">
+          <div className="relative self-center my-4 rounded-lg p-0.5 flex">
             <button
               onClick={() => setBillingInterval('month')}
               type="button"
               className={`${
                 billingInterval === 'month'
-                  ? 'relative w-1/2 bg-accents-1 border-accents-0 shadow-sm text-white'
+                  ? 'relative w-1/2 border-black border font-bold'
                   : 'ml-0.5 relative w-1/2 border border-transparent font-bold'
               } rounded-md m-1 py-2 text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-pink focus:ring-opacity-50 focus:z-10 sm:w-auto sm:px-8`}
             >
@@ -81,7 +82,7 @@ export default function Pricing({ products }) {
               type="button"
               className={`${
                 billingInterval === 'year'
-                  ? 'relative w-1/2 bg-accents-1 border-accents-0 shadow-sm text-white'
+                  ? 'relative w-1/2 border-black border font-bold'
                   : 'ml-0.5 relative w-1/2 border border-transparent font-bold'
               } rounded-md m-1 py-2 text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-pink focus:ring-opacity-50 focus:z-10 sm:w-auto sm:px-8`}
             >
@@ -89,7 +90,39 @@ export default function Pricing({ products }) {
             </button>
           </div>
         </div>
-        <div className="mt-2 sm:mt-4 flex sm:flex-row flex-col">
+        <div className="mt-2 sm:mt-4 flex sm:flex-row flex-col flex-wrap justify-center">
+        {(billingInterval === 'month') ? (
+         <div className='rounded-lg shadow-sm divide-y divide-accents-2 shadow mt-4 lg:mt-0 lg:ml-4 max-w-xs'>
+                <div className="p-6">
+                  <h2 className="text-2xl leading-6 font-semibold">
+                   Community
+                  </h2>
+                  <p className="mt-8">
+                    <span className="text-4xl font-extrabold white">
+                      Free
+                    </span>
+                  </p>
+                  <div className="prose text-lg mt-10">
+                  For coders and tinkerers
+                  <ul>
+                  <li>Deploy apps to your cloud in one click</li>
+                  <li>Admin dashboard to manage your apps</li>
+                  <li>Community support</li>
+                  
+                  </ul>
+                  </div>
+                  <Link href="/onboarding/local/install">
+                  <Button
+                    variant="slim"
+                    type="button"
+                    disabled={session && !userLoaded}
+                    className="mt-4 block w-full rounded-md py-2 text-sm font-semibold text-center hover:bg-gray-900"
+                  >
+                    Get started
+                  </Button>
+                  </Link>
+                </div>
+              </div>): null}
           {products.map((product) => {
             if (product){
             const price = product.prices.find(
@@ -105,7 +138,7 @@ export default function Pricing({ products }) {
               <div
                 key={product.id}
                 className={cn(
-                  'rounded-lg shadow-sm divide-y divide-accents-2 bg-gray-50  mx-4 sm:w-1/2',
+                  'rounded-lg shadow-md border border-green-300 max-w-xs mt-4 lg:mt-0 md:ml-4',
                   {
                     'border border-pink': subscription
                       ? product.name === subscription?.prices?.products.name
@@ -117,7 +150,7 @@ export default function Pricing({ products }) {
                   <h2 className="text-2xl font-semibold" style={{marginTop: "1em"}}>
                     {product.name}
                   </h2>
-                  <p className="mt-8">
+                  <p className="mt-6">
                     <span className="text-4xl font-extrabold white">
                       {priceString}
                     </span>
@@ -129,15 +162,15 @@ export default function Pricing({ products }) {
                   <>
                   <span className="font-bold mt-1 text-green-500">7 days free trial</span>
                   <div className="prose text-lg mt-3">
-                  For teams and non-coders
+                  For teams and non-coders. Everything in Community plus:
                   <ul>
-                  <li>Deploy apps to your cloud in one click. </li>
-                  <li>Access our curated library of high-quality apps</li>
-                  <li>Get an admin dashboard to manage your apps</li>
+                  <li className="font-bold">No-code installation</li>
+                  <li>Access to more one-click apps</li>
+                  <li>Support the project!</li>
                   </ul>
                   </div>
                   </>) : null}
-                  {product.name == "Corporate" ? (
+                  {/*product.name == "Corporate" ? (
                   <div className="prose text-lg mt-2">
                   <ul>
                   <li>For employees or owners of companies with more than $1M annual revenue</li>
@@ -145,7 +178,7 @@ export default function Pricing({ products }) {
                   <li>Commercial use allowed</li>
                   <div className="mt-20 pt-1"></div>
                   </ul>
-                  </div>) : null}
+                  </div>) : null*/}
                    {(user && !subscription) ? (
                      <Button
                     variant="slim"
@@ -153,12 +186,14 @@ export default function Pricing({ products }) {
                     disabled={session && !userLoaded}
                     loading={priceIdLoading === price.id}
                     onClick={() => handleCheckout(price.id)}
-                    className="mt-8 block w-full rounded-md py-2 text-sm font-semibold text-center hover:bg-gray-900"
+                    className="bg-green-500 w-64 md:w-44 lg:w-64 border mt-4 mx-2"
+                    style={{color: "#fff", fontWeight: "bold"}}
                   >
                     {product.name === subscription?.prices?.products.name
                       ? 'Manage'
                       : 'Subscribe'}
                   </Button>) : (
+                  <div className="mx-auto">
                      <Button
               variant="slim"
               className="bg-green-500 w-64 md:w-44 lg:w-64 border mt-4 mx-2"
@@ -166,7 +201,7 @@ export default function Pricing({ products }) {
               onClick={() => { signInWithKeycloak() }}
             >
               <span className="text-white font-bold">Let's go!</span>
-            </Button>)}
+            </Button></div>)}
 
                    
                 </div>
@@ -175,26 +210,8 @@ export default function Pricing({ products }) {
             }
             }
           })}
-          {(billingInterval === 'month') ? (
-          <div className="md:w-1/2 bg">
-                <div className="px-6 pb-4 ">
-                  <h2 className="text-2xl leading-6 font-semibold" style={{marginTop: "1em"}}>
-                    Corporate
-                  </h2>
-                  <div className="mt-6 sm:mt-28 pt-4 md:mt-30"></div>
-                  <div className="prose text-lg mt-2">
-                  <ul>
-                  <li>For employees or owners of companies with more than $1M annual revenue</li>
-                  <li>Same features as Team subscription plan</li>
-                  </ul>
-          <div className="mt-4 text-center cursor-pointer"
-              onClick={() => { setBillingInterval('year') }}>
-              <div className="font-semibold underline">Annual only, press to view</div>
-            </div>
-                  </div>
-                  </div>
-                  </div>): null}
-        {/*<div className='rounded-lg shadow-sm divide-y divide-accents-2 bg-gray-50 mt-4 lg:mt-0 lg:ml-4'>
+          
+        <div className='rounded-lg shadow-sm divide-y divide-accents-2 shadow mt-4 lg:mt-0 lg:ml-4 max-w-xs'>
                 <div className="p-6">
                   <h2 className="text-2xl leading-6 font-semibold">
                    Enterprise
@@ -204,12 +221,12 @@ export default function Pricing({ products }) {
                       Contact us
                     </span>
                   </p>
-                  <div className="prose text-lg mt-4">
-                  For bigger organisations and teams looking to scale. Everything in Subscription plus:
+                  <div className="prose text-lg mt-9">
+                  For bigger organisations looking to scale.
                   <ul>
                   <li>Designated Support manager</li>
                   <li>Custom config and back-ups</li>
-                  <li>Done-for-you migrations and integrating with existing infrastructure</li>
+                  <li>Done-for-you migrations and integrations</li>
                   </ul>
                   </div>
                   <Button
@@ -217,12 +234,12 @@ export default function Pricing({ products }) {
                     type="button"
                     disabled={session && !userLoaded}
                     onClick={() => location.replace("https://cal.com/gardens/intro")}
-                    className="mt-8 block w-full rounded-md py-2 text-sm font-semibold text-center hover:bg-gray-900"
+                    className="mt-4 block w-full rounded-md py-2 text-sm font-semibold text-center hover:bg-gray-900"
                   >
                     Talk to us
                   </Button>
                 </div>
-              </div>*/}
+              </div>
           
         </div>
         <p className="text-center text-lg mt-8 p-2 rounded border">

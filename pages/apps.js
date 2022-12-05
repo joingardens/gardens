@@ -102,7 +102,7 @@ export default function Apps({ products }) {
     </div>
     <div className="md:w-2/3 mx-auto prose text-lg max-w-full px-4 mt-6">
     <div>
-    <h2>Why would I want to host my own apps?</h2>
+    <h2 className="text-center">Why would I want to host my own apps?</h2>
     It's simple!
     <ul>
     <li>Own all your data and don't give up privacy</li>
@@ -110,12 +110,44 @@ export default function Apps({ products }) {
     <li>Use open-source apps, support the movement while enjoying high-quality products </li>
     <li>Become part of a community of self-hosting enthusiasts, get advice and share knowledge</li>
     </ul>
-    <h2>Pricing</h2>
     </div>
+    <h2 className="text-center">Pricing</h2>
+    </div>
+    <div className="mt-2 mb-8">
     <Pricing products={products} />
-    <h2>Hosting options</h2>
-    <div className="flex flex-row justify-between overflow-x-auto">
-    <div className="flex flex-col h-120 border pb-6 px-8 rounded-md items-center mr-4">
+    </div>
+    <div>
+   
+    <div className="md:w-2/3 mx-auto prose text-lg max-w-full px-4 mt-6">
+    <h2 className="text-center">Three simple steps</h2>
+    <h3 className="text-center md:text-left">Connect your cloud or run a CLI script</h3>
+    <div className="flex md:flex-row flex-col w-full items-center">
+    <div className="h-full w-16 border border-blue-700 rounded-full shadow p-2 m-2 text-center my-auto">
+    <div className="my-2 md:my-0 px-3.5 font-bold">1</div></div>
+    <div className="ml-2 md:ml-4 text-center md:text-left pt-2">
+    Run one line in CLI on your machine or install without code in your cloud. Gardens will provision a droplet with an admin app installed and configure everything for you. 
+    </div>
+    </div>
+    <h3 className="text-center md:text-left">Select apps</h3>
+    <div className="flex md:flex-row flex-col w-full items-center">
+    <div className="h-full w-16 border border-blue-700 rounded-full shadow p-2 m-2 text-center my-auto">
+    <div className="my-2 md:my-0 px-3.5 font-bold">2</div></div>
+    <div className="ml-2 md:ml-4 text-center md:text-left pt-2">
+    Pick from a library of 176 one-click apps, featuring classics like Wordpress, Discourse, and Nextcloud, but also new challengers. If you are a coder, deploy your apps from version control or with CI/CD.
+    </div>
+    </div>
+    <h3 className="text-center md:text-left">Enjoy!</h3>
+    <div className="flex md:flex-row flex-col w-full items-center">
+    <div className="h-full w-16 border border-blue-700 rounded-full shadow p-2 m-2 text-center my-auto">
+    <div className="my-2 md:my-0 px-3.5 font-bold">3</div></div>
+    <div className="ml-2 md:ml-4 text-center md:text-left pt-2">
+    Your apps are up and running with SSL, basic configuration and analytics taken care of. It just works, out of the box.
+    </div>
+    </div>
+    <h2 className="text-center">Hosting options</h2>
+    </div>
+    <div className="flex flex-row justify-between overflow-x-auto my-12">
+    <div className="flex flex-col h-120 border pb-6 px-8 rounded-md items-center mr-4 prose w-96">
     <h3 className="text-left w-full">DigitalOcean</h3>
     <div className="w-20 h-20 min-w-20 relative mx-2 mb-2">
             <Image src="https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/digital-ocean-logo-7B970FE624-seeklogo.com.png" alt="DigitalOcean logo" 
@@ -133,7 +165,7 @@ export default function Apps({ products }) {
               <span className="text-white font-bold">Let's go!</span>
     </Button>
     </div>
-    <div className="flex flex-col h-120 border pb-6 px-8 rounded-md items-center mr-4">
+    <div className="flex flex-col h-120 border pb-6 px-8 rounded-md items-center mr-4 prose w-96">
     <h3 className="text-left w-full">Local</h3>
     <div className="w-20 h-20 min-w-20 relative mx-2 mb-2">
             <Image src="https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/laptop_1f4bb.png" alt="Laptop emoji" 
@@ -151,17 +183,17 @@ export default function Apps({ products }) {
               <span className="text-white font-bold">Sign up</span>
     </Button>
     </div>
-    <div className="flex flex-col h-120 border pb-6 px-8 rounded-md items-center mr-4">
+    <div className="flex flex-col h-120 border pb-6 px-8 rounded-md items-center mr-4 prose w-96">
     <h3 className="text-left w-full">Oracle</h3>
     <div className="w-20 h-20 min-w-20 relative mx-2 mb-2">
             <Image src="https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/cloud_2601-fe0f.png" alt="Cloud emoji" 
             layout='fill' objectFit='contain' objectPosition='center center' />
             </div>
     <span className="w-full mt-2 text-yellow-600 font-semibold">Coming in Q4 2022</span>
-    <div className="mt-2">Take advantage of Oracle infrastructure, including Always Free tier machines and more</div>
+    <div className="mt-2 mb-4">Take advantage of Oracle infrastructure, including Always Free tier machines</div>
     <Button
               variant="slim"
-              className="bg-green-800 border mt-4 w-full mx-8"
+              className="bg-green-800 border w-full mt-6 md:mt-5 lg:mt-0 mx-8"
               type="submit"
               loading={loading}
               onClick={() => { location.assign("https://tally.so/r/wA7Xqk") }}
@@ -169,16 +201,16 @@ export default function Apps({ products }) {
               <span className="text-white font-bold">Join Waitlist</span>
     </Button>
     </div>
-    <div className="flex flex-col h-120 border pb-6 px-8 rounded-md items-center mr-4">
+    <div className="flex flex-col h-120 border pb-6 px-8 rounded-md items-center mr-4 prose w-96">
     <h3 className="text-left w-full">Your Cloud</h3>
     <div className="w-20 h-20 min-w-20 relative mx-2 mb-2">
-            <Image src="https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/magnifying-glass-tilted-left_1f50d.png" alt="Cloud emoji" 
+            <Image src="https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/magnifying-glass-tilted-left_1f50d.png" alt="Magnifying glass emoji" 
             layout='fill' objectFit='contain' objectPosition='center center' />
             </div>
     <div className="mt-2 mb-9">Request a different hosting option or let us know about your preferred cloud provider</div>
     <Button
               variant="slim"
-              className="bg-green-800 border mt-4 w-full mx-8"
+              className="bg-green-800 border mt-3 w-full mx-8"
               type="submit"
               loading={loading}
               onClick={() => { location.assign("https://tally.so/r/wA7Xqk") }}
@@ -187,51 +219,11 @@ export default function Apps({ products }) {
     </Button>
     </div>
     </div>
-    <div>
-    <h2>Three simple steps</h2>
-    <h3 className="text-center md:text-left">Connect your cloud or run a CLI script</h3>
-    <div className="flex md:flex-row flex-col w-full items-center">
-    <div className="h-full w-16 border border-blue-700 rounded-full shadow p-2 m-2 text-center my-auto">
-    <div className="my-2 md:my-0 px-3.5 font-bold">1</div></div>
-    <div className="ml-2 md:ml-4 text-center md:text-left pt-2">
-    Run one line in CLI on your machine or install without code in the cloud. Gardens will provision a droplet with an admin app installed and configure everything for you. 
+    <div className="md:w-2/3 mx-auto prose text-lg max-w-full px-4 mt-6">
+    
+    <h2 className="text-center">🌟 No lock-in whatsoever</h2>
+    <div>All the data, along with apps, lives in your own cloud. You can always remove Gardens admin app from your server. Your apps will continue working. Only DevOps people could do this in the past!
     </div>
-    </div>
-    <h3 className="text-center md:text-left">Select apps</h3>
-    <div className="flex md:flex-row flex-col w-full items-center">
-    <div className="h-full w-16 border border-blue-700 rounded-full shadow p-2 m-2 text-center my-auto">
-    <div className="my-2 md:my-0 px-3.5 font-bold">2</div></div>
-    <div className="ml-2 md:ml-4 text-center md:text-left pt-2">
-    Pick from a library of 176 one-click apps, featuring classics like Wordpress, Discourse, and Nextcloud, but also new challengers. If you are a coder, deploy your apps from version control or using the CLI.
-    </div>
-    </div>
-    <h3 className="text-center md:text-left">Enjoy!</h3>
-    <div className="flex md:flex-row flex-col w-full items-center">
-    <div className="h-full w-16 border border-blue-700 rounded-full shadow p-2 m-2 text-center my-auto">
-    <div className="my-2 md:my-0 px-3.5 font-bold">3</div></div>
-    <div className="ml-2 md:ml-4 text-center md:text-left pt-2">
-    Your apps are up and running with SSL, basic configuration and analytics taken care of. It just works, out of the box.
-    </div>
-    </div>
-    </div>
-    <div className="flex flex-col items-center bg-green-50 w-full justify-center mt-8">
-    <div className="flex items-center py-4">
-    <Logo className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white mt-8 mr-4 shadow" />
-    <h2 className="w-64">Start self-hosting your apps now!</h2>
-    </div>
-    <Button
-              variant="slim"
-              className="bg-green-500 w-72 md:w-96 border mb-12"
-              type="submit"
-              loading={loading}
-              onClick={() => { signInWithKeycloak() }}
-            >
-              <span className="text-white font-bold">Get Started</span>
-            </Button>
-    </div>
-    <h2>🌟 No lock-in whatsoever</h2>
-    All the data, along with apps, lives in your own cloud. You can always remove Gardens admin app from your server. Your apps will continue working.
-    <h2>Only DevOps people could do this in the past!</h2>
     <h3>Before (Without Gardens)</h3>
     <ul>
     <li>Set up and configure a VPS/Droplet</li>
@@ -245,7 +237,7 @@ export default function Apps({ products }) {
     <li>Everything just works</li>
     </ul>
     <div>
-    <h2>Scaling? No problem!</h2>
+    <h2 className="text-center">Scaling? No problem!</h2>
     If you ever hit the limit of one instance of your app can do, you can scale by adding more instances of the app, or by adding more droplets. Load will be auto-magically distributed through the power of Docker Swarm.
     </div>
     <div className="flex flex-col items-center bg-green-50 w-full justify-center mt-8">
@@ -263,7 +255,7 @@ export default function Apps({ products }) {
               <span className="text-white font-bold">Sign Up</span>
             </Button>
     </div>
-    <h2>FAQ</h2>
+    <h2 className="text-center">FAQ</h2>
     <div>
     <h3>❓ Who is this for?</h3>
     Gardens Apps is meant for anyone who needs to host their own apps, or who is curious to learn more about self-hosting and open-source. It's perfect for non-profit and social enterprises, and for hobbyists who find themselves hosting many apps at once.
@@ -288,7 +280,7 @@ export default function Apps({ products }) {
             </Button>
     </div>
     </div>
-    
+    </div>
     <div className="mb-24"/>
     </div>
     </>

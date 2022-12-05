@@ -15,22 +15,10 @@ export default function Prerequisites() {
   const { user, userLoaded } = useUser()
   //const [showLocalDetails, setShowLocalDetails] = useState(null);
   const { makeToast } = useToast()
-  const [paasId, setPaasId] = useState(null)
+  //const [paasId, setPaasId] = useState(null)
   const router = useRouter();
   const [pageLoading, setPageLoading] = useState(true)
 
-  async function getPaasById(user_id){
-  const paasDetails = await getPaasByUserId(user_id);
-  setPaasId(paasDetails[0].id)
-  return
-  }
-
-  useEffect(() => {
-    if (user){
-     setPageLoading(false)
-     getPaasById(user.id)
-    }
-  }, [user])
 
   return (
   	<>
@@ -49,9 +37,30 @@ export default function Prerequisites() {
     <div className="bg-gray-700 px-2 py-4 rounded text-white monospace my-2">
     docker run -p 80:80 -p 443:443 -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock -v /captain:/captain joingardens/gardens-engine-edge
     </div>
-    <div>Done! Wait a couple minutes for everything to set up, then open <span className="bg-gray-200">http://[YOUR_SERVER_IP]:3000</span> and log in with default password <span className="bg-gray-200">captain42</span>. Then press "Confirm installation".</div>
+    <div>Done! Wait a couple minutes for everything to set up, then open <span className="bg-gray-200">http://[YOUR_SERVER_IP]:3000</span> and log in with default password <span className="bg-gray-200">captain42</span>.</div>
     </div>
-     <div className="mt-8 mx-auto bg-green-400 ">
+    <div className="flex w-72 lg:w-96 h-20 mt-12 items-center justify-center">
+        <a href={"https://discord.gg/CKYkMAHW"} target="_blank" className="flex items-center justify-center w-full bg-white text-center mx-auto py-3 shadow my-4 md:my-0 rounded border border-blue-600 text-lg hover:bg-blue-50">
+        <Image alt="Discord logo" width="70" height="70"
+        src="https://nbygyyaygsxxesvjjcwa.supabase.co/storage/v1/object/public/public/discord.png" />
+        <span className="ml-4 text-2xl">Join our Discord</span>
+        </a>
+     </div>
+    {/*
+
+  async function getPaasById(user_id){
+  const paasDetails = await getPaasByUserId(user_id);
+  setPaasId(paasDetails[0].id)
+  return
+  }
+
+  useEffect(() => {
+    if (user){
+     setPageLoading(false)
+     getPaasById(user.id)
+    }
+  }, [user])
+      <div className="mt-8 mx-auto bg-green-400 ">
           <Button
             onClick={() => {
                 setPageLoading(true)
@@ -76,7 +85,6 @@ export default function Prerequisites() {
             
           </div>
         </div>
-    {/*
     <div className="mx-auto mt-8">
     <Link href="/myapps">
     <a className="border border-seaweed hover:bg-seaweed hover:text-white  text-xl transition py-1 px-2 focus:outline-none rounded">

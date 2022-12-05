@@ -1,4 +1,5 @@
 import { loadStripe } from '@stripe/stripe-js';
+import { postData } from './helpers';
 
 let stripePromise;
 

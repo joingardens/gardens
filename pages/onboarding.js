@@ -21,8 +21,8 @@ export default function Apps({ products }) {
   return (
   	<>
     <div className="mt-12"></div>
-    <div className="md:w-2/3 w-4/5 mx-auto flex flex-col md:items-center">
-    <h1 className="text-3xl py-4 text-center font-bold">Select a plan</h1>
+    <div className="w-full mx-auto flex flex-col md:items-center">
+    <h1 className="text-3xl py-4 text-center font-bold">Please confirm your plan</h1>
     <Pricing products={products} />
     <div className="mb-24"/>
     </div>
