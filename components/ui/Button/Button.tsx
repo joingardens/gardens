@@ -2,7 +2,6 @@ import cn from 'classnames';
 import React, { forwardRef, useRef } from 'react';
 import mergeRefs from 'react-merge-refs';
 import s from './Button.module.css';
-
 import LoadingDots from '../LoadingDots';
 
 const Button = forwardRef((props: any, buttonRef) => {

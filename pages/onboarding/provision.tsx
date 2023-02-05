@@ -153,7 +153,6 @@ export default function Provision() {
   }, [paasId])
 
   useEffect(() => {
-    
     if (dropletId){
      router.push("/myapps/configure")
     }

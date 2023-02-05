@@ -6,7 +6,7 @@ type DigitalOceanResponseData = {
 
 class ApiAdapter extends BaseHttpAdapter {
     constructor() {
-        const url = process.env.NODE_ENV === "development" ? "http://localhost:3000/" : "https://joingardens.com/"
+        const url = process.env.NODE_ENV === "development" ? "http://localhost:3000/" : "https://www.joingardens.com/"
         super(url)
     }
 
