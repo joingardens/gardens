@@ -36,7 +36,6 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
       <ToastContextProvider>
         <NewFlowContextProvider>
         <Layout meta={{}}>
-        <ChatwootWidget />
           <Component {...pageProps} />
         </Layout>
         
