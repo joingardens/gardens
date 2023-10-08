@@ -14,7 +14,7 @@ import SquareBlock from '../../components/ui/SquareBlock';
 import PrettyBlock from '../../components/ui/PrettyBlock';
 import getRandomGradient from '../../utils/getRandomGradient';
 
-export default function ToolsBySection({ products, tools, jobTools }) {
+export default function ToolsBySection({ tools, jobTools }) {
    
    const router = useRouter()
    if (router.isFallback) {
@@ -106,8 +106,6 @@ export default function ToolsBySection({ products, tools, jobTools }) {
     {listTools}
     </div>
     </div>
-    {/*<ParagraphWithButton />
-    <Pricing products={products} />*/}
     </>
     )
   }
@@ -146,7 +144,7 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      products,
+
       tools,
       jobTools
     },
