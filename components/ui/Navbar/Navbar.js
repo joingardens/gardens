@@ -69,47 +69,8 @@ const Navbar = () => {
               </Link>)}
               
               <Link href="/tools">
-                <a className={`hidden sm:block mr-1.5 md:mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded`}>Tools</a>
+                <a className={`hidden sm:block mr G-1.5 md:mr-2.5 ${buttonState} py-1 px-2 focus:outline-none rounded`}>Tools</a>
               </Link>
-              {(user && subscription) ? (<Link href={"/myapps"}>
-                <a className={`mr-1.5 md:mr-2.5 ${ctaState} py-1 px-2 focus:outline-none rounded font-semibold`}>
-                  Home
-                </a>
-              </Link>) : (user ? (<Link href={"/onboarding/"}>
-                <a className={`mr-1.5 md:mr-2.5 ${ctaState} py-1 px-2 focus:outline-none rounded font-semibold`}>
-                  Finish registration
-                </a>
-              </Link>) : 
-              <Link href={"/apps"}>
-                <a className={`mr-1.5 md:mr-2.5 ${ctaState} py-1 px-2 focus:outline-none rounded font-semibold`}>
-                  Start self-hosting
-                </a>
-              </Link>)
-              
-              }
-              {/*user ? (
-            <>
-            <button 
-            onClick={() => {
-              service.openModal("newItem")
-            }}
-            className={`inline-flex items-center ${ctaState} py-1 px-2 mr-1.5 md:mr-2.5  focus:outline-none rounded font-bold`}>
-            + New
-            </button>
-              <Link href="#">
-                <a className={`text-gray-600 absolute top-0 right-0 mt-20 mr-4 bg-white rounded px-0.5 border border-gray-300 hover:bg-gray-100`} onClick={() => signOut()}>
-                  Sign out
-                </a>
-              </Link>
-               </>
-            ) : (
-            null
-            )*/}
-              {/*
-              <Link href="/account">
-                <a className="mr-2.5 bg-white py-1 px-2 focus:outline-none hover:bg-gray-200 rounded text-base">Account</a>
-              </Link>
-            */}
             </div>
         </nav>
       </div>

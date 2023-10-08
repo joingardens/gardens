@@ -57,45 +57,9 @@ const SignUp = () => {
         <Logo width="64px" height="64px" />
       </div>
       <div className="flex flex-col space-y-4">
-        {message.content && (
-          <div
-            className={`${
-              message.type === 'error' ? 'text-pink-600' : 'text-green-600'
-            } border ${
-              message.type === 'error' ? 'border-pink-600' : 'border-green-600'
-            } p-3`}
-          >
-            {message.content}
-          </div>
-        )}
-        <Input placeholder="Name" onChange={setName} />
-        <Input type="email" placeholder="Email" onChange={setEmail} required />
-        <Input type="password" placeholder="Password" onChange={setPassword} />
-        <div className="pt-2 w-full flex flex-col">
-          <Button
-            variant="slim"
-            type="submit"
-            loading={loading}
-            disabled={loading || !email.length || !password.length}
-          >
-            Sign up
-          </Button>
-
-          <GoogleButton style={{width: '100%', marginTop: '1rem'}}
-          type="light" label="Sign up with Google"
-           onClick={() => { signInWithGoogle() }}
-            />
-        </div>
-
-        <span className="pt-1 text-center text-sm">
-          <span className="text-accents-7">Do you have an account?</span>
-          {` `}
-          <Link href="/signin">
-            <a className="text-accent-9 font-bold hover:underline cursor-pointer">
-              Sign in.
-            </a>
-          </Link>
-        </span>
+      <div className="mt-2 mb-8">
+    Unfortunately, Gardens has been shut down. Reach out to us at <a href="mailto:hello@joingardens.com">hello@joingardens.com</a> if you have a question or a proposal.
+    </div>
       </div>
     </form>
   );

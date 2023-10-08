@@ -4,13 +4,11 @@ import { updateUserName } from '../utils/supabase-client';
 import LightHeroD from '../components/ui/Hero';
 import React, { useState, useEffect } from 'react';
 import ParagraphWithButton from '../components/ui/ParagraphWithButton';
-import { signInWithKeycloak, getActiveProductsWithPrices } from '../utils/supabase-client';
 import Link from 'next/link';
 import Button from '../components/ui/Button';
 import Image from 'next/image'
 import Input from '../components/ui/Input';
 import Logo from '../components/icons/Logo';
-import Pricing from '../components/Pricing'
 
 export default function Apps({ products }) {
 
@@ -76,15 +74,6 @@ export default function Apps({ products }) {
         )
         */}
        <div className="flex">
-        <Button
-              variant="slim"
-              className="bg-green-500 w-72 md:w-96 border"
-              type="submit"
-              loading={loading}
-              onClick={() => { signInWithKeycloak() }}
-            >
-              <span className="text-white font-bold">Get Started</span>
-            </Button>
         </div>
         </div>
     </form>
@@ -114,7 +103,7 @@ export default function Apps({ products }) {
     <h2 className="text-center">Pricing</h2>
     </div>
     <div className="mt-2 mb-8">
-    <Pricing products={products} />
+    Unfortunately, Gardens has been shut down. Reach out to us at <a href="mailto:hello@joingardens.com">hello@joingardens.com</a> if you have a question or a proposal.
     </div>
     <div>
    
@@ -155,15 +144,6 @@ export default function Apps({ products }) {
             </div>
     <span className="w-full mt-2 text-green-700 font-semibold">Available</span>
     <div className="mt-2">Use a DigitalOcean droplet, with prices starting at $4 per month and free credits</div>
-    <Button
-              variant="slim"
-              className="bg-green-500 border mt-4 w-full mx-8"
-              type="submit"
-              loading={loading}
-              onClick={() => { signInWithKeycloak() }}
-            >
-              <span className="text-white font-bold">Let's go!</span>
-    </Button>
     </div>
     <div className="flex flex-col h-120 border pb-6 px-8 rounded-md items-center mr-4 prose w-96">
     <h3 className="text-left w-full">Local</h3>
@@ -173,15 +153,6 @@ export default function Apps({ products }) {
             </div>
     <span className="w-full mt-2 text-green-700 font-semibold">Available</span>
     <div className="mt-2">Host on your own machine or server by running a couple CLI scripts</div>
-    <Button
-              variant="slim"
-              className="bg-green-500 border mt-4 w-full mx-8"
-              type="submit"
-              loading={loading}
-              onClick={() => { signInWithKeycloak() }}
-            >
-              <span className="text-white font-bold">Sign up</span>
-    </Button>
     </div>
     <div className="flex flex-col h-120 border pb-6 px-8 rounded-md items-center mr-4 prose w-96">
     <h3 className="text-left w-full">Oracle</h3>
@@ -245,16 +216,6 @@ export default function Apps({ products }) {
     <Logo className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white mt-8 mr-4 shadow" />
     <h2 className="w-64">Seriously, try it.<br/> 7 days free trial! </h2>
     </div>
-    <Button
-              variant="slim"
-              className="bg-green-500 w-72 md:w-96 border mb-12"
-              type="submit"
-              loading={loading}
-              onClick={() => { signInWithKeycloak() }}
-            >
-              <span className="text-white font-bold">Sign Up</span>
-            </Button>
-    </div>
     <h2 className="text-center">FAQ</h2>
     <div>
     <h3>❓ Who is this for?</h3>
@@ -269,19 +230,11 @@ export default function Apps({ products }) {
     <Logo className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white mt-8 mr-4 shadow" />
     <h2 className="w-64">Start owning your digital infrastructure</h2>
     </div>
-    <Button
-              variant="slim"
-              className="bg-green-500 w-72 md:w-96 border mb-12"
-              type="submit"
-              loading={loading}
-              onClick={() => { signInWithKeycloak() }}
-            >
-              <span className="text-white font-bold">Join Gardens Now</span>
-            </Button>
     </div>
     </div>
     </div>
     <div className="mb-24"/>
+    </div>
     </div>
     </>
     )

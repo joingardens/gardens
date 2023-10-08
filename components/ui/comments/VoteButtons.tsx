@@ -92,7 +92,6 @@ const VoteButtons = ({
   }
 
   function handleDownvote(): void {
-    if (!user || !user.id) return open('signInModal');
 
     if (status === 'unvoted') {
       invokeVote(comment.id, user.id, -1);
