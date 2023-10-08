@@ -6,7 +6,7 @@ import ListItem from '../../components/ui/ListItem';
 import TextList from '../../components/ui/TextList';
 import ListItemMirrored from '../../components/ui/ListItemMirrored';
 import Title from '../../components/ui/Title';
-import { getActiveProductsWithPrices, getFlowItemsByFlowId, 
+import {  getFlowItemsByFlowId, 
   getAllOutputs, getOutputById, getAllJobGroups, getFlowOutputsByOutputId, getFlowById, getAllFlows } from '../../utils/supabase-client';
 //import MyDisclosure from '@/components/dynamic/disclosure';
 //import SquareBlock from '../../components/ui/SquareBlock';
@@ -79,7 +79,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  const products = await getActiveProductsWithPrices();
+
   const jobGroups = await getAllJobGroups();
   const allFlows = await getAllFlows();
   const flowsOutputs = await getFlowOutputsByOutputId(context.params.output_id);
@@ -88,7 +88,7 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      products,
+
       jobGroups,
       flowsOutputs,
       output,

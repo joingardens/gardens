@@ -8,7 +8,7 @@ import ListItem from '../../components/ui/ListItem';
 import TextList from '../../components/ui/TextList';
 import ListItemMirrored from '../../components/ui/ListItemMirrored';
 import Title from '../../components/ui/Title';
-import { getActiveProductsWithPrices, getToolsBySection, getAllJobTools, getAllSections } from '../../utils/supabase-client';
+import {  getToolsBySection, getAllJobTools, getAllSections } from '../../utils/supabase-client';
 import urlify from '../../utils/helpers.js';
 import SquareBlock from '../../components/ui/SquareBlock';
 import PrettyBlock from '../../components/ui/PrettyBlock';
@@ -135,7 +135,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const tools = await getToolsBySection(context.params.section_title);
-  const products = await getActiveProductsWithPrices();
+
   const jobTools = await getAllJobTools();
 
   if (!tools) {

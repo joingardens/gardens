@@ -6,7 +6,7 @@ import ListItem from '../components/ui/ListItem';
 import TextList from '../components/ui/TextList';
 import ListItemMirrored from '../components/ui/ListItemMirrored';
 import Title from '../components/ui/Title';
-import { getActiveProductsWithPrices, getAllTools, getAllJobTools } from '../utils/supabase-client';
+import { getAllTools, getAllJobTools } from '../utils/supabase-client';
 import urlify from '../utils/helpers.js';
 import SquareBlock from '../components/ui/SquareBlock';
 import PrettyBlock from '../components/ui/PrettyBlock';
@@ -112,13 +112,13 @@ export default function ToolsPage({ products, tools, jobTools }) {
 }
 
 export async function getStaticProps() {
-  const products = await getActiveProductsWithPrices();
+
   const tools = await getAllTools();
   const jobTools = await getAllJobTools();
 
   return {
     props: {
-      products,
+
       tools,
       jobTools
     },

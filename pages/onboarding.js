@@ -2,7 +2,7 @@ import { useUser } from '../utils/useUser';
 import { useRouter } from 'next/router';
 import { updateUserName } from '../utils/supabase-client';
 import React, { useState, useEffect } from 'react';
-import { getActiveProductsWithPrices } from '../utils/supabase-client';
+
 import ParagraphWithButton from '../components/ui/ParagraphWithButton';
 import Link from 'next/link';
 import Button from '../components/ui/Button';
@@ -28,16 +28,4 @@ export default function Apps({ products }) {
     </div>
     </>
     )
-}
-
-
-export async function getStaticProps() {
-  const products = await getActiveProductsWithPrices();
-
-  return {
-    props: {
-      products
-    },
-    revalidate: 60
-  };
 }

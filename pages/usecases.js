@@ -5,7 +5,7 @@ import ListItem from '../components/ui/ListItem';
 import TextList from '../components/ui/TextList';
 import ListItemMirrored from '../components/ui/ListItemMirrored';
 import Title from '../components/ui/Title';
-import { getActiveProductsWithPrices, getAllJobs, getAllJobGroups, getAllJobTools, getAllTools } from '../utils/supabase-client';
+import {  getAllJobs, getAllJobGroups, getAllJobTools, getAllTools } from '../utils/supabase-client';
 import SquareBlock from '../components/ui/SquareBlock';
 import getRandomGradient from '../utils/getRandomGradient';
 
@@ -85,7 +85,7 @@ export default function UseCasePage({ products, jobs, jobGroups, tools, jobTools
 }
 
 export async function getStaticProps() {
-  const products = await getActiveProductsWithPrices();
+
   const jobs = await getAllJobs();
   const tools = await getAllTools();
   const jobGroups = await getAllJobGroups();
@@ -93,7 +93,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      products,
+
       jobs,
       jobGroups,
       jobTools,

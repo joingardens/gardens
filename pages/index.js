@@ -1,5 +1,5 @@
 import { getPublishedFlows, getAllFlowItems, getAllFlowItemsWithTools, 
-  getPublishedDrafts, getAllActions, getAllSections, getActiveProductsWithPrices,
+  getPublishedDrafts, getAllActions, getAllSections,
   getPaasByUserId, getDropletsByPaasId } from '../utils/supabase-client';
 import { useUser } from '../utils/useUser';
 import { useEffect, useState } from "react";
@@ -201,7 +201,7 @@ export async function getStaticProps() {
   const drafts = await getPublishedDrafts();
   const actions = await getAllActions();
   const sections = await getAllSections();
-  const products = await getActiveProductsWithPrices();
+
 
   return {
     props: {
@@ -210,7 +210,7 @@ export async function getStaticProps() {
       flowItemsWithTools,
       drafts,
       sections,
-      products
+
     },
     revalidate: 60
   };

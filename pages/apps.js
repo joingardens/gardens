@@ -241,14 +241,3 @@ export default function Apps({ products }) {
 }
 
 
-
-export async function getStaticProps() {
-  const products = await getActiveProductsWithPrices();
-
-  return {
-    props: {
-      products
-    },
-    revalidate: 60
-  };
-}
