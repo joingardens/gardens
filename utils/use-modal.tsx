@@ -56,7 +56,7 @@ const ModalProvider = (props: ModalProviderProps): JSX.Element => {
         return (
           <Portal key={`${key}_${index}`}>
             <div style={{ zIndex: BASE_Z_INDEX + index }}>
-              <ReactElement />
+
             </div>
           </Portal>
         );
