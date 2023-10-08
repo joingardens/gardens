@@ -3,7 +3,6 @@ import '../assets/main.css';
 import '../assets/chrome-bug.css';
 import Layout from '../components/Layout';
 import { usePostHog } from 'next-use-posthog';
-import ChatwootWidget from '../components/ChatwootWidget'
 import { UserContextProvider } from '../utils/useUser';
 import { ModalsContextProvider } from '../components/modals/modalsContext';
 import { NewFlowContextProvider } from '../components/context/newFlow/newFlowContext';
@@ -16,7 +15,8 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   
   const router = useRouter()
   usePostHog(process.env.NEXT_PUBLIC_POSTHOG_KEY, { api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST })
-  
+  const AnyComponent = Component as any;
+
   useEffect(() => {
     document.body.classList?.remove('loading');
   }, []);
@@ -36,7 +36,7 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
       <ToastContextProvider>
         <NewFlowContextProvider>
         <Layout meta={{}}>
-          <Component {...pageProps} />
+          <AnyComponent {...pageProps} />
         </Layout>
         
         </NewFlowContextProvider>
