@@ -2,7 +2,7 @@ import { getArticleById, getPublishedDrafts, getPersonalDetailsByUserId } from '
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { mastodonAdapter } from "../../adapters/other-apps/mastodon/adapter";
-import ReadOnlyEditor from '../../components/writer/ReadOnlyEditor';
+
 import Image from 'next/image';
 
 export default function Article({ article, user }) {
@@ -90,7 +90,6 @@ export default function Article({ article, user }) {
         {(article && article[0].payload && !loading) ? 
         // (JSON.stringify(article[0].payload))
         (<>
-          <ReadOnlyEditor data={article[0].payload} />
           <div className="-mt-48 pb-24 pt-4 px-2 w-full justify-center flex flex-col z-40">
     <h2 className="px-9 sm:text-2xl text-center text-xl font-semibold text-gray-900 bg-green-50 py-1">
     Comments</h2>
