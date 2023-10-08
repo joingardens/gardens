@@ -9,7 +9,6 @@ module.exports = {
       include: /node_modules/,
       type: 'javascript/auto'
     })
-
     return config
   },
 }
